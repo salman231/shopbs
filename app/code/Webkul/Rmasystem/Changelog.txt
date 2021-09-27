@@ -1,0 +1,63 @@
+Legend
+
++ Features
+- Bugs
+-------------------------------- Version 3.0.1 --------------------------------------
+	+ Email issue with Magento 2.3.3 fixed.
+
+-------------------------------- Version 3.0.0 --------------------------------------
+	+ Issue with Bundle and Group Product return fixed.
+	+ Shipping Label option from print Page removed.
+	+ XSS scripts execution have been removed.
+
+-------------------------------- Version 2.1.0 --------------------------------------
+	+ Compatible with Magento 2.3
+
+-------------------------------- Version 2.0.7 --------------------------------------
+	+ Allowed Category for RMA generation implemented.
+	+ Allowed Payment Method for RMA implemented.
+	+ Shipping Label Price type changed to decimal.
+
+-------------------------------- Version 2.0.6 --------------------------------------
+	+ Compatible with Magento v2.2.*.
+	
+-------------------------------- Version 2.0.5 --------------------------------------
+	+ Custom Fields in RMA Generation form feature added.
+	- Bug Fixed.
+	
+-------------------------------- Version 2.0.4 --------------------------------------
+	+ File Attachemnt feature added for RMA conversation
+	+ Frontend Ui Changed.
+	- Bugs fixed.
+	
+-------------------------------- Version 2.0.3 --------------------------------------
+	+ Credit Memo Feature Added.
+	+ Admin can refund offline for rma by creating Credit Memo.
+	+ Admin can allow different types of products for RMA.
+
+-------------------------------- Version 2.0.2 --------------------------------------
+
+	+ Compatible with Magento 2.1.*
+	- All RMA grid bug fixed.
+
+-------------------------------- Version 2.0.1 --------------------------------------
+	- If RMA Generated for perticular item in order, will not able to generate again.
+	- When RMA will generate Admin will also get an Email Notification.
+
+-------------------------------- Version 2.0.0 --------------------------------------
+
+	+ Return Merchandise Authorization for Magento 2.0.0
+	+ Fully Admin handled module.
+	+ Guest Customers can generate RMA too.
+	+ Buyer and Admin can communicate at Store end.
+	+ Return Policy Page
+	+ Dynamic order selection with various option.
+	+ Customer can upload RMA images.
+	+ Print RMA details and shipping label easily.
+	+ Customer can also enter consignment number and upload images after RMA generation.
+	+ Admin can set Order status for RMA.
+	+ Admin can manage RMA status as well as Reasons.
+	+ Admin and buyer both can receive notification mail.
+	+ Using Return Quantity, Admin will return RMA quantity to their store.
+	+ RMA History with Filters and Pagination
+	+ Print RMA details and shipping label easily.

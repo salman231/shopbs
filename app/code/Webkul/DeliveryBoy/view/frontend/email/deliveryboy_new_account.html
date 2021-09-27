@@ -1,0 +1,33 @@
+<!--
+/**
+ * Webkul Software.
+ *
+ * PHP version 7.0+
+ *
+ * @category  Webkul
+ * @package   Webkul_DeliveryBoy
+ * @author    Webkul <support@webkul.com>
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+-->
+<!--@subject {{trans "Welcome to %store_name" store_name=$store.getFrontendName()}} @-->
+<!--@vars {
+"var deliveryboy.email":"Deliveryboy Email",
+"var deliveryboy.name":"Deliveryboy Name"
+} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<p class="greeting">Hello {{trans "%name," name=$deliveryboy.name}}</p>
+<p>{{trans "Welcome to %store_name." store_name=$store.getFrontendName()}}</p>
+<p>
+    {{trans 'You account has been successfully created. Use the below credentials to login to your account.'}}
+</p>
+<ul>
+    <li><strong>{{trans "Email:"}}</strong> {{var deliveryboy.email}}</li>
+    <li><strong>{{trans "Password:"}}</strong> {{var deliveryboy.password}}</li>
+</ul>
+
+{{template config_path="design/email/footer_template"}}

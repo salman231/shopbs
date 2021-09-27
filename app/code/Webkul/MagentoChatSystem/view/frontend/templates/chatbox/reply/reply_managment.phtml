@@ -1,0 +1,46 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MagentoChatSystem
+ * @author    Webkul
+ * @copyright Copyright (c)  Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+?>
+<script id="reply_client_template" type="text/x-magento-template">
+    <div class="chat-message-client message_container">
+         <img class="profile-image" data-bind="attr: {'src': $parent.getProfileImage()}" src="<%- data.image %>" alt="" width="32" height="32">
+        <div class="chat-message-client-content triangle-right left clearfix">
+            <span class="chat-time"><%- data.time %></span>
+            <h5><%- data.customerName %></h5>
+            <% if(data.type == 'image') { %>
+                <p><a target="_blank" href="<?= $block->escapeUrl($block->getUrl('chatsystem/index/viewfile').'file/') ?><%- data.message %>"><img src="<?= $block->escapeUrl($block->getUrl('chatsystem/index/viewfile').'file/') ?><%- data.message %>" class="image-type message-image"></a></p>
+            <% } if(data.type == 'file'){ %>
+                <p><a href="<?= $block->escapeUrl($block->getUrl('chatsystem/index/viewfile').'file/') ?><%- data.message %>" ><img width="30" height="20" src="<?= $block->getViewFileUrl('Webkul_MagentoChatSystem::images/download.png');?>"><span><?= $block->escapeHtml(__('Download File')); ?></span></a></p>
+            <% } if(data.type != 'file' && data.type != 'image') { %>
+                 <p><%= data.message %></p>
+            <% } %>
+        </div>
+    </div>
+    <% if (data.statusError == true) { %>
+    <p class="status-error"><?= $block->escapeHtml(__('Support is not available for chat.')) ?></p>
+    <% } %>
+</script>
+<script id="reply_admin_template" type="text/x-magento-template">
+    <div class="chat-message-admin message_container">
+        <img class="profile-image" src="<%- data.adminImage %>" alt="" width="32" height="32">
+        <div class="chat-message-admin-content triangle-right right clearfix">
+            <span class="chat-time"><%- data.time %></span>
+            <h5><%- data.adminName %></h5>
+            <% if(data.type == 'image') { %>
+                <p><a target="_blank" href="<?= $block->escapeUrl($block->getUrl('chatsystem/index/viewfile').'file/') ?><%- data.message %>"><img src="<?= $block->escapeUrl($block->getUrl('chatsystem/index/viewfile').'file/') ?><%- data.message %>" class="image-type message-image"></a></p>
+            <% } if(data.type == 'file'){ %>
+                <p><a href="<?= $block->escapeUrl($block->getUrl('chatsystem/index/viewfile').'file/') ?><%- data.message %>" ><img width="30" height="20" src="<?= $block->getViewFileUrl('Webkul_MagentoChatSystem::images/download.png');?>"><span><?= $block->escapeHtml(__('Download File')); ?></span></a></p>
+            <% } if(data.type != 'file' && data.type != 'image') { %>
+                 <p><%= data.message %></p>
+            <% } %>
+        </div>
+    </div>
+</script>

@@ -1,0 +1,24 @@
+<script id="authentication-template" type="text/x-magento-template">
+    <div class="product info detailed">
+        <div class="product data items" data-mage-init='{"tabs":{"openedState":"active"}}'>
+                <?php
+                    $alias = '';
+                    $label = '';
+                ?>
+                <div class="data item title"
+                     aria-labeledby="tab-label-<?= $block->escapeHtml($alias);?>-title"
+                     data-role="collapsible" id="tab-label-<?= $block->escapeHtml($alias);?>">
+                    <a class="data switch"
+                       tabindex="-1"
+                       data-toggle="switch"
+                       href="#<?= $block->escapeHtml($alias); ?>"
+                       id="tab-label-<?= $block->escapeHtml($alias);?>-title">
+                        <?= $block->escapeHtml(__('Hello')); ?>
+                    </a>
+                </div>
+                <div class="data item content" id="<?= $block->escapeHtml($alias); ?>" data-role="content">
+                    <?= ''; ?>
+                </div>>
+        </div>
+    </div>
+</script>

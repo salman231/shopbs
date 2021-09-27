@@ -1,0 +1,108 @@
+<?php
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+    $baseurl = $storeManager->getStore()->getBaseUrl();
+    // $catId = 4;  //Parent Category ID
+    $storeScope = \Magento\Store\Model\ScopeInterface::SCOPE_STORES;
+    $title = $objectManager->get('Magento\Framework\App\Config\ScopeConfigInterface')->getValue('magemonkey_general/general/shopby_title', $storeScope);
+    $catId = $objectManager->get('Magento\Framework\App\Config\ScopeConfigInterface')->getValue('magemonkey_general/general/shopby_catid', $storeScope);
+    
+    $subcategory = $objectManager->create('Magento\Catalog\Model\Category')->load($catId);
+    $childcat = $subcategory->getChildrenCategories(); 
+    // echo "<pre>";
+    // print_r($childcat->getData());
+    // exit;
+
+if (count($childcat) > 0): ?>
+    <div class="carousel-container custom-carousel">
+        <h2 class="cate-title mp-product-slider-title"><?php echo  $title;?></h2>
+        <div id="shopby-slider-carousel">
+            <?php $iterator = 1; ?>
+            <div id="shopby-category-list" class="owl-carousel owl-theme">
+                <?php foreach ($childcat as $subcats): ?>
+                    <?php
+                    $category = $objectManager->create('Magento\Catalog\Model\Category')->load($subcats->getId());
+                    $cattitle = $category->getName();
+                    $caturl = $baseurl.$subcats->getRequestPath();
+                    $parentcat = $category->getParentCategory(); 
+                    // echo "<pre>";
+                    // print_r($parentcat->getId());
+                    // exit;
+                    if($parentcat->getId() == $catId){
+
+                    ?>
+                    <?php echo ($iterator++ == 1) ? '<div class="category-item category-slider">' : '</div><div class="category-item category-slider">' ?>
+                        <div class="item-image">
+                            <div class="cat_thumb">
+                                <a href="<?php echo $caturl;?>" class="p_view">
+                                    <img class="lazy" src="<?php echo $baseurl; ?>pub/media/wysiwyg/loader.gif" data-original="<?php echo $baseurl.'pub/media/catalog/category/'.$category->getCategorythumb();?>" alt=" <?php echo $cattitle ?>"/>
+                                </a>
+                                <a href="<?php echo $caturl;?>" class="home-cattitle">
+                                    <span><?php echo $cattitle ?></span>
+                                </a>
+                            </div>
+                        </div>
+                    <?php echo ($iterator == count($childcat) + 1) ? '</div>' : '' ?>
+                <?php }
+                endforeach; ?>
+            </div>
+        </div>
+        <?php //echo $block->getPagerHtml() ?>
+    </div>
+
+    <script>
+
+        /*require(['jquery', 
+            'mageplaza/core/owl.carousel'], function ($) {
+            $('#valentine-category-list').owlCarousel({
+                "autoWidth":0,
+                "autoHeight":1,
+                "loop":0,
+                "nav":0,
+                "dots":1,
+                "lazyLoad":0,
+                "autoplay":1,
+                "autoplayTimeout":5000,
+                "animateOut":"none",
+                "items":1
+
+            });
+        });*/
+        require([
+                'jquery',
+                'mageplaza/core/owl.carousel'
+            ], function ($) {
+                jQuery("#shopby-category-list").owlCarousel({
+                    responsive:{
+                        0:{
+                            items:2
+                        },
+                        480:{
+                            items:2
+                        },
+                        768:{
+                            items:3
+                        },
+                        992:{
+                            items:5
+                        },
+                        1200:{
+                            items:6
+                        }
+                    },
+                    autoWidth:0,
+                    autoHeight:1,
+                    autoplay:false,
+                    loop:true,
+                    nav : true,
+                    dots: false,
+                    autoplaySpeed : 5000,
+                    navSpeed : 500,
+                    dotsSpeed : 500,
+                    autoplayHoverPause: true,
+                    margin:30,
+                });   
+            }); 
+                
+    </script>
+<?php endif; ?>

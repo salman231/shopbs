@@ -1,0 +1,84 @@
+<div data-bind='simpleGrid: gridViewModel'>
+    </div>
+    <script type="text/html" id="ko_simpleGrid_grid">
+        <button class="action-secondary filter-order" type="button" data-action="grid-filter-apply" data-bind="click: filterGrid">
+              <span data-bind="'i18n': 'Apply Filters'"></span>
+          </button>
+        <h4 class="wk_rma_label" data-bind="'i18n': 'Select Order'" style="float:left;"></h4>
+        <table id="wk_rma_orders" class="data-table ko-grid" cellspacing="0">
+            <thead class="wk_rma_sorter">
+                <tr data-bind="foreach: columns">
+                    <!-- ko if: headerText === '' -->
+                    <th class="wk_rma_sortable"></th>
+                    <!-- /ko -->
+                    <!-- ko ifnot: headerText === '' -->
+                    <th class="wk_rma_sortable" data-bind="attr:{'id':rowText}, click: $parent.sort, afterRender: $parent.intializeSorting">
+                        <!-- ko ifnot: headerText === '' -->
+                        <span class="wk_rma_table_title" data-bind="text: headerText"></span>
+                        <span class=""></span>
+                        <!-- /ko -->
+                    </th>
+                    <!-- /ko -->
+                </tr>
+            </thead>
+            <thead class="wk_rma_filter">
+                <tr>
+                    <th></th>
+                    <th>
+                        <input type="text" data-bind="value: orderFilter" id="wk_rma_filter_order_id" class="filter_input" />
+                    </th>
+                    <th>
+                        <input type="text" data-bind="value: priceFilter" id="wk_rma_filter_price" class="filter_input" />
+                    </th>
+                    <th>
+                        <input type="text" data-bind="value: dateFilter" id="wk_rma_filter_date" class="filter_input" />
+                    </th>
+                </tr>
+            </thead>
+            <!-- ko if: dsplayOrderError -->
+            <tbody>
+                <tr data-bind="'i18n': 'Your Order(s) are not completed.'" style="display:block;padding:10px;"></tr>
+            </tbody>
+            <!-- /ko -->
+            <!-- ko if: filterResultError -->
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td data-bind="'i18n': 'No result found.'">
+                    </td>
+                </tr>
+            </tbody>
+            <!-- /ko -->
+            <tbody data-bind="foreach: itemsOnCurrentPage">
+                <tr data-bind="foreach: $parent.columns, click: $parent.loadOrderDetail">
+                    <!-- ko if: rowText === 'radio' -->
+                    <td>
+                        <input data-bind="value: $parent['entity_id'], click: $parent.loadOrderDetail" type='radio' name='order_selection' class='wk_rma_order_selection wk-option-input radio'
+                        />
+                    </td>
+                    <!-- /ko -->
+    
+                    <!-- ko ifnot: rowText === 'radio' -->
+                    <td data-bind="html: $parent[rowText]"></td>
+                    <!-- /ko -->
+    
+                </tr>
+            </tbody>
+        </table>
+    </script>
+    <script type="text/html" id="ko_simpleGrid_pageLinks">
+        <div class="ko-grid-pageLinks wk-pagination">
+            <!-- ko ifnot: dsplayOrderError -->
+            <!-- ko if: $root.totalRecords() > $root.pageSize -->
+            <a href="#" data-bind="click: function() { $root.currentPageIndex(parseInt($root.currentPageIndex()) - 1);}, visible: $root.currentPageIndex() >= 1">&laquo;</a>
+            <!-- ko foreach: ko.utils.range(0, maxPageIndex) -->
+            <a href="#" data-bind="text: $data + 1, click: function() { $root.currentPageIndex($data) }, css: { selected: $data == $root.currentPageIndex() }">
+            </a>
+            <!-- /ko -->
+            <!--ko if: $root.totalRecords() > 3 -->
+            <a href="#" data-bind="click: function() { $root.currentPageIndex(parseInt($root.currentPageIndex()) + 1);}, visible: $root.currentPageIndex()+1 < $root.totalRecords()/ $root.pageSize">&raquo;</a>
+            <!-- /ko -->
+            <!-- /ko -->
+            <!-- /ko -->
+        </div>
+    </script>

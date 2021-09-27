@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * Magedelight
+ * Copyright (C) 2019 Magedelight <info@magedelight.com>
+ *
+ * @category Magedelight
+ * @package Magedelight_Base
+ * @copyright Copyright (c) 2019 Mage Delight (http://www.magedelight.com/)
+ * @license http://opensource.org/licenses/gpl-3.0.html GNU General Public License,version 3 (GPL-3.0)
+ * @author Magedelight <info@magedelight.com>
+ */ 
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Magedelight_Base::md_base_root"
+            title="MageDelight"
+            module="Magedelight_Base"
+            sortOrder="45"
+            resource="Magedelight_Base::root" />
+
+            <add id="Magedelight_Base::md_modules"
+                title="Modules"
+                module="Magedelight_Base"
+                sortOrder="10"
+                parent="Magedelight_Base::md_base_root"
+                resource="Magedelight_Base::md_modules" />
+
+            <add id="Magedelight_Base::md_common"
+                title="Useful Links"
+                module="Magedelight_Base"
+                sortOrder="500"
+                parent="Magedelight_Base::md_base_root"
+                resource="Magedelight_Base::md_common" />
+
+                <add id="Magedelight_Base::md_support"
+                    title="Support"
+                    module="Magedelight_Base"
+                    sortOrder="50"
+                    target="_blank"
+                    parent="Magedelight_Base::md_common"
+                    resource="Magedelight_Base::md_common" />
+
+                <add id="Magedelight_Base::md_visitus"
+                    title="Visit Us"
+                    module="Magedelight_Base"
+                    sortOrder="100"
+                    target="_blank"
+                    parent="Magedelight_Base::md_common"
+                    resource="Magedelight_Base::md_common" />
+    </menu>
+</config>

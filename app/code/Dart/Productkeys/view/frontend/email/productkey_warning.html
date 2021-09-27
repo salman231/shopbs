@@ -1,0 +1,29 @@
+{{template config_path="design/email/header_template"}}
+
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+	<tr>
+		<td valign="top">
+			<br/>
+			<p>To Whom It May Concern,</p>
+			{{depend available_keys}}
+				<p><b>You are getting low on {{var keytype}}s in the {{var keypool}} productkey pool.</b></p>
+			{{/depend}}
+			{{depend available_keys_none}}
+				<h3><b>You have run out of {{var keytype}}s in the {{var keypool}} productkey pool!</b></h3>
+			{{/depend}}
+			<p><b>Product:</b> {{var product_name}}<br />
+			<b>Productkey Pool:</b> {{var keypool}}<br />
+			<b>Productkey Type:</b> {{var keytype}}<br />
+			<b>Number of Available Keys:</b> {{var available_keys}}</p>
+			{{depend available_keys}}
+				<p><b>Please take appropriate action.</b></p>
+			{{/depend}}
+			{{depend available_keys_none}}
+				<h3><b>Immediate action is required!</b></h3>
+			{{/depend}}
+			<p>Sincerely,<br/><br/><strong>{{var storeGroupName}}</strong></p>
+		</td>
+	</tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}

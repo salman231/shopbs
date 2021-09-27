@@ -1,0 +1,117 @@
+<?xml version="1.0" ?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+
+	<!-- Manage Megamenu Profile -->
+	<route method="GET" url="/V1/ves-megamenu/:menuId">
+		<service class="Ves\Megamenu\Api\MenuRepositoryInterface" method="getById"/>
+		<resources>
+			<resource ref="Ves_Megamenu::menu"/>
+		</resources>
+	</route>
+	<route method="GET" url="/V1/ves-megamenu/search">
+		<service class="Ves\Megamenu\Api\MenuRepositoryInterface" method="getList"/>
+		<resources>
+			<resource ref="Ves_Megamenu::menu"/>
+		</resources>
+	</route>
+	
+	<route method="POST" url="/V1/ves-megamenu">
+		<service class="Ves\Megamenu\Api\MenuRepositoryInterface" method="save"/>
+		<resources>
+			<resource ref="Ves_Megamenu::menu_save"/>
+		</resources>
+	</route>
+	<route method="PUT" url="/V1/ves-megamenu/:menuId">
+		<service class="Ves\Megamenu\Api\MenuRepositoryInterface" method="save"/>
+		<resources>
+			<resource ref="Ves_Megamenu::menu_save"/>
+		</resources>
+	</route>
+	<route method="PUT" url="/V1/ves-megamenu/revert/:menuId/:revision">
+		<service class="Ves\Megamenu\Api\MenuRepositoryInterface" method="revert"/>
+		<resources>
+			<resource ref="Ves_Megamenu::menu_save"/>
+		</resources>
+	</route>
+	<route method="DELETE" url="/V1/ves-megamenu">
+		<service class="Ves\Megamenu\Api\MenuRepositoryInterface" method="delete"/>
+		<resources>
+			<resource ref="Ves_Megamenu::menu_delete"/>
+		</resources>
+	</route>
+	<route method="DELETE" url="/V1/ves-megamenu/:menuId">
+		<service class="Ves\Megamenu\Api\MenuRepositoryInterface" method="deleteById"/>
+		<resources>
+			<resource ref="Ves_Megamenu::menu_delete"/>
+		</resources>
+	</route>
+	<route method="GET" url="/V1/ves-megamenu/flushcache">
+		<service class="Ves\Megamenu\Api\FlushcacheManagementInterface" method="execute"/>
+		<resources>
+			<resource ref="Ves_Megamenu::menu_flushcache"/>
+		</resources>
+	</route>
+	<!-- Manage Megamenu Item -->
+	<route method="GET" url="/V1/ves-megamenuitem/getByMenuProfile/:menuId/:storeId">
+		<service class="Ves\Megamenu\Api\ItemRepositoryInterface" method="getByMenuIdBackend"/>
+		<resources>
+			<resource ref="Ves_Megamenu::menu"/>
+		</resources>
+	</route>
+	<route method="GET" url="/V1/ves-megamenuitem/:menuItemId/:storeId">
+		<service class="Ves\Megamenu\Api\ItemRepositoryInterface" method="getByIdBackend"/>
+		<resources>
+			<resource ref="Ves_Megamenu::menu"/>
+		</resources>
+	</route>
+	<route method="GET" url="/V1/ves-megamenuitem/search">
+		<service class="Ves\Megamenu\Api\ItemRepositoryInterface" method="getList"/>
+		<resources>
+			<resource ref="Ves_Megamenu::menu"/>
+		</resources>
+	</route>
+	
+	<route method="POST" url="/V1/ves-megamenuitem">
+		<service class="Ves\Megamenu\Api\ItemRepositoryInterface" method="save"/>
+		<resources>
+			<resource ref="Ves_Megamenu::menu_save"/>
+		</resources>
+	</route>
+	<route method="PUT" url="/V1/ves-megamenuitem/:menuItemId">
+		<service class="Ves\Megamenu\Api\ItemRepositoryInterface" method="save"/>
+		<resources>
+			<resource ref="Ves_Megamenu::menu_save"/>
+		</resources>
+	</route>
+	<route method="DELETE" url="/V1/ves-megamenuitem">
+		<service class="Ves\Megamenu\Api\ItemRepositoryInterface" method="delete"/>
+		<resources>
+			<resource ref="Ves_Megamenu::menu_delete"/>
+		</resources>
+	</route>
+	<route method="DELETE" url="/V1/ves-megamenuitem/:menuItemId">
+		<service class="Ves\Megamenu\Api\ItemRepositoryInterface" method="deleteById"/>
+		<resources>
+			<resource ref="Ves_Megamenu::menu_delete"/>
+		</resources>
+	</route>
+	<!-- Get Megamenu Profile -->
+	<route method="GET" url="/V1/ves-megamenu/getByAlias/:alias/:storeCode/:customerGroupId/:isMobile">
+		<service class="Ves\Megamenu\Api\GetMenuByAliasInterface" method="execute"/>
+		<resources>
+			<resource ref="anonymous"/>
+		</resources>
+	</route>
+	<route method="GET" url="/V1/ves-megamenuitem/getMenuItem/:menuItemId/:storeId">
+		<service class="Ves\Megamenu\Api\ItemRepositoryInterface" method="getById"/>
+		<resources>
+			<resource ref="anonymous"/>
+		</resources>
+	</route>
+	<route method="GET" url="/V1/ves-megamenuitem/getMenuItems/:menuId/:storeId">
+		<service class="Ves\Megamenu\Api\ItemRepositoryInterface" method="getByMenuId"/>
+		<resources>
+			<resource ref="anonymous"/>
+		</resources>
+	</route>
+</routes>

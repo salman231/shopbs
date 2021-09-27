@@ -1,0 +1,58 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+?>
+<div class="wk-mp-dashboard-order-grid wk-mp-latest-order-grid" id="outstanding_balance_wrapper">
+    <div class="wk-mp-order-grid-title-row">
+        <span class="wk-mp-float-left wk-mp-order-grid-title-row-sp1">
+            <?= $block->escapeHtml(__("Outstanding Balance from pending payments"))?>
+        </span>
+    </div>
+    <?= $this->getChildHtml()?>
+</div>
+
+
+<div class="wk-mp-dashboard-main-container-downside">
+    <div class="wk-mp-dashboard-main-column">
+        <div class="wk-mp-dashboard-totalpayout-container">
+            Total Out. Balance
+            <span class="wk-dashboard-sales-value wk-mp-dashboard-totalpayout-value">BSD$<span id="outstanding_balance_total">0.00</span></span>
+        </div>
+    </div>
+</div>
+<style type="text/css">
+    .wk-mp-dashboard-main-container-downside {
+    display: none;
+}
+</style>
+<script>
+require(['jquery', 'jquery/ui'], function($){
+    $(document).ready( function() {
+
+
+	setTimeout(function(){ 
+	var outStandingCal = 0.00;
+	$('#outstanding_balance_wrapper table tbody tr').each(function() {
+
+		var pAmount = $(this).children("td:eq(3)").text();
+		
+		replacedAmount = pAmount.replace("BSD$", "");
+			
+		outStandngCal =parseFloat(outStandingCal) + parseFloat(replacedAmount);
+		$('#outstanding_balance_total').text(outStandngCal);
+		
+        });
+
+	}, 15000);
+
+	
+    });
+});
+</script>

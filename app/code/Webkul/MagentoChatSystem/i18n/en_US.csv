@@ -1,0 +1,177 @@
+"Chat History","Chat History"
+Back,Back
+"Customer Name","Customer Name"
+"Chat Status","Chat Status"
+Action,Action
+"View History","View History"
+Online,Online
+Offline,Offline
+Busy,Busy
+Unknown,Unknown
+"Assigned Chats","Assigned Chats"
+"Agent Name","Agent Name"
+"Rating Stars","Rating Stars"
+Status,Status
+Comment,Comment
+Date,Date
+Approved,Approved
+Disapproved,Disapproved
+"Agent Feedbacks","Agent Feedbacks"
+"Agent Details","Agent Details"
+"Start Server","Start Server"
+"Stop Server","Stop Server"
+"Agent List","Agent List"
+"Assigned Chat","Assigned Chat"
+"Agent Ratings","Agent Ratings"
+"A total of %1 record(s) have been deleted.","A total of %1 record(s) have been deleted."
+"A total of %1 record(s) have been updated.","A total of %1 record(s) have been updated."
+"Something went wrong while updating the part finder(s) status.","Something went wrong while updating the part finder(s) status."
+"Chat Details","Chat Details"
+"Agent details does not exists.","Agent details does not exists."
+"Please correct the data sent.","Please correct the data sent."
+"We can't assigned the chat.","We can't assigned the chat."
+"Status Updated.","Status Updated."
+"Page not found.","Page not found."
+"Chat History Deleted.","Chat History Deleted."
+"Chat history not available.","Chat history not available."
+"Chat Reports","Chat Reports"
+"Server Running.","Server Running."
+"Node path can not be found, make sure Node is installed on this server.","Node path can not be found, make sure Node is installed on this server."
+"Node server already running.","Node server already running."
+"Login successful.","Login successful."
+"Registered successful.","Registered successful."
+"There is already an account with this email address.","There is already an account with this email address."
+"Image updated successfully.","Image updated successfully."
+Support,Support
+"Agent with id ""%1"" does not exist.","Agent with id ""%1"" does not exist."
+"Agent with unique id ""%1"" does not exist.","Agent with unique id ""%1"" does not exist."
+"Could not save the agentRating: %1","Could not save the agentRating: %1"
+"AgentRating with id ""%1"" does not exist.","AgentRating with id ""%1"" does not exist."
+"Could not delete the AgentRating: %1","Could not delete the AgentRating: %1"
+"Customer with id ""%1"" does not exist.","Customer with id ""%1"" does not exist."
+"Could not save the report: %1","Could not save the report: %1"
+"Report with id ""%1"" does not exist.","Report with id ""%1"" does not exist."
+"Could not delete the Report: %1","Could not delete the Report: %1"
+"All agents are offline, try after sometime.","All agents are offline, try after sometime."
+"Agents are offline, send message we will revert you soon.","Agents are offline, send message we will revert you soon."
+"View Details","View Details"
+"Click to download file","Click to download file"
+History,History
+"Type your message...","Type your message..."
+"Download File","Download File"
+"Customer is not available for chat.","Customer is not available for chat."
+"Chat Server is Running on ","Chat Server is Running on "
+"Personal Information","Personal Information"
+Name:,Name:
+Email:,Email:
+"Rating Dashboard","Rating Dashboard"
+"%1 average based on %1 ratings","%1 average based on %1 ratings"
+"Customer chat history","Customer chat history"
+"Message Date","Message Date"
+"Search by agent name","Search by agent name"
+"Search by message date","Search by message date"
+Submit,Submit
+"Sender Name","Sender Name"
+"Receiver Name","Receiver Name"
+Message,Message
+"Message Date Time","Message Date Time"
+You,You
+Hello,Hello
+"Support is not available for chat.","Support is not available for chat."
+"Clear chat history","Clear chat history"
+"Welcome to %store_name","Welcome to %store_name"
+"%name,","%name,"
+"Welcome to %store_name.","Welcome to %store_name."
+"To sign in to our site, use these credentials during checkout or on the <a href=""%customer_url"">My Account</a> page:","To sign in to our site, use these credentials during checkout or on the <a href=""%customer_url"">My Account</a> page:"
+Password:,Password:
+"Give Feedback","Give Feedback"
+"End Chat","End Chat"
+"Profile Setting","Profile Setting"
+"Log in","Log in"
+"Email Address","Email Address"
+Password,Password
+"Sign In","Sign In"
+Register,Register
+Name,Name
+"Create an Account","Create an Account"
+"Start Chat","Start Chat"
+Cancel,Cancel
+Upload,Upload
+"Give Stars","Give Stars"
+"Submit Feedback","Submit Feedback"
+"Report to Admin","Report to Admin"
+"Submit Report","Submit Report"
+"Server Status","Server Status"
+Attension!,Attension!
+"Are you sure want to clear chat history.","Are you sure want to clear chat history."
+"File type not supported","File type not supported"
+"% percent loaded","% percent loaded"
+"Maximum allowe size is ","Maximum allowe size is "
+"Assigning agent for you...","Assigning agent for you..."
+"starting chat...","starting chat..."
+"intializing chat...","intializing chat..."
+"%1 average based on %2 ratings.","%1 average based on %2 ratings."
+"Agent logged out, please start chat again.","Agent logged out, please start chat again."
+"Thanks for you valuable feedback.","Thanks for you valuable feedback."
+"Report submitted successfuly.","Report submitted successfuly."
+Webkul,Webkul
+"Chat System Configuration","Chat System Configuration"
+"Server Settings","Server Settings"
+"Host Name","Host Name"
+"Ex: example.com","Ex: example.com"
+"Port Number","Port Number"
+"Ex: 8080","Ex: 8080"
+"Admin Chat Profile Image","Admin Chat Profile Image"
+"Allowed file types: jpg, jpeg, gif, png","Allowed file types: jpg, jpeg, gif, png"
+"Chat Name","Chat Name"
+"Chat name will be display to all users in frontend.","Chat name will be display to all users in frontend."
+"Assign New Chat to Any Chatsystem Manager Automatically","Assign New Chat to Any Chatsystem Manager Automatically"
+"Allow Customer to send message offline","Allow Customer to send message offline"
+"Customer can send message if there are no agent is available.","Customer can send message if there are no agent is available."
+"Allowed Maximum File Size for Attachment in MB","Allowed Maximum File Size for Attachment in MB"
+"Enter the integer value only: ex. 5","Enter the integer value only: ex. 5"
+"HTTPS Enabled","HTTPS Enabled"
+"Upload Server Private Key File","Upload Server Private Key File"
+"You can get this file from your host provider, file name must be as: server.key","You can get this file from your host provider, file name must be as: server.key"
+"Upload Server Certificate File","Upload Server Certificate File"
+"You can get this file from your host provider, file name must be as: server.crt","You can get this file from your host provider, file name must be as: server.crt"
+"Upload Server CA Bundle File","Upload Server CA Bundle File"
+"You can get this file from your host provider, file name must be as: server.ca-bundle","You can get this file from your host provider, file name must be as: server.ca-bundle"
+"Frontend Chat Window Option","Frontend Chat Window Option"
+"Chat Window Position","Chat Window Position"
+"Chat Window Background Type","Chat Window Background Type"
+"Choose Background Color","Choose Background Color"
+"select chat window background color.","select chat window background color."
+"Chat Window Background Image","Chat Window Background Image"
+"Chat Window Header Color","Chat Window Header Color"
+"select chat window header color.","select chat window header color."
+"Chat Window Header Text Color","Chat Window Header Text Color"
+"select chat window text color.","select chat window text color."
+"Admin Chat Window Option","Admin Chat Window Option"
+"Chat User Panel Window Background Color","Chat User Panel Window Background Color"
+"select chat list window background color.","select chat list window background color."
+"Chat User Panel Window Text Color","Chat User Panel Window Text Color"
+"select chat list window text color.","select chat list window text color."
+"Chat User List Background Color","Chat User List Background Color"
+"Chat User List Text Color","Chat User List Text Color"
+"Agent Information","Agent Information"
+"Assign Chat To","Assign Chat To"
+"Assign Chat","Assign Chat"
+"Are you sure to assign selected chat to agent?","Are you sure to assign selected chat to agent?"
+"Assigned To","Assigned To"
+"Assigned On","Assigned On"
+"Agent ID","Agent ID"
+"Agent Email","Agent Email"
+Sender,Sender
+Receiver,Receiver
+"Dated on","Dated on"
+"Are you sure you want to delete selected items?","Are you sure you want to delete selected items?"
+"Delete items","Delete items"
+Delete,Delete
+Approve,Approve
+Disapprove,Disapprove
+ID,ID
+"Rating Star","Rating Star"
+"Report By","Report By"
+Subject,Subject
+Description,Description

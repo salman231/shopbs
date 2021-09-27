@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ * 
+ * PHP version 7.0+
+ *
+ * @category  Webkul
+ * @package   Webkul_DeliveryBoy
+ * @author    Webkul <support@webkul.com>
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Webkul_DeliveryBoy::expressdelivery" title="Delivery Boy" sortOrder="10">
+                    <resource id="Webkul_DeliveryBoy::menu" title="Menu" sortOrder="10">
+                        <resource id="Webkul_DeliveryBoy::deliveryboydashboard" title="Deliveryboy Dashboard" sortOrder="1"/>
+                        <resource id="Webkul_DeliveryBoy::deliveryboy" title="Manage Delivery Boy" sortOrder="2"/>
+                        <resource id="Webkul_DeliveryBoy::rating" title="Manage Deliveryboy Rating" sortOrder="3"/>
+                        <resource id="Webkul_DeliveryBoy::shipping" title="Express Delivery Shipping" sortOrder="4"/>
+                        <resource id="Webkul_DeliveryBoy::deliveryboyorders" title="Manage Delivery Boy Orders" sortOrder="5"/>
+                        <resource id="Webkul_DeliveryBoy::configuration" title="Delivery Boy Configuration" sortOrder="6"/>
+                    </resource>
+                </resource>
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="Webkul_DeliveryBoy::config_deliveryboy" title="DeliveryBoy Configuration Section" sortOrder="50"/>
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

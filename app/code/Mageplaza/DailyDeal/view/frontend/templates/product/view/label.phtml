@@ -1,0 +1,77 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_DailyDeal
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+/** @var \Mageplaza\DailyDeal\Block\Product\View\Label $block */
+$productId = $block->getRequest()->getParam('id');
+$percent   = $block->_helperData->checkDealConfigurableProduct($productId)
+            ? $block->getMaxPercent($productId)
+            : $block->getPercentDiscount($productId);
+
+$whereToShow = $block->getShowLabelConfig();
+$isDisabled  = $whereToShow === \Mageplaza\DailyDeal\Model\Config\Source\DiscountLabel::DISABLE;
+$style       = [
+    'background' => $block->getBackgroundColor(),
+    'border'     => $block->getBorderStyle(),
+    'color'      => $block->getTextColor(),
+    'img'        => ''
+];
+$position    = 'price';
+?>
+<?php if ($block->_helperData->checkDealProduct($productId) || $block->_helperData->checkDealConfigurableProduct($productId)): ?>
+    <?php $discountLabels = $block->getLabel($percent); ?>
+    <?php if ($whereToShow === \Mageplaza\DailyDeal\Model\Config\Source\DiscountLabel::ABOVE_PRODUCT_IMAGE): ?>
+        <?php $position = 'img'; ?>
+        <div class="mpdeal mpdailydeal-percent-above-image" style="<?= /* @noEscape */ $block->getCssLabelOnImage() ?>">
+            <?= $block->escapeHtml($discountLabels) ?>
+        </div>
+    <?php elseif ($whereToShow === \Mageplaza\DailyDeal\Model\Config\Source\DiscountLabel::UNDER_PRICE): ?>
+        <span class="mpdeal mpdailydeal-percent-underprice">
+            <span><?= $block->escapeHtml($discountLabels) ?></span>
+        </span>
+    <?php endif; ?>
+    <style type="text/css">
+        .mpdeal {
+            background: <?= /* @noEscape */ $style['background']?>;
+            border: <?= /* @noEscape */ $style['border']?>;
+            color: <?= /* @noEscape */ $style['color']?>;
+        }
+    </style>
+    <script>
+        require(['jquery'], function ($) {
+            var position = "<?= /* @noEscape */ $position?>";
+            switch (position){
+                case 'price':
+                    var percentEl = $('.mpdailydeal-percent-underprice');
+                    $('.price-box.price-final_price').first().append(percentEl);
+                    if (percentEl.length > 1) {
+                        percentEl.not(':last').remove()
+                    }
+                    break;
+                case 'img':
+                    var label = $('.mpdailydeal-percent-above-image');
+                    $(".product.media").append(label);
+                    break;
+                default:
+                    break;
+            }
+        });
+    </script>
+<?php endif; ?>

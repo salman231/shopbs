@@ -1,0 +1,19 @@
+Legend
+
++ Features
+- Bugs
+
+-------------------------------- Version 3.0.0---------------------------------------
+	+compatible with Magento 2.3.x
+	-fixed Bugs and issues
+-------------------------------- Version 2.0.1 --------------------------------------
+	
+	+ Composer file updated as per magento 2.2.x
+
+-------------------------------- Version 2.0.0 --------------------------------------
+	
+	+ Ability to display products, while still typing.
+    + Ability to display matched products name with category. 
+    + Ability to Show popular products based on Ratings.
+	+ Highlighting of the keyword in search result.
+

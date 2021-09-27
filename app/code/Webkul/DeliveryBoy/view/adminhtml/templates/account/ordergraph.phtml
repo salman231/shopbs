@@ -1,0 +1,86 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * PHP version 7.0+
+ *
+ * @category  Webkul
+ * @package   Webkul_DeliveryBoy
+ * @author    Webkul <support@webkul.com>
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+?>
+<?php
+$data = $block->getParamValues();
+$data = 'year';
+$salesImage = $block->getsalesAmount($data);
+?>
+<div class="wk-mp-design">
+    <fieldset class="fieldset info wk-mp-fieldset">
+        <div class="wkreport_header wk_sales_graph_outer">
+            <form 
+                action="<?= /* @noEscape */ $block->getUrl(
+                    'expressdelivery/dashboard/index',
+                    [
+                        '_secure' => $block->getIsSecure()
+                    ]
+                ) ?>"
+                method="get"
+                id="generate-report">
+            
+                <div class="wk_sales_graph wk_graph_border">
+                    <div class="wk-filter-buttons">
+                        <div class="wk-filter-button" value='day'>
+                            <?= $block->escapeHtml(__('Day'))?></div>
+                        <div class="wk-filter-button" value='week'>
+                            <?= $block->escapeHtml(__('Week'))?></div>
+                        <div class="wk-filter-button" value='month'>
+                            <?= $block->escapeHtml(__('Month'))?></div>
+                        <div class="wk-filter-button wk-selected-filter-button" value='year'>
+                            <?= $block->escapeHtml(__('Year'))?></div>
+                    </div>
+                    <div>
+                        <img src="<?= /* @noEscape */ $salesImage ?>"
+                             alt="Sales Chart" title="Sales Chart" id="wk-sales-chart"/>
+                    </div>
+                </div>
+        
+            </form>
+        </div>
+    </fieldset>
+</div>
+
+<script type="text/javascript">
+    require([
+        "jquery"
+    ], function(jQuery)  {
+        require([
+        "jquery"
+    ], function(jQuery)  {
+        jQuery("body").on("click", ".wk_sales_graph_outer .wk-filter-button", function () {
+            jQuery(this).parents('.wk-filter-buttons').find(
+                    '.wk-selected-filter-button'
+                ).removeClass(
+                    'wk-selected-filter-button'
+                ).addClass(
+                    'wk-filter-button'
+                );
+                jQuery(this).addClass('wk-selected-filter-button').removeClass('.wk-filter-button');
+                var params = "";
+                params = jQuery(this).attr('value');
+                jQuery.ajax({
+                    url: '<?= /* @noEscape */ $block->getUrl('expressdelivery/graph/index', ['_secure' => true]); ?>',
+                    data: {data:params},
+                    type: "post",
+                    dataType: "json",
+                    showLoader: true,
+                    success: function (data) {
+                        jQuery("#wk-sales-chart").attr('src',data);
+                    }
+                });
+            });
+        });
+    });
+</script>

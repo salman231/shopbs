@@ -1,0 +1,214 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+?>
+<?php
+/**
+ * @var \Magento\Sales\Block\Adminhtml\Order\View\Items $block
+ */
+$_order = $block->getOrder() ?>
+<div class="admin__page-section-title">
+    <span class="title"><?= $block->escapeHtml(__('Product Keys Issued')) ?></span>
+    <script type="text/javascript">
+        function getChecked(button)
+        {
+            var table = document.getElementById("productkeys_table");
+            var inputs = table.getElementsByTagName("input");
+            var items = new Array();
+            var j = 0;
+            for(var i = 0; i < inputs.length; i++)
+            {
+                if(inputs[i].type == "checkbox" && inputs[i].checked == true)
+                {
+                    items[j] = inputs[i].value;
+                    j++;
+                }
+            }
+            if (items.length < 1)
+            {
+                alert("<?php echo $block->escapeHtml(__('Please select items.')) ?>");
+                return;
+            }
+            document.productkey_order_items.elements['productkey_items'].value = items.join();
+            <?php $confrm = 'Are you sure you want to email the productkeys for the selected items to the customer?';
+            $keyConfrm = 'Are you sure you want to issue productkeys to the selected items?';?>
+            if(button == 'email')
+            {
+                var x = confirm("<?php echo $block->escapeHtml(__($confrm)) ?>");
+                if (x)
+                {
+                    <?php $actionUrl = $block->getUrl('productkeys/Productkeys/deliverkeys'); ?>
+                    document.productkey_order_items.action = "<?php echo $block->escapeHtml($actionUrl) ?>";
+                } else {
+                    return;
+                }
+            } else {
+                var x = confirm("<?php echo $block->escapeHtml(__($keyConfrm)) ?>");
+                if (!x)
+                {
+                    return;
+                }
+            }
+            document.productkey_order_items.submit();
+        }
+
+        function keysPopup(item_id, cust_name, prd_name, qty, keyType, prdKeys, prdKeysId, productId, keypool) {
+            document.getElementById('productkeys_mask').style.display = "block";
+            document.getElementById('productkey_popup').style.display = "block";
+            document.getElementById('prdKeys_itemId').value = item_id;
+            document.getElementById('prdkey_customer').value = cust_name;
+            document.getElementById('prdkey_name').value = prd_name;
+            document.getElementById('prdkey_qty').value = qty;
+            document.getElementById('prdkey_type').value = keyType;
+            document.getElementById('prdkey_keys').value = prdKeys.replace(/,/g, "\n");
+            document.getElementById('prdkey_ids').value = prdKeysId;
+            document.getElementById('product_id').value = productId;
+            document.getElementById('sku').value = keypool;
+        }
+
+        function keysPopupClose() {
+            document.getElementById('productkeys_mask').style.display = "none";
+            document.getElementById('productkey_popup').style.display = "none";
+        }
+    </script>
+    <form id="productkey_order_items" name="productkey_order_items"
+        action="<?= $block->escapeHtml($block->getUrl('productkeys/Productkeys/generatekeys')); ?>">
+        <input type="hidden" name="form_key" value="<?= $block->escapeHtml($block->getFormKey()); ?>" />
+        <input type="hidden" name="order_id" value="<?= $block->escapeHtml($_order->getId()); ?>" />
+        <input type="hidden" name="productkey_items" value="" />
+        <input type="hidden" name="orderinc_id" value="<?= $block->escapeHtml($_order->getIncrementId()); ?>" />
+        <button type="button" class="action-default action-secondary" onclick="getChecked('Issue Product Keys');">
+        <?= $block->escapeHtml(__('Issue Product Keys')) ?></button>
+        <button type="button" class="action-default action-secondary" onclick="getChecked('email');">
+        <?= $block->escapeHtml(__('Email Product Keys')) ?></button>
+    </form>
+</div>
+<div class="admin__table-wrapper">
+    <table id="productkeys_table" class="data-table admin__table-primary edit-order-table">
+        <thead>
+            <tr class="headings">
+                <th></th>
+                <th class="col-ordered"><span><?= $block->escapeHtml(__('Ordered')); ?></span></th>
+                <th class="col-product"><span><?= $block->escapeHtml(__('Product')); ?></span></th>
+                <th class="col-productkey_type">
+                <span><?= $block->escapeHtml(__('Product Key Type')); ?></span>
+                </th>
+                <th class="col-product_keys"><span><?= $block->escapeHtml(__('Product Keys')); ?></span></th>
+                <th class="col-product_edit last"><?= $block->escapeHtml(__('Action')); ?><span></span></th>
+            </tr>
+        </thead>
+        <?php $_items = $_order->getAllVisibleItems(); ?>
+        <?php $i = 0;
+        foreach ($_items as $_item) {
+            $i++;
+            $item_id = $_item->getItemId();
+            $qty = (int) $_item->getQtyOrdered();
+            $prd_name = $_item->getName();
+            $keyType = $_item->getProductKeyType();
+            $prd_keys = preg_replace('/\s+/', ' ', trim($_item->getProductKeys()));
+            ?>
+            <tbody class="<?= $i%2 ? 'even' : 'odd' ?>">
+                <td><input type="checkbox" name="item_id" value="<?= $block->escapeHtml($item_id); ?>"/></td>
+                <td><?= $block->escapeHtml($qty); ?></td>
+                <td><?= $block->escapeHtml($prd_name); ?></td>
+                <td><?= $block->escapeHtml($keyType); ?></td>
+                <td><?= str_replace(',', '<br/>', $prd_keys); ?></td>
+                <td>
+                    <?php $funcVal = "'".$item_id."', '".$_order->getBillingAddress()->getName()."','".$prd_name."',
+                    '".$qty."', '".$keyType."', '".$prd_keys."', '".$_item->getProductKeyIds()."',
+                    '".$_item->getProductId()."', '".$_item->getProductKeyPool()."'"; ?>
+                    <a href="#" onclick="keysPopup(<?= $block->escapeHtml(str_replace("\n", "", $funcVal)); ?>);
+                    return false;">
+                    <?= $block->escapeHtml(__('Edit')); ?>
+                    </a>
+                </td>
+            </tbody>
+            <?php
+        } ?>
+    </table>
+</div>
+<div id="productkeys_mask"></div>
+<div id="productkey_popup">
+    <div class="key_edit">
+        <div class="keys_header">
+            <h4 class="keys_title"><?= $block->escapeHtml(__('Edit Product Keys')); ?></h4>
+        </div>
+    </div>
+    <form id="productkey_edit"
+    action="<?= $block->escapeHtml($block->getUrl('productkeys/Productkeys/save')); ?>">
+        <input type="hidden" name="form_key" value="<?= $block->escapeHtml($block->getFormKey()); ?>" />
+        <input type="hidden" name="order_id" value="<?= $block->escapeHtml($_order->getId()); ?>" />
+        <input type="hidden" name="orderinc_id" value="<?= $block->escapeHtml($_order->getIncrementId()); ?>" />
+        <input type="hidden" name="item_id" id="prdKeys_itemId" value="" />
+        <input type="hidden" name="id" id="prdkey_ids" value="" />
+        <input type="hidden" name="status" value="1" />
+        <input type="hidden" name="product_id" id="product_id" value="" />
+        <input type="hidden" name="sku" id="sku" value="" />
+        <div class="productkey_items">
+            <table width="100%" cellspacing="0" class="form-list">
+                <tbody>
+                    <tr>
+                        <td class="label">
+                            <label for="prdkey_order"><?= $block->escapeHtml(__('Order Number')) ?></label>
+                        </td>
+                        <td class="value">
+                            <input id="prdkey_order" type="text"
+                            value="<?= $block->escapeHtml($_order->getIncrementId()); ?>"
+                            disabled readonly="1" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label">
+                            <label for="prdkey_customer"><?= $block->escapeHtml(__('Customer Name')) ?></label>
+                        </td>
+                        <td class="value">
+                            <input id="prdkey_customer" type="text" name="prdkey_customer" disabled readonly="1" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label">
+                            <label for="prdkey_name"><?= $block->escapeHtml(__('Product')) ?></label>
+                        </td>
+                        <td class="value">
+                            <input id="prdkey_name" type="text" name="prdkey_name" disabled readonly="1" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label">
+                            <label for="prdkey_qty"><?= $block->escapeHtml(__('Quantity Ordered')) ?></label>
+                        </td>
+                        <td class="value">
+                            <input id="prdkey_qty" type="text" name="prdkey_qty" disabled readonly="1" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label">
+                            <label for="prdkey_type"><?= $block->escapeHtml(__('Product Keys Type')) ?></label>
+                        </td>
+                        <td class="value">
+                            <input id="prdkey_type" type="text" name="prdkey_type" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label">
+                            <label for="prdkey_keys">
+                                <?= $block->escapeHtml(__('Product Keys (one per line)')) ?></label>
+                        </td>
+                        <td class="value">
+                            <textarea id="prdkey_keys" name="product_key" rows="4"></textarea>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="prdKeys_button">
+            <button type="button" class="prdKeys_cancel" onclick="keysPopupClose()">
+            <?= $block->escapeHtml(__('Cancel')) ?></button>
+            <button type="submit" class="prdKeys_save">
+            <?= $block->escapeHtml(__('Save Product Keys')) ?></button>
+        </div>
+    </form>
+</div>

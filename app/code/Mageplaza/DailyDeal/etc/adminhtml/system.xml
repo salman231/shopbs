@@ -1,0 +1,378 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_DailyDeal
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="dailydeal" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Daily Deal</label>
+            <tab>mageplaza</tab>
+            <resource>Mageplaza_DailyDeal::configuration</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Select Yes to enable this module</comment>
+                </field>
+                <field id="show_qty_remain" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Show Qty of Remaining Items</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Select Yes to display the quantity of remaining products</comment>
+                </field>
+                <field id="show_qty_sold" translate="label comment" type="select" sortOrder="35" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Show Qty of Sold Items</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Select Yes to display the quantity of sold products</comment>
+                </field>
+                <group id="countdown_timer" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Countdown Timer</label>
+                    <field id="show_countdown_timer" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Show countdown timer</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <comment>Select Yes to display the countdown timer on Product Detail</comment>
+                    </field>
+                    <field id="clock_style" translate="label comment" type="select" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Clock Style</label>
+                        <source_model>Mageplaza\DailyDeal\Model\Config\Source\ClockStyle</source_model>
+                        <depends>
+                            <field id="show_countdown_timer">1</field>
+                        </depends>
+                    </field>
+                    <field id="countdown_outer_color" translate="label comment" type="text" sortOrder="30" showInWebsite="1" showInStore="1" showInDefault="1" canRestore="1">
+                        <label>Outer background color</label>
+                        <validate>jscolor {hash:true,refine:false}</validate>
+                        <comment>Select the background color for the outer area of the countdown timer. Leave empty to make it transparent</comment>
+                        <depends>
+                            <field id="show_countdown_timer">1</field>
+                        </depends>
+                    </field>
+                    <field id="countdown_inner_color" translate="label comment" type="text" sortOrder="35" showInWebsite="1" showInStore="1" showInDefault="1" canRestore="1">
+                        <label>Inner background color</label>
+                        <validate>jscolor {hash:true,refine:false}</validate>
+                        <comment>Select the background color for the inner area of the countdown timer.</comment>
+                        <depends>
+                            <field id="show_countdown_timer">1</field>
+                            <field id="clock_style">deal_style_4</field>
+                        </depends>
+                    </field>
+                    <field id="countdown_number" translate="label comment" type="text" sortOrder="40" showInWebsite="1" showInStore="1" showInDefault="1" canRestore="1">
+                        <label>Number Color</label>
+                        <validate>jscolor {hash:true,refine:false}</validate>
+                        <depends>
+                            <field id="show_countdown_timer">1</field>
+                        </depends>
+                    </field>
+                    <field id="countdown_text" translate="label comment" type="text" sortOrder="45" showInWebsite="1" showInStore="1" showInDefault="1" canRestore="1">
+                        <label>Text Color</label>
+                        <validate>jscolor {hash:true,refine:false}</validate>
+                        <depends>
+                            <field id="show_countdown_timer">1</field>
+                        </depends>
+                    </field>
+                </group>
+                <group id="discount_label" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Discount Label</label>
+                    <field id="show_discount_label" translate="label comment" type="select" sortOrder="60" showInDefault="1" showInStore="1" showInWebsite="1" canRestore="1">
+                        <label>Show Discount Label</label>
+                        <source_model>Mageplaza\DailyDeal\Model\Config\Source\DiscountLabel</source_model>
+                        <comment>Select a position to display the label</comment>
+                    </field>
+                    <field id="content_label" translate="label comment" type="text" sortOrder="65" showInWebsite="1" showInStore="1" showInDefault="1" canRestore="1">
+                        <label>Label</label>
+                        <comment><![CDATA[<span>Label is displayed. With <b>{{number}}</b> being the percentage of the discount deal</span>]]></comment>
+                    </field>
+                    <field id="round_percent" translate="label comment" type="select" sortOrder="67" showInDefault="1" showInStore="1" showInWebsite="1" canRestore="1">
+                        <label>Round percentage</label>
+                        <source_model>Mageplaza\DailyDeal\Model\Config\Source\RoundPercent</source_model>
+                    </field>
+                    <field id="show_on" translate="label comment" type="select" sortOrder="70" showInDefault="1" showInStore="1" showInWebsite="1" canRestore="1">
+                        <label>Show On</label>
+                        <source_model>Mageplaza\DailyDeal\Model\Config\Source\ShowOnProductImage</source_model>
+                        <depends>
+                            <field id="show_discount_label">3</field>
+                        </depends>
+                        <comment>Select a position to place the discount label</comment>
+                    </field>
+                    <field id="label_bg_color" translate="label comment" type="text" sortOrder="80" showInWebsite="1" showInStore="1" showInDefault="1" canRestore="1">
+                        <label>Background Color</label>
+                        <validate>jscolor {hash:true,refine:false}</validate>
+                        <comment>Leave empty to make it transparent</comment>
+                    </field>
+                    <field id="label_border_color" translate="label comment" type="text" sortOrder="90" showInWebsite="1" showInStore="1" showInDefault="1" canRestore="1">
+                        <label>Border Color</label>
+                        <validate>jscolor {hash:true,refine:false}</validate>
+                    </field>
+                    <field id="label_text_color" translate="label comment" type="text" sortOrder="100" showInWebsite="1" showInStore="1" showInDefault="1" canRestore="1">
+                        <label>Text Color</label>
+                        <validate>jscolor {hash:true,refine:false}</validate>
+                    </field>
+                </group>
+            </group>
+            <group id="deal_pages" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Deal Pages</label>
+                <group id="all_deals" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>All Deals Page</label>
+                    <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Enable</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <comment>Select Yes to configure the All-deals page</comment>
+                    </field>
+                    <field id="show_links" translate="label comment" type="multiselect" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Show Links</label>
+                        <source_model>Mageplaza\DailyDeal\Model\Config\Source\ShowLinks</source_model>
+                        <comment>Select a position to place the link to the All-deals page</comment>
+                    </field>
+                    <field id="route" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Route</label>
+                        <validate>letters-only</validate>
+                        <comment>the path. Eg: if you set the link title "dailydeal", the page URL will be: example.com/dailydeal.html</comment>
+                    </field>
+                    <field id="title" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Page Title</label>
+                        <comment>The title of the All-deals page</comment>
+                    </field>
+                </group>
+                <group id="new_deals" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>New Deals Page</label>
+                    <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Enable</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <comment>Select Yes to configure the New Deals page</comment>
+                    </field>
+                    <field id="show_links" translate="label comment" type="multiselect" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Show Links</label>
+                        <source_model>Mageplaza\DailyDeal\Model\Config\Source\ShowLinks</source_model>
+                        <comment>Select a position to place the link to the New Deals page</comment>
+                    </field>
+                    <field id="route" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Route</label>
+                        <validate>letters-only</validate>
+                        <comment>the path. Eg: if you set the link title "new-deal", the page URL will be: example.com/new-deal.html</comment>
+                    </field>
+                    <field id="title" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Page Title</label>
+                        <comment>The title of the New Deals page</comment>
+                    </field>
+                </group>
+                <group id="best_deals" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Bestseller Deals Page</label>
+                    <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Enable</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <comment>Select Yes to configure the Bestseller Deals page</comment>
+                    </field>
+                    <field id="show_links" translate="label comment" type="multiselect" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Show Links</label>
+                        <source_model>Mageplaza\DailyDeal\Model\Config\Source\ShowLinks</source_model>
+                        <comment>Select a position to place the link to the Bestseller Deals page</comment>
+                    </field>
+                    <field id="route" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Route</label>
+                        <validate>letters-only</validate>
+                        <comment>the path. Eg: if you set the link title "bestseller-deal", the page URL will be: example.com/bestseller-deal.html</comment>
+                    </field>
+                    <field id="title" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Page Title</label>
+                        <comment>The title of the Bestseller Deals page</comment>
+                    </field>
+                </group>
+                <group id="featured_deals" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Featured Deals Page</label>
+                    <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Enable</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <comment>Select Yes to configure the Featured Deals page</comment>
+                    </field>
+                    <field id="show_links" translate="label comment" type="multiselect" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Show Links</label>
+                        <source_model>Mageplaza\DailyDeal\Model\Config\Source\ShowLinks</source_model>
+                        <comment>Select a position to place the link to the Featured Deals page</comment>
+                    </field>
+                    <field id="route" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Route</label>
+                        <validate>letters-only</validate>
+                        <comment>the path. Eg: if you set the link title "feature-deals", the page URL will be: example.com/feature-deals.html</comment>
+                    </field>
+                    <field id="title" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Page Title</label>
+                        <comment>The title of the Featured Deals page</comment>
+                    </field>
+                </group>
+            </group>
+            <group id="sidebar_widget" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Sidebar Widget</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Select Yes to turn on the sidebar widget</comment>
+                </field>
+                <field id="qty_remain" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Show Qty of Remaining Items</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Select Yes to display the quantity of remaining products</comment>
+                </field>
+                <field id="qty_sold" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Show Qty of Sold Items</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Select Yes to display the quantity of sold products</comment>
+                </field>
+                <group id="random_deal" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Random Deal</label>
+                    <field id="enable" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Show</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <comment>Select Yes to enable the Random Deal block</comment>
+                    </field>
+                    <field id="title" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Block Title</label>
+                        <comment>The title of the block</comment>
+                    </field>
+                    <field id="show_on" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInStore="1" showInWebsite="1" canRestore="1">
+                        <label>Show On</label>
+                        <source_model>Mageplaza\DailyDeal\Model\Config\Source\WidgetShowOn</source_model>
+                        <comment>The position to place the block</comment>
+                    </field>
+                    <field id="limit" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Limit</label>
+                        <comment>The maximum number of items which are allowed to show up in the block</comment>
+                    </field>
+                </group>
+                <group id="selling_deal" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Top Selling Deal</label>
+                    <field id="enable" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Show</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <comment>Select Yes to enable the Top Selling Deal block</comment>
+                    </field>
+                    <field id="title" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Block Title</label>
+                        <comment>The title of the block</comment>
+                    </field>
+                    <field id="show_on" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInStore="1" showInWebsite="1" canRestore="1">
+                        <label>Show On</label>
+                        <source_model>Mageplaza\DailyDeal\Model\Config\Source\WidgetShowOn</source_model>
+                        <comment>The position to place the block</comment>
+                    </field>
+                    <field id="limit" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Limit</label>
+                        <comment>The maximum number of items which are allowed to show up in the block</comment>
+                    </field>
+                </group>
+                <group id="upcoming_deal" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Upcoming Deal</label>
+                    <field id="enable" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Show</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <comment>Select Yes to enable the Upcoming Deal block</comment>
+                    </field>
+                    <field id="title" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Block Title</label>
+                        <comment>The title of the block</comment>
+                    </field>
+                    <field id="show_on" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInStore="1" showInWebsite="1" canRestore="1">
+                        <label>Show On</label>
+                        <source_model>Mageplaza\DailyDeal\Model\Config\Source\WidgetShowOn</source_model>
+                        <comment>The position to place the block</comment>
+                    </field>
+                    <field id="limit" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Limit</label>
+                        <comment>The maximum number of items which are allowed to show up in the block</comment>
+                    </field>
+                </group>
+                <group id="float_deal" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Floating Deal Slider</label>
+                    <field id="enable" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Show</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <comment>Select Yes to enable the Floating Slider Deal block</comment>
+                    </field>
+                    <field id="show_mobile" translate="label comment" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Show on mobile</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <comment>Select Yes to enable the Floating Slider Deal block on mobile</comment>
+                    </field>
+                    <field id="title" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Block Title</label>
+                        <comment>The title of the block</comment>
+                    </field>
+                    <field id="show_on" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInStore="1" showInWebsite="1" canRestore="1">
+                        <label>Show On</label>
+                        <source_model>Mageplaza\DailyDeal\Model\Config\Source\FloatShowOn</source_model>
+                        <comment>The position to place the block</comment>
+                    </field>
+                    <field id="limit" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Number of Deals</label>
+                        <comment>The maximum number of items which are allowed to show up in the block</comment>
+                    </field>
+                    <field id="show_again_after" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Show again after</label>
+                        <comment>seconds. The floating bar will not be shown again if customer closes it. It will appear again after this configured time. Set it 0 or leave it blank not to display the slider again until customer reloads the page or opens a new page.</comment>
+                    </field>
+                </group>
+            </group>
+            <group id="snippet" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Snippet</label>
+                <field id="manually_insert" translate="label" type="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <frontend_model>Mageplaza\DailyDeal\Block\Adminhtml\System\Snippet</frontend_model>
+                </field>
+            </group>
+            <group id="create_deal" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Automatic Create Deal</label>
+                <field id="schedule_for" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Schedule For</label>
+                    <source_model>Mageplaza\DailyDeal\Model\Config\Source\Frequency</source_model>
+                    <backend_model>Mageplaza\DailyDeal\Model\Config\Backend\Deal\Frequency</backend_model>
+                    <comment>Set up the schedule in which deals are created automatically.</comment>
+                </field>
+                <field id="time" translate="label" type="time" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Start Time</label>
+                </field>
+                <field id="category" translate="label" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Apply for Categories</label>
+                    <frontend_model>Mageplaza\DailyDeal\Block\Adminhtml\System\Category</frontend_model>
+                </field>
+                <field id="percent_price" translate="label comment" type="text" sortOrder="50" showInWebsite="1" showInStore="1" showInDefault="1" canRestore="1">
+                    <label>Special Price (Percent)</label>
+                    <backend_model>Mageplaza\DailyDeal\Model\Config\Backend\Deal\PercentPrice</backend_model>
+                    <comment>Apply as percentage of original</comment>
+                </field>
+                <field id="product_number" translate="label comment" type="text" sortOrder="55" showInWebsite="1" showInStore="1" showInDefault="1" canRestore="1">
+                    <label>Number Product Created</label>
+                    <comment>Number of products generated per cron run</comment>
+                </field>
+                <field id="qty" translate="label comment" type="text" sortOrder="60" showInWebsite="1" showInStore="1" showInDefault="1" canRestore="1">
+                    <label>Qty</label>
+                    <validate>validate-number</validate>
+                    <comment>Default: 10</comment>
+                </field>
+                <field id="day" translate="label comment" type="text" sortOrder="70" showInWebsite="1" showInStore="1" showInDefault="1" canRestore="1">
+                    <label>Day(s)</label>
+                    <validate>validate-number</validate>
+                    <comment>Default: 1 day</comment>
+                </field>
+                <field id="run_manually" translate="label comment" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <frontend_model>Mageplaza\DailyDeal\Block\Adminhtml\System\Config\Manually</frontend_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

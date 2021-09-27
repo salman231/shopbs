@@ -1,0 +1,53 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_AutoRelated
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+$categoryIds = implode(',', $block->getCategoryIds());
+?>
+<fieldset class="fieldset admin__fieldset list-category">
+    <legend class="admin__legend legend">
+        <span><?= /** @noEscape */ __('Category'); ?></span>
+    </legend>
+    <input type="hidden" name="category_conditions_serialized" id="autorealated_rule_form_category"
+           value="<?= /** @noEscape */ $categoryIds; ?>"/>
+    <div class="admin__field">
+        <?= /** @noEscape */ $block->getCategoryTree(); ?>
+    </div>
+
+    <script type='text/javascript'>
+        require(['jquery'], function ($) {
+            autorealated_rule_form = {
+                updateElement: {
+                    value: "",
+                    linkedValue: ""
+                }
+            };
+            Object.defineProperty(autorealated_rule_form.updateElement, "value", {
+                get: function () {
+                    return autorealated_rule_form.updateElement.linkedValue;
+                },
+                set: function (value) {
+                    autorealated_rule_form.updateElement.linkedValue = value;
+                    $("#autorealated_rule_form_category").val(value);
+                }
+            });
+        });
+    </script>
+</fieldset>

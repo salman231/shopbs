@@ -1,0 +1,36 @@
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_DailyDeal
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+.toolbar.toolbar-products {
+    position: relative !important;
+}
+
+li.item.product.product-item {
+    position: relative;
+    padding-top: 10px;
+}
+
+.products-grid .product-item-info:hover {
+    z-index: 11;
+}
+
+li.mpdailydeal-product-item.product-item {
+    max-width: 100%;
+}

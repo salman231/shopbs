@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_DailyDeal
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <dailydeal>
+            <general>
+                <enabled>1</enabled>
+                <show_qty_remain>1</show_qty_remain>
+                <show_qty_sold>1</show_qty_sold>
+                <countdown_timer>
+                    <show_countdown_timer>1</show_countdown_timer>
+                    <clock_style>deal_style_4</clock_style>
+                    <countdown_outer_color>#00BF96</countdown_outer_color>
+                    <countdown_inner_color>#00816A</countdown_inner_color>
+                    <countdown_number>#FFFFFF</countdown_number>
+                    <countdown_text>#FFFFFF</countdown_text>
+                </countdown_timer>
+                <discount_label>
+                    <show_discount_label>1</show_discount_label>
+                    <content_label>{{number}}% OFF</content_label>
+                    <round_percent>1</round_percent>
+                    <show_on>1</show_on>
+                    <label_bg_color>#FFFFFF</label_bg_color>
+                    <label_border_color>#61A969</label_border_color>
+                    <label_text_color>#61A969</label_text_color>
+                </discount_label>
+            </general>
+            <sidebar_widget>
+                <qty_remain>1</qty_remain>
+                <qty_sold>1</qty_sold>
+                <random_deal>
+                    <enable>0</enable>
+                    <show_on>1</show_on>
+                    <limit>1</limit>
+                </random_deal>
+                <selling_deal>
+                    <enable>0</enable>
+                    <show_on>1</show_on>
+                    <limit>1</limit>
+                </selling_deal>
+                <upcoming_deal>
+                    <enable>0</enable>
+                    <show_on>1</show_on>
+                    <limit>1</limit>
+                </upcoming_deal>
+                <float_deal>
+                    <enable>0</enable>
+                    <show_mobile>1</show_mobile>
+                    <show_on>2</show_on>
+                    <limit>1</limit>
+                    <show_again_after>0</show_again_after>
+                </float_deal>
+            </sidebar_widget>
+            <deal_pages>
+                <all_deals>
+                    <enabled>0</enabled>
+                    <route>alldeals</route>
+                    <title>All Deals</title>
+                </all_deals>
+                <new_deals>
+                    <enabled>0</enabled>
+                    <route>newdeals</route>
+                    <title>New Deals</title>
+                </new_deals>
+                <best_deals>
+                    <enabled>0</enabled>
+                    <route>sellerdeals</route>
+                    <title>BestSeller Deals</title>
+                </best_deals>
+                <featured_deals>
+                    <enabled>0</enabled>
+                    <route>featuredeals</route>
+                    <title>Featured Deals</title>
+                </featured_deals>
+            </deal_pages>
+            <create_deal>
+                <schedule_for>0</schedule_for>
+                <percent_price>0</percent_price>
+                <product_number>1</product_number>
+                <qty>10</qty>
+                <day>1</day>
+            </create_deal>
+        </dailydeal>
+    </default>
+</config>

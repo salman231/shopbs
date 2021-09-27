@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category   Webkul
+ * @package    Webkul_MpAdvancedCommission
+ * @author     Webkul Software Private Limited
+ * @copyright  Copyright (c)  Webkul Software Private Limited (https://webkul.com)
+ * @license    https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Webkul_Marketplace::marketplace">
+                    <resource id="Webkul_Marketplace::menu">
+                        <resource id="Webkul_MpAdvancedCommission::commissionrules" title="Manage Commission Rules" sortOrder="20" />
+                    </resource>
+                </resource>
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="Webkul_MpAdvancedCommission::config_mpadvancedcommission" title="Marketplace Advanced Commission" sortOrder="52" />
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

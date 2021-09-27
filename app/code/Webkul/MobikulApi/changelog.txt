@@ -1,0 +1,7 @@
+Legend
+
++ Features
+- bugs
+
+-------------------------------- Version 3.0.0 --------------------------------------
+	+ compatible with magento version 2.3

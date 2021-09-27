@@ -1,0 +1,83 @@
+.user-rating-dashboard {
+    background: #fff;
+    padding: 12px;
+}
+
+/* Three column layout */
+.user-rating-dashboard .side {
+    clear: both;
+    float: left;
+    width: 15%;
+    margin-top: 10px;
+}
+
+.user-rating-dashboard .middle {
+    margin-top: 10px;
+    float: left;
+    width: 65%;
+}
+
+/* Place text to the right */
+.user-rating-dashboard .right {
+    text-align: right;
+    clear: none !important;
+}
+
+/* Clear floats after the columns */
+.user-rating-dashboard .row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* The bar container */
+.user-rating-dashboard .bar-container {
+    width: 100%;
+    background-color: #f1f1f1;
+    text-align: center;
+    color: white;
+}
+
+/* Individual bars */
+.user-rating-dashboard .bar-5 {
+    width: 0%;
+    height: 18px;
+    background-color: #4CAF50;
+}
+
+.user-rating-dashboard .bar-4 {
+    width: 0%;
+    height: 18px;
+    background-color: #2196F3;
+}
+
+.user-rating-dashboard .bar-3 {
+    width: 0%;
+    height: 18px;
+    background-color: #00bcd4;
+}
+
+.user-rating-dashboard .bar-2 {
+    width: 0%;
+    height: 18px;
+    background-color: #ff9800;
+}
+
+.user-rating-dashboard .bar-1 {
+    width: 0%;
+    height: 18px;
+    background-color: #f44336;
+}
+
+/* Responsive layout - make the columns stack on top of each other instead of next to each other */
+@media (max-width: 400px) {
+
+    .user-rating-dashboard .side,
+    .user-rating-dashboard .middle {
+        width: 100%;
+    }
+
+    .user-rating-dashboard .right {
+        display: none;
+    }
+}

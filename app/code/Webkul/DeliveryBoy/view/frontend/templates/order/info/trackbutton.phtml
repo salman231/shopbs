@@ -1,0 +1,55 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * PHP version 7.0+
+ *
+ * @category  Webkul
+ * @package   Webkul_DeliveryBoy
+ * @author    Webkul <support@webkul.com>
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+if ($block->canTrackOrder()):
+    $deliveryboyOrder = $block->getDeliveryBoyOrder();
+    $deliveryboyOrderId = $deliveryboyOrder->getId();
+    $trackingDataUrl = $block->getTrackingDataAction();?>
+    <div class="deliveryboy-track-order-wrapper" data-block="deliveryboy-track-order">
+        <div id="deliveryboy-track-order-loader_<?= $block->escapeHtmlAttr($deliveryboyOrderId); ?>"
+            data-role="deliveryboy-track-order-loader"
+            class="loading-mask" data-mage-init='{"Webkul_DeliveryBoy/js/view/review-loader": {}}'>
+            <div class="loader">
+                <img src="<?= $block->escapeUrl($block->getViewFileUrl('images/loader-1.gif')) ?>"
+                    alt="<?= $block->escapeHtmlAttr(__('Loading...')) ?>"
+                    style="position: absolute;">
+            </div>
+        </div>
+        <div class="actions deliveryboy-track-order-action-wrapper">
+            <button class="action track-order" data-trigger="deliveryboy-track-order">
+                <span><?= $block->escapeHtml(__('Track Order')) ?></span>
+            </button>
+        </div>
+        <div class="track-order block-deliveryboy-track-order"
+             style="display: none;"
+             data-mage-init='{"Webkul_DeliveryBoy/js/view/track-order": {
+                 "trackingDataUrl": "<?= $block->escapeUrl($trackingDataUrl); ?>",
+                 "deliveryboyOrderId": "<?= /** @noEscape */ $deliveryboyOrder->getId(); ?>"
+             }}'>
+            <div class="block block-deliveryboy-track-order">
+                <div class="block-content">
+                    <div class="order-tracking-delivery-boy">
+                        <div class= "estimated_time no_display" >
+                            <?= $block->escapeHtml(__("Your order will be delivered in ")) ?>
+                                <span class="estimated_time_value"></span>.
+                        </div>
+                        <div class="db_order_track"></div>
+                    </div>
+                    <div class="track-order-error-container no_display">
+                        <p class="track-order-error-text"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>

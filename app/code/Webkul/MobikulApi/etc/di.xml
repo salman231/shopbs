@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ * 
+ *
+ *
+ * @category  Webkul
+ * @package   Webkul_MobikulApi
+ * @author    Webkul <support@webkul.com>
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\Theme\Controller\Result\JsFooterPlugin" type="Webkul\MobikulApi\Controller\Result\JsFooterPlugin" />
+    <preference for="Magento\Framework\Controller\Result\Json" type="Webkul\MobikulApi\Controller\Framework\Result\Json" />
+    <preference for="Magento\Framework\File\Uploader" type="Webkul\MobikulApi\Controller\File\Uploader" />
+    <type name="Webkul\MobikulCore\Helper\Data">
+        <plugin name="authentiation_disable" type="Webkul\MobikulApi\Plugin\Data" sortOrder="10" disabled="false"  />
+    </type>
+</config>

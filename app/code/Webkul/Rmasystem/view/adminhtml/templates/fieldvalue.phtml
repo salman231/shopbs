@@ -1,0 +1,45 @@
+<?php
+$rma = $block->getRmaDetail();
+$id = $rma->getRmaId();
+$helper = $this->helper("Webkul\Rmasystem\Helper\Data");
+
+$fieldData = $helper->getFieldData($id);
+foreach ($fieldData as $field) { ?>
+    <tr>
+        <th><?php echo $block->escapeHtml($field->getLabel()); ?></th>
+        <?php if (($field->getInputType()=='checkbox') || ($field->getInputType()=='multiselect')) { ?>
+            <td>
+            <?php
+            $check = false;
+            $vl = explode(",", $field->getValue());
+            $op = $field->getSelectOption();
+            $op = explode(",", $op);
+            foreach ($op as $key) {
+                $val = explode('=>', $key);
+                if (in_array($val[0], $vl)) {
+                    if (!$check) {
+                        echo $val[1];
+                    } else { echo ', '.$val[1];
+                    }
+                    $check = true;
+                }
+            } //die;
+            ?> </td> <?php
+        } elseif (($field->getInputType()=='radio') || ($field->getInputType()=='select')) { ?>
+            <td>
+            <?php
+            $vl = $field->getValue();
+            $op = $field->getSelectOption();
+            $op = explode(",", $op);
+            foreach ($op as $key) {
+                $val = explode('=>', $key);
+                if ($val[0]==$vl) {
+                    echo $val[1];
+                }
+            } //die;
+            ?> </td> <?php
+        } else { ?>
+            <td><?php echo $block->escapeHtml($field->getValue()); ?></td>
+        <?php } ?>
+    </tr>
+<?php } ?>

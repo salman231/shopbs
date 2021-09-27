@@ -1,0 +1,22 @@
+<!--@subject {{var form_name}} form reply from {{var store_name}} @-->
+<!--@vars {
+"var form_name":"Form Name",
+"var customer_name":"Sender Name",
+"var answer":"Answer Model"
+} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<table>
+    <tr class="email-intro">
+        <td valign="top">
+            <p><strong>Hello {{var customer_name}},</strong></p>
+
+            <p>{{trans "Thank you for filling the form out. Your feedback is much appreciated!"}}</p>
+
+            <p>{{trans "Best Regards"}},  {{var store_name}} Team</p>
+        </td>
+    </tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}

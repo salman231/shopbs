@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_DailyDeal
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+-->
+<layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/layout_generic.xsd">
+    <referenceBlock name="render.product.prices">
+        <arguments>
+            <argument name="default" xsi:type="array">
+                <item name="prices" xsi:type="array">
+                    <item name="final_price" xsi:type="array">
+                        <item name="render_class" xsi:type="string">Mageplaza\DailyDeal\Pricing\Render\FinalPriceBox</item>
+                        <item name="render_template" xsi:type="string">Mageplaza_DailyDeal::product/price/final_price.phtml</item>
+                    </item>
+                </item>
+            </argument>
+            <argument name="configurable" xsi:type="array">
+                <item name="prices" xsi:type="array">
+                    <item name="final_price" xsi:type="array">
+                        <item name="render_class" xsi:type="string">Magento\ConfigurableProduct\Pricing\Render\FinalPriceBox</item>
+                        <item name="render_template" xsi:type="string">Mageplaza_DailyDeal::product/price/final_price_configurable.phtml</item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </referenceBlock>
+</layout>

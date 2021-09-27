@@ -1,0 +1,8 @@
+[25-Feb-2021 10:05:38 UTC] PHP Fatal error:  Uncaught Zend_Cache_Exception: cache_dir "/home/shop/public_html/var/cache/" is not writable in /home/shop/public_html/vendor/magento/zendframework1/library/Zend/Cache.php:209
+Stack trace:
+#0 /home/shop/public_html/vendor/magento/zendframework1/library/Zend/Cache/Backend/File.php(180): Zend_Cache::throwException('cache_dir "/hom...')
+#1 /home/shop/public_html/vendor/colinmollenhour/cache-backend-file/File.php(87): Zend_Cache_Backend_File->setCacheDir('/home/shop/publ...')
+#2 /home/shop/public_html/vendor/magento/zendframework1/library/Zend/Cache.php(153): Cm_Cache_Backend_File->__construct(Array)
+#3 /home/shop/public_html/vendor/magento/zendframework1/library/Zend/Cache.php(94): Zend_Cache::_makeBackend('Cm_Cache_Backen...', Array, true, true)
+#4 /home/shop/public_html/vendor/magento/framework/App/Cache/Frontend/Factory.php(156): Zend_Cache::factory('Magento\\Framewo...', 'Cm_Cache_Backen...', Array, Array, true, true, true)
+#5 /home/shop/public_html/vendor/magento/framework/Cache/Frontend/Adapter/Zend.php(38 in /home/shop/public_html/vendor/magento/zendframework1/library/Zend/Cache.php on line 209

@@ -1,0 +1,82 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Customform
+ */
+?>
+<?php
+/** @var Amasty\Customform\Block\Init $block */
+$formId = $block->getFormId();
+$usePopup = $block->isPopupUsed();
+?>
+<?php if ($usePopup): ?>
+<div class="amform-parent">
+    <div class="amform-popup" data-form-id=<?= $block->escapeHtml($formId) ?>>
+<?php endif; ?>
+<form class="rendered-form amform-form <?= ($usePopup) ? 'amform-content' : '' ?> <?= $block->getAdditionalClasses() ?>"
+      id="amform-form-<?= $formId;?>"
+      action="<?=$block->getFormAction();?>"
+      data-mage-init='{"validation": {"ignore" : ".amcform-hidden-field, .amcform-hidden-page, :hidden:not(.amform-rating)"}}'
+      enctype="multipart/form-data" method="post">
+
+    <input name="form_key" type="hidden" value="<?= $block->escapeHtml($block->getFormKey()) ?>" />
+    <input name="form_id" type="hidden" value="<?= $formId;?>" />
+    <div class="amform-form-fieldset fieldset">
+        <div class="insert-container fields"></div>
+        <?php if ($block->isGDPREnabled()) : ?>
+            <div class="field required amform-hide-formload control amcform-gdpr" data-amcform-js="gdpr">
+                <label class="label" for="amcustom-form-gdpr-<?= $formId; ?>">
+                    <input type="checkbox"
+                           name="gdpr"
+                           data-id="amcustom-form-gdpr-<?= $formId; ?>"
+                           id="amcustom-form-gdpr-<?= $formId; ?>"
+                           title="<?= __('GDPR'); ?>"
+                           data-validate="{required:true}"
+                           value="1"
+                           disabled>
+                    <?= $block->getGDPRText(); ?>
+                </label>
+            </div>
+        <?php endif; ?>
+    </div>
+    <?php if ($usePopup): ?>
+        <div class="amform-popup-close">
+            <span class="amform-close">&times;</span>
+        </div>
+    <?php endif; ?>
+</form>
+
+<?php if ($usePopup): ?>
+    </div>
+        <div data-amform-show="<?= $formId ?>" class="amform-show">
+            <button class="action primary"><?= $block->escapeHtml($block->getTriggerPopup()) ?></button>
+        </div>
+    </div>
+<?php endif; ?>
+
+<script type="text/javascript">
+    <?php if ($block->isUseGoogleMap()) : ?>
+    require([
+        'https://maps.googleapis.com/maps/api/js?libraries=places&key=<?= $block->getGoogleKey() ?>'
+    ], function () {
+    });
+    <?php endif; ?>
+    require([
+        'jquery',
+        'jquery/ui',
+        'Amasty_Customform/js/form-render',
+        'Amasty_Customform/js/am-google-map',
+        'Amasty_Customform/js/form-init'
+    ], function ($) {
+        var renderedFormContainer = $('#amform-form-<?= $formId;?> .insert-container'),
+            renderedForm;
+
+        renderedFormContainer.formRender(<?= $formId ?>, <?= $block->getFormDataJson()?>);
+        renderedForm = $('[data-amcform-js="multi-page"]');
+
+        if (renderedForm.length) {
+            renderedForm.amFormInit();
+        }
+    });
+</script>

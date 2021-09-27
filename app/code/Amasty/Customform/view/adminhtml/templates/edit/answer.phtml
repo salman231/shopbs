@@ -1,0 +1,103 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Customform
+ */
+?>
+<?php
+/** @var \Amasty\Customform\Block\Adminhtml\Data\Edit\Answer $block */
+?>
+<section class="admin__page-section request-view-information">
+    <div class="admin__page-section-title">
+        <span class="title"><?= /* @escapeNotVerified */ __('Information') ?></span>
+    </div>
+    <div class="admin__page-section-content">
+        <table class="admin__table-secondary request-information-table">
+            <?php foreach ($block->getInformationData() as $data) :?>
+                <tr>
+                    <th><?= $block->escapeHtml($data['label']) ?></th>
+                    <td><?= /* @escapeNotVerified */ $data['value'] ?></td>
+                </tr>
+            <?php endforeach;?>
+        </table>
+    </div>
+</section>
+<section class="admin__page-section request-view-data">
+    <div class="admin__page-section-title">
+        <span class="title"><?= /* @escapeNotVerified */ __('Data') ?></span>
+    </div>
+    <div class="admin__page-section-content">
+        <table class="admin__table-secondary request-information-table">
+            <?php foreach ($block->getResponseData() as $key => $data) :?>
+                <tr>
+                    <th><?= $block->escapeHtml($data['label']) ?></th>
+                    <td>
+                        <?php if ($data['type'] == 'googlemap'): ?>
+                            <div id="map-<?= $key ?>" class="fb-googlemap"></div>
+                            <script type="text/javascript">
+                                require([
+                                    'jquery',
+                                    'https://maps.googleapis.com/maps/api/js?libraries=places&key=<?= $block->getGoogleKey() ?>',
+                                    'Amasty_Customform/js/am-google-map'
+                                ], function ($) {
+                                    $('#map-<?= $key ?>').amGoogleMap(Object.assign(
+                                        <?= $data['value'] ?>,
+                                        {
+                                            'enabledMarker': false,
+                                            'showFormattedAddress': true
+                                        }
+                                    ));
+                                });
+                            </script>
+                        <?php else: ?>
+                            <?= /* escaped in block code*/ $data['value'] ?>
+                        <?php endif; ?>
+                    </td>
+                </tr>
+            <?php endforeach;?>
+        </table>
+    </div>
+</section>
+<section class="admin__page-section request-view-data">
+    <div class="admin__page-section-title">
+        <span class="title"><?= /* @escapeNotVerified */ __('Admin Response') ?></span>
+    </div>
+    <div class="admin__page-section-content">
+        <table class="admin__table-secondary request-information-table">
+            <?php foreach ($block->getAdminResponseData() as $data) :?>
+                <tr>
+                    <th><?= $block->escapeHtml($data['label']) ?></th>
+                    <td><?= /* escaped in block code*/ $data['value']?></td>
+                </tr>
+            <?php endforeach;?>
+        </table>
+    </div>
+</section>
+<?php if ($block->isShowEmailSendingForm()) : ?>
+<section class="admin__page-section request-view-answer-section">
+    <div id="request-view-answer" class="request-view-answer">
+        <form action="<?= $block->getSubmitUrl()?>" method="post">
+            <input name="form_key" type="hidden" value="<?= $block->escapeHtml($block->getFormKey()) ?>" />
+            <div class="request-answer-block">
+                <div class="admin__field field-row">
+                    <label class="admin__field-label"
+                           for="email_text"><?= /* @escapeNotVerified */ __('Email Text') ?></label>
+                    <div class="admin__field-control">
+                        <textarea name="email_text"
+                                  class="admin__control-textarea"
+                                  rows="3"
+                                  cols="5"
+                                  id="email_text"></textarea>
+                    </div>
+                </div>
+                <div class="admin__field">
+                    <div class="review-actions">
+                        <?= $block->getChildHtml('submit_button') ?>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+<?php endif;?>

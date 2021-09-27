@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+    	<referenceContainer name="header.container">
+    		<block class="Magento\Cms\Block\Block" name="mobile_submenu" after="-">
+		        <arguments>
+		            <argument name="block_id" xsi:type="string">mobile_submenu</argument>
+		        </arguments>
+		    </block>
+    	</referenceContainer>
+    	<referenceBlock name="footer_links" remove="true"/>
+    	<referenceContainer name="footer">
+		    <block class="Magento\Cms\Block\Block" name="footer_links_block">
+		        <arguments>
+		            <argument name="block_id" xsi:type="string">footer_links_block</argument>
+		        </arguments>
+		    </block>
+		</referenceContainer>
+		<referenceContainer name="before.body.end">
+			<block class="Magento\Framework\View\Element\Template" name="backtotop" template="Magento_Theme::html/backtotop.phtml" after="-" />
+		</referenceContainer>
+		<referenceBlock name="header.links">
+		        <block class="Magento\Framework\View\Element\Template" name="shopbs.link" template="Magento_Theme::link.phtml" after="-" />
+
+		      <block class="Magento\Cms\Block\Block" name="account_tab_block">
+		        <arguments>
+		            <argument name="block_id" xsi:type="string">account-tab</argument>
+		        </arguments>
+		    </block>
+		</referenceBlock>
+		
+		<!-- <move element="header.links" destination="header-wrapper" before="top.search"/> -->
+		<move element="minicart" destination="page.top" after="navigation.sections"/>
+		<move element="catalog.compare.link" destination="top.links" after="wish-list-link"/>
+		
+    </body>
+</page>

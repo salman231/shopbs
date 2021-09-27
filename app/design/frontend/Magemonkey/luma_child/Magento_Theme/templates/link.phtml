@@ -1,0 +1,42 @@
+<?php
+	$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+    $customerSession = $objectManager->create('Magento\Customer\Model\Session');
+    $baseurl = $storeManager->getStore()->getBaseUrl();
+?>
+<li class="mob-account-tab hidden-sm hidden-lg hidden-md"><a href="javascript:void(0)"><span>Your Account Settings</span><span class="mob-opener"></span></a>
+<ul class="mob-acc-sub">
+<li><a href="<?php echo $baseurl;?>customer/account"><span>Your Account</span></a></li>
+<li><a href="<?php echo $baseurl;?>sales/order/history"><span>Your orders</span></a></li>
+<li><a href="<?php echo $baseurl;?>wishlist"><span>Your wishlist</span></a></li>
+<li><a href="<?php echo $baseurl;?>customer/address"><span>Your Addresses</span></a></li>
+</ul>
+</li>
+<li class="whyshopbs-link">  
+   <a href="<?php echo $baseurl;?>whyshopbs"> Why Shop.bs? Learn More</a>
+</li>
+<?php if (!$customerSession->isLoggedIn()) { ?>
+	<li class="soc-login hidden-sm hidden-lg hidden-md"><a href="<?php echo $baseurl;?>customer/account/create" class="social-login" data-effect="mfp-move-from-top">Create an Account</a></li>
+
+<li class="mob-seller-account-tab hidden-sm hidden-lg hidden-md"><a href="javascript:void(0)"><span>Shop Suppliers</span><span class="mob-opener"></span></a>
+	<ul class="mob-seller-acc-sub">
+		<li class="seller-login"><a href="<?php echo $baseurl;?>marketplace/account/login"><span>Supplier Login</span></a></li>
+		<li class="seller-reg"><a href="<?php echo $baseurl;?>marketplace"><span>Become a Supplier</span></a></li>
+	</ul>
+</li>
+	<!-- <li class="hidden-sm hidden-lg hidden-md"><a href="<?php //echo $baseurl;?>marketplace/"><span>Register as Shop.bs Seller</span></a></li> -->
+<?php } /*else{ ?>
+	<li class="hidden-sm hidden-lg hidden-md"><a href="<?php echo $baseurl;?>md_membership/membership/plan/"><span>Register as Shop.bs Seller</span></a></li>
+<?php }*/ ?>
+
+ <script type="text/javascript">
+    require([ 'jquery', 'jquery/ui'], function($){ 
+    	$(window).load(function($) {
+   			/*$(".mob-account-tab a").click(function(){
+   				console.log("asdasdsadsad");
+			    $(this).toggleClass("Active");
+			    $(".mob-acc-sub").toggle(); 
+			});*/
+		}); 
+	});
+</script>

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Mpreportsystem
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <wk_mpreportsystem>
+            <general_settings>
+                <customerdatacount>5</customerdatacount>
+                <productdatacount>5</productdatacount>
+            </general_settings>
+        </wk_mpreportsystem>
+    </default>
+</config>

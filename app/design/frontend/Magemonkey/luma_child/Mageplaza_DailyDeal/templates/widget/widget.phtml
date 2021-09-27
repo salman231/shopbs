@@ -1,0 +1,256 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_DailyDeal
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+/** @var \Mageplaza\DailyDeal\Block\Widget $block */
+
+/** @var \Mageplaza\DailyDeal\Helper\Data $helperData */
+$helperData = $this->helper('Mageplaza\DailyDeal\Helper\Data');
+$items = $block->getProductCollection(); 
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance(); // Instance of object manager
+// $blockObj = $objectManager->get('Mageplaza\DailyDeal\Block\Product\View\Countdown');
+$blockObj= $block->getLayout()->createBlock('Mageplaza\DailyDeal\Block\Product\View\Countdown');
+// $_helperData = $objectManager->get('Mageplaza\DailyDeal\Helper\Data');
+?>
+
+<?php if (!empty($items) && $helperData->isEnabled()): ?>
+    <div class="mpdailydeal-widget-block">
+        <h2 class="mpdailydeal-widget-title mp-product-slider-title"><?php echo $block->getTitle(); ?></h2>
+        <div class="viewdetails"><a href="<?php echo $this->getUrl()?>alldeals.html">See All</a></div>
+        <div class="widget-block-content">
+            <div class="products-deal-list products-grid grid">
+                <ol class="mpdailydeal-list-items-<?php echo $block->getTypeWidget();?> mpdailydeal-product-deal-items product-items widget-viewed-grid owl-carousel owl-theme">
+                    <?php $iterator = 1; ?>
+                    <!-- <div class="mpdailydeal-list-items" class="owl-carousel owl-theme"> -->
+                        <?php foreach ($items as $_item): ?>
+                            <?php echo ($iterator++ == 1) ? '<li class="mpdailydeal-product-item product-item">' : '</li><li class="mpdailydeal-product-item product-item">' ?>
+                            <div class="widget-deal-product-item-info">
+                                <?php $productUrl = $block->getProductUrl($block->getParentConfigurableProduct($_item->getId())); 
+                                if($block->getTypeWidget() == 'new'){ ?>
+
+                                <div class="product details deal-product-details">
+                                    <strong class="product name product-item-name">
+                                        <a title="<?php echo $block->escapeHtml($_item->getName()); ?>" href="<?php echo $productUrl ?>">
+                                            <?php echo $block->escapeHtml($_item->getName()) ?>
+                                        </a>
+                                    </strong>
+                                    <?php $final_price = number_format($helperData->getDealPrice($_item->getId()), 2); ?>
+                                    <span class="price">
+                                        <span class="price-box price-final_price"><?php echo $block->getProductPrice($_item); ?></span>
+                                    </span>
+                                    <?php if ($block->label()->getShowLabelConfig() == 2): ?>
+                                        <br><span class="mpdailydeal-percent-underprice"
+                                              style="
+                                                      background: <?php echo $block->label()->getBackgroundColor(); ?>;
+                                                      border: solid 1px <?php echo $block->label()->getBorderColor(); ?>;
+                                                      color: <?php echo $block->label()->getTextColor(); ?>;">
+                                            <span><?php echo $block->widgetLabel($_item->getId()); ?></span>
+                                        </span>
+                                    <?php endif; ?>
+                                
+                                <?php 
+                                // $blockObj= $block->getLayout()->createBlock('Mageplaza\DailyDeal\Block\Product\View\Countdown');
+                                
+
+                       if ($blockObj->_helperData->checkDealProduct($_item->getId()) && $blockObj->isShowCountdown()):?>
+                       <div class="custom-countdown">
+                            <span class="limit-time-label"><?php echo __("Limited Time Remaining!"); ?></span>
+                            <p><span class="sale-end-label"><?php echo __("Sale Ends"); ?></span></p>
+                            
+                            <div id="clockdiv-<?php echo $_item->getId();?>" class="customclockdiv test1" data-mage-init='{"dataTimeCountdown": <?php echo $blockObj->getTimeCountdownData($_item->getId()); ?>}'>
+                                <div class="bg-outer">
+                                    <span class="days-<?php echo $_item->getId(); ?>"></span> : <span class="hours-<?php echo $_item->getId(); ?>"></span>  : <span class="minutes-<?php echo $_item->getId(); ?>"></span>  : <span class="seconds-<?php echo $_item->getId(); ?>"></span> 
+                                   
+                            </div>
+                            <style>
+                                #clockdiv-<?php echo $_item->getId();?> {
+                                    color: <?php echo $blockObj->getTextColorCountdown(); ?>
+                                }
+
+                                .bg-outer {
+                                    background: <?php echo $blockObj->getOuterCountdownBg(); ?>
+                                }
+
+                                .bg-outer > span {
+                                    background: <?php echo $blockObj->getInnerCountdownBg(); ?>
+                                }
+                            </style>
+                        </div>
+                        <?php endif; 
+                                ?>
+                            </div>
+                            </div>
+                            <div class="product-img">
+                                 <a class="product photo product-item-photo"
+                                    <?php if($block->label()->isLabelBottom()): ?>
+                                        style=" position: relative; padding-bottom: 10px;"
+                                   <?php endif; ?> href="<?php echo $productUrl; ?>">
+                                    <?php if ($block->label()->getShowLabelConfig() == 3): ?>
+                                        <div class="mpdailydeal-widget-label"
+                                             style="background: <?php echo $block->label()->getBackgroundColor(); ?>;
+                                                     border: solid 1px <?php echo $block->label()->getBorderColor(); ?>;
+                                                     color: <?php echo $block->label()->getTextColor(); ?>;
+                                             <?php echo $block->label()->getCssLabelOnImage(); ?>">
+                                            <?php echo $block->widgetLabel($_item->getId()); ?>
+                                        </div>
+                                    <?php endif; ?>
+                                    <?php echo $block->getImage($_item, 'recently_viewed_products_grid_content_widget')->toHtml(); ?>
+                                </a>
+                            </div>
+
+                                <?php 
+                                
+                            }else{
+                                ?>
+                                <a class="product photo product-item-photo"
+                                    <?php if($block->label()->isLabelBottom()): ?>
+                                        style=" position: relative; padding-bottom: 10px;"
+                                   <?php endif; ?> href="<?php echo $productUrl; ?>">
+                                    <?php if ($block->label()->getShowLabelConfig() == 3): ?>
+                                        <div class="mpdailydeal-widget-label"
+                                             style="background: <?php echo $block->label()->getBackgroundColor(); ?>;
+                                                     border: solid 1px <?php echo $block->label()->getBorderColor(); ?>;
+                                                     color: <?php echo $block->label()->getTextColor(); ?>;
+                                             <?php echo $block->label()->getCssLabelOnImage(); ?>">
+                                            <?php echo $block->widgetLabel($_item->getId()); ?>
+                                        </div>
+                                    <?php endif; ?>
+                                    <?php echo $block->getImage($_item, 'recently_viewed_products_grid_content_widget')->toHtml(); ?>
+                                </a>
+                                <div class="product details deal-product-details">
+                                    <strong class="product name product-item-name">
+                                        <a title="<?php echo $block->escapeHtml($_item->getName()); ?>" href="<?php echo $productUrl ?>">
+                                            <?php echo $block->escapeHtml($_item->getName()) ?>
+                                        </a>
+                                    </strong>
+                                    <?php $final_price = number_format($helperData->getDealPrice($_item->getId()), 2); ?>
+                                    <span class="price">
+                                        <span class="price-box price-final_price"><?php echo $block->getProductPrice($_item); ?></span>
+                                    </span>
+                                    <?php if ($block->label()->getShowLabelConfig() == 2): ?>
+                                        <br><span class="mpdailydeal-percent-underprice"
+                                              style="
+                                                      background: <?php echo $block->label()->getBackgroundColor(); ?>;
+                                                      border: solid 1px <?php echo $block->label()->getBorderColor(); ?>;
+                                                      color: <?php echo $block->label()->getTextColor(); ?>;">
+                                            <span><?php echo $block->widgetLabel($_item->getId()); ?></span>
+                                        </span>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+
+                            <?php 
+                            // $blockObj = $objectManager->get('Mageplaza\DailyDeal\Block\Product\View\Countdown');
+
+                       
+                       if ($blockObj->_helperData->checkDealProduct($_item->getId()) && $blockObj->isShowCountdown()):?>
+                       <div class="custom-countdown">
+                            <span class="limit-time-label"><?php echo __("Limited Time Remaining!"); ?></span>
+                            <div id="clockdiv-<?php echo $_item->getId();?>" class="customclockdiv test2" data-mage-init='{"dataTimeCountdown": <?php echo $blockObj->getTimeCountdownData($_item->getId()); ?>}'>
+                                <div class="bg-outer dsfdfsdf">
+                                    <span class="days-<?php echo $_item->getId(); ?>"></span>:<span class="hours-<?php echo $_item->getId(); ?>"></span>:<span class="minutes-<?php echo $_item->getId(); ?>"></span>:<span class="seconds-<?php echo $_item->getId(); ?>"></span>
+                                    <?php /*<span class="days"></span>
+                                    <div class="smalltext"><?php echo __("Days"); ?></div>
+                                </div>
+                                <div class="bg-outer">
+                                    <span class="hours"></span>
+                                    <div class="smalltext"><?php echo __("Hours"); ?></div>
+                                </div>
+                                <div class="bg-outer">
+                                    <span class="minutes"></span>
+                                    <div class="smalltext"><?php echo __("Minutes"); ?></div>
+                                </div>
+                                <div class="bg-outer">
+                                    <span class="seconds"></span>
+                                    <div class="smalltext"><?php echo __("Seconds"); ?></div>
+                                </div> */ ?>
+                            </div>
+                            <style>
+                                #clockdiv-<?php echo $_item->getId();?> {
+                                    color: <?php echo $blockObj->getTextColorCountdown(); ?>
+                                }
+
+                                .bg-outer {
+                                    background: <?php echo $blockObj->getOuterCountdownBg(); ?>
+                                }
+
+                                .bg-outer > span {
+                                    background: <?php echo $blockObj->getInnerCountdownBg(); ?>
+                                }
+                            </style>
+                        </div>
+                        <?php endif; 
+                        }?>
+                            <?php echo ($iterator == count($items) + 1) ? '</li>' : '' ?>
+                        <?php endforeach ?>
+                    <!-- </div> -->
+                </ol>
+            </div>
+            
+        </div>
+
+    </div>
+    <?php if ($block->getTypeDisplay() == 'slider'): 
+        if($block->getTypeWidget() == 'new'){ ?>
+            <script>
+            require(['jquery', 'mageplaza/core/owl.carousel'], function ($) {
+                $('.mpdailydeal-list-items-<?php echo $block->getTypeWidget();?>').owlCarousel({
+                    loop:false,
+                    margin:10,
+                    lazyLoad:true,
+                    autoplay:true,
+                    autoplayTimeout:5000,
+                    autoWidth:0,
+                    nav:true,
+                    responsive: {
+                        0: {items: 1},
+                        360: {items: 1},
+                        540: {items: 1},
+                        720: {items: 1},
+                        900: {items: 1}
+                    }
+                });
+            });
+        </script> 
+        <?php }else{
+        ?>
+        <script>
+            require(['jquery', 'mageplaza/core/owl.carousel'], function ($) {
+                $('.mpdailydeal-list-items-<?php echo $block->getTypeWidget();?>').owlCarousel({
+                    loop:false,
+                    margin:10,
+                    lazyLoad:true,
+                    autoplay:true,
+                    autoplayTimeout:5000,
+                    autoWidth:0,
+                    responsive: {
+                        0: {items: 2},
+                        360: {items: 2},
+                        540: {items: 3},
+                        720: {items: 4},
+                        900: {items: 5}
+                    }
+                });
+            });
+        </script>
+    <?php 
+    } 
+    endif; ?>
+<?php endif; ?>

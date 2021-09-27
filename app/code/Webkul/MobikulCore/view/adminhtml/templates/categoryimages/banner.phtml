@@ -1,0 +1,117 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ *
+ *
+ * @category  Webkul
+ * @package   Webkul_MobikulCore
+ * @author    Webkul <support@webkul.com>
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+?>
+<style type="text/css">
+    .eachBanner{
+        display: flex;
+        margin-top: 10px;
+    }
+    .wk-mobikul-categorybanner-delete{
+        vertical-align: bottom;
+    }
+    .categorybannerimage{
+        vertical-align: top;
+    }
+    #wk-mobikul-categorybannerimages{
+        margin-top: 20px;
+    }
+    .inputContainer{
+        font-size: 1.2rem;
+    }
+</style>
+<?php
+$categoryBannerData = $block->getCategoryBannerData();
+$categoryBanners = explode(",", $categoryBannerData->getBanner());
+$mediaPath = $block->coreHelper->getUrl("media");
+$imageCount = count($categoryBanners);
+if ($imageCount > 0): ?>
+    <div id="wk-mobikul-category-banner">
+        <label class="admin__field-label">
+            <span><strong><?= $block->escapeHtml(__("Banner Image")) ?></strong></span>
+        </label>
+        <?php $i = 0; ?>
+        <?php foreach ($categoryBanners as $key => $image): ?>
+            <div class="admin__field categorybanner-image">
+                <div class="admin__field-control eachBanner" style="display:flex;">
+                    <div class="inputContainer">
+                        <?php if ($image): ?>
+                            <input 
+                                type="hidden" 
+                                name="mobikul_categoryimages_exist[]" 
+                                form="mobikul_categoryimages_form" 
+                                value="<?= $block->escapeHtml($image) ?>" 
+                                class="mobikul_categoryimages_exist_input">
+                        <?php endif; ?>
+                        <input 
+                            class="admin__control-file" 
+                            type="file" 
+                            name="mobikul_categoryimages_banner[<?= $block->escapeHtml($i) ?>]" 
+                            form="mobikul_categoryimages_form"><br>
+                        <span><?= $block->escapeHtml(__("Allowed file type: png, jpg, jpeg.")) ?></span>
+                    </div>
+                    <div>
+                        <?php if ($image): ?>
+                            <img 
+                                class="categorybannerimage" 
+                                height="50px" 
+                                width="75px" 
+                                src="<?= $block->escapeUrl($mediaPath."mobikul/categoryimages/banner/".$image) ?>">
+                        <?php endif; ?>
+                        <button class="wk-mobikul-categorybanner-delete"><?= $block->escapeHtml(__("Delete")) ?>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <?php $i++; ?>
+        <?php endforeach; ?>
+    </div>
+<?php endif ; ?>
+<div id="wk-mobikul-categorybannerimages" >
+    <div class="admin__field categorybanner-image" >
+        <button id="wk-mobikul-categorybanner-add-more"><?= $block->escapeHtml(__("Add More")) ?></button>
+    </div>
+</div>
+<script id="wk-categorybanner-template" type="text/x-magento-template">
+    <div class="admin__field categorybanner-image">
+        <div class="admin__field-control eachBanner">
+            <div>
+                <input 
+                    class="admin__control-file" 
+                    type="file" 
+                    name="mobikul_categoryimages_banner[<%- data.index %>]" 
+                    form="mobikul_categoryimages_form"><br>
+                <span><?= $block->escapeHtml(__("Allowed file type: png, jpg, jpeg.")) ?></span>
+            </div>
+            <div>
+                <button class="wk-mobikul-categorybanner-delete"><?= $block->escapeHtml(__("Delete")) ?></button>
+            </div>
+        </div>
+    </div>
+</script>
+<?php
+$optionElements = [
+    "key" => $i
+];
+$serializedData = $block->jsonHelper->jsonEncode($optionElements);
+?>
+<script type="text/x-magento-init">
+    {
+    "*":{
+            "categoryBannerImage":<?= /* @noEscape */ $serializedData; ?>
+        }
+    }
+</script>
+<script type="text/javascript">
+    require("mage/apply/main").apply();
+</script>

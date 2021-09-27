@@ -1,0 +1,49 @@
+<style type="text/css">
+    <?php if ($block->getConfigData('background_type') == 'color'): ?>
+    .chat .chat-history{
+        background: <?= $block->escapeHtml($block->getConfigData('solid_color')) ?>!important;
+    }
+    <?php elseif ($block->getConfigData('background_type') == 'image'): ?>
+    .chat .chat-history{
+        background: url(<?= $block->escapeHtml($block->getBackgroundImage()) ?>)!important;
+        background-size: cover;
+        background-repeat: no-repeat;
+
+    }
+    <?php else: ?>
+    .chat .chat-history{
+        background: #fff;
+    }
+    <?php endif; ?>
+
+    <?php if ($block->getConfigData('header_color')): ?>
+    #chatbox-component header.chatbox-header{
+        background: <?= $block->escapeHtml($block->getConfigData('header_color')) ?>!important;
+    }
+    <?php else: ?>
+    .#chatbox-component header.chatbox-header{
+        background: #293239;
+    }
+    <?php endif; ?>
+
+    <?php if ($block->getConfigData('header_text_color')): ?>
+    #chatbox-component header.chatbox-header{
+        color: <?= $block->escapeHtml($block->getConfigData('header_text_color')) ?>!important;
+    }
+    <?php else: ?>
+    .#chatbox-component header.chatbox-header{
+        color: #fff;
+    }
+    <?php endif; ?>
+
+    <?php if ($block->getConfigData('window_position') !== ''): ?>
+    #chatbox-component{
+        <?= $block->escapeHtml($block->getConfigData('window_position')) ?>:24px!important;
+    }
+    <?php else: ?>
+    .#chatbox-component{
+        right: 24px!important;
+    }
+    <?php endif; ?>
+    
+</style>

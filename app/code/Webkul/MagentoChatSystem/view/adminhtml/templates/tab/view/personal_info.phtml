@@ -1,0 +1,101 @@
+<?php
+/**
+ * Webkul Software
+ *
+ * @category Webkul
+ * @package Webkul_MagentoChatSystem
+ * @author Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license https://store.webkul.com/license.html
+ */
+
+/** @var \Webkul\MagentoChatSystem\Block\Adminhtml\Edit\Tab\View\PersonalInfo $block */
+
+?>
+<div class="fieldset-wrapper customer-information">
+    <div class="fieldset-wrapper-title">
+        <span class="title"><?= $block->escapeHtml(__('Personal Information')) ?></span>
+    </div>
+    <table class="admin__table-secondary">
+        <tbody>
+            <tr>
+                <th><?= $block->escapeHtml(__('Name:')) ?></th>
+                <td><?= $block->escapeHtml($block->getAgent()->getAgentName()) ?></td>
+            </tr>
+            <tr>
+                <th><?= $block->escapeHtml(__('Email:')) ?></th>
+                <td><?= $block->escapeHtml($block->getAgent()->getAgentEmail()) ?></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="user-rating-dashboard fieldset-wrapper" data-bind="visible: showRatingDashboard" style="">
+    <div class="fieldset-wrapper-title">
+        <span class="title"><?= $block->escapeHtml(__('Rating Dashboard')) ?></span>
+    </div>
+    <div class="dashboard-ratings-sprite">
+        <span style="width: <?= $block->escapeHtml($block->getAveragePercentage()).'%'; ?>;" class="star-ratings-sprite-rating"></span>
+    </div>
+    <p>
+        <?= $block->escapeHtml(__('%1 average based on %1 ratings', $block->getAverageRating(), $block->getTotalRating())) ?>
+    </p>
+    <hr style="border:3px solid #f1f1f1">
+
+    <div class="row">
+        <div class="side">
+            <div>5 star</div>
+        </div>
+        <div class="middle">
+            <div class="bar-container">
+                <div class="bar-5" style="width: <?= $block->escapeHtml($block->getRatingPercentByValue(5)).'%'; ?>;"></div>
+            </div>
+        </div>
+        <div class="side right">
+            <div><?= $block->escapeHtml($block->getRatingTotalCount(5)) ?></div>
+        </div>
+        <div class="side">
+            <div>4 star</div>
+        </div>
+        <div class="middle">
+            <div class="bar-container">
+                <div class="bar-4" style="width: <?= $block->escapeHtml($block->getRatingPercentByValue(4)).'%'; ?>;"></div>
+            </div>
+        </div>
+        <div class="side right">
+            <div><?= $block->escapeHtml($block->getRatingTotalCount(4)) ?></div>
+        </div>
+        <div class="side">
+            <div>3 star</div>
+        </div>
+        <div class="middle">
+            <div class="bar-container">
+                <div class="bar-3" style="width: <?= $block->escapeHtml($block->getRatingPercentByValue(3)).'%'; ?>;"></div>
+            </div>
+        </div>
+        <div class="side right">
+        <div><?= $block->escapeHtml($block->getRatingTotalCount(3)) ?></div>
+        </div>
+        <div class="side">
+            <div>2 star</div>
+        </div>
+        <div class="middle">
+            <div class="bar-container">
+                <div class="bar-2" style="width: <?= $block->escapeHtml($block->getRatingPercentByValue(2)).'%'; ?>;"></div>
+            </div>
+        </div>
+        <div class="side right">
+            <div><?= $block->escapeHtml($block->getRatingTotalCount(2)) ?></div>
+        </div>
+        <div class="side">
+            <div>1 star</div>
+        </div>
+        <div class="middle">
+            <div class="bar-container">
+                <div class="bar-1" style="width: <?= $block->escapeHtml($block->getRatingPercentByValue(1)).'%'; ?>;"></div>
+            </div>
+        </div>
+        <div class="side right">
+            <div><?= $block->escapeHtml($block->getRatingTotalCount(1)) ?></div>
+        </div>
+    </div>
+</div>

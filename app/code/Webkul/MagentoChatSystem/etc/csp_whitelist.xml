@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<csp_whitelist xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Csp/etc/csp_whitelist.xsd">
+    <policies>
+        <policy id="connect-src">
+            <values>
+                <value id="wk-chatsystem-socket" type="host">http://shop.bs:1362/socket.io/</value>
+                <value id="wk-chatsystem-sockets" type="host">https://shop.bs:1362/socket.io/</value>
+                <value id="wk-chatsystem-websocket" type="host">ws://shop.bs:1362/socket.io/</value>
+            </values>
+        </policy>
+        <policy id="style-src">
+            <values>
+                <value id="wk-chatsystem-font-awesome" type="host">https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css</value>
+            </values>
+        </policy>
+        <policy id="font-src">
+            <values>
+                <value id="wk-chatsystem-fontawesome-font1" type="host">https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.woff2</value>
+                <value id="wk-chatsystem-fontawesome-font3" type="host">https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.woff</value>
+                <value id="wk-chatsystem-fontawesome-font2" type="host">https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.ttf</value>
+            </values>
+        </policy>
+    </policies>
+</csp_whitelist>

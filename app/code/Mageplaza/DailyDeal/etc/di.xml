@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_DailyDeal
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Mageplaza\DailyDeal\Api\DealRepositoryInterface" type="Mageplaza\DailyDeal\Model\DealRepository" />
+    <preference for="Mageplaza\DailyDeal\Api\Data\DailyDealInterface" type="Mageplaza\DailyDeal\Model\Deal" />
+    <preference for="Mageplaza\DailyDeal\Api\Data\DealSearchResultInterface" type="Magento\Framework\Api\SearchResults" />
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="mpdailydeal_deal_listing_data_source" xsi:type="string">Mageplaza\DailyDeal\Model\ResourceModel\Deal\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Mageplaza\DailyDeal\Model\ResourceModel\Deal\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">mageplaza_dailydeal_deal</argument>
+            <argument name="resourceModel" xsi:type="string">Mageplaza\DailyDeal\Model\ResourceModel\Deal</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Catalog\Model\Layer">
+        <plugin name="mpdailydeal_layer_collection" type="Mageplaza\DailyDeal\Plugin\Model\CustomCollection"/>
+    </type>
+    <type name="Magento\Catalog\Block\Product\ProductList\Toolbar">
+        <plugin name="mpdailydeal_pages_collection" type="Mageplaza\DailyDeal\Plugin\Product\ProductList\ToolbarCollection"/>
+    </type>
+    <type name="Magento\Catalog\Block\Product\AbstractProduct">
+        <plugin name="mpdailydeal-price-deal" type="Mageplaza\DailyDeal\Plugin\Product\PriceDeal"/>
+    </type>
+    <type name="Magento\ConfigurableProduct\Pricing\Render\FinalPriceBox">
+        <plugin name="mpdailydeal-check-configurable-product" type="Mageplaza\DailyDeal\Plugin\Pricing\Render\FinalPriceBox"/>
+    </type>
+    <type name="Magento\Quote\Model\Quote\Item\AbstractItem">
+        <plugin name="mpdailydeal_set_price_item" type="Mageplaza\DailyDeal\Plugin\Product\SetPriceItem"/>
+    </type>
+    <type name="Magento\Catalog\Block\Product\ListProduct">
+        <plugin name="mpdailydeal_catalog_coutdowntimer" type="Mageplaza\DailyDeal\Plugin\Product\CountDown"/>
+    </type>
+    <type name="Magento\Catalog\Api\ProductRepositoryInterface">
+        <plugin name="add_mp_deal_to_product" type="Mageplaza\DailyDeal\Plugin\Api\DealAttributes" sortOrder="60"/>
+    </type>
+</config>

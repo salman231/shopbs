@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_GiftCard
+ * @author    Webkul Software Private Limited
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */ 
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<tab id="webkul" translate="label" sortOrder="10">
+			<label>Webkul</label>
+		</tab>
+		<section id="giftcard" translate="label" type="text" sortOrder="300" showInDefault="1" showInWebsite="1" showInStore="1">
+			<label>Gift Card</label>
+			<!-- Assign section to tab -->
+			<tab>webkul</tab>
+			<resource>Webkul_GiftCard::config</resource>
+			<group id="email" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Gift Card Email Setting</label>
+				<!--<label>GiftCard Transactional Emails</label>-->
+				<field id="gift_notification_mail" translate="label comment" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Gift Notification Template</label>
+					<source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+					<!-- This model return all transactional email template list of magento -->
+				</field>
+			</group>
+			<group id="adminEmail" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Gift Card Left Amount Email Setting</label>
+				<field id="gift_admin_mail_name" translate="label comment" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Name of Admin in Mail</label>
+				</field>
+				<field id="gift_admin_mail_email" translate="label comment" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Admin Email</label>
+				</field>
+				<field id="admin_amt_notification_mail" translate="label comment" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Admin Left Amount Notification Template</label>
+					<source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+					<!-- This model return all transactional email template list of magento -->
+				</field>
+			</group>
+			<group id="activeDuration" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Gift Card Active Duration</label>
+				<field id="gift_admin_active_days" translate="label comment" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>No. of days</label>
+					<validate> required-entry validate-greater-than-zero integer</validate>
+				</field>
+			</group>
+		</section>
+	</system>
+</config>

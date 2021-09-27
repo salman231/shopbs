@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ * 
+ *
+ *
+ * @category  Webkul
+ * @package   Webkul_MobikulApi
+ * @author    Webkul <support@webkul.com>
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="standard">
+        <route id="mobikulhttp" frontName="mobikulhttp">
+            <module name="Webkul_MobikulApi"/>
+        </route>
+    </router>
+</config>

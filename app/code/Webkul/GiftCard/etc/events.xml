@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_GiftCard
+ * @author    Webkul Software Private Limited
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */ 
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="controller_action_catalog_product_save_entity_after">
+        <observer name="webkul_giftcard_AfterProductSave" instance="Webkul\GiftCard\Observer\AfterProductSave" shared="false" />
+    </event>      
+    <event name="sales_order_invoice_save_after">
+        <observer name="webkul_giftcard_AfterInvoiceGeneration" instance="Webkul\GiftCard\Observer\AfterInvoiceGeneration" shared="false" />
+    </event>     
+	<event name="checkout_cart_product_add_after">
+        <observer name="webkul_giftcard_CartLoadBefore" instance="Webkul\GiftCard\Observer\CartLoadBefore" shared="false" />
+    </event>  	
+    <event name="checkout_onepage_controller_success_action">
+        <observer name="webkul_giftcard_AfterPlaceOrder" instance="Webkul\GiftCard\Observer\AfterPlaceOrder" shared="false" />
+    </event>
+    <event name="adminhtml_sales_order_creditmemo_register_before">
+        <observer name="webkul_giftcard_BeforeCreateCreditMemo" instance="Webkul\GiftCard\Observer\BeforeCreateCreditMemo" shared="false" />
+    </event> 
+    <event name="sales_quote_remove_item">
+        <observer name="webkul_giftcard_sales_quote_remove_item" instance="Webkul\GiftCard\Observer\SalesQuoteRemoveItem" />
+    </event>
+    <event name="payment_cart_collect_items_and_amounts">
+        <observer name="paymentfee" instance="Webkul\GiftCard\Observer\AddCustomAmountItem" />
+    </event>
+</config>

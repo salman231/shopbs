@@ -1,0 +1,25 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_PageSpeedOptimizer
+ */
+?>
+<?php
+/**
+ * @var \Magento\Backend\Block\Template $block
+ */
+?>
+
+<script>
+    require(["jquery"], function (jquery) {
+        var button = jquery('#amoptimizer_images_opti_generate_queue');
+
+        button.click(function(){
+            button.prepend('<input type="hidden" name="am-gen-queue" value="1" />');
+            button.attr('disabled', true);
+
+            jquery('#save').click();
+        })
+    });
+</script>

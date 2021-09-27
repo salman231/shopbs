@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+       <css src="Webkul_Rmasystem::css/rs_front.css"/>
+	</head>
+    <update handle="customer_account"/>
+    <body>
+
+        <referenceContainer name="content">
+            <block class="Webkul\Rmasystem\Block\Newrma" name="rma.newrma.index" template="Webkul_Rmasystem::customer/newrma.phtml" cacheable="false">
+                <block class="Magento\Framework\View\Element\Template" name="rma.newrma.customfield" template="Webkul_Rmasystem::customfield.phtml" cacheable="false" />
+                <arguments>
+                    <argument name="jsLayout" xsi:type="array">
+                        <item name="components" xsi:type="array">
+                            <item name="new-rma-component" xsi:type="array">
+                                <item name="component" xsi:type="string">Webkul_Rmasystem/js/view/new-rma</item>
+                                <item name="config" xsi:type="array">
+                                    <item name="template" xsi:type="string">Webkul_Rmasystem/view/new-rma</item>
+                                </item>
+                            </item>
+                        </item>
+                    </argument>
+                </arguments>
+            </block>
+            <block class="Magento\Customer\Block\Account\Dashboard" name="customer.account.link.back" template="account/link/back.phtml" cacheable="false"/>
+             <block class="Magento\Cookie\Block\RequireCookie" name="require-cookie" template="Magento_Cookie::require_cookie.phtml">
+                <arguments>
+                    <argument name="triggers" xsi:type="array">
+                        <item name="loginButton" xsi:type="string">.action.newrma</item>
+                    </argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+
+    </body>
+</page>

@@ -1,0 +1,61 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_PageSpeedOptimizer
+ */
+?>
+<?php
+/**
+ * @var \Magento\Backend\Block\Template $block
+ */
+?>
+<div style="margin-top: 5px">
+    <span id="process_file_counter" style="font-weight:bold"></span>
+</div>
+
+<script>
+    var disableButton = document.getElementById('amoptimizer_images_opti_force_optimize').disabled;
+    require(["jquery", "mage/translate"], function (jquery, __) {
+        var button = jquery('#amoptimizer_images_opti_force_optimize'),
+            fileCounter = jquery('#process_file_counter'),
+            filesCount = 0,
+            part = 0,
+            parts = 0,
+            imagesPerRequest = 10;
+
+        function optimizeFiles()
+        {
+            jquery.ajax(
+                {
+                    url: '<?= $block->escapeUrl($block->getProcessUrl()); ?>?limit='+imagesPerRequest,
+                    type: 'GET',
+                    success: function () {
+                        fileCounter.html((part * imagesPerRequest) + '/' + filesCount);
+                        part++;
+                        if (part < parts) {
+                            optimizeFiles();
+                        } else {
+                            fileCounter.html(__('Done'));
+                            button.attr('disabled', false);
+                        }
+                    }
+                }
+            );
+        }
+
+        button.click(function(){
+            if (!button.attr('readonly')) {
+                button.attr('disabled', true);
+                filesCount = <?= (int)$block->getImagesCount(); ?>;
+                if (parseInt(jquery('#amoptimizer_images_opti_process_images_per_request').val()) > 0) {
+                    imagesPerRequest = parseInt(jquery('#amoptimizer_images_opti_process_images_per_request').val());
+                }
+                parts = Math.round(filesCount/imagesPerRequest);
+                fileCounter.html('0/' + filesCount);
+                part = 1;
+                optimizeFiles();
+            }
+        });
+    });
+</script>

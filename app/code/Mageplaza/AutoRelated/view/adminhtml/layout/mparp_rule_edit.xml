@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_AutoRelated
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="editor"/>
+    <body>
+        <referenceContainer name="left">
+            <block class="Mageplaza\AutoRelated\Block\Adminhtml\Rule\Edit\Tabs" name="autorelated_rule_edit_tabs">
+                <container label="Main" name="main">
+                    <block class="Mageplaza\AutoRelated\Block\Adminhtml\Rule\Edit\Tab\General\Statistic" as="advanced"/>
+                    <block class="Mageplaza\AutoRelated\Block\Adminhtml\Rule\Edit\Tab\General\General" as="base"/>
+                </container>
+                <block class="Mageplaza\AutoRelated\Block\Adminhtml\Rule\Edit\Tab\Conditions\ProductCart" as="conditions"/>
+                <block class="Mageplaza\AutoRelated\Block\Adminhtml\Rule\Edit\Tab\Conditions\Category" as="category_conditions"/>
+                <container label="Actions" name="actions">
+                    <block class="Mageplaza\AutoRelated\Block\Adminhtml\Rule\Edit\Tab\Actions\BlockConfig" as="advanced"/>
+                    <block class="Mageplaza\AutoRelated\Block\Adminhtml\Rule\Edit\Tab\Actions\Actions" as="base"/>
+                </container>
+                <block class="Mageplaza\AutoRelated\Block\Adminhtml\Rule\Edit\Tab\Test\Test" as="test"/>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="content">
+            <block class="Mageplaza\AutoRelated\Block\Adminhtml\Rule\Edit" name="autorelated_rule_edit"/>
+        </referenceContainer>
+    </body>
+</page>

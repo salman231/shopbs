@@ -1,0 +1,66 @@
+
+<?php
+/**
+ * Webkul Software.
+ *
+ * PHP version 7.0+
+ *
+ * @category  Webkul
+ * @package   Webkul_DeliveryBoy
+ * @author    Webkul <support@webkul.com>
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+?>
+<div class="order-history-block">
+    <div class="admin__field">
+        <label for="history_comment" class="admin__field-label"><?= $block->escapeHtml(__('Add New Comment')) ?></label>
+        <div class="admin__field-control">
+            <textarea name="newcomment" rows="3" cols="5" id="newcomment" class="admin__control-textarea"></textarea>
+            <input type="hidden" id="orderId" value="<?= $block->escapeHtmlAttr($block->getOrderIncrementId()) ?>">
+        </div>
+    </div>
+    <div class="admin__field">           
+        <div class="order-history-comments-actions">
+            <button id="save" title="Submit Comment"
+                    type="button" class="action-default scalable action-save action-secondary">
+                <span>Submit Comment</span>
+            </button><br/>
+            <div class="result_msg"></div> 
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    require([
+        "jquery"
+    ], function(jQuery)  {
+        jQuery('#loading-image').hide();
+     
+        jQuery("body").on("click", "#save", function () {
+            var newComment = jQuery("#newcomment").val();
+            var orderId = jQuery("#orderId").val();
+            jQuery(".result_msg").html("");
+            if (newComment.trim()) {
+                jQuery.ajax({
+                url: '<?= $block->escapeUrl(
+                    $block->getUrl('expressdelivery/orders/saveNewComment', ['_secure' => true])
+                ) ?>',
+                data: {comment:newComment, incrementId:orderId},
+                type: "POST",
+                dataType: 'json',
+                showLoader: true,
+                }).done(function (result) {
+                    if (result == 1) {
+                        jQuery(".result_msg").html("<span style='color:green'>Comment saved successfully.</span>");
+                        setTimeout(window.location.reload(), 4000);
+                    } else {
+                        jQuery(".result_msg").html("<span style='color:green'>Some error occurred</span>");
+                    }
+                });
+            } else {
+                jQuery(".result_msg").html("<span style='color:red'>Input field is empty</span>");
+            }
+        });
+    });
+</script>

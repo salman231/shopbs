@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ * 
+ * PHP version 7.0+
+ *
+ * @category  Webkul
+ * @package   Webkul_DeliveryBoy
+ * @author    Webkul <support@webkul.com>
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add
+            id="Webkul_DeliveryBoy::expressdelivery"
+            title="Delivery Boy"
+            module="Webkul_DeliveryBoy"
+            sortOrder="10"
+            resource="Webkul_DeliveryBoy::expressdelivery"/>
+        <add
+            id="Webkul_DeliveryBoy::deliveryboydashboard"
+            title="DeliveryBoy Dashboard"
+            module="Webkul_DeliveryBoy"
+            sortOrder="1"
+            parent="Webkul_DeliveryBoy::expressdelivery"
+            action="expressdelivery/dashboard"
+            resource="Webkul_DeliveryBoy::deliveryboydashboard"/>
+        <add
+            id="Webkul_DeliveryBoy::deliveryboy"
+            title="Manage Delivery Boy"
+            module="Webkul_DeliveryBoy"
+            sortOrder="2"
+            parent="Webkul_DeliveryBoy::expressdelivery"
+            action="expressdelivery/deliveryboy"
+            resource="Webkul_DeliveryBoy::deliveryboy"/>
+        
+        <add
+            id="Webkul_DeliveryBoy::rating"
+            title="Manage Deliveryboy Rating"
+            module="Webkul_DeliveryBoy"
+            sortOrder="3"
+            parent="Webkul_DeliveryBoy::expressdelivery"
+            action="expressdelivery/rating"
+            resource="Webkul_DeliveryBoy::rating"/>
+        <add
+            id="Webkul_DeliveryBoy::shipping"
+            title="Express Delivery Shipping"
+            module="Webkul_DeliveryBoy"
+            parent="Webkul_DeliveryBoy::expressdelivery"
+            sortOrder="4"
+            action="adminhtml/system_config/edit/section/carriers/"
+            resource="Webkul_DeliveryBoy::shipping"/>
+        <add
+            id="Webkul_DeliveryBoy::orders"
+            title="Manage Delivery Boy Orders"
+            module="Webkul_DeliveryBoy"
+            parent="Webkul_DeliveryBoy::expressdelivery"
+            sortOrder="5"
+            action="expressdelivery/orders"
+            resource="Webkul_DeliveryBoy::deliveryboyorders"/>
+        <add
+            id="Webkul_DeliveryBoy::configuration"
+            title="Delivery Boy Configuration"
+            module="Webkul_DeliveryBoy"
+            parent="Webkul_DeliveryBoy::expressdelivery"
+            sortOrder="6"
+            action="adminhtml/system_config/edit/section/deliveryboy/"
+            resource="Webkul_DeliveryBoy::configuration"/>
+    </menu>
+</config>

@@ -1,0 +1,236 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_BetterProductReviews
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+?>
+<?php /** @var \Mageplaza\BetterProductReviews\Block\Review\ListView $block */ ?>
+<?php
+$_items = $block->getReviewsCollection()->getItems();
+$format = \IntlDateFormatter::LONG;
+?>
+<div>
+    <div class="mp-reviews-offset-<?php echo $block->getReviewOffset() ?>">
+        <?php foreach ($_items as $_review) :
+            /** @var \Magento\Review\Model\Review $_review */
+            ?>
+            <li id="review-item-<?php echo $_review->getId() ?>" class="item mp-review-item">
+                    <a class="data switch" id="link-item-<?php echo $_review->getId() ?>"
+                       href="#review-item-<?php echo $_review->getId() ?>"></a>
+                <?php if ($block->getReviewRatingSummary($_review->getId())->getCount()) : ?>
+                    <?php $ratingPercent = ceil($block->getReviewRatingSummary($_review->getId())->getSum() / ($block->getReviewRatingSummary($_review->getId())->getCount())); ?>
+                    <div class="rating-summary item">
+                        <div class="rating-result" title="<?php /* @escapeNotVerified */
+                        echo $ratingPercent ?>%">
+                    <span style="width:<?php /* @escapeNotVerified */
+                    echo $ratingPercent ?>%">
+                    </span>
+                        </div>
+                    </div>
+                <?php elseif (!empty($_review->getRatingVotes())) : ?>
+                    <div class="mp-review-ratings">
+                        <?php foreach ($_review->getRatingVotes() as $_vote) : ?>
+                            <div class="rating-summary item">
+                                <div class="rating-result" title="<?php /* @escapeNotVerified */
+                                echo $_vote->getPercent() ?>%">
+                            <span style="width:<?php /* @escapeNotVerified */
+                            echo $_vote->getPercent() ?>%">
+                            </span>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
+                <div class="mp-review-title">
+                    <strong><?php echo $block->escapeHtml($_review->getTitle()) ?></strong>
+                </div>
+                <div class="mp-review-details">
+                    <?php if ($block->isReviewDateShow()) : ?>
+                        <div class="mp-review-date">
+                            <time class="mp-review-details-value" datetime="<?php /* @escapeNotVerified */
+                            echo $block->formatDate($_review->getCreatedAt(), $format) ?>">
+                                <?php /* @escapeNotVerified */
+                                echo $block->formatDate($_review->getCreatedAt(), $format) ?>
+                            </time>
+                        </div>
+                    <?php endif; ?>
+                    <div class="mp-review-author">
+                <span class="mp-review-details-label"><?php /* @escapeNotVerified */
+                    echo __('By') ?></span>
+                        <span class="mp-review-details-value">
+                    <?php echo ($block->isReviewNicknameShow()) ? $block->escapeHtml($_review->getNickname()) : __('Customer') ?>
+                </span>
+                        <?php if ($_review->getMpBprVerifiedBuyer() && $block->isVerifiedBuyerMarkShow()) : ?>
+                            -
+                            <img class="mp-review-details-verified-mark"
+                                 src="<?php echo $block->getVerifiedBuyerMark() ?>"
+                                 alt="<?php echo __('Verified Buyer Mark') ?>"/>
+                            <span class="mp-review-details-verified mp-magento"><?php echo __('Verified Purchase') ?></span>
+                        <?php endif; ?>
+                    </div>
+                </div>
+                <div class="mp-review-content">
+                    <?php echo nl2br($block->escapeHtml($_review->getDetail())) ?>
+                </div>
+
+                <?php /** @var \Magento\Review\Model\Review $_review */
+                if ($images = $block->getReviewImages($_review)) : ?>
+                    <div class="mp-review-images">
+                        <?php foreach ($images as $image) : ?>
+                            <a class="mp-review-image-link" href="<?php echo $block->getImageUrl($image['file']) ?>">
+                                <div class="mp-review-image">
+                                    <img src="<?php echo $block->getImageUrl($image['file']) ?>"
+                                         alt="<?php echo __(
+                                             'Review_%1 Image_%2 ',
+                                             $_review->getId(),
+                                             $image['position']
+                                         ) ?>">
+                                </div>
+                            </a>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
+                <?php if ($block->isRecommendProductEnabled() && $_review->getMpBprRecommendedProduct()) : ?>
+                    <div class="mp-review-recommended">
+                        <strong><?php echo __('I recommend this product') ?></strong>
+                    </div>
+                <?php endif; ?>
+                <?php ?>
+                <?php if ($block->isHelpfulEnabled()) : ?>
+                    <div id="mp-review-helpful-<?php echo $_review->getId() ?>" class="mp-review-helpful">
+                        <div class="mp-review-helpful-details <?php echo ($_review->getMpBprHelpful()) ? '' : 'mp-hide' ?>">
+                            <span class="mp-review-helpful-value"><?php echo $_review->getMpBprHelpful() ?></span>
+                            <span class="mp-review-helpful-label"><?php echo __(
+                                'visitor%1 found this helpful',
+                                ($_review->getMpBprHelpful() == 1) ? '' : 's'
+                            ) ?></span>
+                        </div>
+
+                        <div class="primary actions-primary mp-review-helpful-btn">
+                            <button class="action submit primary"
+                                    data-review-id="<?php echo $_review->getId() ?>">
+                                <span><?php echo __('Helpful') ?></span>
+                            </button>
+                        </div>
+                        <div class="mp-betterproductreviews-message"></div>
+
+                        <div class="mp_image_loader">
+                            <div class="loader">
+                                <img src="<?php echo $block->getViewFileUrl('images/loader-1.gif') ?>"
+                                     alt="<?php echo __('Loading...') ?>">
+                            </div>
+                        </div>
+                    </div>
+                <?php endif; ?>
+                <?php if ($block->isSocialShareEnabled()) : ?>
+                    <!-- AddToAny BEGIN -->
+                    <div class="a2a_kit a2a_kit_size_32 a2a_default_style"
+                         data-a2a-url="<?php echo $block->getReviewsUrl() . '?reviewId=' . $_review->getId() . '#reviews' ?>">
+                        <a class="a2a_button_facebook"></a>
+                        <a class="a2a_button_twitter"></a>
+                        <a class="a2a_button_google_plus"></a>
+                        <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+                    </div>
+                    <script async src="https://static.addtoany.com/menu/page.js"></script>
+                    <!-- AddToAny END -->
+                <?php endif; ?>
+                <?php if ($_review->getReplyEnabled() && $block->isStoreOwnerReplyEnabled()) : ?>
+                    <div class="mp-review-reply">
+                        <div class="mp-reply-details">
+                            <div class="mp-reply-date">
+                                <time class="mp-review-reply-value" datetime="<?php /* @escapeNotVerified */
+                                echo $block->formatDate(
+                                    $_review->getReplyCreatedAt(),
+                                    $format
+                                ) ?>"><?php /* @escapeNotVerified */
+                                    echo $block->formatDate($_review->getReplyCreatedAt(), $format) ?></time>
+                            </div>
+                            <div class="mp-reply-author">
+                                <span class="mp-reply-details-label"><?php /* @escapeNotVerified */
+                                    echo __('Reply by') ?></span>
+                                <span class="mp-reply-details-value">
+                            <?php echo __('%1 - Store Owner', $block->escapeHtml($_review->getReplyNickname())) ?>
+                        </span>
+                            </div>
+                            <div class="mp-reply-content">
+                                <?php echo nl2br($block->escapeHtml($_review->getReplyContent())) ?>
+                            </div>
+                        </div>
+                    </div>
+                <?php endif; ?>
+            </li>
+        <?php endforeach; ?>
+    </div>
+
+    <script type="text/javascript">
+        require([
+            'jquery',
+            'review_list',
+            'Mageplaza_Core/js/jquery.magnific-popup.min'
+        ], function ($, review_list) {
+            var config = {
+                reviewPerPage: '<?php echo $block->getReviewsPerPage() ?>',
+                reviewOffset: '<?php echo $block->getReviewOffset() ?>',
+                storeId: '<?php echo $block->getCurrentStoreId() ?>',
+                productId: '<?php echo ($block->getProductId()) ?: $block->getAjaxProductId() ?>',
+                ajaxHelpfulUrl: '<?php echo $block->getAjaxHelpfulUrl() ?>',
+                ajaxSortUrl: '<?php echo $block->getAjaxSortUrl() ?>'
+            };
+            $("#mp-review-items a.mp-review-image-link").magnificPopup({
+                type: 'image',
+                closeOnContentClick: true,
+                closeBtnInside: false,
+                fixedContentPos: true,
+                mainClass: 'mfp-no-margins mfp-with-zoom',
+                image: {
+                    verticalFit: true
+                },
+                zoom: {
+                    enabled: true,
+                    duration: 300
+                }
+            });
+            review_list(config);
+
+            $(window).ready(function() {
+                var param = RegExp('[\?&]reviewId=([^&#]*)').exec(window.location.href);
+                if(param){
+                    $('html, body').animate({
+                        scrollTop: $('#link-item-'+param[1]).offset().top
+                    }, 'fast');
+                }
+            });
+        });
+    </script>
+    <?php if ($block->getIsLoadMore()) : ?>
+        <div class="mp-review-load-more col-mp mp-12">
+            <button title="Write a review" class="action primary load-more"
+                    data-review-count="<?php echo $block->getTotalReviews() ?>"
+                    data-review-offset="<?php echo $block->getReviewOffset() ?>">
+                <span><?php echo __('Load more') ?></span>
+            </button>
+        </div>
+        <div class="mp_image_loader mp_image_load_more_loader">
+            <div class="loader">
+                <img src="<?php echo $block->getViewFileUrl('images/loader-1.gif') ?>"
+                     alt="<?php echo __('Loading...') ?>">
+            </div>
+        </div>
+    <?php endif; ?>
+</div>

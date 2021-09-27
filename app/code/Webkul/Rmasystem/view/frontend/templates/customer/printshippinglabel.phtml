@@ -1,0 +1,96 @@
+<?php $this_rma = $block->getRmaDetail();
+    $id = $this_rma->getRmaId();
+?>
+    <div class="page-title">
+        <h1><?= __("Shipping Label"); ?>
+            <span style="float:right;">#<?= $this_rma->getIncrementId()."-".$id; ?></span>
+        </h1>
+    </div>
+    <div class="dashboard">
+        <div class="box-account box-info wk_rma_bigbox">
+            <div class="box-content">
+        <?php   $label = $block->getRmaShippingLabelModel($this_rma->getShippingLabel());?>
+                <div class="shipping_label_each">
+                    <img src="<?= $block->getLabelBaseUrl().$label->getFilename(); ?>" class="shipping_label_img"/>
+                </div>
+<?php           $filename = $block->getBarBaseUrl().$id.".gif";
+                echo "<img class='wk_barcode_images' alt='image' src='".$filename."'/>";                            ?>
+            </div>
+            <div class="col2-set" style="clear:both;">
+                <div class="col-1">
+                    <div class="box">
+                        <div class="box-title">
+                            <h3><?= __("Order Id"); ?></h3>
+                        </div>
+                        <div class="box-content">
+                            <p>#<?= $this_rma->getIncrementId(); ?></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="box">
+                        <div class="box-title">
+                            <h3><?= __("RMA Id"); ?></h3>
+                        </div>
+                        <div class="box-content">
+                            <p>#<?= $this_rma->getIncrementId()."-".$id; ?></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col2-set">
+                <div class="col-1">
+                    <div class="box">
+                        <div class="box-title">
+                            <h3><?= __("Created On"); ?></h3>
+                        </div>
+                        <div class="box-content">
+                            <p><?= date("Y-m-d g:i:s a", $block->getTimestamp($this_rma->getCreatedAt()));  ?></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h2 class="table-caption"><?= __("Item(s) Requested for RMA"); ?></h2>
+        <table class="data-table" id="item_table">
+            <thead>
+                <tr>
+                    <th><?= __("Product Name"); ?></th>
+                    <th><?= __("SKU"); ?></th>
+                    <th class="a-right"><?= __("Return Qty"); ?></th>
+                    <th class="a-right"><?= __("Reason"); ?></th>
+                </tr>
+            </thead>
+            <?php   $orderItems = $block->getItemCollection($id);
+            foreach ($orderItems as $item) {
+                $mage_item = $block->getSalesOrderItemDetail($item->getItemId());
+                if ($mage_item->getProductType()!=='downloadable' && $mage_item->getProductType()!=='virtual'):
+                    $product = $block->getProductDetail($mage_item->getProductId());
+                    $reason = $block->getReason($item->getReasonId())->getReason();
+                    if (!$reason) {
+                        $reason = $item->getRmaReason();
+                    }   ?>
+                <tbody>
+                <tr>
+                    <td><h3 class="product-name"><?= $product->getName(); ?></h3></td>
+                    <td><?= $product->getSku(); ?></td>
+                    <td class="a-right">
+                    <?= $item->getQty(); ?>
+                    </td>
+                    <td class="a-right">
+                    <?= $reason;   ?>
+                    </td>
+                </tr>
+                </tbody>
+                <?php endif; ?>
+            <?php   } ?>
+        </table>
+    </div>
+<script>
+require([
+        "jquery",
+    ], function($){
+            'use strict';
+            window.print();
+        });
+</script>

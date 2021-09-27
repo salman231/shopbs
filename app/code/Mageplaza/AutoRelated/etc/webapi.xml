@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_AutoRelated
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+-->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/mpARP/product-page" method="GET">
+        <service class="Mageplaza\AutoRelated\Api\AutoRelatedRepositoryInterface" method="getRuleProductPage"/>
+        <resources>
+            <resource ref="Mageplaza_AutoRelated::autorelated" />
+            <resource ref="Magento_Catalog::products" />
+        </resources>
+    </route>
+    <route url="/V1/mpARP/category-page" method="GET">
+        <service class="Mageplaza\AutoRelated\Api\AutoRelatedRepositoryInterface" method="getRuleCategoryPage"/>
+        <resources>
+            <resource ref="Mageplaza_AutoRelated::autorelated" />
+            <resource ref="Magento_Catalog::products" />
+        </resources>
+    </route>
+    <route url="/V1/mpARP/shopping-cart-page" method="GET">
+        <service class="Mageplaza\AutoRelated\Api\AutoRelatedRepositoryInterface" method="getRuleCartPage"/>
+        <resources>
+            <resource ref="Mageplaza_AutoRelated::autorelated" />
+            <resource ref="Magento_Catalog::products" />
+        </resources>
+    </route>
+    <route url="/V1/mpARP/checkout-page" method="GET">
+        <service class="Mageplaza\AutoRelated\Api\AutoRelatedRepositoryInterface" method="getRuleOSCPage"/>
+        <resources>
+            <resource ref="Mageplaza_AutoRelated::autorelated" />
+            <resource ref="Magento_Catalog::products" />
+        </resources>
+    </route>
+</routes>

@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © MagePal LLC. All rights reserved.
+ * See COPYING.txt for license details.
+ * http://www.magepal.com | support@magepal.com
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="magemonkey" sortOrder="200" translate="label">
+            <label>Magemonkey</label>
+        </tab>
+        <section id="magemonkey_general" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="5" translate="label">
+            <label>General Configuration</label>
+            <tab>magemonkey</tab>
+            <resource>Magemonkey_General::magemonkey_general</resource>
+            <group id="general" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="0" translate="label">
+                <!-- <label>Sandy</label> -->
+                <field id="giftshop_title" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Gift Shop Title</label>
+                </field>
+                <field id="giftshop_catid" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Gift Shop Category Id</label>
+                </field>
+                <field id="department_title" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Department Title</label>
+                </field>
+                <field id="department_catid" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Department Category Id</label>
+                </field>
+                <field id="shopby_title" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Shop by Title</label>
+                </field>
+                <field id="shopby_catid" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Shop by Category Id</label>
+                </field>
+                <field id="home_catid" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Home Main Category Sections</label>
+                    <comment>Please Add Category Id by (,) comma separated.</comment>
+                </field>
+            </group>
+            <!-- <group id="additional" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Home Category Selection</label>
+                <field id="emails" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Please Add Category Id</label>
+                    <validate>validate-not-negative-number</validate>
+                   <frontend_model>Magemonkey\General\Block\Adminhtml\Form\Field\AdditionalEmail</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                    <comment>Please Add single Category Id in one box.</comment>
+                </field>
+            </group> -->
+        </section>
+    </system>
+</config>

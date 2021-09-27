@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Customform
+ */
+-->
+<form>
+    <group id="information">
+        <title>Contact form</title>
+        <code>contact</code>
+        <status>1</status>
+        <customer_group>0</customer_group>
+        <store_id>0</store_id>
+        <send_notification>0</send_notification>
+    </group>
+    <group id="content">
+        <submit_button>Submit</submit_button>
+        <success_message>Thanks for contacting us. Your request was saved successfully.</success_message>
+    </group>
+    <group id="fields">
+        <form_json>
+            <field>
+                <type>textinput</type>
+                <name>first_name</name>
+                <label>First Name</label>
+                <className>form-control</className>
+                <required>true</required>
+                <validation></validation>
+            </field>
+            <field>
+                <type>textinput</type>
+                <name>last_name</name>
+                <label>Last Name</label>
+                <className>form-control</className>
+                <required>true</required>
+                <validation></validation>
+            </field>
+            <field>
+                <type>textinput</type>
+                <name>email</name>
+                <label>Email</label>
+                <className>form-control</className>
+                <required>true</required>
+                <validation>validate-email</validation>
+            </field>
+            <field>
+                <type>number</type>
+                <name>phone</name>
+                <label>Phone</label>
+                <className>form-control</className>
+                <required>true</required>
+                <validation></validation>
+            </field>
+            <field>
+                <type>dropdown</type>
+                <name>company</name>
+                <label>Company</label>
+                <className>form-control</className>
+                <values>
+                    <option>
+                        <label>C-1</label>
+                        <value>option-1</value>
+                        <selected>true</selected>
+                    </option>
+                    <option>
+                        <label>C-2</label>
+                        <value>option-2</value>
+                    </option>
+                    <option>
+                        <label>C-3</label>
+                        <value>option-3</value>
+                    </option>
+                </values>
+            </field>
+            <field>
+                <type>textarea</type>
+                <name>message</name>
+                <label>Message</label>
+                <className>form-control</className>
+                <required>true</required>
+                <validation></validation>
+            </field>
+        </form_json>
+    </group>
+</form>

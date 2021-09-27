@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Dart_Productkeys Extension Config Default Values
+ *
+ * @package        Dart_Productkeys
+ *
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <productkeys>
+            <general>
+                <issue_invoice>1</issue_invoice>
+                <productkeys_type>Productkey</productkeys_type>
+                <productkeys_updatestock>1</productkeys_updatestock>
+                <productkeys_not_available>Oops! No Productkey Available right now. Please call or email.</productkeys_not_available>
+                <productkeys_send_email>1</productkeys_send_email>
+                <productkeys_low_warning>1</productkeys_low_warning>
+                <productkeys_warning_level>5</productkeys_warning_level>
+            </general>
+        </productkeys>
+    </default>
+</config>

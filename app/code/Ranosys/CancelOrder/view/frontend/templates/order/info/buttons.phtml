@@ -1,0 +1,96 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+// @codingStandardsIgnoreFile
+
+$is_enable = $block->getenable();
+$notice = $block->getnotice();
+$label = $block->getlabel();
+if (!$label) {
+    $label = "Cancel Order";
+}
+if ($notice) {
+    $notice = "Notice: " . $notice;
+}
+?>
+
+<div class="actions">
+    <?php $_order = $block->getOrder() ?>
+    <?php if ($this->helper('Magento\Sales\Helper\Reorder')->canReorder($_order->getEntityId())) : ?>
+        <a href="#" data-post='<?php
+	/* @escapeNotVerified */ echo
+		$this->helper(\Magento\Framework\Data\Helper\PostHelper::class)
+		->getPostData($block->getReorderUrl($_order))
+	?>' class="action order">
+    	<span><?php /* @escapeNotVerified */ echo __('Reorder') ?></span>
+        </a>
+    <?php endif ?>
+    <a class="action print"
+       href="<?php /* @escapeNotVerified */ echo $block->getPrintUrl($_order) ?>"
+       onclick="this.target = '_blank';">
+        <span><?php /* @escapeNotVerified */ echo __('Print Order') ?></span>
+    </a>
+    <?php if ($is_enable == 1 && $_order->getStatusLabel() == 'Pending') : ?>
+        <?php /*<a class="action cancel" href="javascript:void(0);">
+    	<span><?php /* @escapeNotVerified * echo __($label) ?></span>
+        </a>
+        */ ?>
+        <div class="popup-form">
+    	<form class="form cancel-order"
+    	      action="<?php /* @escapeNotVerified */ echo $block->getFormAction($_order); ?>"
+    	      id="cancellation-form"
+    	      method="post">
+    	    <fieldset class="fieldset">
+    		<div class="field note no-label order-q"><?php /* @escapeNotVerified */ echo __('Are you sure to cancel selected order?') ?><br>
+    		    <span class="order-id"><?php /* @escapeNotVerified */ echo __('Order #:') ?><?php /* @escapeNotVerified */ echo $_order->getRealOrderId() ?></span></div>
+    		<div class="field comment col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    		    <label class="label" for="comment"><span><?php /* @escapeNotVerified */ echo __('Any cancellation reason ?') ?></span></label>
+    		    <div class="control">
+    			<textarea name="comment" id="comment" title="<?php /* @escapeNotVerified */ echo __('Any cancellation reason ?') ?>" placeholder="<?php /* @escapeNotVerified */ echo __('Why do you want to cancel this order?') ?>" class="input-text" cols="5" rows="3"></textarea>
+    		    </div>
+    		</div>
+    		<span class="order-notice"><?php /* @escapeNotVerified */ echo __($notice) ?></span>
+    	    </fieldset>
+    	</form>
+        </div>
+    <?php endif ?>
+    <?php echo $block->getChildHtml(); ?>
+</div>
+
+<script type = 'text/javascript'>
+    require(
+            [
+                'jquery',
+                'Magento_Ui/js/modal/modal'
+            ],
+            function (
+                    $,
+                    modal
+                    ) {
+                var options = {
+                    type: 'popup',
+                    buttons: [{
+                            text: $.mage.__('Yes'),
+                            class: 'btn-yes',
+                            click: function () {
+                                $('.cancel-order').submit();
+                            }
+                        }, {
+                            text: $.mage.__('No'),
+                            class: 'btn-no',
+                            click: function () {
+                                this.closeModal();
+                            }
+                        }]
+                };
+
+                var popup = modal(options, $('.popup-form'));
+                $(".cancel").on('click', function () {
+                    $(".popup-form").modal("openModal");
+                });
+
+            }
+    );
+</script>

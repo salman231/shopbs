@@ -1,0 +1,20 @@
+{
+    "name": "webkul/marketplace-advanced-report-system",
+    "description": "Webkul Marketplace Advanced Report System for Magento2",
+    "require": {
+        "webkul/module-marketplace": "3.0.*"
+    },
+    "type": "magento2-module",
+    "version": "3.0.0",
+    "license": [
+        "proprietary"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Webkul\\Mpreportsystem\\": ""
+        }
+    }
+}

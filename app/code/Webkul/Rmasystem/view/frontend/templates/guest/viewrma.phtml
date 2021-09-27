@@ -1,0 +1,326 @@
+
+<?php $rma = $block->getRmaDetail();
+$id = $rma->getRmaId();
+$helper = $this->helper("Webkul\Rmasystem\Helper\Data");
+$order = $block->getOrder($rma->getOrderId());
+?>
+<script>
+    window.rmaData = <?php /* @escapeNotVerified */ echo \Zend_Json::encode(['downloadUrl' => $block->getUrl('rmasystem/index/downloader/', ['_secure' => $this->getRequest()->isSecure(), 'id'=> $rma->getId()])]); ?>;
+</script>
+<div class="block">
+    <div class="block-content">
+        <form method="post" action="<?= $this->getUrl('rmasystem/guest/rmaupdate', ['_secure' => $this->getRequest()->isSecure()]); ?>" id="wk_rma_con_form" enctype="multipart/form-data" data-mage-init='{"validation":{}}'>
+            <div id="view-rma-component" data-bind="scope:'view-rma-component'" class="field">
+                    <!-- ko template: getTemplate() --><!-- /ko -->
+                    <script type="text/x-magento-init">
+                    {
+                            "#view-rma-component": {
+                                    "Magento_Ui/js/core/app":  <?php /* @escapeNotVerified */ echo $block->getJsLayout();?>
+                            }
+                    }
+                    </script>
+                        <div class="dashboard">
+                            <fieldset class="fieldset info wk-mp-fieldset">
+                            <?php
+                            $orderItemsPro=$block->getItemCollection($id);
+                            $wrong_product_type='';
+                            if (count($orderItemsPro)==1) {
+                                foreach ($orderItemsPro as $item_pro) {
+                                    $item_pro_data=$block->getSalesOrderItemDetail($item_pro->getItemId());
+                                    if ($item_pro_data->getProductType()=='downloadable' || $item_pro_data->getProductType()=='virtual') {
+                                        $wrong_product_type='invalid';
+                                    }
+                                }
+                            }
+                            ?>
+                            <legend class="legend">
+                                <span><?= __('Guest RMA Details') ?></span>
+                        <?php if ($rma->getShippingLabel() > 0 && $rma->getResolutionType() !== 0 && $wrong_product_type=='') {                                                           ?>
+                                <a class="link-print" onclick="this.target='_blank';" href="<?= $this->getUrl('rmasystem/guest/printlabel/', ['_secure' => $this->getRequest()->isSecure(), 'id'=>$id]); ?>">
+                                    <button class="button" title="<?= __('Print Shipping Label') ?>" type="button" style="float: right">
+                                        <span><span><?= __('Print Shipping Label') ?></span></span>
+                                    </button>
+                                </a>&nbsp;|&nbsp;
+                        <?php } ?>
+                        <?php if ($rma->getStatus() != 0 && $rma->getStatus() != 4): ?>
+                                <a class="link-print" onclick="this.target='_blank';" href="<?= $this->getUrl('rmasystem/guest/rmaprint/', ['_secure' => $this->getRequest()->isSecure(), 'id'=>$id]); ?>">
+                                    <button class="button" title="<?= __('Print RMA') ?>" type="button" style="float: right; margin-right:1em;">
+                                            <span><span><?= __('Print RMA') ?></span></span>
+                                    </button>
+                                </a>
+                        <?php endif;    ?>
+                                <a href="<?= $this->getUrl('rmasystem/guest/rmalist', ['_secure' => $this->getRequest()->isSecure()])?>">
+                                    <button class="button back" title="<?= __('Back') ?>" type="button">
+                                        <span><span><?= __('Back') ?></span></span>
+                                    </button>
+                                </a>
+                            </legend>
+                            <section class="admin__page-section order-view-account-information">
+                                <div class="wk-box admin__page-section-item order-information">
+                                    <div class="admin__page-section-content">
+                                    <table class="admin__table-secondary order-information-table">
+                                        <tbody>
+                                            <tr>
+                                                <th><?= __("Order Id"); ?></th>
+                                                <td>#<?= $rma->getIncrementId();?></td>
+                                            </tr>
+                                            <?php if (!$rma->getResolutionType()==3): ?>
+                                            <tr>
+                                                <th><?= __("Package Condition"); ?></th>
+                                                <td>
+                                                    <?php if ($rma->getPackageCondition() == 0) {
+                                                        echo "<p>".__("Open")."</p>";
+                                                    } else {
+                                                        echo "<p>".__("Packed")."</p>";
+                                                    }?>
+                                                </td>
+                                            </tr>
+                                            <?php endif; ?>
+                                            <tr>
+                                                <th><?= __("Created On"); ?></th>
+                                                <td><p><?= $block->formatDate($rma->getCreatedAt(), \IntlDateFormatter::MEDIUM); ?></p></td>
+                                            </tr>
+                                            <?php if ($rma->getResolutionType() == 1 && $rma->getAdminConsignmentNo() != "") { ?>
+                                            <tr>
+                                                <th><?= __("Admin Consignment Number"); ?></th>
+                                                <td><?= $rma->getAdminConsignmentNo(); ?></td>
+                                            </tr>
+                                            <?php } ?>
+                                            <?php if ($rma->getResolutionType() != 3 && $rma->getStatus() != 2): ?>
+                                            <tr>
+                                                <th><?= __("Your Consignment Number"); ?></th>
+                                                <td>
+                                                    <div class="box-content">
+                                                                    <input type="text" name="customer_consignment_no" value="<?= $rma->getCustomerConsignmentNo(); ?>"/>
+                                                                </div>
+                                                            </td>
+                                            </tr>
+                                            <?php endif; ?>
+                                            <!-- custom field value -->
+                                            <?= $this->getChildHtml('rma.viewrma.fieldvalue'); ?>
+                                            <tr>
+                                                <th><?= __("Upload Additional Image"); ?></th>
+                                                <td style="width:45%;">
+                                                        <div class="wk_rma_input_box image-field">
+                                                            <button type="button" for="related_images" id="wk_rma_label_image" data-bind="click: addImageBlock">
+                                                                    <span id="wk_rma_upload_icon"></span>
+                                                                    <span id="wk_rma_upload_text"><?= __("Upload Images"); ?></span>
+                                                            </button>
+                                                            <input type="hidden" name="total_images" data-bind="value: totalImages"/>
+                                                            <div class="control" id="image_block">
+                                                            </div>
+                                                            <script type="text/html" id="rmaImageTemplate">
+                                                                <div class="wk-showcase-block">
+                                                                        <div title="Delete Showcase" class="wk-delete-item" data-bind="click: deleteImage">x</div>
+                                                                        <div class="wk-default-block"><?= __("Add Image") ?></div>
+                                                                        <input type="file" name="related_images[]" accept="image/*" class="wk-showcase-img wk-no-display" data-bind="event:{change: fileSelect}">
+                                                                </div>
+                                                            </script>
+                                         </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    </div>
+                                </div>
+                                    <div class="wk-box admin__page-section-item order-account-information">
+                                    <div class="admin__page-section-content">
+                                        <table class="admin__table-secondary order-account-information-table">
+                                        <tbody>
+                                            <tr>
+                                                <th><?= __("RMA Status"); ?></th>
+                                                <td>
+                                                    <span>
+                                                            <?= "<strong class='wk_rma_status_pending'>".$helper->getRmaStatusTitle($rma->getStatus())."</strong>";?>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th><?= __("Product Delivery Status"); ?></th>
+                                                <td>
+                                                    <span>
+                                                            <?= "<strong class='wk_rma_status_pending'>".$helper->getRmaOrderStatusTitle($rma->getCustomerDeliveryStatus())."</strong>";?>
+                                        </span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th><?= __("Resolution Type"); ?></th>
+                                                <td>
+                                                    <?php if ($rma->getResolutionType() == 0) {
+                                                        echo "<p>".__("Refund")."</p>";
+                                                    } elseif ($rma->getResolutionType() == 1) {
+                                                        echo "<p>".__("Exchange")."</p>";
+                                                    } else {
+                                                        echo "<p>".__("Cancel Item")."</p>";
+                                                    }?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th><?= __("Additional Information"); ?></th>
+                                                <td><p><?= nl2br(strip_tags($rma->getAdditionalInfo())); ?></p></td>
+                                            </tr>
+                                            <tr>
+                                                <th><h3><?= __("Additional Image(s)"); ?></h3></th>
+                                                <td>
+                                                    <div id="wk_rma_add_images_container">
+                                                <?php
+                                                    $images = $block->getImages();
+                                                foreach ($images as $filename) {
+                                                    $getfilename = explode("/", $filename);
+                                                    $justfname = $block->getBaseUrl()."/".end($getfilename);
+                                                    echo "<img class='wk_rma_add_images' alt='".end($getfilename)."' src='".$justfname."'/>";
+                                                }                                                                                       ?>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    </div>
+                                </div>
+                            </section>
+                            <section class="admin__page-section">
+                                <div class="admin__page-section-title" style="clear:both">
+                                    <span class="title"><?= __("Item(s) Requested for RMA"); ?></span>
+                                </div>
+                                    <div class="admin__table-wrapper table-wrapper">
+                                    <table id="shipping_table" class="data table">
+                                        <thead>
+                                                <tr>
+                                                        <th scope="col" class="col name"><?= __("Product Name"); ?></th>
+                                                        <th scope="col" class="col sku"><?= __("SKU"); ?></th>
+                                                        <th scope="col" class="col qty"><?= __("Return Qty"); ?></th>
+                                                        <th scope="col" class="col reason"><?= __("Reason"); ?></th>
+                                                        <th scope="col" class="col price"><?= __("Product Price"); ?></th>
+                                                </tr>
+                                        </thead>
+                        <?php   $orderItems = $block->getItemCollection($id);
+                                $download_count=count($orderItems);
+                                $download=0;
+                        foreach ($orderItems as $item) {
+                            $mageItem = $block->getSalesOrderItemDetail($item->getItemId());
+                            $product = $block->getProductDetail($mageItem->getProductId());
+                            $reason = $block->getReason($item->getReasonId())->getReason();
+                            if (!$reason) {
+                                $reason = $item->getRmaReason();
+                            }
+                            if ($product) {
+                                $image_url = $block->imageHelperObj()->init($product, 'product_page_image_small')
+                                                                                        ->setImageFile($product->getFile())
+                                                                                        ->getUrl();
+                            }
+                                    
+                            ?>
+                                <tbody>
+                                            <tr class="border">
+                                                <td data-th="<?= __('Item Name') ?>" class="col name">
+                                                    <div class="wk-pro-divide1">
+                                                    <?php if ($product) { ?>
+                                                                <img src="<?= $image_url?>" class="image" />
+                                                    <?php } ?>
+                                                    </div>
+                                                    <div class="wk-pro-divide2">
+                                                        <?= $mageItem->getName();?>
+                                                    </div>
+                                                </td>
+                                                <td data-th="<?= __('Item SKU') ?>" class="col name"><?= $mageItem->getSku(); ?></td>
+                                                <td data-th="<?= __('Returned Qty') ?>" class="col name"><?= $item->getQty(); ?></td>
+                                                <td data-th="<?= __('Reason') ?>" class="col name"><?= $reason; ?></td>
+                                                <td data-th="<?= __('Price') ?>" class="col name"><?= $order->formatPrice($mageItem->getPrice()); ?></td>
+                                             </tr>
+                                 </tbody>
+                        <?php } ?>
+                                        </table>
+                                        </div>
+                            </section>
+                        </div>
+                            <div id="wk_rma_conversation_container">
+                                    <fieldset class="fieldset conversation-block">
+                                        <h2 class="legend wk_rma_clear"><?= __("RMA History & Conversation"); ?></h2>
+                                    <?php
+                                            $collection = $this->getRmaCollection($id);
+                                            $guest_data = $block->getGuestSession();
+                                    foreach ($collection as $eachconver) {                                                                      ?>
+                                                <div class="wk_rma_onereply">
+                                                    <span class="wk_rma_onereply_head <?= $eachconver->getSender() == 'guest'? "wk_rma_onereply_customer":"wk_rma_onereply_admin";?>">
+                                                        <span class="wk_rma_onereply_head_left"><?= $block->formatDate($rma->getCreatedAt(), \IntlDateFormatter::FULL); ?> | <?php if ($eachconver->getSender() == 'guest') {
+                                                            echo __("You");
+                                                                                                } else {
+                                                                                                    echo __("Admin");
+                                                                                                } ?></span>
+                                                    </span>
+                                                    <p class="wk_rma_onereply_cntnt <?= $eachconver->getSender() == 'default'?'admin':'customer' ?>">
+                                                        <span><?= nl2br(strip_tags($eachconver->getMessage())); ?></span></br>
+                                                        <?php if ($eachconver->getAttachment() != '') { ?>
+                                                            <a href="<?= $block->getUrl('rmasystem/index/downloader/', ['_secure' => $this->getRequest()->isSecure(), 'id'=> $rma->getId(), 'file_name' => $eachconver->getAttachment(), 'conv' => '1']) ?>" target="_blank">
+                                                                <span class="wk-icon-attachment"></span>
+                                                                <?= __('Download'); ?>
+                                                            </a>
+                                                        <?php } ?>
+                                                    </p>
+                                                    
+                                                </div>
+                                    <?php   }   ?>
+                                    </fieldset>
+                                    <input type="hidden" value="<?= $block->getFormKey(); ?>" name="form_key"/>
+                                    <input type="hidden" value="<?= $id; ?>" name="rma_id"/>
+
+                                    <!-- <ul class="form-list"> -->
+                                    <fieldset class="fieldset login new-message-block" data-hasrequired="<?php /* @escapeNotVerified */ echo __('* Required Fields') ?>">
+                                        <h2 class="legend wk_rma_clear"><?= __("Send New Message"); ?></h2>
+                                        <div class="field">
+                                            <label class="label"><span><?= __("Enter Message"); ?>:</span></label>
+                                            <div class="control">
+                                                <textarea id="wk_rma_additional_info" class="required" name="message"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label class="label"><span><?= __("Send Attachment"); ?>:</span></label>
+                                            <div class="control">
+                                                <input type="file" name="attachment" />
+                                            </div>
+                                        </div>
+                                    <?php       if ($rma->getStatus() != 4 && $rma->getStatus() != 3 && $rma->getStatus() != 2) {                                                                       ?>
+                                                    <div class="field">
+                                                        <input type="checkbox" name="solved" id="wk_rma_solved"/>
+                                                        <label class="label" for="wk_rma_solved"><span><?= __("Check to mark as solved"); ?></span></label>
+                                                    </div>
+                                    <?php       } elseif ($rma->getStatus() != 2) {                                                                                                 ?>
+                                                    <div class="field">
+                                                        <input type="checkbox" name="pending" id="wk_rma_pending"/>
+                                                        <label class="label" for="wk_rma_solved"><span><?= __("Check to Reopen"); ?></span></label>
+                                                     </div>
+                                    <?php       }                                                                                                       ?>
+                                                <!-- </ul> -->
+                                                <div class="field">
+                                                    <input type="checkbox" name="receive_email" id="wk_rma_email"/>
+                                                    <label class="label" for="wk_rma_solved"><span><?= __("Check to receive email"); ?></span></label>
+                                                </div>
+                                                <div class="buttons-set">
+                                                    <p class="required">* <?= __("Required Fields"); ?></p>
+                                                    <button class="action updaterma primary" title="<?= __("Submit Request"); ?>" type="submit">
+                                                        <span><?= __("Submit Request"); ?></span>
+                                                    </button>
+                                                </div>
+                                                <a href="<?= $this->getUrl('rmasystem/guest/rmalist', ['_secure' => $this->getRequest()->isSecure()])?>">&laquo;<?= __("back"); ?></a>
+                                            </div>
+                                    </fieldset>
+                    </div>
+            </form>
+        </div>
+    </div>
+<script type="text/javascript">
+    require([
+        'jquery',
+        'mage/mage'
+    ], function($) {
+
+        var dataForm = $('#wk_rma_con_form');
+        dataForm.mage('validation', {});
+
+        $('body').on('click','.updaterma.button', function() {
+            if (dataForm.valid() != false) {
+                $(this).attr('disabled','disabled');
+                $('#wk_rma_con_form').submit();
+            }
+        });
+    });
+</script>

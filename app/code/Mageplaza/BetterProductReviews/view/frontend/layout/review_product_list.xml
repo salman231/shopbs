@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_BetterProductReviews
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="https://use.fontawesome.com/releases/v5.2.0/css/all.css" src_type="url"/>
+        <css src="Mageplaza_Core::css/grid-mageplaza.css"/>
+        <css src="Mageplaza_Core::css/colors.css"/>
+        <css src="Mageplaza_Core::css/magnific-popup.css"/>
+        <css src="Mageplaza_BetterProductReviews::css/style.css"/>
+        <css src="Mageplaza_BetterProductReviews::css/review/product-list.css"/>
+    </head>
+    <body>
+        <referenceContainer name="product.info.details">
+            <block class="Mageplaza\BetterProductReviews\Block\Review\Summary" name="mpbetterproductreviews.review.summary" before="-"
+                   template="Mageplaza_BetterProductReviews::review/summary.phtml" ifconfig="mpbetterproductreviews/general/enabled"/>
+            <block class="Mageplaza\BetterProductReviews\Block\Review\ListView" name="mpbetterproductreviews.review.list" after="-"
+                   template="Mageplaza_BetterProductReviews::review/list.phtml" ifconfig="mpbetterproductreviews/general/enabled"/>
+        </referenceContainer>
+        <referenceBlock name="product.review.form">
+            <action method="setTemplate" ifconfig="mpbetterproductreviews/general/enabled">
+                <argument name="template" xsi:type="string">Mageplaza_BetterProductReviews::review/form.phtml</argument>
+            </action>
+            <arguments>
+                <argument name="jsLayout" xsi:type="array">
+                    <item name="components" xsi:type="array">
+                        <item name="review-form" xsi:type="array">
+                            <item name="component" xsi:type="string">Mageplaza_BetterProductReviews/js/view/review</item>
+                        </item>
+                    </item>
+                </argument>
+            </arguments>
+            <block class="Mageplaza\BetterProductReviews\Block\Review\Form"
+                   name="mpbetterproductreviews.review.form" as="mpbetterproductreviews_extrafields"
+                   template="Mageplaza_BetterProductReviews::review/form/extrafields.phtml" ifconfig="mpbetterproductreviews/general/enabled"/>
+        </referenceBlock>
+        <referenceBlock name="product.info.product_additional_data" remove="true"/>
+        <referenceBlock name="product_review_list.toolbar" remove="true"/>
+    </body>
+</page>

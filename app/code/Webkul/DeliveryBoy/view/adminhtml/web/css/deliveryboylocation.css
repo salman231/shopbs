@@ -1,0 +1,23 @@
+/**
+ * Webkul Software.
+ * 
+ * PHP version 7.0+
+ *
+ * @category  Webkul
+ * @package   Webkul_DeliveryBoy
+ * @author    Webkul <support@webkul.com>
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+#map {
+    height: 400px;
+    width: 500px;
+    position: static;
+    overflow: auto;
+}
+
+#map_container {
+    height: 300px;
+    width: 400px
+}

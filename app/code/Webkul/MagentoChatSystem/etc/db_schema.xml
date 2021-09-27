@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MagentoChatSystem
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+ -->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+  <table name="chatsystem_userdata" resource="default" engine="innodb">
+    <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true"/>
+    <column xsi:type="int" name="customer_id" padding="10" unsigned="true" nullable="true" identity="false"
+                comment="Parent Id"/>
+    <column xsi:type="text" name="unique_id" nullable="true"/>
+    <column xsi:type="text" name="image" nullable="true"/>
+    <column xsi:type="int" name="chat_status" padding="10" unsigned="true" nullable="false" identity="false" default="0"/>
+    <column xsi:type="int" name="endchat" padding="2" unsigned="true" nullable="false" identity="false" default="1"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="entity_id"/>
+    </constraint>
+	<constraint xsi:type="foreign" referenceId="CHATSYSTEM_USERDATA_CUSTOMER_ID_CUSTOMER_ENTITY_ENTITY_ID"
+                    table="chatsystem_userdata" column="customer_id" referenceTable="customer_entity"
+                    referenceColumn="entity_id" onDelete="CASCADE"/>
+    <index referenceId="CHATSYSTEM_USERDATA_CUSTOMER_ID" indexType="btree">
+        <column name="customer_id"/>
+    </index>
+  </table>
+  <table name="chatsystem_agentdata" resource="default" engine="innodb">
+    <column xsi:type="int" name="entity_id" padding="11" unsigned="false" nullable="false" identity="true"/>
+    <column xsi:type="int" name="agent_id" padding="10" unsigned="true" nullable="false" identity="false" default="0"/>
+    <column xsi:type="text" name="agent_unique_id" nullable="true"/>
+    <column xsi:type="text" name="agent_email" nullable="true"/>
+    <column xsi:type="text" name="agent_name" nullable="true"/>
+    <column xsi:type="text" name="image" nullable="true"/>
+    <column xsi:type="int" name="chat_status" padding="10" unsigned="true" nullable="false" identity="false" default="0"/>
+    <column xsi:type="int" name="agent_type" padding="11" unsigned="false" nullable="false" identity="false" default="0"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="entity_id"/>
+    </constraint>
+	<constraint xsi:type="foreign" referenceId="CHATSYSTEM_AGENTDATA_AGENT_ID_ADMIN_USER_USER_ID"
+                    table="chatsystem_agentdata" column="agent_id" referenceTable="admin_user"
+                    referenceColumn="user_id" onDelete="CASCADE"/>
+    <index referenceId="CHATSYSTEM_AGENTDATA_AGENT_ID" indexType="btree">
+        <column name="agent_id"/>
+    </index>
+  </table>
+  <table name="chatsystem_assigned_chat" resource="default" engine="innodb">
+    <column xsi:type="int" name="entity_id" padding="11" unsigned="false" nullable="false" identity="true"/>
+    <column xsi:type="int" name="agent_id" padding="10" unsigned="true" nullable="false" identity="false" default="0"/>
+    <column xsi:type="text" name="agent_unique_id" nullable="true"/>
+    <column xsi:type="int" name="customer_id" padding="10" unsigned="true" nullable="false" identity="false" default="0"/>
+    <column xsi:type="text" name="unique_id" nullable="true"/>
+    <column xsi:type="int" name="is_admin_chatting" padding="10" unsigned="true" nullable="false" identity="false" default="0"/>
+    <column xsi:type="int" name="chat_status" padding="10" unsigned="true" nullable="false" identity="false" default="0"/>
+    <column xsi:type="datetime" name="assigned_at" on_update="false" nullable="true"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="entity_id"/>
+    </constraint>
+  </table>
+  <table name="chatsystem_total_agent_chat" resource="default" engine="innodb">
+    <column xsi:type="int" name="entity_id" padding="11" unsigned="false" nullable="false" identity="true"/>
+    <column xsi:type="int" name="agent_id" padding="10" unsigned="true" nullable="false" identity="false" default="0"/>
+    <column xsi:type="text" name="agent_unique_id" nullable="true"/>
+    <column xsi:type="int" name="total_active_chat" padding="10" unsigned="true" nullable="false" identity="false" default="0"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="entity_id"/>
+    </constraint>
+  </table>
+  <table name="chatsystem_history" resource="default" engine="innodb">
+    <column xsi:type="int" name="entity_id" padding="11" unsigned="false" nullable="false" identity="true"/>
+    <column xsi:type="int" name="sender_id" padding="10" unsigned="true" nullable="false" identity="false" default="0"/>
+    <column xsi:type="text" name="sender_unique_id" nullable="true"/>
+    <column xsi:type="int" name="receiver_id" padding="10" unsigned="true" nullable="false" identity="false" default="0"/>
+    <column xsi:type="text" name="receiver_unique_id" nullable="true"/>
+    <column xsi:type="text" name="message" nullable="true"/>
+    <column xsi:type="timestamp" name="date" on_update="false" nullable="true"/>
+    <column xsi:type="varchar" name="sender_name" nullable="false" length="255" default=""/>
+    <column xsi:type="varchar" name="receiver_name" nullable="false" length="255" default=""/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="entity_id"/>
+    </constraint>
+  </table>
+  <table name="chatsystem_agent_rating" resource="default" engine="innodb">
+    <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true"/>
+    <column xsi:type="int" name="customer_id" padding="10" unsigned="true" nullable="false" identity="false" default="0"/>
+    <column xsi:type="int" name="agent_id" padding="10" unsigned="true" nullable="false" identity="false" default="0"/>
+    <column xsi:type="text" name="agent_unique_id" nullable="true"/>
+    <column xsi:type="int" name="rating" padding="10" unsigned="true" nullable="false" identity="false" default="0"/>
+    <column xsi:type="text" name="rating_comment" nullable="true"/>
+    <column xsi:type="int" name="status" padding="10" unsigned="true" nullable="false" identity="false" default="0"/>
+    <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="entity_id"/>
+    </constraint>
+  </table>
+  <table name="chatsystem_report" resource="default" engine="innodb">
+    <column xsi:type="int" name="report_id" padding="10" unsigned="true" nullable="false" identity="true"/>
+    <column xsi:type="int" name="customer_id" padding="11" unsigned="false" nullable="true" identity="false"/>
+    <column xsi:type="varchar" name="customer_name" nullable="true" length="255"/>
+    <column xsi:type="varchar" name="agent_id" nullable="true" length="255"/>
+    <column xsi:type="text" name="subject" nullable="true"/>
+    <column xsi:type="text" name="content" nullable="true"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="report_id"/>
+    </constraint>
+  </table>
+</schema>

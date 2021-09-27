@@ -1,0 +1,310 @@
+"Order Id","Order Id"
+"Customer Name","Customer Name"
+"Grand Total","Grand Total"
+"Created At","Created At"
+"Store Id","Store Id"
+Status,Status
+Back,Back
+"Delete DeliveryBoy","Delete DeliveryBoy"
+"Save DeliveryBoy","Save DeliveryBoy"
+"Invalid Deliveryboy.","Invalid Deliveryboy."
+"Review Details","Review Details"
+"<a href=""%1"" onclick=""this.target=""blank"""">%2 %3</a> <a href=""mailto:%4"">(%4)</a>","<a href=""%1"" onclick=""this.target=""blank"""">%2 %3</a> <a href=""mailto:%4"">(%4)</a>"
+Author,Author
+"<a href=""%1"" onclick=""this.target=""blank""""><img src=""%4""/>%2 </a> <a href=""mailto:%3"">(%3)</a>","<a href=""%1"" onclick=""this.target=""blank""""><img src=""%4""/>%2 </a> <a href=""mailto:%3"">(%3)</a>"
+"Delivery Boy","Delivery Boy"
+"Summary Rating","Summary Rating"
+"Summary of Review","Summary of Review"
+Review,Review
+"Save and Continue Edit","Save and Continue Edit"
+"Add Comment to Deliveryboy Order","Add Comment to Deliveryboy Order"
+"Assign DeliveryBoy","Assign DeliveryBoy"
+"Comment Id","Comment Id"
+Comment,Comment
+"Date Time","Date Time"
+"Commented By","Commented By"
+"Deliveryboy Order Comments","Deliveryboy Order Comments"
+"Update Review","Update Review"
+"Delete Review","Delete Review"
+"Are you sure you want to do this?","Are you sure you want to do this?"
+"Edit Review '%1'","Edit Review '%1'"
+"New Review","New Review"
+Subtotal,Subtotal
+"Shipping & Handling","Shipping & Handling"
+"Discount (%1)","Discount (%1)"
+Discount,Discount
+"Grand Total to be Charged","Grand Total to be Charged"
+"DeliveryBoy Dashboard","DeliveryBoy Dashboard"
+"Deliveryboy could not be deleted.","Deliveryboy could not be deleted."
+"Deliveryboy has been deleted.","Deliveryboy has been deleted."
+"Requested delivery boy doesn't exist","Requested delivery boy doesn't exist"
+"Something went wrong while editing the delivery boy.","Something went wrong while editing the delivery boy."
+"Edit Item with id %1","Edit Item with id %1"
+"New Deliveryboy","New Deliveryboy"
+"Deliveryboy Image","Deliveryboy Image"
+"Manage Delivery Boy","Manage Delivery Boy"
+"A total of %1 record(s) were deleted.","A total of %1 record(s) were deleted."
+"A total of %1 record(s) were disabled.","A total of %1 record(s) were disabled."
+"A total of %1 record(s) were enabled.","A total of %1 record(s) were enabled."
+"Delivery boy with same email already exist.","Delivery boy with same email already exist."
+"Delivery boy with same mobile number already exist.","Delivery boy with same mobile number already exist."
+"Delivery boy with same vehicle number already exist.","Delivery boy with same vehicle number already exist."
+"You saved the deliveryboy.","You saved the deliveryboy."
+"Something went wrong while saving the deliveryboy. %1","Something went wrong while saving the deliveryboy. %1"
+"Please upload avatar image.","Please upload avatar image."
+"File can not be saved to the destination folder.","File can not be saved to the destination folder."
+"Please upload deliveryboy avatar image.","Please upload deliveryboy avatar image."
+"Delivery boy name is a required field.","Delivery boy name is a required field."
+"Mobile number should be a valid digits.","Mobile number should be a valid digits."
+"Mobile number field can not be blank.","Mobile number field can not be blank."
+"Password is a required field.","Password is a required field."
+"Password confirmation is a required field.","Password confirmation is a required field."
+"Password and confirm password should be same.","Password and confirm password should be same."
+"invalid request","invalid request"
+"see error log for details","see error log for details"
+"Service unavailable: %1","Service unavailable: %1"
+"Unable to perform the requested operation. The order is in %1 state.","Unable to perform the requested operation. The order is in %1 state."
+"Your have received new order to deliver.","Your have received new order to deliver."
+"New Order Assigned.","New Order Assigned."
+"One order is unassigned form you.","One order is unassigned form you."
+"Order UnAssigned.","Order UnAssigned."
+"Manage Delivery Boy Orders","Manage Delivery Boy Orders"
+"Comment field is required.","Comment field is required."
+"Comment should be atleast 5 words.","Comment should be atleast 5 words."
+"Rating could not be deleted.","Rating could not be deleted."
+"Rating has been deleted.","Rating has been deleted."
+"Requested rating doesn't exist","Requested rating doesn't exist"
+"Something went wrong while approving rating.","Something went wrong while approving rating."
+"Approve Rating ""%1""","Approve Rating ""%1"""
+"Manage Deliveryboy Rating","Manage Deliveryboy Rating"
+"A total of %1 rating(s) were approved.","A total of %1 rating(s) were approved."
+Guest,Guest
+"A total of %1 rating(s) were disapproved.","A total of %1 rating(s) were disapproved."
+"Rating is updated.","Rating is updated."
+"Something went wrong while saving the rating. %1","Something went wrong while saving the rating. %1"
+"Invalid order.","Invalid order."
+"Invalid deliveryboy order.","Invalid deliveryboy order."
+"Comment added successfully.","Comment added successfully."
+"Invalid Request","Invalid Request"
+"Comment should be at least 5 words.","Comment should be at least 5 words."
+"Unauthorized access.","Unauthorized access."
+"Order assigned successfully.","Order assigned successfully."
+"Invalid Order.","Invalid Order."
+"Deliveryboy is offline.","Deliveryboy is offline."
+"Sorry this order is not eligible for express delivery.","Sorry this order is not eligible for express delivery."
+"One order is unassigned from you.","One order is unassigned from you."
+"This Deliveryboy still have pending orders.","This Deliveryboy still have pending orders."
+"Deliveryboy deleted successfully.","Deliveryboy deleted successfully."
+"Invalid delivery boy.","Invalid delivery boy."
+"Review not found","Review not found"
+"Review deleted successfully.","Review deleted successfully."
+"Review updated successfully.","Review updated successfully."
+"Deliveryboy details saved successfully.","Deliveryboy details saved successfully."
+"Deliveryboy created successfully.","Deliveryboy created successfully."
+"Title is required field.","Title is required field."
+"Invalid Rating.","Invalid Rating."
+"Thanks for your review, it is submitted for moderation.","Thanks for your review, it is submitted for moderation."
+"Request processed successfully.","Request processed successfully."
+"Invalid delivery boy order.","Invalid delivery boy order."
+Assigned,Assigned
+"Delivery Accepted by %1.","Delivery Accepted by %1."
+"Delivery Accepted #%1","Delivery Accepted #%1"
+"Please check the order status and re-assign to delivery boy.","Please check the order status and re-assign to delivery boy."
+"Delivery Declined #%1","Delivery Declined #%1"
+"You have successfully accepted the Delivery for order #","You have successfully accepted the Delivery for order #"
+"Delivery for order #%1 has been rejected successfully.","Delivery for order #%1 has been rejected successfully."
+"Delivery Rejected #%1","Delivery Rejected #%1"
+"Invalid Request.","Invalid Request."
+"You still have pending orders.","You still have pending orders."
+"Requested Deliveryboy is not valid.","Requested Deliveryboy is not valid."
+"Invalid delivery boy status.","Invalid delivery boy status."
+"The requested deliveryboy doesn't exist.","The requested deliveryboy doesn't exist."
+"Invalid OTP.","Invalid OTP."
+"Deliveryboy unavailable.","Deliveryboy unavailable."
+"Order cannot be invoiced.","Order cannot be invoiced."
+"Order Delivered Successfully.","Order Delivered Successfully."
+"Notified customer about invoice #%1.","Notified customer about invoice #%1."
+"Order Delivered #%1","Order Delivered #%1"
+"Order update received.","Order update received."
+"Invalid Username.","Invalid Username."
+"No deliveryboy is associated with provided username.","No deliveryboy is associated with provided username."
+"Password reset request received, please check mail.","Password reset request received, please check mail."
+"Invalid request.","Invalid request."
+"Password changed successfully.","Password changed successfully."
+"Password and confirm password should match.","Password and confirm password should match."
+"Password and confirm password can not be blank.","Password and confirm password can not be blank."
+"Token expired.","Token expired."
+"Invalid Latitude.","Invalid Latitude."
+"Invalid Longitude.","Invalid Longitude."
+"Order picked up from store.","Order picked up from store."
+"Your Order has been picked up by %1","Your Order has been picked up by %1"
+"Order #%1 has been picked up successfully.","Order #%1 has been picked up successfully."
+"Order picked up by %1","Order picked up by %1"
+"Order update received","Order update received"
+"The requested deliveryboy does not exist.","The requested deliveryboy does not exist."
+"Invalid rating.","Invalid rating."
+"Invalid Password.","Invalid Password."
+"No user with this username exist.","No user with this username exist."
+"Invalid username or password.","Invalid username or password."
+Tax,Tax
+"Invalid token","Invalid token"
+"Invalid Delivery boy.","Invalid Delivery boy."
+"Comment is required field.","Comment is required field."
+"Unable to save review. Please try again later.","Unable to save review. Please try again later."
+"Invalid Customer Address","Invalid Customer Address"
+"My Express Orders","My Express Orders"
+"Please reassign this Unclaimed Order","Please reassign this Unclaimed Order"
+"Unclaimed Order","Unclaimed Order"
+January,January
+February,February
+March,March
+April,April
+May,May
+June,June
+July,July
+August,August
+September,September
+October,October
+November,November
+December,December
+"Unable to remove comment with id %1","Unable to remove comment with id %1"
+Enabled,Enabled
+Disabled,Disabled
+Bike,Bike
+Cycle,Cycle
+"A Delivery boy with email ' . . ' already exists.","A Delivery boy with email ' . . ' already exists."
+"Unable to remove deliveryboy with id %1","Unable to remove deliveryboy with id %1"
+"Unable to remove rating with id %1","Unable to remove rating with id %1"
+"Please check the order status and assign to delivery boy.","Please check the order status and assign to delivery boy."
+"New Order #%1","New Order #%1"
+Edit,Edit
+"View Order","View Order"
+"Offline Order","Offline Order"
+Day,Day
+Week,Week
+Month,Month
+Year,Year
+"Select Range:","Select Range:"
+"No Data Found","No Data Found"
+"Add New Comment","Add New Comment"
+"Assign Order to Deliveryboy","Assign Order to Deliveryboy"
+"Choose Deliveryboy:","Choose Deliveryboy:"
+"Select Deliveryboy","Select Deliveryboy"
+"Assign to Deliveryboy","Assign to Deliveryboy"
+"Successfully assigned to deliveryboy","Successfully assigned to deliveryboy"
+"Some error occurred","Some error occurred"
+"Please select deliveryboy.","Please select deliveryboy."
+"Order can't be assigned as delivery boy is not online.","Order can't be assigned as delivery boy is not online."
+Orders,Orders
+"Order #","Order #"
+Date,Date
+"Ship To","Ship To"
+"Order Total","Order Total"
+Action,Action
+Actions,Actions
+Track,Track
+"You have placed no express orders.","You have placed no express orders."
+"Delivery Boy Information","Delivery Boy Information"
+Details,Details
+OTP,OTP
+"stars out of ","stars out of "
+Loading...,Loading...
+"Add Review","Add Review"
+"* Required Fields","* Required Fields"
+"You're reviewing:","You're reviewing:"
+"Your Rating","Your Rating"
+"%1 %2","%1 %2"
+Title,Title
+"Your food will be delivered in ","Your food will be delivered in "
+"Welcome to %store_name","Welcome to %store_name"
+"%name,","%name,"
+"Welcome to %store_name.","Welcome to %store_name."
+"You account has been successfully created. Use the below credentials to login to your account.","You account has been successfully created. Use the below credentials to login to your account."
+Email:,Email:
+Password:,Password:
+"You have got a new Review by ","You have got a new Review by "
+"Hello ","Hello "
+",",","
+"You have got a new review from ","You have got a new review from "
+"It has been submitted for evaluation.","It has been submitted for evaluation."
+Ratings,Ratings
+%comment,%comment
+"Review from ","Review from "
+" has been evaluated by "," has been evaluated by "
+Hello,Hello
+"Your order ","Your order "
+" has been picked up and its on the way to you."," has been picked up and its on the way to you."
+"Order Details:","Order Details:"
+"Status: ","Status: "
+"Order Date: ","Order Date: "
+"DeliveryBoy Details:","DeliveryBoy Details:"
+"Name: ","Name: "
+"Contact: ","Contact: "
+" has been succesfully assigned to "," has been succesfully assigned to "
+"Your order assignment confirmation OTP is ","Your order assignment confirmation OTP is "
+Accept,Accept
+"Reject Quote","Reject Quote"
+"Directions not available","Directions not available"
+"You are here","You are here"
+"Please select one of each of the ratings above.","Please select one of each of the ratings above."
+"Comment should contain at least 5 words.","Comment should contain at least 5 words."
+Submit,Submit
+"Could not add review. Please try again later","Could not add review. Please try again later"
+Webkul,Webkul
+Deliveryboy,Deliveryboy
+"Api Authentication","Api Authentication"
+Username,Username
+Password,Password
+"FCM API key","FCM API key"
+"Deliveryboy Basic Configuration","Deliveryboy Basic Configuration"
+"Warehouse Address","Warehouse Address"
+Latitude,Latitude
+Longitude,Longitude
+"Google Map Api Key","Google Map Api Key"
+"Delivery Range in kms","Delivery Range in kms"
+"Admin email address","Admin email address"
+"Allowed Shipping Methods","Allowed Shipping Methods"
+"Collection Page Size","Collection Page Size"
+"Express Few Hour Delivery","Express Few Hour Delivery"
+"Method Name","Method Name"
+Price,Price
+"Calculate Handling Fee","Calculate Handling Fee"
+"Handling Fee","Handling Fee"
+"Sort Order","Sort Order"
+Type,Type
+"Ship to Applicable Countries","Ship to Applicable Countries"
+"Ship to Specific Countries","Ship to Specific Countries"
+"Show Method if Not Applicable","Show Method if Not Applicable"
+"Displayed Error Message","Displayed Error Message"
+"Deliveryboy Dashboard","Deliveryboy Dashboard"
+"Order Graph","Order Graph"
+"Sales Graph","Sales Graph"
+"Today's Orders","Today's Orders"
+"Deliveryboy Location","Deliveryboy Location"
+"Rating Information","Rating Information"
+"Deliveryboy Information","Deliveryboy Information"
+Name,Name
+Email,Email
+"Mobile Number","Mobile Number"
+"Vehicle Type","Vehicle Type"
+"Vehicle Number","Vehicle Number"
+"Confirm Password","Confirm Password"
+"Full Address","Full Address"
+"Deliveryboy Status","Deliveryboy Status"
+"Add DeliveryBoy","Add DeliveryBoy"
+Disable,Disable
+"Are you sure you wan't to disable selected records?","Are you sure you wan't to disable selected records?"
+Enable,Enable
+"Are you sure you wan't to enable selected records?","Are you sure you wan't to enable selected records?"
+Delete,Delete
+"Are you sure you wan't to delete selected records?","Are you sure you wan't to delete selected records?"
+ID,ID
+Image,Image
+"Deliveryboy name","Deliveryboy name"
+"Increment Id","Increment Id"
+Disapprove,Disapprove
+"Are you sure you want to disapprove selected ratings?","Are you sure you want to disapprove selected ratings?"
+Approve,Approve
+"Are you sure you want to approve selected ratings?","Are you sure you want to approve selected ratings?"
+Rating,Rating
+"Track Order","Track Order"

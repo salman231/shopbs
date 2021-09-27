@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_GiftCard
+ * @author    Webkul Software Private Limited
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Webkul_GiftCard::giftcard" title="Gift Card" sortOrder="10" >
+                    <resource id="Webkul_GiftCard::giftcarddetails" title="Gift Card Details" sortOrder="10">
+                    </resource>
+                    <resource id="Webkul_GiftCard::giftuser_index" title="Gift Card Index" sortOrder="10">
+                    </resource>
+                </resource> 
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="Webkul_GiftCard::config" title="GiftCard Configuration" sortOrder="50" />
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_DailyDeal
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Mageplaza_DailyDeal::mpdailydeal" title="Daily Deal" module="Mageplaza_DailyDeal" sortOrder="55" resource="Mageplaza_DailyDeal::mpdailydeal" parent="Magento_Backend::marketing"/>
+        <add id="Mageplaza_DailyDeal::dealgrid" title="Manage Deals" module="Mageplaza_DailyDeal" sortOrder="20" parent="Mageplaza_DailyDeal::mpdailydeal" action="mpdailydeal/deal" resource="Mageplaza_DailyDeal::dealgrid"/>
+        <add id="Mageplaza_DailyDeal::configuration" title="Configuration" module="Mageplaza_DailyDeal" sortOrder="40" action="adminhtml/system_config/edit/section/dailydeal" resource="Mageplaza_DailyDeal::configuration" parent="Mageplaza_DailyDeal::mpdailydeal"/>
+    </menu>
+</config>

@@ -1,0 +1,75 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php $_item = $block->getItem(); ?>
+<?php $_order = $block->getItem()->getOrder(); ?>
+
+<?php
+$productId = $_item->getProductId();
+$objectManagerHere = \Magento\Framework\App\ObjectManager::getInstance();
+$product = $objectManagerHere->get('Magento\Catalog\Model\Product')->load($productId);
+$productImage = $this->helper('Magento\Catalog\Helper\Image')->init($product, 'category_page_list', array('height' => '135' , 'width'=> '135'))->getUrl();
+
+
+?>
+
+<?php         
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $proid = $objectManager->get('Magento\Catalog\Model\Product')->getIdBySku($block->getSku($_item));
+    $product = $objectManager->create('Magento\Catalog\Model\Product')->load($proid);
+    $mpproduct = $objectManager->get('Webkul\Marketplace\Model\Product')->load($proid,'mageproduct_id');
+    if($mpproduct['seller_id']){
+        $customerObj = $objectManager->create('Magento\Customer\Model\Customer')->load($mpproduct['seller_id']);
+        $sellername = ucfirst($customerObj->getFirstname())." ".ucfirst($customerObj->getLastname());
+    }else{
+        $sellername = "Shop.bs";
+    }
+?> 
+
+
+<tr width="100%">
+<td> 
+<table>
+<tr>
+	<td>
+	<img style="width: 100px;padding: 5px;" src="<?=$productImage?>" title="<?= $block->escapeHtml($_item->getName()) ?>" alt="<?= $block->escapeHtml($_item->getName()) ?>" style="vertical-align:top;" />
+	</td>
+	
+    <td class="item-info<?php if ($block->getItemOptions()): ?> has-extra<?php endif; ?>">
+        <p class="product-name"><?= $block->escapeHtml($_item->getName()) ?></p>
+        <p class="sku"><?= /* @escapeNotVerified */  __('SKU') ?>: <?= $block->escapeHtml($block->getSku($_item)) ?></p>
+        <?php if ($block->getItemOptions()): ?>
+            <dl>
+                <?php foreach ($block->getItemOptions() as $option): ?>
+                    <dt><strong><em><?= /* @escapeNotVerified */  $option['label'] ?></em></strong></dt>
+                    <dd>
+                        <?= /* @escapeNotVerified */  nl2br($option['value']) ?>
+                    </dd>
+                <?php endforeach; ?>
+            </dl>
+        <?php endif; ?>
+        <?php $addInfoBlock = $block->getProductAdditionalInformationBlock(); ?>
+        <?php if ($addInfoBlock) :?>
+            <?= $addInfoBlock->setItem($_item->getOrderItem())->toHtml() ?>
+        <?php endif; ?>
+        <?= $block->escapeHtml($_item->getDescription()) ?>
+    </td>
+	
+</tr>	
+</table>	
+</td>	
+
+	<td style="text-align:centre;" class="item-qty"> <?php echo $sellername;?> </td>
+   
+
+   <td class="item-qty"><?= /* @escapeNotVerified */  $_item->getQty() * 1 ?></td>
+    <td class="item-price">
+        <?= /* @escapeNotVerified */  $block->getItemPrice($_item->getOrderItem()) ?>
+    </td>
+</tr>

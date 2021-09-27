@@ -1,0 +1,56 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_PageSpeedOptimizer
+ */
+?>
+<?php
+/** @var \Magento\Backend\Block\Template $block */
+
+$stepInfo = __('Please, click on the link(s) below to open it. It can take some'
+    . ' time for the page(s) to load. Open all the links if there are'
+    . 'several of them. Wait until you get the "Now you can close the'
+    . 'page" message and proceed to the next JS optimization step.');
+?>
+
+<div>
+    <div class="amasty-page-speed-step"><?= $block->escapeHtml(__('Step 2')) ?></div>
+    <div>
+        <?= $block->escapeHtml($stepInfo); ?>
+        <div class="amasty-page-speed-code">
+            <?php foreach ($block->getUrls() as $url => $urlBundle) : ?>
+                <div>
+                    <a href="<?= $block->escapeUrl($urlBundle); ?>"
+                        target="_blank"
+                        class="amoptimizer-super-bundle">
+                            <?= $block->escapeUrl($url); ?>
+                    </a>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</div>
+<script>
+    require(["jquery", "prototype"], function (jquery) {
+        var button = jquery('#amoptimizer_settings_javascript_super_bundling');
+
+        button.click(function(){
+            button.prepend('<input type="hidden" name="am-bundling-step3" value="1" />');
+            button.attr('disabled', true);
+            jquery('#amoptimizer_settings_javascript_merge_js').attr('disabled', false).val(1);
+            jquery('#amoptimizer_settings_javascript_js_bundling').attr('disabled', false).val(1);
+            jquery('#save').click();
+        });
+        jquery(document).ready(function () {
+            jquery('.amoptimizer-super-bundle').click(function () {
+                $(this).replaceWith('');
+                if (!(jquery('.amoptimizer-super-bundle').length)) {
+                    jquery('#amoptimizer_settings_javascript_super_bundling').show();
+                }
+            });
+            jquery('#amoptimizer_settings_javascript-head').click();
+            jquery('#amoptimizer_settings_javascript_super_bundling').hide();
+        })
+    });
+</script>

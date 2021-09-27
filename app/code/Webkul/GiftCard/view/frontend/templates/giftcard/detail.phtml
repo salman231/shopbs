@@ -1,0 +1,82 @@
+
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_GiftCard
+ * @author    Webkul
+ * @copyright Copyright (c) 2010-2017 Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+$giftCardDetails = $block->getCollection();
+$getHelper = $block->getHelper();
+?>
+
+<form action="<?= /* @noEscape */ $block->getUrl('giftcard/giftuser/index')?>" method="get" id="form-cartlist-filter" 
+name="formCartlistFilter" autocomplete="off" novalidate="novalidate">
+    <table cellspacing="0" class="wkcs-filter-table">
+        <thead>
+            <tr>
+                <th><span><?= /* @noEscape */ __('Customer Email')?></span></th>
+                <th><span>&nbsp;</span></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <input type="text" class="input-text" name="ge" placeholder="<?= /* @noEscape */ __('Search by Email')?>" value="<?= /* @noEscape */ $block->getRequest()->getParam('ge')?>">
+                </td>
+                <td>
+                    <input type="text" class="input-text" name="gc" placeholder="<?= /* @noEscape */ __('Search by Gift Code')?>" value="<?= /* @noEscape */ $block->getRequest()->getParam('gc')?>">
+                </td>
+                <td>
+                    <input type="text" class="input-text" name="gp" placeholder="<?= /* @noEscape */ __('Search by Price')?>" value="<?= /* @noEscape */ $block->getRequest()->getParam('gp')?>">
+                </td>
+                <td>
+                    <input type="text" class="input-text" name="gl" placeholder="<?= /* @noEscape */ __('Search by Left Amount')?>" value="<?= /* @noEscape */ $block->getRequest()->getParam('gl')?>">
+                </td>
+                <td><button class="button" title="<?= /* @noEscape */ __('Save')?>" type="submit"><span><span><span><?= /* @noEscape */ __('Submit')?></span></span></span></button></td>
+            </tr>
+        </tbody>
+    </table>
+</form>
+<?php if ($giftCardDetails && count($giftCardDetails)): ?>
+    <div class="table-wrapper">
+        <table class="data table" id="subaccount-list">
+            <thead>
+                <tr>
+                    <th scope="col" class="col customer-email"><?= /* @noEscape */ __('From') ?></th>
+                    <th scope="col" class="col customer-email"><?= /* @noEscape */ __('Gift Code') ?></th>
+                    <th scope="col" class="col customer-email"><?= /* @noEscape */ __('Price') ?></th>
+                    <th scope="col" class="col customer-email"><?= /* @noEscape */ __('Left Amount') ?></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                foreach ($giftCardDetails as $giftCardDetails):
+                    ?>
+                    <tr>
+                        <td class="col customer-email"><?= /* @noEscape */ $giftCardDetails->getFrom() ?></td>
+                        <td class="col customer-email"><?= /* @noEscape */ $giftCardDetails->getCode() ?></td>
+                        <td class="col customer-email"><?= /* @noEscape */ $getHelper->getCurrentCurrencySymbol().$giftCardDetails->getAmount() ?></td>
+                        <td class="col customer-email"><?= /* @noEscape */ $getHelper->getCurrentCurrencySymbol().$giftCardDetails->getRemainingAmt() ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+    <?php if ($block->getPagerHtml()): ?>
+        <div class="toolbar bottom"><?= /* @noEscape */ $block->getPagerHtml(); ?></div>
+    <?php endif ?>
+<?php else: ?>
+    <div class="message info empty"><span><?= /* @noEscape */ __('Sorry, No gift card available'); ?></span></div>
+<?php endif ?>
+
+<script type="text/x-magento-init">
+{
+    "*" : {
+        "approvecartlist": ""
+    }
+}
+</script>

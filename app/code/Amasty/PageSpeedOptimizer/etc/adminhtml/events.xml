@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_PageSpeedOptimizer
+ */
+-->
+        <!--
+        /**
+         * Copyright © Magento, Inc. All rights reserved.
+         * See COPYING.txt for license details.
+         */
+        -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="admin_system_config_changed_section_amoptimizer">
+        <observer name="toolsChecker" instance="Amasty\PageSpeedOptimizer\Observer\ToolsChecker" />
+        <observer name="queueCheck" instance="Amasty\PageSpeedOptimizer\Observer\Queue" />
+        <observer name="startBundling" instance="Amasty\PageSpeedOptimizer\Observer\Bundling" />
+    </event>
+</config>

@@ -1,0 +1,128 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_DailyDeal
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+/** @var \Mageplaza\DailyDeal\Block\Widget\FloatDeal $block */
+if ($block->isFloatEnable() && $block->isWidgetEnable()) {
+    $position      = $block->getPositionFloat() ? 'left: 10px' : '';
+    $items         = $block->getProductCollection();
+    if ($items && $items->getSize()): ?>
+        <div class="mpdailydeal-float-block" style="<?= /* @noEscape */ $position ?>">
+            <div class="mpdailydeal-title-float">
+                <span class="mpdailydeal-float-heading"><?= /* @noEscape */ $block->getBlockTitle()  ?></span>
+            </div>
+            <div id="float_close" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </div>
+            <div class="float-block-content">
+                <div class="products-grid grid">
+                    <ol class="mpdailydeal-product-items product-items widget-viewed-grid">
+                        <?php $iterator = 1; ?>
+                        <div id="mpdailydeal-list-items" class="owl-carousel owl-theme">
+                            <?php foreach ($items as $_item): ?>
+                                <?= ($iterator++ === 1)
+                                    ? '<li class="deal-product-item product-item">'
+                                    : '</li><li class="deal-product-item product-item"">'
+                                ?>
+                                <?php $productUrl = $block->getProductUrl($block->getParentConfigurableProduct($_item->getId())); ?>
+                                <div class="deal-product-item-info">
+                                    <a href="<?= /* @noEscape */ $productUrl ?>" class="product photo deal-product-item-photo">
+                                        <?= $block->getImage($_item, 'recently_viewed_products_grid_content_widget')->toHtml() ?>
+                                    </a>
+                                    <div class="product details deal-product-item-details">
+                                        <strong class="product name product-item-name float-name">
+                                            <a title="<?= /* @noEscape */ $_item->getName() ?>" href="<?= /* @noEscape */ $productUrl ?>">
+                                                <?= $block->escapeHtml($_item->getName()) ?>
+                                            </a>
+                                        </strong>
+                                        <?php $final_price = number_format($block->_helperData->getDealPrice($_item->getId()), 2); ?>
+                                        <span class="price">
+                                            <span class="price-box price-final_price"><?= /* @noEscape */ $block->getProductPrice($_item) ?></span>
+                                        </span>
+<!--                                        TODO: improve this-->
+                                        <div class="widget-qty-items" data-mage-init='{"qtyUpdate": <?= /* @noEscape */ $block->getQtyData($_item->getId()) ?>}'>
+                                        <?php if ($block->isWidgetShowRemainingItems()): ?>
+                                            <div class="widget-remaining-qty-item float-remain">
+                                                <span class="widget-qty" style="font-weight:bold"><?= $block->escapeHtml($block->getQtyRemain($_item->getId())) ?></span>
+                                                <span><?= /* @noEscape */ __('item(s) left') ?></span>
+                                            </div>
+                                        <?php endif; ?>
+                                        </div>
+                                        <?php if ($block->isWidgetShowSoldItems()): ?>
+                                            <div class="widget-sold-qty-item float-sold">
+                                                <span class="widget-qty" style="font-weight:bold"><?= $block->escapeHtml($block->getQtySold($_item->getId())) ?></span>
+                                                <span><?= /* @noEscape */ __('item(s) sold') ?></span>
+                                            </div>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                                <?= ($iterator === count($items) + 1) ? '</li>' : '' ?>
+                            <?php endforeach ?>
+                        </div>
+                        <?php if (!$block->isShowOnMobile()): ?>
+                            <style>
+                                @media (max-width: 768px) {
+                                    .mpdailydeal-float-block {
+                                        display: none;
+                                    }
+                                }
+                            </style>
+                        <?php endif; ?>
+                        <script>
+                            require(['jquery', 'mageplaza/core/owl.carousel'], function ($) {
+                                $('#mpdailydeal-list-items').owlCarousel(
+                                    {
+                                        items: 1,
+                                        loop:<?= ($items->getSize() === 1) ? 'false' : 'true' ?>,
+                                        margin: 0,
+                                        autoplay: true,
+                                        dots: false,
+                                        responsiveClass: true,
+                                        responsive: {
+                                            0: {
+                                                nav: false
+                                            },
+                                            600: {
+                                                nav: false
+                                            },
+                                            1000: {
+                                                nav: true,
+                                                navText: ["<", ">"]
+                                            }
+                                        }
+                                    }
+                                );
+
+                                var floatBlock = $('.mpdailydeal-float-block');
+                                <?php
+                                    $timeShowAgain = $block->getTimeShowAgain() * 1000;
+                                ?>
+                                $('#float_close').bind('click', function () {
+                                    floatBlock.hide("slow");
+                                    floatBlock.delay(<?= /* @noEscape */ $timeShowAgain ?>).fadeIn(500);
+                                });
+                            });
+                        </script>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+<?php } ?>

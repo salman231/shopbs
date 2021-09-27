@@ -1,0 +1,507 @@
+<?php
+$dataHelper = $this->helper("Ves\Megamenu\Helper\Data");
+$editor     = $this->helper("Ves\Megamenu\Helper\Editor");
+$enable_admin_ajax = $dataHelper->getConfig("general_settings/enable_admin_ajax");
+$menu       = $block->getMenu();
+$structure  = json_decode($menu->getStructure(), true);
+$menuItems  = $menu->getData('menuItems');
+
+$fields     = $this->getFields();
+$items      = [];
+if (is_array($structure)) {
+    foreach ($structure as $k => $v) {
+        $items[] = $this->renderMenuItem($v);
+    }
+}
+
+$mediaUrl = $block->getMediaUrl();
+$html     = json_encode($items);
+$icons    = $block->getIcons();
+$store_categories = [];
+if(!$enable_admin_ajax) {
+    $store_categories = $block->getStoreCategories();
+}
+$options  = [
+'items'                 => $items,
+'fields'                => $dataHelper->jsQuoteEscape($fields),
+'editor'                => json_encode($editor->getWysiwygConfig()),
+'storeCategories'       => $store_categories,
+'icons'                 => $icons,
+'ajaxSaveItemUrl'       => $block->getAjaxSaveItemUrl(),
+'ajaxSaveMenuUrl'       => $block->getAjaxSaveMenuUrl(),
+'ajaxImportCategoryUrl' => $block->getAjaxImportCategoryUrl(),
+'previewUrl'            => $block->getPreviewUrl(),
+'desktopTemplate'      => $menu->getDesktopTemplate()
+];
+
+$design = $menu->getDesign();
+if ($design) {
+    $design = unserialize($design);
+}
+?>
+<div class="child-translate slide">
+    <div class="btn-close"><i class="fa fa-remove" aria-hidden="true"></i></div>
+    <img src="<?php echo $mediaUrl . 'ves/megamenu/MEGAMENU.png' ?>" alt="img-preview"/>
+</div>
+<div id="megamenu-editor" data-bind="scope: 'megamenueditor'">
+    <div class="menu-top">
+        <button type="button" id="add-item" class="btn-add" data-bind="click: addItem"><i class="fa fa-plus" aria-hidden="true"></i><?php echo __('Add Menu Item'); ?></button>
+        <button type="button" id="load-category" data-bind="click: importStoreCategory"><i class="fa fa-cloud-upload" aria-hidden="true"></i><?php echo __('Import Store Category'); ?></button>
+        <button type="button" id="preview" data-bind="click: preview"><i class="fa fa-search" aria-hidden="true"></i><?php echo __('Preview'); ?></button>
+        <div id="nestable-menu">
+            <button type="button" data-action="expand-all"><?php echo __('Expand All'); ?></button>
+            <button type="button" data-action="collapse-all"><?php echo __('Collapse All'); ?></button>
+        </div>
+
+        <div class="menu_type">
+            <button type="button" class="_active" data-bind="event: { click: setMenuType('vertical') }, css: { _active: 'vertical' == modeClass() }">
+                <?php echo __('Vertical'); ?>
+            </button>
+            <button type="button" data-bind="event: { click: setMenuType('horizontal') }, css: { _active: 'horizontal' == modeClass() }">
+                <?php echo __('Horizontal'); ?>
+            </button>
+        </div>
+    </div>
+
+    <div data-bind="attr: {class:  'cf nestable-lists ' + modeClass()}">
+        <div class="dd" id="nestable" data-bind="visible: items().length > 0">
+            <ol class="dd-list" data-bind="style: { width: 'horizontal' == modeClass() ? $data.sub_width : '' }, template: { name: 'treeElement', foreach: items }"></ol>
+        </div>
+        <div class="megamenu-editor" data-bind="visible: editorVisible && items().length > 0">
+            <div class="control-group" data-bind="with: itemForEditing">
+                <div class="controls" style="margin-bottom: 5px;width: 100%;">
+                    <button class="btn btn-save" data-bind="click: $parents[$parents.length-2].acceptItem"><i class="fa fa-floppy-o" aria-hidden="true"></i><?php echo __('Update'); ?></button>
+                    <button class="btn btn-delete" data-bind="click: $parents[$parents.length-2].removeItem"><i class="fa fa-trash" aria-hidden="true"></i><?php echo __('Delete'); ?></button>
+                    <button class="btn btn-cancel" data-bind="click: $parents[$parents.length-2].revertItem"><i class="fa fa-times" aria-hidden="true"></i><?php echo __('Cancel'); ?></button>
+                    <button class="btn item-structure" onclick="javascript:void(0);"><i class="fa fa-search" aria-hidden="true"></i><?php echo __('Structure Preview'); ?></button>
+                </div>
+            </div>
+            <div id="megamenu-editor1" class="megamenu-editor1 ves-field-list">
+                <?php
+                $i           = 0;
+                $hasFieldset = false;
+                $count       = count($fields);
+                $fieldList   = array_values($fields);
+                ?>
+                <?php $z = 0; ?>
+                <?php foreach ($fieldList as $k => $v) { ?>
+                <?php // FIELD SET + Accordion ?>
+                <?php if ($v['type'] == 'fieldset') { ?>
+                <?php
+                $fieldSetId  = $v['name'] . '-heading';
+                $hasFieldset = true;
+                ?>
+                <div class="ves-fieldset <?php echo $fieldSetId; ?> <?php echo (($z%2==0) ? 'even' : 'old') ?>">
+                    <div data-role="title" id="<?php echo $fieldSetId ?>" class="ves-fieldset-title" data-bind="click: loadCollapsible.bind($data, '#<?php echo $fieldSetId ?>')"><?php echo $v['label'] ?></div>
+                    <div data-role="content" class="ves-fieldset-content">
+                        <?php $z++; ?>
+                        <?php } ?>
+
+                        <?php if($v['type'] != 'fieldset'){ ?>
+                        <div class="control-group editor-field-<?php echo $v['name']; ?> <?php echo isset($v['class'])?$v['class']:'' ?>" data-bind="with: itemForEditing">
+                            <?php if($v['label']){ ?>
+                            <label class="control-label" for="option-<?php echo $k; ?>"><?php echo $v['label'] ?></label>
+                            <?php } ?>
+                            <div class="controls">
+                                <?php echo $editor->renderCellTemplate($v['name']) ?>
+                            </div>
+                        </div>
+                        <?php } ?>
+                        <?php // FIELD SET + Accordion ?>
+                        <?php if($hasFieldset && ( (isset($fieldList[$i+1]) && $fieldList[$i+1]['type'] == 'fieldset') || $i == ($count-1))){ ?>
+                    </div><!-- End Content -->
+                </div><!-- End Fieldset -->
+                <?php } ?>
+                <?php $i++; ?> 
+                <?php } ?>
+            </div>
+            <div class="control-group" data-bind="with: itemForEditing">
+                <div class="controls" style="margin-bottom: 5px;width: 100%;">
+                    <button class="btn btn-save" data-bind="click: $parents[$parents.length-2].acceptItem"><i class="fa fa-floppy-o" aria-hidden="true"></i><?php echo __('Update'); ?></button>
+                    <button class="btn btn-delete" data-bind="click: $parents[$parents.length-2].removeItem"><i class="fa fa-trash" aria-hidden="true"></i><?php echo __('Delete'); ?></button>
+                    <button class="btn btn-cancel" data-bind="click: $parents[$parents.length-2].revertItem"><i class="fa fa-times" aria-hidden="true"></i><?php echo __('Cancel'); ?></button>
+                    <button class="btn item-structure" onclick="javascript:void(0);"><i class="fa fa-search" aria-hidden="true"></i><?php echo __('Structure Preview'); ?></button>
+                </div>
+            </div>
+        </div>
+        <div class="design-overlay"></div>
+    </div>
+    <textarea id="nestable-output" name="structure" style="display:none"><?php echo $menu->getStructure(); ?></textarea>
+    <div id="icon-form">
+        <div id="icon-search">
+            <div class="search-wrapper">
+                <i class="fa fa-search" aria-hidden="true"></i>
+                <input type="text" placeholder="<?php echo __('Search Icon'); ?>">
+            </div>
+        </div>
+        <div class="icons-container">
+            <ol class="icon-list" data-bind="template: { name: 'icon', foreach: icons }"></ol>
+        </div>
+    </div>
+    <div id="preview-form">
+        <div class="preview-wrapper">
+            <div class="preview-devices">
+                <input type="radio" data-bind="checked: devices" name="device" checked value="1280px" id="preview-desktop">
+                <label for="preview-desktop"><?php echo __('Desktop(1280px)') ?></label>
+                <input type="radio" data-bind="checked: devices" name="device" value="1024px" id="preview-table-landscape">
+                <label for="preview-table-landscape"><?php echo __('Tablet Landscape (1024px)') ?></label>
+                <input type="radio" data-bind="checked: devices" name="device" value="768px" id="preview-table-portrait">
+                <label for="preview-table-portrait"><?php echo __('Tablet Portrait (768px)') ?></label>
+                <input type="radio" data-bind="checked: devices" name="device" value="480px" id="preview-mobile-landscape">
+                <label for="preview-mobile-landscape"><?php echo __('Mobile Landscape (480x320)') ?></label>
+                <input type="radio" data-bind="checked: devices" name="device" value="320px" id="preview-mobile-portrait">
+                <label for="preview-mobile-portrait"><?php echo __('Mobile Portrait (320x480)') ?></label>
+            </div>
+            <div class="preview-option">
+                <?php echo $editor->getStoreHtml(); ?>
+                <button data-bind="click: previewMenu"><?php echo __('Load') ?></button>
+            </div>
+        </div>
+        <iframe id="myiFrame" data-bind="style: {width: devices}, attr: {class: devices}" width="100%" height="480" data-src="<?php echo $block->getPreviewUrl() ?>" src=""></iframe>
+        <div class="ves-spinner" data-bind="visible: loading">
+            <div class="animation-1">
+                <div class="box1"></div>
+                <div class="box2"></div>
+                <div class="box3"></div>
+                <div class="box4"></div>
+            </div>
+            <div class="spinner-overlay"></div>
+        </div>
+    </div>
+    <div id="import-form">
+        <fieldset class="fieldset admin__fieldset ">
+            <div class="admin__field field " data-ui-id="import-wordress-form-fieldset-element-form-field-import-categories">
+                <label class="label admin__field-label" for="blogimport_import_categories" data-ui-id="import-wordress-form-fieldset-element-select-import-categories-label"><span><?php echo __('Category'); ?></span></label>
+                <div class="admin__field-control control" id="loadStoreCategories">
+                    <?php 
+                    if(!$enable_admin_ajax) { 
+                        echo $editor->getCategoriesHtml();
+                    }
+                    ?>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset class="fieldset admin__fieldset ">
+            <div class="admin__field field " data-ui-id="import-wordress-form-fieldset-element-form-field-import-categories">
+                <label class="label admin__field-label" for="blogimport_import_categories" data-ui-id="import-wordress-form-fieldset-element-select-import-categories-label"><span><?php echo __('Only Import Subcategories') ?></span></label>
+                <div class="admin__field-control control">
+                    <select data-bind="value: importsubcategries">
+                        <option value="1"><?php echo __('Yes') ?></option>
+                        <option value="0"><?php echo __('No') ?></option>
+                    </select>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset class="fieldset admin__fieldset " style="display: none">
+            <div class="admin__field field " data-ui-id="import-wordress-form-fieldset-element-form-field-import-categories">
+                <label class="label admin__field-label" for="blogimport_import_categories" data-ui-id="import-wordress-form-fieldset-element-select-import-categories-label"><span><?php echo __('Import Sub-categories Level') ?></span></label>
+                <div class="admin__field-control control">
+                    <input type="text" data-bind="value: menulevel">
+                </div>
+            </div>
+        </fieldset>
+        <fieldset class="fieldset admin__fieldset " style="display: none">
+            <div class="admin__field field " data-ui-id="import-wordress-form-fieldset-element-form-field-import-categories">
+                <label class="label admin__field-label" for="blogimport_index_from" data-ui-id="import-wordress-form-fieldset-element-select-import-categories-label"><span><?php echo __('Import From Item Index') ?></span></label>
+                <div class="admin__field-control control">
+                    <input type="text" data-bind="value: startindex">
+                </div>
+            </div>
+        </fieldset>
+        <fieldset class="fieldset admin__fieldset " style="display: none">
+            <div class="admin__field field " data-ui-id="import-wordress-form-fieldset-element-form-field-import-categories">
+                <label class="label admin__field-label" for="blogimport_index_to" data-ui-id="import-wordress-form-fieldset-element-select-import-categories-label"><span><?php echo __('Import To Item Index') ?></span></label>
+                <div class="admin__field-control control">
+                    <input type="text" data-bind="value: endindex">
+                </div>
+            </div>
+        </fieldset>
+        <fieldset class="fieldset admin__fieldset ">
+            <div class="admin__field field " data-ui-id="import-wordress-form-fieldset-element-form-field-import-categories">
+                <label class="label admin__field-label" for="blogimport_import_categories" data-ui-id="import-wordress-form-fieldset-element-select-import-categories-label"><span></span></label>
+                <div class="admin__field-control control">
+                    <button class="btn-import" data-bind="click: importSubCategory"><?php echo __('Import'); ?></button>
+                </div>
+            </div>
+        </fieldset>
+        <div class="ves-spinner" data-bind="visible: loading">
+            <div class="animation-1">
+                <div class="box1"></div>
+                <div class="box2"></div>
+                <div class="box3"></div>
+                <div class="box4"></div>
+            </div>
+            <div class="spinner-overlay"></div>
+        </div>
+    </div>
+    <div class="ves-spinner" data-bind="visible: loading">
+        <div class="animation-1">
+            <div class="box1"></div>
+            <div class="box2"></div>
+            <div class="box3"></div>
+            <div class="box4"></div>
+        </div>
+        <div class="spinner-overlay"></div>
+    </div>
+    <div class="menu-design">
+        <div class="design_margin">
+            <label><?php echo __('Margin'); ?></label>
+            <input type="text" name="design[margin_top]" class="design_top" data-name="margin-top" data-bind="event:{ change: changeDesign }" placeholder="-" data-attribute="margin" value="<?php echo isset($design['margin_top'])?$design['margin_top']:'' ?>">
+            <input type="text" name="design[margin_right]" class="design_right" data-name="margin-right" data-bind="event:{ change: changeDesign }" placeholder="-" data-attribute="margin" value="<?php echo isset($design['margin_right'])?$design['margin_right']:'' ?>">
+            <input type="text" name="design[margin_bottom]" class="design_bottom" data-name="margin-bottom" data-bind="event:{ change: changeDesign }" placeholder="-" data-attribute="margin" value="<?php echo isset($design['margin_bottom'])?$design['margin_bottom']:'' ?>">
+            <input type="text" name="design[margin_left]" class="design_left" data-name="margin-left" data-bind="event:{ change: changeDesign }" placeholder="-" data-attribute="margin" value="<?php echo isset($design['margin_left'])?$design['margin_left']:'' ?>">
+            <select class=" select admin__control-select margin-units" data-name="margin" name="design[margin_units]" data-bind="event:{ change: changeUnit }">
+                <option value="px" <?php echo (isset($design['margin_units']) && $design['margin_units'] =='px' ) ? 'selected' : '' ?>>px</option>
+                <option value="em" <?php echo (isset($design['margin_units']) && $design['margin_units'] =='em' ) ? 'selected' : '' ?>>em</option>
+                <option value="%" <?php echo (isset($design['margin_units']) && $design['margin_units'] =='%' ) ? 'selected' : '' ?>>%</option>
+            </select>      
+            <div class="design_border">
+                <label><?php echo __('Border'); ?></label>
+                <input type="text" name="design[border_top_width]" class="design_top" class="design_top" data-bind="event:{ change: changeDesign }" placeholder="-" data-name="border-top-width" data-attribute="border" value="<?php echo isset($design['border_top_width'])?$design['border_top_width']:'' ?>">
+                <input type="text" name="design[border_right_width]" class="design_right" data-bind="event:{ change: changeDesign }" placeholder="-" data-name="border-right-width" data-attribute="border" value="<?php echo isset($design['border_right_width'])?$design['border_right_width']:'' ?>">
+                <input type="text" name="design[border_bottom_width]" class="design_bottom" data-bind="event:{ change: changeDesign }" placeholder="-" data-name="border-bottom-width" data-attribute="border" value="<?php echo isset($design['border_bottom_width'])?$design['border_bottom_width']:'' ?>">
+                <input type="text" name="design[border_left_width]" class="design_left" data-bind="event:{ change: changeDesign }" placeholder="-" data-name="border-left-width" data-attribute="border" value="<?php echo isset($design['border_left_width'])?$design['border_left_width']:'' ?>">
+                <select class=" select admin__control-select border-units" data-bind="event:{ change: changeUnit }" data-name="border" name="design[border_units]">
+                    <option value="px" <?php echo (isset($design['border_units']) && $design['border_units'] =='px' ) ? 'selected' : '' ?>>px</option>
+                    <option value="em" <?php echo (isset($design['border_units']) && $design['border_units'] =='em' ) ? 'selected' : '' ?>>em</option>
+                </select>
+                <div class="design_padding">
+                    <label><?php echo __('Padding'); ?></label>
+                    <input type="text" name="design[padding_top]" class="design_top" placeholder="-" data-bind="event:{ change: changeDesign }" data-name="padding-top"  data-attribute="padding" value="<?php echo isset($design['padding_top'])?$design['padding_top']:'' ?>">
+                    <input type="text" name="design[padding_right]" class="design_right" placeholder="-" data-bind="event:{ change: changeDesign }" data-name="padding-right" data-attribute="padding" value="<?php echo isset($design['padding_right'])?$design['padding_right']:'' ?>">
+                    <input type="text" name="design[padding_bottom]" class="design_bottom" placeholder="-" data-bind="event:{ change: changeDesign }" data-name="padding-bottom" data-attribute="padding" value="<?php echo isset($design['padding_bottom'])?$design['padding_bottom']:'' ?>">
+                    <input type="text" name="design[padding_left]" class="design_left" placeholder="-" data-name="padding-left" data-bind="event:{ change: changeDesign }" data-attribute="padding" value="<?php echo isset($design['padding_left'])?$design['padding_left']:'' ?>">
+                    <div class="design_content">
+                        <select class=" select admin__control-select padding-units" data-name="padding" name="design[padding_units]" data-bind="event:{ change: changeUnit }">
+                            <option value="px" <?php echo (isset($design['padding_units']) && $design['padding_units'] =='px' ) ? 'selected' : '' ?>>px</option>
+                            <option value="em" <?php echo (isset($design['padding_units']) && $design['padding_units'] =='em' ) ? 'selected' : '' ?>>em</option>
+                            <option value="%" <?php echo (isset($design['padding_units']) && $design['padding_units'] =='%' ) ? 'selected' : '' ?>>%</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="design_settings admin__scope-old">
+            <div class="admin__field field form-inline">
+                <label class="label admin__field-label" for="menu_width"><span><?php echo __('Width'); ?></span></label>
+                <div class="admin__field-control control">
+                    <input id="menu_width" name="design[width]" data-bind="event:{ change: changeDesign }" class="input-text admin__control-text" title="<?php echo __('Width') ?>" data-name="width" type="text" value="<?php echo isset($design['width'])?$design['width']:'' ?>" style="width: 152px;">
+                </div>
+            </div>
+            <div class="admin__field field form-inline">
+                <label class="label admin__field-label" for="menu_border_color"><span><?php echo __('Border color'); ?></span></label>
+                <div class="admin__field-control control">
+                    <input id="menu_border_color" name="design[border_color]" class="minicolor input-text admin__control-text" title="<?php echo __('Border Color') ?>" data-name="border-color" data-bind="event:{ change: changeDesign }" type="text" value="<?php echo isset($design['border_color'])?$design['border_color']:'' ?>" style="width: 152px;">
+                </div>
+            </div>
+            <div class="admin__field field form-inline">
+                <label class="label admin__field-label" for="menu_border_style"><span><?php echo __('Border Style'); ?></span></label>
+                <div class="admin__field-control control">
+                    <?php $borderStyles = $block->getBorderStyles(); ?>
+                    <select id="menu_border_style" name="design[border_style]" data-name="border-style" data-bind="event:{ change: changeDesign }" >
+                        <?php foreach ($borderStyles as $type) { ?>
+                        <option value="<?php echo $type['value'] ?>" <?php echo (isset($design['border_style']) && $type['value']==$design['border_style']) ? 'selected' : '' ?>><?php echo $type['label'] ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+            </div>
+            <div class="admin__field field form-inline">
+                <label class="label admin__field-label" for="menu_background"><span><?php echo __('Background color'); ?></span></label>
+                <div class="admin__field-control control">
+                    <input id="menu_background" name="design[background]" data-bind="event:{ change: changeDesign }" data-name="background-color" class="minicolor input-text admin__control-text" title="<?php echo __('Background') ?>" type="text" value="<?php echo isset($design['background'])?$design['background']:'' ?>" style="width: 152px;">
+                </div>
+            </div>
+            <div class="admin__field field form-inline boxshadow-options">
+                <label class="label admin__field-label"><span><?php echo __('Box Shadow'); ?></span></label>
+                <div class="admin__field-control control">
+                    <select class=" select admin__control-select boxshadow-units" name="design[boxshadow_units]" data-name="borderradius" data-bind="event:{ change: changeBoxShadow }">
+                        <option value="px" <?php echo (isset($design['boxshadow_units']) && $design['boxshadow_units'] =='px' ) ? 'selected' : '' ?>>px</option>
+                        <option value="em" <?php echo (isset($design['boxshadow_units']) && $design['boxshadow_units'] =='em' ) ? 'selected' : '' ?>>em</option>
+                    </select>
+                    <div class="boxshadow-inset <?php echo (isset($design['boxshadow_inset']) && $design['boxshadow_inset']) ? 'active':'' ?>"><?php echo __('inset'); ?></div>
+                    <input id="boxshadow_inset" name="design[boxshadow_inset]" class="input-text admin__control-text" type="hidden" value="<?php echo isset($design['boxshadow_inset'])?$design['boxshadow_inset']:'0' ?>">
+                    <div class="boxshadow-text">X</div>
+                    <input id="boxshadow_x" name="design[boxshadow_x]" title="<?php echo __('Boxshadow X') ?>" data-bind="event:{ change: changeBoxShadow }" class="input-text admin__control-text" type="text" value="<?php echo isset($design['boxshadow_x'])?$design['boxshadow_x']:'0' ?>">
+                    <div class="boxshadow-text">X</div>
+                    <input id="boxshadow_y" name="design[boxshadow_y]" title="<?php echo __('Boxshadow Y') ?>" data-bind="event:{ change: changeBoxShadow }" class="input-text admin__control-text" type="text" value="<?php echo isset($design['boxshadow_y'])?$design['boxshadow_y']:'0' ?>">
+                    <div class="boxshadow-text"><?php echo __('Blur') ?></div>
+                    <input id="boxshadow_blur" name="design[boxshadow_blur]" data-bind="event:{ change: changeBoxShadow }" class="input-text admin__control-text" type="text" title="<?php echo __('Boxshadow Blur') ?>" value="<?php echo isset($design['boxshadow_blur'])?$design['boxshadow_blur']:'0' ?>">
+                    <div class="boxshadow-text"><?php echo __('Spread') ?></div>
+                    <input id="boxshadow_spread" name="design[boxshadow_spread]" data-bind="event:{ change: changeBoxShadow }" class="input-text admin__control-text"  type="text" title="<?php echo __('Boxshadow Spread') ?>" value="<?php echo isset($design['boxshadow_spread'])?$design['boxshadow_spread']:'0' ?>">
+                    <input id="boxshadow_color" name="design[boxshadow_color]" data-bind="event:{ change: changeBoxShadow }" class="minicolor input-text admin__control-text" title="<?php echo __('Boxshadow Color') ?>" type="text" value="<?php echo isset($design['boxshadow_color'])?$design['boxshadow_color']:'' ?>">
+                </div>
+            </div>
+            <div class="admin__field field form-inline">
+                <label class="label admin__field-label" for="font_size"><span><?php echo __('Font Size'); ?></span></label>
+                <div class="admin__field-control control">
+                    <input id="font_size" name="design[font_size]" class="input-text admin__control-text" title="<?php echo __('Font Size') ?>" value="<?php echo isset($design['font_size'])?$design['font_size']:'' ?>">
+                </div>
+            </div>
+            <div class="admin__field field form-inline">
+                <label class="label admin__field-label" for="font_group"><span><?php echo __('Font Family'); ?></span></label>
+                <div class="admin__field-control control">
+                    <select id="font_group" class=" select admin__control-select boxshadow-units" name="design[font_group]">
+                        <?php foreach ($block->getFontGroup() as $group) { ?>
+                        <option value="<?php echo $group['value'] ?>" <?php echo (isset($design['font_group']) && $design['font_group'] == $group['value'] ) ? 'selected' : '' ?>><?php echo $group['label'] ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+            </div>
+            <div class="admin__field field form-inline font_custom">
+                <label class="label admin__field-label" for="font_custom"><span><?php echo __('Custom'); ?></span></label>
+                <div class="admin__field-control control">
+                    <input id="font_custom" name="design[font_custom]" class="input-text admin__control-text" title="<?php echo __('Custom') ?>" type="text" value="<?php echo isset($design['font_custom'])?$design['font_custom']:'' ?>">
+                    <p class="note"><span><?php echo __('Type in your custom font stack, e.g.:<br><em>Arial, "Helvetica Neue", Helvetica, sans-serif</em>.<br><strong>Important</strong>: Do not add trailing semicolon.'); ?></span></p>
+                </div>
+            </div>
+            <div class="admin__field field form-inline font_google">
+                <label class="label admin__field-label" for="font_google"><span><?php echo __('Google Font'); ?></span></label>
+                <div class="admin__field-control control">
+                    <select id="font_google" class=" select admin__control-select boxshadow-units" name="design[font_google]" style="width: 100%;">
+                        <?php foreach ($block->getGoogleFonts() as $font) { ?>
+                        <option value="<?php echo $font['value'] ?>" <?php echo (isset($design['font_google']) && $design['font_google'] == $font['value'] ) ? 'selected' : '' ?>><?php echo $font['label'] ?></option>
+                        <?php } ?>
+                    </select>
+                    <p class="note"><span><?php echo __('Font preview is available on <a href="http://www.google.com/webfonts">Google Web Fonts</a><br><strong style="color:red;">Important</strong>: most of the fonts from Google are not available in all weights. Make sure that you specified correct weight (field <strong>Font Weight</strong> below) for selected font. Otherwise font will not be displayed. Refer to <a href="http://www.google.com/webfonts">Google Web Fonts</a> to check if the selected weight is available for your font.'); ?></span></p>
+                </div>
+            </div>
+            <div class="admin__field field form-inline font_char_subset">
+                <label class="label admin__field-label" for="font_char_subset"><span><?php echo __('Character Sets'); ?></span></label>
+                <div class="admin__field-control control">
+                    <select id="font_char_subset" class=" select admin__control-select boxshadow-units" name="design[font_char_subset]" style="width: 100%;">
+                        <?php foreach ($block->getCharSubsets() as $font) { ?>
+                        <option value="<?php echo $font['value'] ?>" <?php echo (isset($design['font_char_subset']) && $design['font_char_subset'] == $font['value'] ) ? 'selected' : '' ?>><?php echo $font['label'] ?></option>
+                        <?php } ?>
+                    </select>
+                    <p class="note"><span><?php echo __('Some of the fonts support multiple scripts (like Latin and Cyrillic for example). You need to select at least one character set.<br><strong style="color:red;">Important</strong>: not all fonts support extended character sets. For a complete list of available fonts and font subsets refer to <a href="http://www.google.com/webfonts">Google Web Fonts</a>.<br><strong style="color:red;">Important</strong>: using multiple character sets affects performance, so only select the character sets that you actually need.'); ?></span></p>
+                </div>
+            </div>
+            <div class="admin__field field form-inline">
+                <label class="label admin__field-label" for="font_weight"><span><?php echo __('Font Weight'); ?></span></label>
+                <div class="admin__field-control control">
+                    <input id="font_weight" name="design[font_weight]" class="input-text admin__control-text" title="<?php echo __('Font Weight') ?>" type="text" value="<?php echo isset($design['font_weight'])?$design['font_weight']:'' ?>">
+                    <p class="note"><?php echo __('Specify the weight of the font. You can only use <strong>numeric font weights</strong> which are available for the CSS property <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight"><em>font-weight</em></a>. E.g. normal weight is <em>400</em>, bold is <em>700</em>. Leave empty to use default weight.<br><strong style="color:red;">Important</strong>: if you selected a font from Google Fonts, note that some fonts are not available in all weights. Refer to <a href="http://www.google.com/webfonts">Google Web Fonts</a> to check if the selected weight is available for your font.'); ?></p>
+                </div>
+            </div>
+            <div class="admin__field field form-inline">
+                <label class="label admin__field-label" style="width: 100% !important;text-align: center;margin-bottom: 10px;"><span><?php echo __('Border Radius'); ?></span></label>
+                <div class="design_margin design_borderradius" style="height: 210px; background: #f6f6f6">
+                    <input type="text" name="design[border_top_left_radius]" class="design_top input1" data-name="border-top-left-radius" placeholder="-" data-attribute="borderradius" value="<?php echo isset($design['border_top_left_radius'])?$design['border_top_left_radius']:'' ?>" data-bind="event:{ change: changeDesign }">
+                    <input type="text" name="design[border_top_right_radius]" class="design_right input2" data-name="border-top-right-radius" placeholder="-" data-attribute="borderradius" value="<?php echo isset($design['border_top_right_radius'])?$design['border_top_right_radius']:'' ?>" data-bind="event:{ change: changeDesign }">
+                    <input type="text" name="design[border_bottom_right_radius]" class="design_bottom input3" data-name="border-bottom-right-radius" placeholder="-" data-attribute="borderradius" value="<?php echo isset($design['border_bottom_right_radius'])?$design['border_bottom_right_radius']:'' ?>" data-bind="event:{ change: changeDesign }">
+                    <input type="text" name="design[border_bottom_left_radius]" class="design_left input4" data-name="border-bottom-left-radius" placeholder="-" data-attribute="borderradius" value="<?php echo isset($design['border_bottom_left_radius'])?$design['border_bottom_left_radius']:'' ?>" data-bind="event:{ change: changeDesign }">
+                    <div class="design_content">
+                        <select class=" select admin__control-select borderradius-units" name="design[radius_units]" data-name="borderradius" data-bind="event:{ change: changeUnit }">
+                            <option value="px" <?php echo (isset($design['padding_units']) && $design['padding_units'] =='px' ) ? 'selected' : '' ?>>px</option>
+                            <option value="em" <?php echo (isset($design['padding_units']) && $design['padding_units'] =='em' ) ? 'selected' : '' ?>>em</option>
+                            <option value="%" <?php echo (isset($design['padding_units']) && $design['padding_units'] =='%' ) ? 'selected' : '' ?>>%</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script id="icon" type="text/html">
+    <li class="icon-item">
+        <i data-bind="attr: {'class': 'fa ' + value, 'data-title': value, 'id': 'icon' + value}, click: $parents[$parents.length-2].selectIcon"></i>
+    </li>
+</script>
+<script id="treeElement" type="text/html">
+    <li class="dd-item" data-bind="attr: {'data-id': item_id, 'id': $data.item_id, class: 'dd-item parent-align' + $data.align() }" >
+        <div class="btn-wrapper">
+            <div class="editor-btns">
+                <div class="editor-btn btn-edit" data-bind="click: $parents[$parents.length-2].btnSelectItem"><i class="fa fa-pencil" aria-hidden="true"></i></div>
+                <div class="editor-btn btn-remove" data-bind="click: $parents[$parents.length-2].removeItem"><i class="fa fa-trash" aria-hidden="true"></i></div>
+                <div class="editor-btn btn1 btn-add" data-title="<?php echo __('Append New Item'); ?>" data-bind="click: $parents[$parents.length-2].addAppendChild, bootstrapTooltip: 'vesTooltip'"><i class="fa fa-sort-numeric-desc"></i></div>
+                <div class="editor-btn btn2 btn-add" data-title="<?php echo __('Prepend New Item'); ?>" data-bind="click: $parents[$parents.length-2].addPrependChild, bootstrapTooltip: 'vesTooltip'"><i class="fa fa-sort-numeric-asc"></i></div>
+            </div>
+        </div>
+        <div class="dd-handle"><span class="item-name" data-bind="html: name"></span></div>
+        <ol class="dd-list" data-bind="style: { width: 'horizontal' == $parents[$parents.length-2].modeClass() ? sub_width : '' }, template: { name: 'treeElement', foreach: children }, attr: {class: 'dd-list ' + $data.content_type() + ' ves-column' + $data.child_col() + ' level' + $parents.length + ' ' + ($data.is_group() == 1 ? 'subgroup':'subhover') + ' dropdown-align' + $data.align() }"></ol>
+    </li>
+</script>
+<script>
+    <?php if($enable_admin_ajax) { ?>
+    var store_categories = [];
+    var _list_category_options = '';
+    var _tree_categories_html = '';
+    var ajax_load_categories = "<?php echo $this->getUrl("vesmegamenu/menu/ajaxGetCategories"); ?>";
+    <?php } ?>
+    window.megamenu = <?php echo \Zend_Json::encode($options); ?>;
+</script>
+<script>
+    require(['jquery'], function($) {
+        jQuery(document).ready(function($) {
+            $("body").append("<div class='ves-notify'></div>");
+            $(document).on('click', '.item-structure', function(e){
+                $( '.slide' ).toggleClass("in");
+                return false;
+            });
+            $(document).on('click', '.btn-close', function(e){
+                $( '.slide' ).toggleClass("in");
+                return false;
+            });
+            $(document).on('click', '.boxshadow-inset', function() {
+                $('#boxshadow_inset').val(1);
+                if ($(this).hasClass('active')) {
+                    $('#boxshadow_inset').val(0);
+                }
+                $(this).toggleClass('active');
+                $('.boxshadow-options input').trigger('change');
+            });
+
+            $(document).on('change', '#font_group', function() {
+                var val = $(this).val();
+                if (val == 'custom') {
+                    $('.font_custom').show();
+                } else {
+                    $('.font_custom').hide();
+                }
+                if (val == 'google') {
+                    $('.font_google, .font_char_subset').show();
+                } else {
+                    $('.font_google, .font_char_subset').hide();
+                }
+            }).change();
+            <?php if($enable_admin_ajax) { ?>
+            $.ajax({
+                url: ajax_load_categories,
+                method: "GET",
+                cache: true,
+                dataType: 'json',
+                beforeSend: function(){
+                    $(".ves-spinner").show();
+                    console.log("\n - Before send ajax load categories...");
+                },
+                success: function(dataResponse){
+                    store_categories = window.megamenu.storeCategories = dataResponse.store_categories;
+                    _tree_categories_html = '<select data-bind="value: loadcategory">';
+                    _tree_categories_html += dataResponse.tree_html;
+                    _tree_categories_html += '</select>';
+                    _list_category_options = dataResponse.tree_html;
+                    $("#loadStoreCategories").html(_tree_categories_html);
+                    $("#option-category").html(_list_category_options);
+                    $("#option-parentcat").html(_list_category_options);
+                    $(".ves-spinner").hide();
+                    console.log("\n - Completely ajax load categories...");
+                }
+            });
+            <?php } ?>
+        });
+    });
+</script>
+<script type="text/x-magento-init">
+    {
+    "*": {
+        "Magento_Ui/js/core/app": {
+            "components": {
+                "megamenueditor": {
+                "component": "Ves_Megamenu/js/editor",
+                    "provider": "megamenueditor"
+                }
+            }
+        }
+    }
+}
+</script>

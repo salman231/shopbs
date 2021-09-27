@@ -1,0 +1,98 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_DailyDeal
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+const STYLE = [
+    'style1' => [
+        'number_color' => '#eb5202',
+        'text_color'   => '#eb5202',
+        'outer_color'  => '#ffffff',
+        'inner_color'  => '',
+    ],
+    'style2' => [
+        'number_color' => '#ffffff',
+        'text_color'   => '#ffffff',
+        'outer_color'  => '#846add',
+        'inner_color'  => '',
+    ],
+    'style3' => [
+        'number_color' => '#ffffff',
+        'text_color'   => '#ffffff',
+        'outer_color'  => '#333333',
+        'inner_color'  => '',
+    ],
+    'style4' => [
+        'number_color' => '#ffffff',
+        'text_color'   => '#ffffff',
+        'outer_color'  => '#00BF96',
+        'inner_color'  => '#00816A',
+    ],
+    'style5' => [
+        'number_color' => '#111111',
+        'text_color'   => '#f47321',
+        'outer_color'  => '#222222',
+        'inner_color'  => '#dddddd',
+    ],
+];
+$style = Mageplaza\DailyDeal\Helper\Data::jsonEncode(STYLE);
+?>
+<script type="text/javascript">
+    require(["jquery"], function ($) {
+        "use strict";
+        $(function () {
+            var clockStyleBefore = $("#dailydeal_general_countdown_timer_clock_style");
+            depends(<?= /* @noEscape */  $style ?>);
+
+            function depends (style) {
+                clockStyleBefore.on("change", function () {
+                    switch ($(this).val()){
+                        case 'deal_style_1':
+                            setFieldBeforeCss(style.style1);
+                            break;
+                        case 'deal_style_2':
+                            setFieldBeforeCss(style.style2);
+                            break;
+                        case 'deal_style_3':
+                            setFieldBeforeCss(style.style3);
+                            break;
+                        case 'deal_style_4':
+                            setFieldBeforeCss(style.style4);
+                            break;
+                        case 'deal_style_5':
+                            setFieldBeforeCss(style.style5);
+                            break;
+                    }
+                });
+            }
+
+            function setFieldBeforeCss (style) {
+                processColorField($('#dailydeal_general_countdown_timer_countdown_number'), style.number_color);
+                processColorField($('#dailydeal_general_countdown_timer_countdown_text'), style.text_color);
+                processColorField($('#dailydeal_general_countdown_timer_countdown_outer_color'), style.outer_color);
+                processColorField($('#dailydeal_general_countdown_timer_countdown_inner_color'), style.inner_color);
+            }
+
+            function processColorField (element, style) {
+                element.css('background-color', style);
+                element.val(style).trigger("change");
+            }
+        });
+    });
+</script>

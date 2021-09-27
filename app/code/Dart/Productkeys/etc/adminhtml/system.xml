@@ -1,0 +1,71 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Dart_Productkeys Admin Config
+ *
+ * @package		Dart_Productkeys
+ *
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<tab id="dart" sortOrder="5">
+			<label>Dart</label>
+		</tab>
+		<section id="productkeys" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+			<class>separator-top</class>
+			<label>Product Keys</label>
+			<tab>dart</tab>
+			<resource>Dart_Productkeys::productkeys_config</resource>
+			<group id="general" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>General Configuration</label>
+				<field id="issue_invoice" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Issue When Invoiced</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<comment>Enable automatic issuing of productkeys to order when invoiced and paid.</comment>
+				</field>
+				<field id="productkeys_updatestock" type="select" sortOrder="3" showInDefault="1">
+					<label>Update Product Quantity and Stock</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<comment>Update product quantity and stock status based on number of productkeys available.</comment>
+				</field>
+				<field id="productkeys_type" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Product Key Type</label>
+					<comment>Sent as title along with keys (e.g. License Key, Activation Key). Defaults to "Productkey", if left empty.</comment>
+				</field>
+				<field id="productkeys_not_available" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Not Available Message</label>
+					<comment>Message displayed to customer when no productkeys are available to issue. Defaults to "Oops! No Productkey Available right now. Please call or email." if left empty.</comment>
+				</field>
+				<field id="productkeys_send_email" type="select" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Send Customer Email</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<comment>Email productkeys to customer when they are automatically issued.</comment>
+				</field>
+				<field id="productkeys_email_template" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Delivery Email Template</label>
+					<source_model>Dart\Productkeys\Model\Config\Source\Templateoptions</source_model>
+					<comment>Email template to use for delivering productkeys to customer.</comment>
+				</field>
+				<field id="productkeys_low_warning" type="select" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Send Low Warning Email</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<comment>Send warning message by email when remaining productkeys are getting low.</comment>
+				</field>
+				<field id="productkeys_warning_template" type="select" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Low Warning Template</label>
+					<source_model>Dart\Productkeys\Model\Config\Source\Templateoptions</source_model>
+					<comment>Email template to use for the warning message.</comment>
+				</field>
+				<field id="productkeys_warning_level" type="text" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Low Warning Level</label>
+					<comment>Notify when remaining productkeys reaches this number.</comment>
+				</field>
+				<field id="productkeys_warning_email" type="text" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Email Low Warning To</label>
+					<comment>Separate each provided email address with semicolons</comment>
+				</field>
+			</group>
+		</section>
+	</system>
+</config>

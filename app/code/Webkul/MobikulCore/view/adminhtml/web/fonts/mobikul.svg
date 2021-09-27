@@ -1,0 +1,34 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<!--
+2018-9-19: Created with FontForge (http://fontforge.org)
+-->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+<metadata>
+Created by FontForge 20150501 at Tue Sep 19 19:23:30
+ By Nitish Kumar
+Copyright (c), Webkul Software
+</metadata>
+<defs>
+<font id="mobikul" horiz-adv-x="256" >
+  <font-face 
+    font-family="1709191923-mobikul"
+    font-weight="400"
+    font-stretch="normal"
+    units-per-em="256"
+    panose-1="2 0 5 9 0 0 0 0 0 0"
+    ascent="256"
+    descent="0"
+    bbox="32 -32 219.098 186"
+    underline-thickness="3"
+    underline-position="-6.25"
+    unicode-range="U+0040-0040"
+  />
+    <missing-glyph />
+    <glyph glyph-name="at" unicode="@" 
+d="M199 32c-1 -3 -9 -13 -13 -13h-102h-2c-6 0 -11 -5 -11 -11v-2v-2c0 -6 5 -10 11 -10h2h7c2 7 10 12 18 12s16 -5 18 -12h28c2 7 10 12 18 12s16 -5 18 -12h21c3 -1 5 -4 6 -7c-1 -3 -3 -6 -6 -6h-21c-2 -7 -10 -13 -18 -13s-16 6 -18 13h-28c-2 -7 -10 -13 -18 -13
+s-16 6 -18 13h-7c-14 0 -26 11 -26 25s12 27 26 27h3l-17 54l-12 28h-19c-4 0 -7 3 -7 7s3 6 7 6h25c3 0 7 -3 7 -6l11 -26h8v58c0 16 14 32 36 32h40c17 -1 32 -15 33 -32v-58h6c16 0 15 -8 13 -13zM173 -19c4 0 7 2 7 6s-3 7 -7 7s-6 -3 -6 -7s2 -6 6 -6zM109 -19
+c4 0 7 2 7 6s-3 7 -7 7s-6 -3 -6 -7s2 -6 6 -6zM173 38c0 -4 3 -6 7 -6s6 2 6 6v39c0 4 -2 6 -6 6s-7 -2 -7 -6v-39zM154 38c0 -4 2 -6 6 -6s7 2 7 6v39c0 4 -3 6 -7 6s-6 -2 -6 -6v-39zM135 38c0 -4 2 -6 6 -6s7 2 7 6v39c0 4 -3 6 -7 6s-6 -2 -6 -6v-39zM116 38
+c0 -3 3 -6 6 -6s6 3 6 6v39c0 3 -3 6 -6 6s-6 -3 -6 -6v-39zM96 77v-39c0 -3 4 -6 7 -6s6 3 6 6v39c0 3 -3 6 -6 6s-7 -3 -7 -6zM186 154c0 13 -6 19 -19 19h-45c-13 0 -19 -6 -19 -19v-58h13v58h57v-58h13v58z" />
+  </font>
+</defs></svg>

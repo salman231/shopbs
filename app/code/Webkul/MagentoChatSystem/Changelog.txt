@@ -1,0 +1,47 @@
+Legend
+
+- Bugs
++ Features
+
+-------------------------------- Version 3.0.0 --------------------------------------
+	+ Version updated
+
+-------------------------------- Version 2.1.0 --------------------------------------
+    + Compatible with Magento 2.3.x.
+
+-------------------------------- Version 2.0.5 -------------------------------------
+	- Fixed ACL permission issue to chat agent for viewing the chat history.
+	- Fixed some minor issues.
+
+-------------------------------- Version 2.0.4 -------------------------------------
+	+ UI changed.
+	+ Emojis Supports.
+	+ Customer can give feedback to agent.
+	+ Customer can report about chat to Admin.
+	+ Customer can view the Agent's Rating Chart.
+	+ Admin/Chat Managers can assign chat to Chat Agents.
+	+ Admin can approve/disapprove feedbacks of agent.
+	+ Agent can view his/her Chat Dashboard.
+
+-------------------------------- Version 2.0.3 --------------------------------------
+
+	- Minor Issue Fixed.
+
+-------------------------------- Version 2.0.2 --------------------------------------
+
+	+ Buyer and Admin can send image or file attachment.
+
+-------------------------------- Version 2.0.1 --------------------------------------
+
+	+ Socket.io & KnockoutJS based real time Chat System.
+	+ Admin can Stop & Start Chat Server.
+	+ Admin can update Chat Window skin.
+	+ Admin can set his image & name to display on frontend.
+	+ Admin can clear chat history.
+	+ Admin can change his status to Active, Busy & Offline.
+	+ Customers can login using chat window.
+	+ Customers can register using chat window.
+	+ Customers can change their profile image.
+	+ Customers can load their chat history.
+	+ Customers can update their chat status.
+	+ Customers can enable & disable chat notification sound.

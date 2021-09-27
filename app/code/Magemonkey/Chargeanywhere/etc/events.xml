@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="sales_order_place_before">
+        <observer name="place_order_chargeanywhere" instance="Magemonkey\Chargeanywhere\Observer\BeforePlaceOrder"/>
+    </event>
+    <!-- <event name="checkout_submit_all_after">
+        <observer name="after_place_order_chargeanywhere" instance="Magemonkey\Chargeanywhere\Observer\AfterPlaceOrder" />
+    </event> -->
+</config>

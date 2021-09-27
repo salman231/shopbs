@@ -1,0 +1,273 @@
+/*page styles*/
+.amcustomform-form-elements-part {
+    display: inline-block;
+    padding: 5px;
+    width: 49%;
+    min-height: 500px;
+}
+
+.amcustomform-form-elements-part.left-part {
+    border-right: 1px solid black;
+    margin-right: 5px;
+}
+
+label.amform-versiontwo-label {
+    margin-right: 10px;
+    display: inline-block;
+    padding-right: 20px;
+}
+
+.amelement-leftvisible {
+    width: 100px;
+    height: 100px;
+    border: 1px solid #e3e3e3;
+    padding: 10px;
+    text-align: center;
+    border-radius: 10px;
+    margin: 0 10px 10px 0;
+    cursor: pointer;
+}
+
+ul li.amelement-container {
+    display: block;
+    border: 1px solid #e3e3e3;
+    padding: 10px;
+    text-align: left;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    width: 100%;
+    height: auto;
+    vertical-align: top;
+    background: #f7f7f7;
+}
+
+.amelement-title, .amelement-content {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.amelement-title {
+    width: 25%;
+    margin-right: 5px;
+    padding-left: 5px;
+}
+
+.amelement-content {
+    width: 70%;
+}
+
+.amelement-content input, .amelement-content textarea {
+    width: 100%;
+}
+
+.amelement-content select {
+    width: 300px;
+}
+
+.frmb.ui-sortable {
+    min-height: 300px !important;
+}
+
+.form-builder-wrap .form-actions.btn-group {
+    padding: 0;
+    width: 100%;
+}
+
+.form-builder-wrap .form-actions .btn.btn-default {
+    padding: 10px;
+    min-width: 120px;
+    font-size: 16px;
+}
+
+div#frmb-0-cb-wrap {
+    min-height: 300px !important;
+    position: relative;
+    padding-bottom: 40px;
+}
+
+.amform-form {
+    max-width: 500px;
+}
+
+.amform-form input[type="number"] {
+    max-width: 70px;
+}
+
+#form_tabs_embeddings_section_content textarea[readonly] {
+    cursor: copy;
+    opacity: .8;
+}
+
+#form_layout {
+    min-height: 130px;
+}
+
+/*Styles for multiple  page form*/
+.amcform-tabs-wrap {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    border-radius: 2px;
+    border-bottom: 1px solid #cbcbcb;
+}
+
+.amcform-tabs-wrap .amcform-tab {
+    position: relative;
+    -webkit-flex-grow: 1;
+    flex-grow: 1;
+    padding: 5px 0;
+    min-height: 45px;
+    line-height: 35px;
+    text-align: center;
+    list-style: none;
+    background: #f1f1f1;
+    border-right: 1px solid #e3e3e3;
+    cursor: pointer;
+}
+
+.amcform-tabs-wrap .amcform-tab.active {
+    position: relative;
+    border: 0;
+    border-top: 3px solid #eb5202;
+    background-color: #fff;
+}
+
+.amcform-tabs-wrap .amcform-tab.active:after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    display: block;
+    height: 1px;
+    width: 100%;
+    background: #fff;
+}
+
+.amcform-tabs-wrap .amcform-tab:not(.active):hover {
+    background-color: #e4e4e4;
+    -webkit-transition: background-color .3s ease;
+    transition: background-color .3s ease;
+}
+
+.amcform-tabs-wrap .amcform-tab:last-child {
+    border-right: 0;
+}
+
+.amcform-tabs-wrap .ui-tabs-panel {
+    padding: 0;
+}
+
+.amcform-tabs-wrap .amcform-delete {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzNTciIGhlaWdodD0iMzU3Ij48cGF0aCBkPSJNMzU3IDM1LjdMMzIxLjMgMCAxNzguNSAxNDIuOCAzNS43IDAgMCAzNS43bDE0Mi44IDE0Mi44TDAgMzIxLjMgMzUuNyAzNTdsMTQyLjgtMTQyLjhMMzIxLjMgMzU3bDM1LjctMzUuNy0xNDIuOC0xNDIuOHoiLz48L3N2Zz4=) no-repeat center;
+    background-size: 10px;
+    opacity: .3;
+    vertical-align: text-bottom;
+    -webkit-transition: opacity .3s ease;
+    transition: opacity .3s ease;
+}
+
+.amcform-tabs-wrap .amcform-delete:hover {
+    opacity: 1;
+    color: #333;
+    -webkit-transition: color .3s ease-in-out;
+    transition: color .3s ease-in-out;
+}
+
+.amcform-tab.-new .amcform-delete {
+    display: none;
+}
+
+.amcform-tabs-wrap.-main {
+    margin-top: 35px;
+}
+
+.amcform-tabs-wrap.-main .amcform-tab {
+    max-width: 155px;
+    min-width: 100px;
+}
+
+.amcform-tabs-wrap.-main .amcform-tab.active {
+    font-weight: 600;
+}
+
+.amcform-tab .amcform-link {
+    display: inline-block;
+    width: 100%;
+    line-height: 45px;
+    font-size: 15px;
+    color: #333;
+}
+
+.amcform-tab .amcform-link:hover {
+    color: #333;
+    text-decoration: none;
+}
+
+.amcform-tab:last-child:hover .amcform-link {
+    color: #007bdb;
+}
+
+.amcform-tabs-wrap.-second .amcform-tab.active {
+    border-top: 3px solid #b1b1b1;
+}
+
+.amcform-tabs-wrap.-second .amcform-tab {
+    min-height: 40px;
+}
+
+.amcform-title-edit {
+    margin-top: 10px;
+    margin-bottom: 25px;
+}
+
+.amcform-title-edit .amcform-label {
+    display: inline-block;
+    width: 15%;
+    margin-right: 8px;
+    line-height: 34px;
+    box-sizing: border-box;
+    vertical-align: top;
+    font-weight: 600;
+}
+
+.amcform-control {
+    display: inline-block;
+    width: 82%;
+}
+
+.amcform-control > .note {
+    margin-top: 3px;
+    font-size: 12px;
+}
+
+.admin__scope-old .amcform-title-edit .amcform-input {
+    padding: 6px 12px;
+    width: 100%;
+    height: 34px;
+    border-color: #cccccc;
+    border-radius: 4px;
+    color: #555;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.admin__scope-old .amcform-title-edit .amcform-input:focus {
+    border-color: #66afe9;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+}
+
+.form-builder-wrap [id^='frmb-'][id$='-form-wrap'] .stage-wrap {
+    width: 47%;
+    margin-right: 3%;
+}
+
+.form-builder-wrap [id^='frmb-'][id$='-form-wrap'] .stage-wrap.empty:after {
+    top: 60%;
+}

@@ -1,0 +1,41 @@
+<!--@subject Gift card usage notification  @-->
+<!--@vars {
+"var this.getUrl($store, 'admin')":"Warehouse Account URL",
+"var customer.email":"Customer Email",
+"var customer.name":"Customer Name"
+} @-->
+{{template config_path="design/email/header_template"}} <!-- pathe of template header-->
+<table>
+    <tr class="email-intro">
+        <td>
+            <p class="greeting"><h3>{{trans "Hi %customer_name," customer_name=$myvar3}}</h3></p>
+            <p>
+                {{trans "Your Gift Card Usage Details:"}}
+            </p>
+        </td>
+    </tr>
+    <tr class="email-summary">
+        <td>
+            <p>{{trans "Name : %code" code=$myvar3}}</p>
+            <p>{{trans "Email : %code" code=$myvar2}}</p>
+        </td>
+    </tr>
+    <tr class="email-information">
+        <td>
+            <table class="order-details">
+                <tr>
+                    <td class="address-details">
+                        <p>{{trans "Gift Card Code : %code" code=$myvar6}}</p>
+                        <p>{{trans "Previous Amount: %symbol %price" symbol=$myvar8 price=$myvar5}}</p>
+                        <p>{{trans "Reduced Amount: %symbol %price" symbol=$myvar8 price=$myvar4}}</p>
+                        <p>{{trans "Remaining Amount: %symbol %price" symbol=$myvar8 price=$myvar7}}</p>
+                        <p>{{trans "Issue Date: %issuedate"  issuedate=$myvar9}}</p>
+                        <p>{{trans "Expiry Date: %expirydate"  expirydate=$myvar10}}</p>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+ 
+{{template config_path="design/email/footer_template"}} <!--footer of template-->

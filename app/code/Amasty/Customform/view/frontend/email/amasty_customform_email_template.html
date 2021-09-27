@@ -1,0 +1,33 @@
+<!--@subject Custom Forms Notification @-->
+<!--@vars
+{"var response":"Response model",
+ "var link":"Link to Submitted Data",
+ "var customer_name":"Username",
+ "var customer_link":"Customer link",
+ "var submit_fields":"Submitted fields"
+}
+@-->
+{{template config_path="design/email/header_template"}}
+
+<table>
+    <tr class="email-intro">
+        <td valign="top">
+
+            <p><strong>{{trans "You have new submitted custom form."}}</strong></p>
+
+            <p>{{trans "%form_title form was submitted  by " form_title="$response.form_title"}}
+                {{if customer_link}}
+                 <a href="{{var customer_link}}">{{trans "%userName" userName="$customer_name"}}</a>,
+                {{else}}
+                    {{trans "%userName" userName="$customer_name"}},
+                {{/if}}
+            <p>{{trans "which you can see by the following "}} <a href="{{var link}}">{{trans "link"}}</a>.</p>
+
+            <p>{{trans "Submitted Data:"}}</p>
+            {{var submit_fields|raw}}
+        </td>
+    </tr>
+</table>
+{{template config_path="design/email/footer_template"}}
+
+

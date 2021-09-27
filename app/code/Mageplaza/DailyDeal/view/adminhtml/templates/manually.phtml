@@ -1,0 +1,47 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_DailyDeal
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+/** @var \Mageplaza\DailyDeal\Block\Adminhtml\System\Config\Manually $block */ ?>
+
+<button id="mpdailydeal_run_manually" title="Run Manually" type="button" class="primary" style="width: 94%;">
+    <span><?= /** @noEscape */ __('Run Manually') ?></span>
+</button>
+<div class="mpdailydeal_popup_confirm"></div>
+
+<script>
+    require([
+        'jquery',
+        'Magento_Ui/js/modal/confirm',
+        'mage/translate',
+    ], function ($, confirm, $t) {
+        $('#mpdailydeal_run_manually').on('click', function () {
+            confirm({
+                content: $t('Are you sure to run manually?'),
+                actions: {
+                    /** @inheritdoc */
+                    confirm: function () {
+                        window.location.href = "<?= /** @noEscape */ $block->getUrl('mpdailydeal/create/manually', ['form_key' => $block->getFormKey(), '_current' => true]) ?>";
+                    }
+                }
+            });
+        });
+    })
+</script>

@@ -1,0 +1,27 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_PageSpeedOptimizer
+ */
+?>
+<?php
+/**
+ * @var \Magento\Backend\Block\Template $block
+ */
+?>
+
+<script>
+    require(["jquery"], function (jquery) {
+        var button = jquery('#amoptimizer_settings_javascript_super_bundling');
+
+        button.click(function(){
+            button.prepend('<input type="hidden" name="am-start-bundling" value="1" />');
+            button.attr('disabled', true);
+            jquery('#amoptimizer_settings_javascript_merge_js').attr('disabled', false).val(0);
+            jquery('#amoptimizer_settings_javascript_js_bundling').attr('disabled', false).val(0);
+            jquery('#amoptimizer_settings_javascript_minify_js').attr('disabled', false).val(1);
+            jquery('#save').click();
+        })
+    });
+</script>

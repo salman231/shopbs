@@ -1,0 +1,86 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_BetterProductReviews
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+/** @var \Mageplaza\BetterProductReviews\Block\Design $block */
+?>
+<?php if ($block->getCurrentTheme() == 'Smartwave/porto'): ?>
+    <style type="text/css">
+        #mp-review-write-review-button {
+            padding: 7px 15px !important;
+        }
+
+        #term_field {
+            margin-right: 4px;
+        }
+
+        @media (max-width: 1199px) {
+            #mp-review-write-review-button {
+                width: 100%;
+            }
+
+            #mp-review-summary .mp-review-button {
+                border-left: none;
+            }
+        }
+
+        #mp-review-summary .mp-review-details {
+            padding: 0 10px;
+        }
+
+        @media (min-width: 1200px) {
+            #mp-review-summary .mp-review-details, #mp-review-summary .mp-review-statistic {
+                width: 33.3333333333% !important;
+            }
+        }
+
+        @media (max-width: 1199px) and (min-width: 992px) {
+            #mp-review-summary .mp-review-details, #mp-review-summary .mp-review-statistic {
+                width: 41.6666666667% !important;
+            }
+
+            #mp-review-summary .mp-review-button {
+                width: 100% !important;
+            }
+        }
+
+        @media (max-width: 991px) and (min-width: 768px) {
+            #mp-review-summary .mp-review-details {
+                width: 50% !important;
+            }
+        }
+
+        #mp-review-products .owl-next {
+            right: -10px !important;
+        }
+
+        #mp-review-products .owl-prev {
+            left: -10px !important;
+        }
+
+        #mp-review-list .mp-review-reply {
+            margin-top: 18px;
+        }
+
+        #mp-review-summary .recommend-product p {
+            margin-left: 10px;
+        }
+    </style>
+<?php endif; ?>

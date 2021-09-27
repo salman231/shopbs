@@ -1,0 +1,98 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * PHP version 7.0+
+ *
+ * @category  Webkul
+ * @package   Webkul_DeliveryBoy
+ * @author    Webkul <support@webkul.com>
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+$locationData = $block->getDeliveryboyLocation();
+$googlemapApiKey = "AIzaSyCkvNmm4sjMEg_Dcj98YBgg-mBD-znS0oc";
+$latitude = $longitude = 0;
+if (!empty($locationData) &&
+    !empty($locationData['latitude']) &&
+    !empty($locationData['longitude'])
+) {
+    $latitude = $locationData["latitude"] ?? 0;
+    $longitude = $locationData["longitude"] ?? 0; ?>
+<div id="map_container" style="height:400px; width:550px">
+    <div id="map"></div>
+<div>
+<?php } else { ?>
+This tab contains deliveryboy location info.
+<?php } ?>
+<input type="hidden" id="latitude" value="<?= /** @noEscape */ $latitude ?>"/>
+<input type="hidden" id="longitude" value="<?= /** @noEscape */ $longitude ?>"/>
+<script>
+        require.config({
+            map: {
+                '*': {
+                    'googleMapKey': 'https://maps.googleapis.com/maps/api/js' +
+                        '?key=<?= /* @noEscape */ $googlemapApiKey ?>&libraries=places'
+                }
+            }
+        });
+</script>
+
+<script type="text/javascript">
+    require([
+        "jquery",
+        "mage/calendar",
+        'mage/translate',
+        'googleMapKey',
+        'Magento_Ui/js/modal/alert',
+    ], function(jQuery)  {
+        jQuery(document).ready(function() {
+            var latitudeVal = 0;
+            var longitudeVal = 0;
+            if (jQuery("#latitude").val() != "0" && jQuery("#longitude").val() != "0") {
+                latitudeVal = parseFloat(jQuery("#latitude").val());
+                longitudeVal = parseFloat(jQuery("#longitude").val());
+                var myLatlng = {lat: latitudeVal, lng: longitudeVal};
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    mapTypeControl: false,
+                    center: myLatlng,
+                    zoom: 6
+                });
+                
+                var marker = new google.maps.Marker({
+                    position: myLatlng,
+                    map: map,
+                    title: 'Click to zoom'
+                });
+                marker.addListener('click', function() {
+                    map.setZoom(8);
+                    map.setCenter(marker.getPosition());
+                });
+
+                var infowindow = new google.maps.InfoWindow();
+                var service = new google.maps.places.PlacesService(map);
+                service.getDetails({placeId: 'ChIJN1t_tDeuEmsRUsoyG83frY4'}, function(place, status) {
+                    if (status === google.maps.places.PlacesServiceStatus.OK) {
+                        var marker = new google.maps.Marker({
+                        map: map,
+                        position: place.geometry.location
+                        });
+                        google.maps.event.addListener(marker, 'click', function() {
+                        infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
+                            'Place ID: ' + place.place_id + '<br>' +
+                            place.formatted_address + '</div>');
+                        infowindow.open(map, this);
+                        });
+                    }
+                });
+            }
+        });
+    });
+</script>
+<style>
+#map {
+    height: 400px;
+    width: 550px;
+}
+</style>

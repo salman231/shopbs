@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MagentoChatSystem
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Webkul_MagentoChatSystem::chatsystem" title="Chat System" module="Webkul_MagentoChatSystem" sortOrder="20" resource="Webkul_MagentoChatSystem::chatsystem" />
+        <add id="Webkul_MagentoChatSystem::menu" title="Chat System Menu" module="Webkul_MagentoChatSystem" sortOrder="10" parent="Webkul_MagentoChatSystem::chatsystem" dependsOnModule="Webkul_MagentoChatSystem" resource="Webkul_MagentoChatSystem::chatsystem"/>
+        <add id="Webkul_MagentoChatSystem::assigned" title="Assigned Chat" module="Webkul_MagentoChatSystem" sortOrder="2" parent="Webkul_MagentoChatSystem::menu" action="chatsystem/agent/assignedchat" resource="Webkul_MagentoChatSystem::assigned_update"/>
+        <add id="Webkul_MagentoChatSystem::agents" title="Agent List" module="Webkul_MagentoChatSystem" sortOrder="1" parent="Webkul_MagentoChatSystem::menu" action="chatsystem/agent/agentlist" resource="Webkul_MagentoChatSystem::agents"/>        
+        <add id="Webkul_MagentoChatSystem::feedback" title="Agent Ratings" module="Webkul_MagentoChatSystem" sortOrder="4" parent="Webkul_MagentoChatSystem::menu" action="chatsystem/agent/feedback" resource="Webkul_MagentoChatSystem::feedback"/>
+        <add id="Webkul_MagentoChatSystem::chat_report" title="Chat Reports" module="Webkul_MagentoChatSystem" sortOrder="5" parent="Webkul_MagentoChatSystem::menu" action="chatsystem/report" resource="Webkul_MagentoChatSystem::Report"/>
+    </menu>
+</config>

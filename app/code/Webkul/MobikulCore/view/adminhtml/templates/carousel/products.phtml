@@ -1,0 +1,84 @@
+<div id="messages">
+    <div class="messages">
+        <div class="message message-notice notice">
+            <div data-ui-id="messages-message-notice">
+                <?= /* @noEscape*/ __("Applicable only when \"Carousel Type\" is selected as \"Product Type\""); ?>
+            </div>
+        </div>
+    </div>
+</div>
+<input data-form-part="mobikul_carousel_form" type="hidden" name="mobikul_carousel[product_ids]" id="product_ids"/>
+<script type="text/javascript">
+    require([
+            "jquery"
+        ], function($)  {
+            <?php
+            if (($internalBlock = $block->getLayout()->createBlock(
+                \Webkul\MobikulCore\Block\Adminhtml\Edit\Carousel\Tab\Carouselproducts::class
+            )) &&
+                    ($_gridJsObject = $internalBlock->getJsObjectName())
+                ):
+                ?>
+            var product_ids = [];
+            var selectedProducts = '<?= /* @noEscape*/ $block->getCarouselProductsJson(); ?>';
+            if (selectedProducts)
+                product_ids = selectedProducts.split(",");
+            $("#product_ids").val(product_ids);
+            $(document).on("click", "input.checkbox.admin__control-checkbox", function()  {
+                var thisVal = $(this).val();
+                if ($(this).is(":checked"))  {
+                    product_ids.push(thisVal);
+                } else  {
+                    var index = product_ids.indexOf(thisVal);
+                    if (index > -1)
+                        product_ids.splice(index, 1);
+                }
+                $("#product_ids").val(product_ids.join());
+            });
+            function selectedProductRowClick(grid, event)  {
+                if (!$(event.target).hasClass("checkbox"))  {
+                    var trElement = $(event.target).parents("tr");
+                    var checkbox = trElement.find("input:checkbox");
+                    var thisVal = checkbox.val();
+                    if (checkbox.is(":checked"))  {
+                        checkbox.prop("checked", false);
+                        var index = product_ids.indexOf(thisVal);
+                        if (index > -1)
+                            product_ids.splice(index, 1);
+                    } else  {
+                        checkbox.prop("checked", true);
+                        product_ids.push(thisVal);
+                    }
+                    if ($("#product_ids").val() != "")
+                        $("#product_ids").val(product_ids.join());
+                    else
+                        $("#product_ids").val(product_ids);
+                }
+            }
+
+            function selectedProductRowInit(grid, row)  {
+                var checkbox = $(row).find("input:checkbox");
+                var childElements = row.childElements();
+                var childLength = childElements.length;
+                var checkbox = $(row).find("input:checkbox");
+                if($("#product_ids").val() != "")  {
+                    var productids = $("#product_ids").val().split(",");
+                    var checked = false;
+                    if(productids.indexOf(checkbox.val()) >= 0)  {
+                        checked = true;
+                        checkbox.prop("checked", true);
+                    }
+                }
+            }
+
+            setTimeout(function()  {
+                <?= /* @noEscape*/ $_gridJsObject ?>.initRowCallback  = selectedProductRowInit;
+                <?= /* @noEscape*/ $_gridJsObject ?>.rowClickCallback = selectedProductRowClick;
+                <?= /* @noEscape*/ $_gridJsObject ?>.rows.each(function(row){
+                    selectedProductRowInit(<?= /* @noEscape*/ $_gridJsObject ?>, row)
+                });
+            }, 300);
+        <?php   endif;   ?>
+    });
+</script>
+<?= $block->getChildHtml("mobikul.carousel.product"); ?>

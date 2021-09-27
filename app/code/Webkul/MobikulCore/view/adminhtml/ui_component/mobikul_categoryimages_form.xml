@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Webkul Software.
+ * 
+ *
+ *
+ * @category  Webkul
+ * @package   Webkul_Mobikul
+ * @author    Webkul <support@webkul.com>
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="deps" xsi:type="string">mobikul_categoryimages_form.mobikul_categoryimages_form_data_source</item>
+            <item name="provider" xsi:type="string">mobikul_categoryimages_form.mobikul_categoryimages_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Category Image Information</item>
+        <item name="layout" xsi:type="array">
+            <item name="type" xsi:type="string">tabs</item>
+            <item name="navContainerName" xsi:type="string">left</item>
+        </item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="string">Webkul\MobikulCore\Block\Adminhtml\Edit\BackButton</item>
+            <item name="save" xsi:type="string">Webkul\MobikulCore\Block\Adminhtml\Edit\Categoryimages\SaveButton</item>
+            <item name="delete" xsi:type="string">Webkul\MobikulCore\Block\Adminhtml\Edit\Categoryimages\DeleteButton</item>
+            <item name="save_and_continue" xsi:type="string">Webkul\MobikulCore\Block\Adminhtml\Edit\SaveAndContinueButton</item>
+        </item>
+        <item name="reverseMetadataMerge" xsi:type="boolean">true</item>
+    </argument>
+    <dataSource name="mobikul_categoryimages_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="primaryFieldName" xsi:type="string">id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="mobikul/categoryimages/save"/>
+                    <item name="validate_url" xsi:type="url" path="mobikul/categoryimages/validate"/>
+                </item>
+            </argument>
+            <argument name="name" xsi:type="string">mobikul_categoryimages_form_data_source</argument>
+            <argument name="class" xsi:type="string">Webkul\MobikulCore\Model\Categoryimages\DataProvider</argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <fieldset name="mobikul_categoryimages">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Category Image Information</item>
+            </item>
+        </argument>
+        <field name="id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                </item>
+            </argument>
+        </field>
+        <field name="icon">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="label" xsi:type="string">Icon Image</item>
+                    <item name="formElement" xsi:type="string">imageUploader</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="previewTmpl" xsi:type="string">Magento_Catalog/image-preview</item>
+                    <item name="elementTmpl" xsi:type="string">ui/form/element/uploader/uploader</item>
+                    <item name="uploaderConfig" xsi:type="array">
+                        <item name="url" xsi:type="url" path="mobikul/categoryimages/iconUpload"/>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <!-- <field name="banner">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Banner Image</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="formElement" xsi:type="string">fileUploader</item>
+                    <item name="elementTmpl" xsi:type="string">ui/form/element/uploader/uploader</item>
+                    <item name="previewTmpl" xsi:type="string">Magento_Catalog/image-preview</item>
+                    <item name="uploaderConfig" xsi:type="array">
+                        <item name="url" xsi:type="url" path="mobikul/categoryimages/bannerUpload"/>
+                    </item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field> -->
+        <field name="storeviews">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magento\Cms\Ui\Component\Listing\Column\Cms\Options</item>
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="string">0</item>
+                    <item name="source" xsi:type="string">block</item>
+                    <item name="dataType" xsi:type="string">int</item>
+                    <item name="dataScope" xsi:type="string">store_id</item>
+                    <item name="formElement" xsi:type="string">multiselect</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="label" xsi:type="string" translate="true">Store View</item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+    <fieldset name="mobikul_categoryimages_category">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Categories</item>
+            </item>
+        </argument>
+        <container name="category_container">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">1</item>
+                </item>
+            </argument>
+            <htmlContent name="categoryimages_tree">
+                <block class="Webkul\MobikulCore\Block\Adminhtml\Edit\Categoryimages\Category" name="mobikul.categoryimages.tree"/>
+            </htmlContent>
+        </container>
+    </fieldset>
+        <fieldset name="mobikul_categoryimages_banner">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Banner</item>
+            </item>
+        </argument>
+        <container name="category_banner">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">1</item>
+                </item>
+            </argument>
+            <htmlContent name="categoryimages_banner">
+                <block class="Webkul\MobikulCore\Block\Adminhtml\Edit\Categoryimages\Banner" name="mobikul.categoryimages.banner"/>
+            </htmlContent>
+        </container>
+    </fieldset>
+</form>

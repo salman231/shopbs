@@ -1,0 +1,31 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Rmasystem
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+?>
+<script>
+require([
+        "jquery",
+        'mage/validation'
+    ], function($) {
+    var dataForm = $('#edit_form');
+    dataForm.mage('validation', {});
+
+    $('#save').on('click', function() {
+        if (dataForm.valid()!=false) {
+            $(this).attr('disabled','disabled');
+        }
+    });
+    $('#saveandcontinue').on('click', function() {
+        if (dataForm.valid()!=false) {
+            $(this).attr('disabled','disabled');
+        }
+    });
+});
+</script>

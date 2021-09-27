@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ * 
+ *
+ *
+ * @category  Webkul
+ * @package   Webkul_MobikulCore
+ * @author    Webkul <support@webkul.com>
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Webkul_MobikulCore::mobikul" title="Mobikul" sortOrder="10">
+                    <resource id="Webkul_MobikulCore::menu" title="Menu" sortOrder="10">
+                        <resource id="Webkul_MobikulCore::bannerimage" title="Manage Banner Images" sortOrder="1"/>
+                        <resource id="Webkul_MobikulCore::notification" title="Manage Notifications" sortOrder="2"/>
+                        <resource id="Webkul_MobikulCore::featuredcategories" title="Manage Featured Categories" sortOrder="3"/>
+                        <resource id="Webkul_MobikulCore::categoryimages" title="Manage Category Banners and Icons" sortOrder="4"/>
+                        <resource id="Webkul_MobikulCore::salesorder" title="Mobikul Order History" sortOrder="5"/>
+                        <resource id="Webkul_MobikulCore::carouselimage" title="Mobikul Carousel Images" sortOrder="6"/>
+                        <resource id="Webkul_MobikulCore::carousel" title="Mobikul Carousels" sortOrder="7"/>
+                        <resource id="Webkul_MobikulCore::configuration" title="Mobikul Configuration" sortOrder="8"/>
+                        <resource id="Webkul_MobikulCore::barcode" title="Product Barcode" sortOrder="8"/>
+                        <resource id="Webkul_MobikulCore::appcreator" title="Manage App Creator" sortOrder="9"/>
+                    </resource>
+                </resource>
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="Webkul_MobikulCore::config_mobikul" title="Mobikul Configuration Section" sortOrder="50"/>
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Customform
+ */
+-->
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+
+    <route url="/V1/amasty_customform/answer" method="POST">
+        <service class="Amasty\Customform\Api\AnswerRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Amasty_Customform::data" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_customform/answer/:answerId" method="PUT">
+        <service class="Amasty\Customform\Api\AnswerRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Amasty_Customform::data" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_customform/answer/:answerId" method="DELETE">
+        <service class="Amasty\Customform\Api\AnswerRepositoryInterface" method="deleteById"/>
+        <resources>
+            <resource ref="Amasty_Customform::data" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_customform/answer" method="GET">
+        <service class="Amasty\Customform\Api\AnswerRepositoryInterface" method="get"/>
+        <resources>
+            <resource ref="Amasty_Customform::data" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_customform/answer/all" method="GET">
+        <service class="Amasty\Customform\Api\AnswerRepositoryInterface" method="getList" />
+        <resources>
+            <resource ref="Amasty_Customform::data" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_customform/answer/list_filter" method="GET">
+        <service class="Amasty\Customform\Api\AnswerRepositoryInterface" method="getListFilter" />
+        <resources>
+            <resource ref="Amasty_Customform::data" />
+        </resources>
+    </route>
+
+    <route url="/V1/amasty_customform/form" method="POST">
+        <service class="Amasty\Customform\Api\FormRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Amasty_Customform::forms" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_customform/form/:formId" method="PUT">
+        <service class="Amasty\Customform\Api\FormRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Amasty_Customform::forms" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_customform/form/:formId" method="DELETE">
+        <service class="Amasty\Customform\Api\FormRepositoryInterface" method="deleteById"/>
+        <resources>
+            <resource ref="Amasty_Customform::forms" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_customform/form" method="GET">
+        <service class="Amasty\Customform\Api\FormRepositoryInterface" method="get"/>
+        <resources>
+            <resource ref="Amasty_Customform::forms" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_customform/form/all" method="GET">
+        <service class="Amasty\Customform\Api\FormRepositoryInterface" method="getList" />
+        <resources>
+            <resource ref="Amasty_Customform::forms" />
+        </resources>
+    </route>
+</routes>

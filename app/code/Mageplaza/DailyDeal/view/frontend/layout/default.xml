@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_DailyDeal
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Mageplaza_Core::css/owl.carousel.css"/>
+        <css src="Mageplaza_Core::css/owl.theme.css"/>
+        <css src="Mageplaza_DailyDeal::css/widget.css"/>
+    </head>
+    <body>
+        <referenceBlock name="top.links">
+            <block class="Mageplaza\DailyDeal\Block\Link\AllTop" name="mpdailydeal.alldeals.link" before="authorization-link" ifconfig="dailydeal/general/enabled"/>
+            <block class="Mageplaza\DailyDeal\Block\Link\NewTop" name="mpdailydeal.newdeals.link" before="authorization-link" ifconfig="dailydeal/general/enabled"/>
+            <block class="Mageplaza\DailyDeal\Block\Link\SellerTop" name="mpdailydeal.sellerdeals.link" before="authorization-link" ifconfig="dailydeal/general/enabled"/>
+            <block class="Mageplaza\DailyDeal\Block\Link\FeatureTop" name="mpdailydeal.featuredeals.link" before="authorization-link" ifconfig="dailydeal/general/enabled"/>
+        </referenceBlock>
+        <referenceBlock name="catalog.topnav">
+            <block class="Mageplaza\DailyDeal\Block\Link\AllMenu" name="mpdailydeal.alldeals.menu" template="Mageplaza_DailyDeal::menu/topmenu.phtml" ifconfig="dailydeal/general/enabled"/>
+            <block class="Mageplaza\DailyDeal\Block\Link\NewMenu" name="mpdailydeal.newdeals.menu" template="Mageplaza_DailyDeal::menu/topmenu.phtml" ifconfig="dailydeal/general/enabled"/>
+            <block class="Mageplaza\DailyDeal\Block\Link\SellerMenu" name="mpdailydeal.sellerdeals.menu" template="Mageplaza_DailyDeal::menu/topmenu.phtml" ifconfig="dailydeal/general/enabled"/>
+            <block class="Mageplaza\DailyDeal\Block\Link\FeatureMenu" name="mpdailydeal.featuredeals.menu" template="Mageplaza_DailyDeal::menu/topmenu.phtml" ifconfig="dailydeal/general/enabled"/>
+        </referenceBlock>
+        <referenceBlock name="footer_links">
+            <block class="Mageplaza\DailyDeal\Block\Link\AllFooter" name="mpdailydeal.all.footer.link" ifconfig="dailydeal/general/enabled"/>
+            <block class="Mageplaza\DailyDeal\Block\Link\NewFooter" name="mpdailydeal.new.footer.link" ifconfig="dailydeal/general/enabled"/>
+            <block class="Mageplaza\DailyDeal\Block\Link\FeatureFooter" name="mpdailydeal.feature.footer.link" ifconfig="dailydeal/general/enabled"/>
+            <block class="Mageplaza\DailyDeal\Block\Link\SellerFooter" name="mpdailydeal.seller.footer.link" ifconfig="dailydeal/general/enabled"/>
+        </referenceBlock>
+        <referenceContainer name="content">
+            <block class="Mageplaza\DailyDeal\Block\Widget\FloatDeal" name="mp.dailydeal.float.block" template="Mageplaza_DailyDeal::widget/float.phtml" ifconfig="dailydeal/general/enabled"/>
+        </referenceContainer>
+    </body>
+</page>

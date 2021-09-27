@@ -1,0 +1,217 @@
+"Edit Deal '%1'","Edit Deal '%1'"
+"Create Deal","Create Deal"
+"Save and Continue Edit","Save and Continue Edit"
+"General Information","General Information"
+"Product Id","Product Id"
+Product,Product
+"Select Product","Select Product"
+"Select a product which the deal is applied on","Select a product which the deal is applied on"
+SKU,SKU
+"Original Price","Original Price"
+"Product Qty","Product Qty"
+Status,Status
+Active,Active
+Inactive,Inactive
+"Is Featured","Is Featured"
+"If yes, this deal will be shown on Feature Deal Slider","If yes, this deal will be shown on Feature Deal Slider"
+"Deal Price","Deal Price"
+Discount,Discount
+"Deal Qty","Deal Qty"
+"Qty of sold items","Qty of sold items"
+"Store Views","Store Views"
+"Start On","Start On"
+"Time from","Time from"
+"End On","End On"
+"Time to","Time to"
+General,General
+"Deal Information","Deal Information"
+"Product ID","Product ID"
+Name,Name
+Sku,Sku
+Quantity,Quantity
+Price,Price
+"Use the following code to show the daily deal block at any place you want","Use the following code to show the daily deal block at any place you want"
+"List of ""type"" attributes available: all, feature, new, upcoming, bestseller, random","List of ""type"" attributes available: all, feature, new, upcoming, bestseller, random"
+"All Deals","All Deals"
+"Bestseller Deals","Bestseller Deals"
+"Featured Deals","Featured Deals"
+"New Deals","New Deals"
+"DAILY DEAL PRODUCTS","DAILY DEAL PRODUCTS"
+Success!,Success!
+"An error occurred while running manually. Please try again later. %1","An error occurred while running manually. Please try again later. %1"
+"Please enable module!","Please enable module!"
+"The Deal has been deleted.","The Deal has been deleted."
+"This Deal no longer exists.","This Deal no longer exists."
+"Daily Deal","Daily Deal"
+"Manage Deals","Manage Deals"
+"A total of %1 record(s) have been deleted.","A total of %1 record(s) have been deleted."
+"End on must be greater than start on","End on must be greater than start on"
+"The Deal has been saved.","The Deal has been saved."
+"Deal qty must be less than or equal to product qty","Deal qty must be less than or equal to product qty"
+"Already set Deal for this product.","Already set Deal for this product."
+"Something went wrong while saving the Deal. %1","Something went wrong while saving the Deal. %1"
+"There are no satisfying products in this category.","There are no satisfying products in this category."
+"We can't save the cron expression. %1","We can't save the cron expression. %1"
+"Percent price must be between 0 and 100","Percent price must be between 0 and 100"
+Simple,Simple
+Circle,Circle
+Square,Square
+Stack,Stack
+Modern,Modern
+No,No
+"Under Price","Under Price"
+"Above product image","Above product image"
+"Floating Left","Floating Left"
+"Float Right","Float Right"
+Disable,Disable
+Daily,Daily
+Weekly,Weekly
+Monthly,Monthly
+"1 column","1 column"
+"2 columns with left sidebar","2 columns with left sidebar"
+"2 columns with right sidebar","2 columns with right sidebar"
+"3 columns","3 columns"
+"Round up","Round up"
+"Round down","Round down"
+"--Please Select--","--Please Select--"
+"Header Link","Header Link"
+"Footer Link","Footer Link"
+"Category Menu","Category Menu"
+"Top Left","Top Left"
+"Top Right","Top Right"
+"Bottom Left","Bottom Left"
+"Bottom Right","Bottom Right"
+"Sidebar Top","Sidebar Top"
+"Sidebar Bottom","Sidebar Bottom"
+"The module is disabled","The module is disabled"
+"Deal with ID %1 doesn't exist","Deal with ID %1 doesn't exist"
+"The deal data is invalid. Verify the data and try again.","The deal data is invalid. Verify the data and try again."
+"The deal doesn't exist.","The deal doesn't exist."
+"The deal data can't be saved. Verify the data and try again.","The deal data can't be saved. Verify the data and try again."
+"Missing %1 field.","Missing %1 field."
+"The product with SKU %1 doesn't exist.","The product with SKU %1 doesn't exist."
+"The product data is invalid. Verify the data and try again.","The product data is invalid. Verify the data and try again."
+"Deal price must be less than or equal to original price %1 and greater than 0","Deal price must be less than or equal to original price %1 and greater than 0"
+"The status must have a value of 0 or 1","The status must have a value of 0 or 1"
+"There's only %1 product(s) left, please try again with a smaller quantity","There's only %1 product(s) left, please try again with a smaller quantity"
+Edit,Edit
+"All Store Views","All Store Views"
+"Run Manually","Run Manually"
+"Special Price","Special Price"
+"Limited Time Remaining!","Limited Time Remaining!"
+Days,Days
+Hours,Hours
+Minutes,Minutes
+Seconds,Seconds
+"We can't find products matching the selection.","We can't find products matching the selection."
+"Add to Cart","Add to Cart"
+"In stock","In stock"
+"Out of stock","Out of stock"
+"Learn More","Learn More"
+"item(s) left","item(s) left"
+"item(s) sold","item(s) sold"
+"Grouped product items","Grouped product items"
+"Product Name","Product Name"
+Qty,Qty
+Availability,Availability
+"No options of this product are available.","No options of this product are available."
+"Are you sure to run manually?","Are you sure to run manually?"
+Running,Running
+Upcoming,Upcoming
+Ended,Ended
+"Deal price must be less than or equal to original price and greater than 0","Deal price must be less than or equal to original price and greater than 0"
+Continue,Continue
+"Sold Out","Sold Out"
+"Mageplaza DailyDeal","Mageplaza DailyDeal"
+Enable,Enable
+"Select Yes to enable this module","Select Yes to enable this module"
+"Show Qty of Remaining Items","Show Qty of Remaining Items"
+"Select Yes to display the quantity of remaining products","Select Yes to display the quantity of remaining products"
+"Show Qty of Sold Items","Show Qty of Sold Items"
+"Select Yes to display the quantity of sold products","Select Yes to display the quantity of sold products"
+"Countdown Timer","Countdown Timer"
+"Show countdown timer","Show countdown timer"
+"Select Yes to display the countdown timer on Product Detail","Select Yes to display the countdown timer on Product Detail"
+"Clock Style","Clock Style"
+"Outer background color","Outer background color"
+"Select the background color for the outer area of the countdown timer. Leave empty to make it transparent","Select the background color for the outer area of the countdown timer. Leave empty to make it transparent"
+"Inner background color","Inner background color"
+"Select the background color for the inner area of the countdown timer.","Select the background color for the inner area of the countdown timer."
+"Number Color","Number Color"
+"Text Color","Text Color"
+"Discount Label","Discount Label"
+"Show Discount Label","Show Discount Label"
+"Select a position to display the label","Select a position to display the label"
+Label,Label
+"<span>Label is displayed. With <b>{{number}}</b> being the percentage of the discount deal</span>","<span>Label is displayed. With <b>{{number}}</b> being the percentage of the discount deal</span>"
+"Round percentage","Round percentage"
+"Show On","Show On"
+"Select a position to place the discount label","Select a position to place the discount label"
+"Background Color","Background Color"
+"Leave empty to make it transparent","Leave empty to make it transparent"
+"Border Color","Border Color"
+"Deal Pages","Deal Pages"
+"All Deals Page","All Deals Page"
+"Select Yes to configure the All-deals page","Select Yes to configure the All-deals page"
+"Show Links","Show Links"
+"Select a position to place the link to the All-deals page","Select a position to place the link to the All-deals page"
+Route,Route
+"the path. Eg: if you set the link title ""dailydeal"", the page URL will be: example.com/dailydeal.html","the path. Eg: if you set the link title ""dailydeal"", the page URL will be: example.com/dailydeal.html"
+"Page Title","Page Title"
+"The title of the All-deals page","The title of the All-deals page"
+"New Deals Page","New Deals Page"
+"Select Yes to configure the New Deals page","Select Yes to configure the New Deals page"
+"Select a position to place the link to the New Deals page","Select a position to place the link to the New Deals page"
+"the path. Eg: if you set the link title ""new-deal"", the page URL will be: example.com/new-deal.html","the path. Eg: if you set the link title ""new-deal"", the page URL will be: example.com/new-deal.html"
+"The title of the New Deals page","The title of the New Deals page"
+"Bestseller Deals Page","Bestseller Deals Page"
+"Select Yes to configure the Bestseller Deals page","Select Yes to configure the Bestseller Deals page"
+"Select a position to place the link to the Bestseller Deals page","Select a position to place the link to the Bestseller Deals page"
+"the path. Eg: if you set the link title ""bestseller-deal"", the page URL will be: example.com/bestseller-deal.html","the path. Eg: if you set the link title ""bestseller-deal"", the page URL will be: example.com/bestseller-deal.html"
+"The title of the Bestseller Deals page","The title of the Bestseller Deals page"
+"Featured Deals Page","Featured Deals Page"
+"Select Yes to configure the Featured Deals page","Select Yes to configure the Featured Deals page"
+"Select a position to place the link to the Featured Deals page","Select a position to place the link to the Featured Deals page"
+"the path. Eg: if you set the link title ""feature-deals"", the page URL will be: example.com/feature-deals.html","the path. Eg: if you set the link title ""feature-deals"", the page URL will be: example.com/feature-deals.html"
+"The title of the Featured Deals page","The title of the Featured Deals page"
+"Sidebar Widget","Sidebar Widget"
+"Select Yes to turn on the sidebar widget","Select Yes to turn on the sidebar widget"
+"Random Deal","Random Deal"
+Show,Show
+"Select Yes to enable the Random Deal block","Select Yes to enable the Random Deal block"
+"Block Title","Block Title"
+"The title of the block","The title of the block"
+"The position to place the block","The position to place the block"
+Limit,Limit
+"The maximum number of items which are allowed to show up in the block","The maximum number of items which are allowed to show up in the block"
+"Top Selling Deal","Top Selling Deal"
+"Select Yes to enable the Top Selling Deal block","Select Yes to enable the Top Selling Deal block"
+"Upcoming Deal","Upcoming Deal"
+"Select Yes to enable the Upcoming Deal block","Select Yes to enable the Upcoming Deal block"
+"Floating Deal Slider","Floating Deal Slider"
+"Select Yes to enable the Floating Slider Deal block","Select Yes to enable the Floating Slider Deal block"
+"Show on mobile","Show on mobile"
+"Select Yes to enable the Floating Slider Deal block on mobile","Select Yes to enable the Floating Slider Deal block on mobile"
+"Number of Deals","Number of Deals"
+"Show again after","Show again after"
+"seconds. The floating bar will not be shown again if customer closes it. It will appear again after this configured time. Set it 0 or leave it blank not to display the slider again until customer reloads the page or opens a new page.","seconds. The floating bar will not be shown again if customer closes it. It will appear again after this configured time. Set it 0 or leave it blank not to display the slider again until customer reloads the page or opens a new page."
+Snippet,Snippet
+"Automatic Create Deal","Automatic Create Deal"
+"Schedule For","Schedule For"
+"Set up the schedule in which deals are created automatically.","Set up the schedule in which deals are created automatically."
+"Start Time","Start Time"
+"Apply for Categories","Apply for Categories"
+"Special Price (Percent)","Special Price (Percent)"
+"Apply as percentage of original","Apply as percentage of original"
+"Number Product Created","Number Product Created"
+"Number of products generated per cron run","Number of products generated per cron run"
+"Default: 10","Default: 10"
+Day(s),Day(s)
+"Default: 1 day","Default: 1 day"
+"Add New Deal","Add New Deal"
+"Store View","Store View"
+Delete,Delete
+"Delete Deal(s)","Delete Deal(s)"
+"Are you sure want to delete selected Deal(s)?","Are you sure want to delete selected Deal(s)?"
+ID,ID
+"Sale Qty","Sale Qty"

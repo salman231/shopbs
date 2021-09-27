@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Rmasystem
+ * @author    Webkul
+ * @copyright Copyright (c) 2010-2017 Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Webkul_Rmasystem::rmasystem" title="Rma System" sortOrder="10" >
+                    <resource id="Webkul_Rmasystem::menu" title="Menu" sortOrder="10">
+                        <resource id="Webkul_Rmasystem::allrma" title="All Rma" sortOrder="10">
+                            <resource id="Webkul_Rmasystem::update" title="Update Rma" sortOrder="10" />
+                        </resource>
+                        <resource id="Webkul_Rmasystem::reason" title="All Reasons" sortOrder="20">
+                             <resource id="Webkul_Rmasystem::save" title="Save Reason" sortOrder="10" />
+                             <resource id="Webkul_Rmasystem::delete" title="Delete Reason" sortOrder="20" />
+                        </resource>
+                        <resource id="Webkul_Rmasystem::shippinglabel" title="All Shipping Label" sortOrder="20">
+                             <resource id="Webkul_Rmasystem::saveshippinglabel" title="Save Label" sortOrder="10" />
+                             <resource id="Webkul_Rmasystem::deleteshippinglabel" title="Delete Label" sortOrder="20" />
+                        </resource>
+                        <resource id="Webkul_Rmasystem::customfield" title="Manage RMA Custom Fields" sortOrder="20">
+                        </resource>
+                    </resource>
+                </resource>
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="Webkul_Rmasystem::config_rmasystem" title="RMA Section" />
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

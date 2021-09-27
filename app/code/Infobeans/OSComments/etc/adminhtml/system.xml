@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!--
+ * InfoBeans Sales Shipment Comment Extension
+ *
+ * @category   Infobeans
+ * @package    Infobeans_OSComments
+ * @version    2.0.0
+ *
+ * Release with version 2.0.0
+ *
+ * @author     InfoBeans Technologies Limited http://www.infobeans.com/
+ * @copyright  Copyright (c) 2017 InfoBeans Technologies Limited
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="infobeans_extensions" translate="label" sortOrder="1">
+            <label>Infobeans Extensions</label>
+        </tab>
+        <section id="infobeans_oscomments" translate="label" type="text" sortOrder="1300" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Infobeans Order/Shipping Comments</label>
+            <tab>infobeans_extensions</tab>
+            <resource>Infobeans_OSComments::os_comments</resource>
+            <group id="general" type="text"  sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Infobeans Order/Shipping Comments Settings</label>
+                <field id="enable_module" translate="label" type="select" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Module</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="enable_admin" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable On Admin</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="*/*/enable_module">1</field>
+                    </depends>
+                </field>
+                <field id="enable_frontend" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable On Frontend</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="*/*/enable_module">1</field>
+                    </depends>
+                </field>
+                <field id="show_comment" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Blank Shipping Comment</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[If this field is enabled then empty block will be displayed in order for shipping comment.]]></comment>
+                    <depends>
+                        <field id="*/*/enable_module">1</field>
+                    </depends>
+                </field>
+                <field id="shipping_label" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Shipping Block Label</label>
+                    <comment><![CDATA[Heading for shipping comments.]]></comment>
+                    <depends>
+                        <field id="*/*/enable_module">1</field>
+                    </depends>
+                </field> 
+            </group>
+        </section>
+    </system>
+</config>

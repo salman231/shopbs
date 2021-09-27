@@ -1,0 +1,82 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * PHP version 7.0+
+ *
+ * @category  Webkul
+ * @package   Webkul_DeliveryBoy
+ * @author    Webkul <support@webkul.com>
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+/** @var \Webkul\DeliveryBoy\Block\Adminhtml\Dashboard */
+$locationData = $block->getDeliveryBoyCollection();
+$googlemapApiKey = $block->getGoogleMapApiKey();
+
+foreach ($locationData as $location) {
+    echo "<input type='hidden' class='location' value='".
+   /** @noEscape */ $location.
+    "' name='locationdata[]'/>";
+}
+$warehouseCoordinates = $block->getWarehouseCoordinates();
+
+echo "<div id='warehouseCoordinates'>" .
+/** @noEscape */ "<input type='hidden' value='$warehouseCoordinates[latitude]' name='warehouseLatitude'/>" .
+/** @noEscape */ "<input type='hidden' value='$warehouseCoordinates[longitude]' name='warehouseLongitude'/>" .
+"</div>";
+
+?>
+<div id="map_container">
+    <div id="map"></div>
+<div>
+<script>
+require.config({
+    map: {
+        '*': {
+            'googleMapKey': 'https://maps.googleapis.com/maps/api/js' +
+                '?key=<?= /* @noEscape */ $googlemapApiKey ?>&libraries=places'
+        }
+    }
+});
+</script>
+<script type="text/javascript">
+    require([
+        "jquery",
+        "mage/calendar",
+        'mage/translate',
+        'googleMapKey',
+        'Magento_Ui/js/modal/alert',
+        'domReady!'
+    ], function($) {
+        var latitude = 0,
+            longitude = 0,
+            wareshouseLatitude = parseFloat($('#warehouseCoordinates').find('[name="warehouseLatitude"]').val()),
+            wareshouseLongitude = parseFloat($('#warehouseCoordinates').find('[name="warehouseLongitude"]').val()),
+            map = new google.maps.Map(document.getElementById('map'), {
+                mapTypeControl: false,
+                center: new google.maps.LatLng(wareshouseLatitude, wareshouseLongitude),
+                zoom: 6
+            });
+            
+        $(".location").map(function() {
+            var values = ($(this).val()).split("||");
+            if (values.length > 0 && values[0] != "" && values[1] != "" ) {
+                latitude = parseFloat(values[0].trim());
+                longitude = parseFloat(values[1].trim());
+                var marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(latitude, longitude),
+                    map: map,
+                    title: 'Click to zoom'
+                });
+                if (marker) {
+                    marker.addListener('click', function () {
+                        map.setZoom(8);
+                        map.setCenter(marker.getPosition());
+                    });
+                }
+            }
+        }).get();
+    });
+</script>

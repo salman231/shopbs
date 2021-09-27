@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+ * InfoBeans Sales Shipment Comment Extension
+ *
+ * @category   Infobeans
+ * @package    Infobeans_OSComments
+ * @version    2.0.0
+ *
+ * Release with version 2.0.0
+ *
+ * @author     InfoBeans Technologies Limited http://www.infobeans.com/
+ * @copyright  Copyright (c) 2017 InfoBeans Technologies Limited
+ -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" label="Email Shipment Items List" design_abstraction="custom">
+    <update handle="sales_email_order_shipment_renderers"/>
+    <body>
+        <referenceBlock name="items">
+            <action method='setTemplate' ifconfig="infobeans_oscomments/general/enable_frontend">
+                <argument name='template' xsi:type='string'>Infobeans_OSComments::email/shipment/items.phtml</argument>
+            </action>
+        </referenceBlock>
+    </body>
+</page>

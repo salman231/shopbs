@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * SearchSuggestion System configuration.
+ * @category Webkul
+ * @package Webkul_SearchSuggestion
+ * @author Webkul
+ * @copyright Copyright (c)   Webkul Software Private Limited (https://webkul.com)
+ * @license https://store.webkul.com/license.html
+ */ 
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\Search\Controller\Ajax\Suggest" type="Webkul\SearchSuggestion\Controller\Search\Suggest" />
+</config>

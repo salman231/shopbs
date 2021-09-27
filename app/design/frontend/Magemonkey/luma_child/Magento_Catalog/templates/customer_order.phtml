@@ -1,0 +1,164 @@
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$customerSession = $objectManager->get('Magento\Customer\Model\Session');
+
+if($customerSession->isLoggedIn()) {
+   $customerid = $customerSession->getCustomer()->getId();
+    
+
+$lastyear = date('Y-m-d', strtotime("-1 year"));
+$orderCollection = $objectManager->create('\Magento\Sales\Model\ResourceModel\Order\Collection');
+$orderCollection->addAttributeToFilter('customer_id',$customerid)
+            ->addAttributeToFilter('status',array('in' => array('complete','processing','pending')))
+            ->addAttributeToSort('entity_id', 'desc')
+            ->setPageSize(10)
+            ->load();
+
+
+    
+    // echo "<pre>";
+    // print_r($childcat->getData());
+    // exit;
+
+$store = $objectManager->get('Magento\Store\Model\StoreManagerInterface')->getStore();
+
+if (count($orderCollection) > 0): ?>
+    <div class="carousel-container custom-carousel">
+        <h2 class="cate-title mp-product-slider-title"><?php echo  "Recent Shopping History";?></h2>
+        <div id="orders-slider-carousel">
+            
+            <div id="orders-category-list" class="owl-carousel owl-theme">
+                <?php $i = 0;
+                foreach ($orderCollection as $orders): ?>
+                    <?php
+                    
+                    $order = $objectManager->create('Magento\Sales\Model\Order')->load($orders->getId());
+					$orderItems = $order->getAllItems();
+					$iterator = 1;
+					foreach ($orderItems as $key => $item) {
+						
+                    $product = $objectManager->create('Magento\Catalog\Model\Product')->load($item->getProductId());
+                    $protitle = $product->getName();
+                    
+                    $productImageUrl = $store->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . 'catalog/product' . $product->getImage();
+					$productUrl  = $product->getProductUrl();
+					 $abstractProductBlock = $block->getLayout()->createBlock('\Magento\Catalog\Block\Product\AbstractProduct');     
+    				$price =$abstractProductBlock->getProductPrice($product);
+
+    				$listBlock = $objectManager->get('\Magento\Catalog\Block\Product\ListProduct');
+					$addToCartUrl =  $listBlock->getAddToCartUrl($product);
+                    ?>
+                    <?php echo ($iterator++ == 1) ? '<div class="category-item category-slider product-item">' : '</div><div class="category-item category-slider product-item">' ?>
+                        <div class="item-image slider-product-item-info">
+                            <div class="cat_thumb">
+                                <a href="<?php echo $productUrl;?>" class="p_view">
+									<img class="" src="<?php echo $productImageUrl;?>" width="240" height="300" alt="<?php echo $protitle ?>"/>
+								</a>
+								<strong class="product name product-item-name">
+									<a href="<?php echo $productUrl;?>" class="p_view">
+										<span><?php echo $protitle ?></span>
+	                            	</a> 
+                            	</strong>
+                            	
+                            	
+                            <?php 
+                            $reviewFactory = $objectManager->create('Magento\Review\Model\Review');
+                            $storeId = $store->getStoreId();
+                            $reviewFactory->getEntitySummary($product, $storeId);
+                            $ratingSummary = $product->getRatingSummary()->getRatingSummary();
+                            $reviewCount = $product->getRatingSummary()->getReviewsCount();
+                            ?>
+                            <?php if($ratingSummary){ ?>
+                            <div class="product-reviews-summary short">
+                                <div class="rating-summary">
+                                    <div title="<?php echo (int)$ratingSummary; ?>%" class="rating-result">
+                                        <span style="width:<?php echo (int)$ratingSummary; ?>%"><span><?php echo (int)$ratingSummary; ?>%</span></span>
+                                    </div>
+                                </div>
+                                <!-- <div class="reviews-actions">
+                                    <?php //echo __('('.$reviewCount.') Reviews'); ?>
+                                </div> -->
+                            </div>
+                            <?php } ?>
+                            <span class="price"><?php echo $price; ?></span>
+                            <form data-role="tocart-form" action="<?php echo $addToCartUrl; ?>" method="post"> 
+                                <?php echo $block->getBlockHtml('formkey')?>
+                                <div class="btn">
+                                    <button type="submit" title="Add to Cart" class="action tocart primary mageplaza-product-slider-button">
+                                        <span>Add to Cart</span>
+                                    </button>
+                                </div>   
+                             </form>
+							</div>
+                        </div>
+                    <?php echo ($iterator == count($orderItems) + 1) ? '</div>' : '' ?>
+                <?php
+                $i++;
+                
+					}
+					
+					
+                endforeach; ?>
+            </div>
+        </div>
+        <?php //echo $block->getPagerHtml() ?>
+        <div class="viewdetails"><a href="<?php echo $this->getUrl()?>sales/order/history/">View Shopping History</a></div>
+    </div>
+
+    <script>
+
+        /*require(['jquery', 
+            'mageplaza/core/owl.carousel'], function ($) {
+            $('#valentine-category-list').owlCarousel({
+                "autoWidth":0,
+                "autoHeight":1,
+                "loop":0,
+                "nav":0,
+                "dots":1,
+                "lazyLoad":0,
+                "autoplay":1,
+                "autoplayTimeout":5000,
+                "animateOut":"none",
+                "items":1
+
+            });
+        });*/
+        require([
+                'jquery',
+                'mageplaza/core/owl.carousel'
+            ], function ($) {
+                jQuery("#orders-category-list").owlCarousel({
+                    responsive:{
+                        0:{
+                            items:2
+                        },
+                        480:{
+                            items:2
+                        },
+                        768:{
+                            items:3
+                        },
+                        992:{
+                            items:5
+                        },
+                        1200:{
+                            items:6
+                        }
+                    },
+                    autoWidth:0,
+                    autoHeight:1,
+                    autoplay:false,
+                    loop:false,
+                    nav : true,
+                    dots: false,
+                    autoplaySpeed : 5000,
+                    navSpeed : 500,
+                    dotsSpeed : 500,
+                    autoplayHoverPause: true,
+                    margin:30,
+                });   
+            }); 
+                
+    </script>
+<?php endif; ?>
+<?php } ?>

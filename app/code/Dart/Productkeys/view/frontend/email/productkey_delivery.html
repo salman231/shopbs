@@ -1,0 +1,16 @@
+{{template config_path="design/email/header_template"}}
+
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+	<tr>
+		<td valign="top">
+			<br />
+			<p><strong>Hello {{var name}}</strong>,</p>
+			<p>Here are your {{var keytype}}(s) for Order #{{var order.getIncrementId()}}:</p>
+			{{var itemshtml|raw}}
+			<div style="clear:both;" /><br />
+			<p>Best regards,<br/><br/><strong>{{var storeGroupName}}</strong></p>
+		</td>
+	</tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}

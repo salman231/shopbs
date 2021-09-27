@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_AutoRelated
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Mview/etc/mview.xsd">
+    <view id="mageplaza_autorelated_indexer" class="Mageplaza\AutoRelated\Model\Indexer\Product\Rule" group="indexer">
+        <subscriptions>
+            <table name="catalog_product_entity" entity_column="entity_id"/>
+            <table name="catalog_product_entity_varchar" entity_column="entity_id"/>
+            <table name="catalog_product_entity_int" entity_column="entity_id"/>
+            <table name="catalog_product_entity_decimal" entity_column="entity_id"/>
+            <table name="catalog_category_product" entity_column="product_id"/>
+            <table name="catalog_product_website" entity_column="product_id"/>
+        </subscriptions>
+    </view>
+</config>

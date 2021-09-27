@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MagentoChatSystem
+ * @author    Webkul
+ * @copyright Copyright (c)  Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Webkul_MagentoChatSystem::css/style.css"/>
+        <css src="Webkul_MagentoChatSystem::css/panel.css"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Webkul\MagentoChatSystem\Block\Adminhtml\ChatBox\Content" name="chatbox" as="chatbox" template="chatbox/content.phtml">
+                <arguments>
+                    <argument name="jsLayout" xsi:type="array">
+                        <item name="components" xsi:type="array">
+                            <item name="chatbox-content" xsi:type="array">
+                                <item name="component" xsi:type="string">Webkul_MagentoChatSystem/js/chatbox</item>
+                                <item name="children" xsi:type="array">
+                                    <item name="reply-management" xsi:type="array">
+                                        <item name="sortOrder" xsi:type="string">1</item>
+                                        <item name="component" xsi:type="string">Webkul_MagentoChatSystem/js/view/reply-management</item>
+                                        <item name="displayArea" xsi:type="string">reply-management</item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </argument>
+                </arguments>
+            <block class="Webkul\MagentoChatSystem\Block\Adminhtml\ChatBox\ReplyManagement" name="reply_template" template="chatbox/reply/reply_managment.phtml"/>
+            <block class="Webkul\MagentoChatSystem\Block\Adminhtml\ChatBox\Style" name="style_template" template="window/style.phtml"/>
+            </block>
+            <block class="Webkul\MagentoChatSystem\Block\Adminhtml\ChatBox\ModelBox" name="active_customer_model" as="active_customer" template="chatbox/active_model.phtml">
+                <arguments>
+                    <argument name="jsLayout" xsi:type="array">
+                        <item name="components" xsi:type="array">
+                            <item name="active-users" xsi:type="array">
+                                <item name="component" xsi:type="string">Webkul_MagentoChatSystem/js/active-model</item>
+                            </item>
+                        </item>
+                    </argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_AutoRelated
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Mageplaza_AutoRelated::autorelated" title="Automatic Related Products" module="Mageplaza_AutoRelated" sortOrder="50" resource="Mageplaza_AutoRelated::autorelated" parent="Magento_Backend::marketing"/>
+        <add id="Mageplaza_AutoRelated::rule" title="Manage Rules" module="Mageplaza_AutoRelated" sortOrder="10" parent="Mageplaza_AutoRelated::autorelated" action="mparp/rule/index" resource="Mageplaza_AutoRelated::rule"/>
+        <add id="Mageplaza_AutoRelated::configuration" title="Configuration" module="Mageplaza_AutoRelated" sortOrder="20" action="adminhtml/system_config/edit/section/autorelated" resource="Mageplaza_AutoRelated::configuration" parent="Mageplaza_AutoRelated::autorelated"/>
+    </menu>
+</config>

@@ -1,0 +1,73 @@
+<?xml version="1.0" ?>
+<!-- 
+/**
+ * Webkul Software
+ *
+ * @category Webkul
+ * @package Webkul_MagentoChatSystem
+ * @author Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license https://store.webkul.com/license.html
+ */
+ -->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+	<argument name="data" xsi:type="array">
+		<item name="js_config" xsi:type="array">
+			<item name="provider" xsi:type="string">chatsystem_report_listing.chatsystem_report_listing_data_source</item>
+		</item>
+	</argument>
+	<settings>
+		<spinner>chatsystem_report_columns</spinner>
+		<deps>
+			<dep>chatsystem_report_listing.chatsystem_report_listing_data_source</dep>
+		</deps>
+	</settings>
+	<dataSource component="Magento_Ui/js/grid/provider" name="chatsystem_report_listing_data_source">
+		<settings>
+			<storageConfig>
+				<param name="indexField" xsi:type="string">report_id</param>
+			</storageConfig>
+			<updateUrl path="mui/index/render"/>
+		</settings>
+		<aclResource>Webkul_MagentoChatSystem::Report</aclResource>
+		<dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider" name="chatsystem_report_listing_data_source">
+			<settings>
+				<requestFieldName>id</requestFieldName>
+				<primaryFieldName>report_id</primaryFieldName>
+			</settings>
+		</dataProvider>
+	</dataSource>
+	<listingToolbar name="listing_top">
+		<bookmark name="bookmarks"/>
+		<columnsControls name="columns_controls"/>
+		<filters name="listing_filters"/>
+		<paging name="listing_paging"/>
+	</listingToolbar>
+	<columns name="chatsystem_report_columns">
+		<column name="report_id">
+			<settings>
+				<filter>text</filter>
+				<sorting>asc</sorting>
+				<label translate="true">ID</label>
+			</settings>
+		</column>
+		<column name="customer_name">
+			<settings>
+				<filter>text</filter>
+				<label translate="true">Report By</label>
+			</settings>
+		</column>
+		<column name="subject">
+			<settings>
+				<filter>text</filter>
+				<label translate="true">Subject</label>
+			</settings>
+		</column>
+		<column name="content">
+			<settings>
+				<filter>text</filter>
+				<label translate="true">Description</label>
+			</settings>
+		</column>
+	</columns>
+</listing>

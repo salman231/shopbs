@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <title>Contact Us</title>
+        <css src="Webkul_Rmasystem::css/rs_front.css"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Webkul\Rmasystem\Block\Guest\Newrma" name="guestRmaForm" template="Webkul_Rmasystem::guest/newrma.phtml">
+              <block class="Magento\Framework\View\Element\Template" name="rma.newrma.customfield" template="Webkul_Rmasystem::customfield.phtml" cacheable="false" />
+              <arguments>
+                  <argument name="jsLayout" xsi:type="array">
+                      <item name="components" xsi:type="array">
+                          <item name="new-rma-component" xsi:type="array">
+                              <item name="component" xsi:type="string">Webkul_Rmasystem/js/view/new-rma</item>
+                              <item name="config" xsi:type="array">
+                                  <item name="template" xsi:type="string">Webkul_Rmasystem/view/new-rma</item>
+                              </item>
+                              <item name="children" xsi:type="array">
+                                  <item name="errors" xsi:type="array">
+                                      <item name="sortOrder" xsi:type="string">0</item>
+                                      <item name="component" xsi:type="string">Magento_Ui/js/view/messages</item>
+                                      <item name="displayArea" xsi:type="string">messages</item>
+                                  </item>
+                              </item>
+                          </item>
+                      </item>
+                  </argument>
+              </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

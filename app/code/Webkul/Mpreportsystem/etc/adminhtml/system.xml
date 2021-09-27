@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Mpreportsystem
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="webkul" translate="label" sortOrder="10">
+            <label>Webkul</label>
+        </tab>
+        <section id="wk_mpreportsystem" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Marketplace Advance Report System</label>
+            <tab>webkul</tab>
+            <resource>Webkul_Mpreportsystem::config_mpreportsystem</resource>
+            <group id="general_settings" translate="label" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Report System Settings</label>
+                <field id="customerdatacount" translate="label comment" sortOrder="1" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Best Customer Count</label>
+                    <comment>e.g. 5</comment>
+                    <validate>validate-number required-entry validate-digits-range digits-range-1-100</validate>
+                </field>
+                <field id="productdatacount" translate="label comment" sortOrder="2" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Top Product count</label>
+                    <comment>e.g. 5</comment>
+                    <validate>validate-number required-entry validate-digits-range digits-range-1-100</validate>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ * 
+ * PHP version 7.0+
+ *
+ * @category  Webkul
+ * @package   Webkul_DeliveryBoy
+ * @author    Webkul <support@webkul.com>
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="deliveryboy_email_forgotpassword_validation_template" label="Forgot Password Validation" file="forgotpassword_validation.html" type="html" module="Webkul_DeliveryBoy" area="frontend"/>
+    <template id="deliveryboy_email_otp" label="OTP" file="otp.html" type="html" module="Webkul_DeliveryBoy" area="frontend"/>
+    <template id="deliveryboy_order_pickup" label="Order Pickup Email" file="order_pickup.html" type="html" module="Webkul_DeliveryBoy" area="frontend"/>
+    <template id="deliveryboy_new_account" label="Deliveryboy New Account" file="deliveryboy_new_account.html" type="html" module="Webkul_DeliveryBoy" area="frontend"/>
+    <template id="deliveryboy_new_review" label="Deliveryboy New Review" file="deliveryboy_new_review.html" type="html" module="Webkul_DeliveryBoy" area="frontend"/>
+    <template id="deliveryboy_review_evaluation_template" label="Deliveryboy Review Evaluation" file="deliveryboy_review_evaluation_template.html" type="html" module="Webkul_DeliveryBoy" area="frontend"/>
+</config>

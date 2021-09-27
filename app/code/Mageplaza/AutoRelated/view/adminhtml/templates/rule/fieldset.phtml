@@ -1,0 +1,59 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_AutoRelated
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+?>
+<?php $_element = $block->getElement() ?>
+<?php $_jsObjectName = $block->getFieldSetId() != null ? $block->getFieldSetId() : $_element->getHtmlId() ?>
+<div class="rule-tree mageplaza-autorelated-rule-tree">
+    <fieldset id="<?= /** @noEscape */ $_jsObjectName ?>" <?= /** @noEscape */ $_element->serialize(['class']) ?> class="fieldset">
+        <legend class="legend"><span><?= /** @noEscape */ $_element->getLegend() ?></span></legend>
+        <br>
+        <?php if ($_element->getComment()) : ?>
+            <div class="messages">
+                <div class="message message-notice"><?= /** @noEscape */ $block->escapeHtml($_element->getComment()) ?></div>
+            </div>
+        <?php endif; ?>
+        <div class="rule-tree-wrapper">
+            <?= /** @noEscape */ $_element->getChildrenHtml() ?>
+            <?php if ($block->getAjaxUrl()) : ?>
+                <div data-mage-init='{
+                    "Mageplaza_AutoRelated/js/product-list": {
+                        "ajaxUrl": "<?= /** @noEscape */ $block->getAjaxUrl(); ?>"
+                    }
+                }' class="mageplaza-autorelated-list-button">
+                    <button type="button" class="show-details"><?= /** @noEscape */ __('PREVIEW PRODUCTS') ?></button>
+                </div>
+                <div class="mageplaza-autorelated-list"></div>
+            <?php endif; ?>
+        </div>
+    </fieldset>
+</div>
+<script>
+    require([
+        "Magento_Rule/rules",
+        "prototype"
+    ], function (VarienRulesForm) {
+        window.<?= /** @noEscape */ $_jsObjectName ?> = new VarienRulesForm('<?= /** @noEscape */ $_jsObjectName ?>', '<?= /** @noEscape */ $block->getNewChildUrl() ?>');
+        <?php if ($_element->getReadonly()) : ?>
+            <?= /** @noEscape */ $_element->getHtmlId() ?>.
+        setReadonly(true);
+        <?php endif; ?>
+    });
+</script>

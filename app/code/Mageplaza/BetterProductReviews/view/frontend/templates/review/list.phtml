@@ -1,0 +1,66 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_BetterProductReviews
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+?>
+<?php /** @var \Mageplaza\BetterProductReviews\Block\Review\ListView $block */ ?>
+<?php
+$_items = $block->getReviewsCollection()->getItems();
+?>
+<?php if (!empty($_items)): ?>
+    <div id="mp-review-list" class="block mp-review-list col-mp mp-8 mp-xs-12">
+        <div class="block-content">
+            <?php if ($block->isSortingEnabled()): ?>
+                <div class="mp-toolbar mp-review-toolbar">
+                    <label for="mp-review-sort" class="label"><?php echo __('View Reviews By') ?></label>
+                    <select id="mp-review-sort">
+                        <?php foreach ($block->getSortingTypeConfig() as $type): ?>
+                            <option value="<?php echo $type['value'] ?>" <?php echo ($type['value'] == $block->getDefaultSortingType()) ? 'selected' : '' ?>>
+                                <?php echo $type['label'] ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            <?php endif; ?>
+            <ol id="mp-review-items" class="items mp-review-items">
+                <div id="ln_overlay" class="ln_overlay">
+                    <div class="loader">
+                        <img src="<?php echo $block->getViewFileUrl('images/loader-1.gif'); ?>" alt="Loading...">
+                    </div>
+                </div>
+                <div id="mp-review-items-container"></div>
+            </ol>
+        </div>
+    </div>
+<?php endif; ?>
+
+<script type="text/javascript">
+    require(['mp_productReviewAjaxSort'], function (mp_productReviewAjaxSort) {
+        /** ajax review sorting */
+        var config = {
+            ajaxSortUrl: '<?php echo $block->getAjaxSortUrl() ?>',
+            reviewPerPage: '<?php echo $block->getReviewsPerPage() ?>',
+            productId: '<?php echo ($block->getProductId()) ?: $block->getAjaxProductId() ?>',
+            writeReviewEnabled: <?php echo $block->getWriteReviewRestriction() ?>,
+            writeReviewNotice: "<?php echo $block->getCustomerNotice() ?>"
+        };
+        return mp_productReviewAjaxSort(config);
+    });
+</script>

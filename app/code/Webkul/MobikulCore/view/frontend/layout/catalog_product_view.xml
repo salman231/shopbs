@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ * 
+ *
+ *
+ * @category  Webkul
+ * @package   Webkul_MobikulCore
+ * @author    Webkul <support@webkul.com>
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+-->
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<head>
+        <css src="Webkul_MobikulCore::css/ar.css"/>
+    </head>
+    <body>
+        <referenceContainer name="product.info.media">
+            <container name="skip_gallery_before.wrapper_test" htmlTag="div" htmlClass="ar_web_feature" before="-">
+                <block class="Webkul\MobikulCore\Block\ArProduct" name="skip_gallery_before_test" template="Webkul_MobikulCore::arproduct.phtml">
+                    <arguments>
+                        <argument name="target" xsi:type="string">gallery-next-area</argument>
+                        <argument name="label" translate="true" xsi:type="string">Skip to the end of the images gallery</argument>
+                    </arguments>
+                </block>
+            </container>
+        </referenceContainer>
+    </body>
+</page>

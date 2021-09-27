@@ -1,0 +1,1194 @@
+"Enable Cache","Enable Cache"
+"Disable Cache","Disable Cache"
+"Mega Menu Cache Status: <span style=""background: #d0e5a9 none repeat scroll 0 0;border: 1px solid #5b8116;color: #185b00;line-height: 17px;padding: 10px 10px;text-align: center;text-transform: uppercase;"">Enabled</span","Mega Menu Cache Status: <span style=""background: #d0e5a9 none repeat scroll 0 0;border: 1px solid #5b8116;color: #185b00;line-height: 17px;padding: 10px 10px;text-align: center;text-transform: uppercase;"">Enabled</span"
+"Mega Menu Cache Status: <span style=""background: #f9d4d4 none repeat scroll 0 0;border: 1px solid #e22626;color: #e22626;line-height: 17px;padding: 10px 10px;text-align: center;text-transform: uppercase;"">Disabled</span","Mega Menu Cache Status: <span style=""background: #f9d4d4 none repeat scroll 0 0;border: 1px solid #e22626;color: #e22626;line-height: 17px;padding: 10px 10px;text-align: center;text-transform: uppercase;"">Disabled</span"
+"Flush Menu Cache","Flush Menu Cache"
+"Add New Menu","Add New Menu"
+"Horizontal Menu","Horizontal Menu"
+"Vertical Left Menu","Vertical Left Menu"
+"Vertical Right Menu","Vertical Right Menu"
+"Accordion Menu","Accordion Menu"
+"Drill Down Menu","Drill Down Menu"
+"Edit Menu","Edit Menu"
+"New Menu","New Menu"
+"Manage Menus","Manage Menus"
+Settings,Settings
+"User Guide","User Guide"
+"Video Guide","Video Guide"
+"Get Support","Get Support"
+"Revert Previous Version","Revert Previous Version"
+"Revert Next Version","Revert Next Version"
+"Delete Menu","Delete Menu"
+"Edit Menu '%1'","Edit Menu '%1'"
+"Save Menu","Save Menu"
+"Save & Flush Menu Cache","Save & Flush Menu Cache"
+"Save & New","Save & New"
+"Save & Duplicate","Save & Duplicate"
+"Menu Top","Menu Top"
+Version,Version
+Name,Name
+Alias,Alias
+Event,Event
+"Scroll to Fixed","Scroll to Fixed"
+"Additional Class","Additional Class"
+"Disable Dimensions","Disable Dimensions"
+"Enter the width(pixel) want to disable this menu. Empty to disable this feature.<br/><br/><strong>Bootstrap 3 Media Query Breakpoints</strong><br/>Large Devices, Wide Screens: 1200px<br/>Medium Devices, Desktops: 992px<br/>Small Devices, Tablets: 768px<br/>Extra Small Devices, Phones: 480px<br/>iPhone Retina: 320px","Enter the width(pixel) want to disable this menu. Empty to disable this feature.<br/><br/><strong>Bootstrap 3 Media Query Breakpoints</strong><br/>Large Devices, Wide Screens: 1200px<br/>Medium Devices, Desktops: 992px<br/>Small Devices, Tablets: 768px<br/>Extra Small Devices, Phones: 480px<br/>iPhone Retina: 320px"
+"Desktop Template","Desktop Template"
+"Apply when width >= 768px","Apply when width >= 768px"
+"Mobile Template","Mobile Template"
+"Apply when width < 768px","Apply when width < 768px"
+"Custom Menu on Mobile","Custom Menu on Mobile"
+"Disable Item Blocks on mobile","Disable Item Blocks on mobile"
+"Item Blocks: Header Block, Left Block, Right Block, Footer Block","Item Blocks: Header Block, Left Block, Right Block, Footer Block"
+"Customer Groups","Customer Groups"
+"Store View","Store View"
+Status,Status
+Yes,Yes
+No,No
+"Media Storage","Media Storage"
+"Create Folder...","Create Folder..."
+"Delete Folder","Delete Folder"
+"Delete File","Delete File"
+"Insert File","Insert File"
+"New Folder Name:","New Folder Name:"
+"Are you sure you want to delete this folder?","Are you sure you want to delete this folder?"
+"Are you sure you want to delete this file?","Are you sure you want to delete this file?"
+"The menu has been deleted.","The menu has been deleted."
+"We can't find a menu to delete.","We can't find a menu to delete."
+"Menu Cache were enabled.","Menu Cache were enabled."
+"Something went wrong while refresh menu cache.","Something went wrong while refresh menu cache."
+Menu,Menu
+"This menu no longer exists.","This menu no longer exists."
+"The Mega Menu Cache has been flushed.","The Mega Menu Cache has been flushed."
+"Something went wrong in progressing.","Something went wrong in progressing."
+Menus,Menus
+"A total of %1 record(s) have been deleted.","A total of %1 record(s) have been deleted."
+"A total of %1 record(s) have been disabled.","A total of %1 record(s) have been disabled."
+"A total of %1 record(s) have been enabled.","A total of %1 record(s) have been enabled."
+"You reverted the menu id #%1, current version #%2","You reverted the menu id #%1, current version #%2"
+"You saved this menu.","You saved this menu."
+"Something went wrong while saving the menu.","Something went wrong while saving the menu."
+"You duplicated this menu.","You duplicated this menu."
+"Something went wrong while duplicating the menu.","Something went wrong while duplicating the menu."
+"General Information","General Information"
+"CSS Classes","CSS Classes"
+"Link Type","Link Type"
+"Cms Page","Cms Page"
+"Choose a cms page to generate link for it.","Choose a cms page to generate link for it."
+"Custom Link","Custom Link"
+"<ul class=""menu-note""><li>Enter hash(#) to make this item not clickable.</li><li>Support Magento 2 Store Directive - It helps get URLs of your store. Example: <b>{{store url=""""}}</b>, <b>{{store url=""contact""}}</b></li></ul>","<ul class=""menu-note""><li>Enter hash(#) to make this item not clickable.</li><li>Support Magento 2 Store Directive - It helps get URLs of your store. Example: <b>{{store url=""""}}</b>, <b>{{store url=""contact""}}</b></li></ul>"
+Category,Category
+"Link Target","Link Target"
+"Show Icon","Show Icon"
+Icon,Icon
+"Hover Icon","Hover Icon"
+"Icon Position","Icon Position"
+"Icon CCS Classes","Icon CCS Classes"
+"Disable Dimesion","Disable Dimesion"
+"Enter the width(pixel) want to disable this item. Empty to disable this feature.<br/><strong>Bootstrap 3 Media Query Breakpoints: </strong><br/><ul class=""menu-note"" style=""margin-left: 40px;""><li><span>Large Devices, Wide Screens: 1200px</span></li><li><span>Medium Devices, Desktops: 992px</span></li><li><span>Small Devices, Tablets: 768px</span></li><li><span>Extra Small Devices, Phones: 480px</span></li><li><span>iPhone Retina: 320px</span></li></ul>","Enter the width(pixel) want to disable this item. Empty to disable this feature.<br/><strong>Bootstrap 3 Media Query Breakpoints: </strong><br/><ul class=""menu-note"" style=""margin-left: 40px;""><li><span>Large Devices, Wide Screens: 1200px</span></li><li><span>Medium Devices, Desktops: 992px</span></li><li><span>Small Devices, Tablets: 768px</span></li><li><span>Extra Small Devices, Phones: 480px</span></li><li><span>iPhone Retina: 320px</span></li></ul>"
+Caret,Caret
+"Hove Caret","Hove Caret"
+"Before HTML","Before HTML"
+"After HTML","After HTML"
+Dropdown,Dropdown
+"Is Group","Is Group"
+"Set to Yes and then both menu content and sub-menu items will be displayed in the same level.","Set to Yes and then both menu content and sub-menu items will be displayed in the same level."
+Width,Width
+"Show Effect","Show Effect"
+"Check animations at <a href=""https://daneden.github.io/animate.css"" target=""_blank"">here</a>","Check animations at <a href=""https://daneden.github.io/animate.css"" target=""_blank"">here</a>"
+"Show Duration(s)","Show Duration(s)"
+Alignment,Alignment
+"Background Color","Background Color"
+"Background Image","Background Image"
+"Background Repeat","Background Repeat"
+"Background Position X","Background Position X"
+"Background Position Y","Background Position Y"
+"Inline CSS","Inline CSS"
+"Semi-colon separated.","Semi-colon separated."
+Header,Header
+Enabled,Enabled
+"Top HTML","Top HTML"
+"Left Block","Left Block"
+HTML,HTML
+"Main Content","Main Content"
+"Main Content Type","Main Content Type"
+"Tab Position","Tab Position"
+"Parent Category","Parent Category"
+"Get sub-categories","Get sub-categories"
+"Child Menu Column","Child Menu Column"
+"Content HTML","Content HTML"
+"Right Block","Right Block"
+"Bottom Block","Bottom Block"
+"Menu ID","Menu ID"
+"Item ID","Item ID"
+Design,Design
+"Text Color","Text Color"
+"Hover Text Color","Hover Text Color"
+"Background Hover Color","Background Hover Color"
+"Insert Image","Insert Image"
+"Upload Image","Upload Image"
+"WYSIWYG Editor","WYSIWYG Editor"
+"From left menu","From left menu"
+"From right menu","From right menu"
+"From left item","From left item"
+"From right item","From right item"
+None,None
+"Attention Seekers","Attention Seekers"
+bounce,bounce
+flash,flash
+pulse,pulse
+rubberBand,rubberBand
+shake,shake
+swing,swing
+tada,tada
+wobble,wobble
+jello,jello
+"Bouncing Entrances","Bouncing Entrances"
+bounceIn,bounceIn
+bounceInDown,bounceInDown
+bounceInLeft,bounceInLeft
+bounceInRight,bounceInRight
+bounceInUp,bounceInUp
+"Fading Entrances","Fading Entrances"
+fadeIn,fadeIn
+fadeInDown,fadeInDown
+fadeInDownBig,fadeInDownBig
+fadeInLeft,fadeInLeft
+fadeInLeftBig,fadeInLeftBig
+fadeInRight,fadeInRight
+fadeInRightBig,fadeInRightBig
+fadeInUp,fadeInUp
+fadeInUpBig,fadeInUpBig
+Flippers,Flippers
+flip,flip
+flipInX,flipInX
+flipInY,flipInY
+Lightspeed,Lightspeed
+lightSpeedIn,lightSpeedIn
+"Rotating Entrances","Rotating Entrances"
+rotateIn,rotateIn
+rotateInDownLeft,rotateInDownLeft
+rotateInDownRight,rotateInDownRight
+rotateInUpLeft,rotateInUpLeft
+rotateInUpRight,rotateInUpRight
+"Sliding Entrances","Sliding Entrances"
+slideInUp,slideInUp
+slideInDown,slideInDown
+slideInLeft,slideInLeft
+slideInRight,slideInRight
+"Zoom Entrances","Zoom Entrances"
+zoomIn,zoomIn
+zoomInDown,zoomInDown
+zoomInLeft,zoomInLeft
+zoomInRight,zoomInRight
+zoomInUp,zoomInUp
+Specials,Specials
+rollIn,rollIn
+Disable,Disable
+"Bouncing Exits","Bouncing Exits"
+"Fading Exits","Fading Exits"
+"Rotating Exits","Rotating Exits"
+"Sliding Exits","Sliding Exits"
+"Zoom Exits","Zoom Exits"
+"Theme defaults","Theme defaults"
+Solid,Solid
+Dotted,Dotted
+Dashed,Dashed
+Hidden,Hidden
+Double,Double
+Groove,Groove
+Ridge,Ridge
+Inset,Inset
+Outset,Outset
+Initial,Initial
+Inherit,Inherit
+Hover,Hover
+Click,Click
+Custom...,Custom...
+"Google Fonts...","Google Fonts..."
+"Arial, Helvetica Neue, Helvetica, sans-serif","Arial, Helvetica Neue, Helvetica, sans-serif"
+"Georgia, serif","Georgia, serif"
+"Lucida Sans Unicode, Lucida Grande, sans-serif","Lucida Sans Unicode, Lucida Grande, sans-serif"
+"Palatino Linotype, Book Antiqua, Palatino, serif","Palatino Linotype, Book Antiqua, Palatino, serif"
+"Tahoma, Geneva, sans-serif","Tahoma, Geneva, sans-serif"
+"Trebuchet MS, Helvetica, sans-serif","Trebuchet MS, Helvetica, sans-serif"
+"Verdana, Geneva, sans-serif","Verdana, Geneva, sans-serif"
+Left,Left
+Right,Right
+500px,500px
+address-book,address-book
+address-book-o,address-book-o
+address-card,address-card
+address-card-o,address-card-o
+adjust,adjust
+adn,adn
+align-center,align-center
+align-justify,align-justify
+align-left,align-left
+align-right,align-right
+amazon,amazon
+ambulance,ambulance
+american-sign-language-interpreting,american-sign-language-interpreting
+anchor,anchor
+android,android
+angellist,angellist
+angle-double-down,angle-double-down
+angle-double-left,angle-double-left
+angle-double-right,angle-double-right
+angle-double-up,angle-double-up
+angle-down,angle-down
+angle-left,angle-left
+angle-right,angle-right
+angle-up,angle-up
+apple,apple
+archive,archive
+area-chart,area-chart
+arrow-circle-down,arrow-circle-down
+arrow-circle-left,arrow-circle-left
+arrow-circle-o-down,arrow-circle-o-down
+arrow-circle-o-left,arrow-circle-o-left
+arrow-circle-o-right,arrow-circle-o-right
+arrow-circle-o-up,arrow-circle-o-up
+arrow-circle-right,arrow-circle-right
+arrow-circle-up,arrow-circle-up
+arrow-down,arrow-down
+arrow-left,arrow-left
+arrow-right,arrow-right
+arrow-up,arrow-up
+arrows,arrows
+arrows-alt,arrows-alt
+arrows-h,arrows-h
+arrows-v,arrows-v
+asl-interpreting,asl-interpreting
+assistive-listening-systems,assistive-listening-systems
+asterisk,asterisk
+at,at
+audio-description,audio-description
+automobile,automobile
+backward,backward
+balance-scale,balance-scale
+ban,ban
+bandcamp,bandcamp
+bank,bank
+bar-chart,bar-chart
+bar-chart-o,bar-chart-o
+barcode,barcode
+bars,bars
+bath,bath
+bathtub,bathtub
+battery,battery
+battery-0,battery-0
+battery-1,battery-1
+battery-2,battery-2
+battery-3,battery-3
+battery-4,battery-4
+battery-empty,battery-empty
+battery-full,battery-full
+battery-half,battery-half
+battery-quarter,battery-quarter
+battery-three-quarters,battery-three-quarters
+bed,bed
+beer,beer
+behance,behance
+behance-square,behance-square
+bell,bell
+bell-o,bell-o
+bell-slash,bell-slash
+bell-slash-o,bell-slash-o
+bicycle,bicycle
+binoculars,binoculars
+birthday-cake,birthday-cake
+bitbucket,bitbucket
+bitbucket-square,bitbucket-square
+bitcoin,bitcoin
+black-tie,black-tie
+blind,blind
+bluetooth,bluetooth
+bluetooth-b,bluetooth-b
+bold,bold
+bolt,bolt
+bomb,bomb
+book,book
+bookmark,bookmark
+bookmark-o,bookmark-o
+braille,braille
+briefcase,briefcase
+btc,btc
+bug,bug
+building,building
+building-o,building-o
+bullhorn,bullhorn
+bullseye,bullseye
+bus,bus
+buysellads,buysellads
+cab,cab
+calculator,calculator
+calendar,calendar
+calendar-check-o,calendar-check-o
+calendar-minus-o,calendar-minus-o
+calendar-o,calendar-o
+calendar-plus-o,calendar-plus-o
+calendar-times-o,calendar-times-o
+camera,camera
+camera-retro,camera-retro
+car,car
+caret-down,caret-down
+caret-left,caret-left
+caret-right,caret-right
+caret-square-o-down,caret-square-o-down
+caret-square-o-left,caret-square-o-left
+caret-square-o-right,caret-square-o-right
+caret-square-o-up,caret-square-o-up
+caret-up,caret-up
+cart-arrow-down,cart-arrow-down
+cart-plus,cart-plus
+cc,cc
+cc-amex,cc-amex
+cc-diners-club,cc-diners-club
+cc-discover,cc-discover
+cc-jcb,cc-jcb
+cc-mastercard,cc-mastercard
+cc-paypal,cc-paypal
+cc-stripe,cc-stripe
+cc-visa,cc-visa
+certificate,certificate
+chain,chain
+chain-broken,chain-broken
+check,check
+check-circle,check-circle
+check-circle-o,check-circle-o
+check-square,check-square
+check-square-o,check-square-o
+chevron-circle-down,chevron-circle-down
+chevron-circle-left,chevron-circle-left
+chevron-circle-right,chevron-circle-right
+chevron-circle-up,chevron-circle-up
+chevron-down,chevron-down
+chevron-left,chevron-left
+chevron-right,chevron-right
+chevron-up,chevron-up
+child,child
+chrome,chrome
+circle,circle
+circle-o,circle-o
+circle-o-notch,circle-o-notch
+circle-thin,circle-thin
+clipboard,clipboard
+clock-o,clock-o
+clone,clone
+close,close
+cloud,cloud
+cloud-download,cloud-download
+cloud-upload,cloud-upload
+cny,cny
+code,code
+code-fork,code-fork
+codepen,codepen
+codiepie,codiepie
+coffee,coffee
+cog,cog
+cogs,cogs
+columns,columns
+comment,comment
+comment-o,comment-o
+commenting,commenting
+commenting-o,commenting-o
+comments,comments
+comments-o,comments-o
+compass,compass
+compress,compress
+connectdevelop,connectdevelop
+contao,contao
+copy,copy
+copyright,copyright
+creative-commons,creative-commons
+credit-card,credit-card
+credit-card-alt,credit-card-alt
+crop,crop
+crosshairs,crosshairs
+css3,css3
+cube,cube
+cubes,cubes
+cut,cut
+cutlery,cutlery
+dashboard,dashboard
+dashcube,dashcube
+database,database
+deaf,deaf
+deafness,deafness
+dedent,dedent
+delicious,delicious
+desktop,desktop
+deviantart,deviantart
+diamond,diamond
+digg,digg
+dollar,dollar
+dot-circle-o,dot-circle-o
+download,download
+dribbble,dribbble
+drivers-license,drivers-license
+drivers-license-o,drivers-license-o
+dropbox,dropbox
+drupal,drupal
+edge,edge
+edit,edit
+eercast,eercast
+eject,eject
+ellipsis-h,ellipsis-h
+ellipsis-v,ellipsis-v
+empire,empire
+envelope,envelope
+envelope-o,envelope-o
+envelope-open,envelope-open
+envelope-open-o,envelope-open-o
+envelope-square,envelope-square
+envira,envira
+eraser,eraser
+etsy,etsy
+eur,eur
+euro,euro
+exchange,exchange
+exclamation,exclamation
+exclamation-circle,exclamation-circle
+exclamation-triangle,exclamation-triangle
+expand,expand
+expeditedssl,expeditedssl
+external-link,external-link
+external-link-square,external-link-square
+eye,eye
+eye-slash,eye-slash
+eyedropper,eyedropper
+fa,fa
+facebook,facebook
+facebook-f,facebook-f
+facebook-official,facebook-official
+facebook-square,facebook-square
+fast-backward,fast-backward
+fast-forward,fast-forward
+fax,fax
+feed,feed
+female,female
+fighter-jet,fighter-jet
+file,file
+file-archive-o,file-archive-o
+file-audio-o,file-audio-o
+file-code-o,file-code-o
+file-excel-o,file-excel-o
+file-image-o,file-image-o
+file-movie-o,file-movie-o
+file-o,file-o
+file-pdf-o,file-pdf-o
+file-photo-o,file-photo-o
+file-picture-o,file-picture-o
+file-powerpoint-o,file-powerpoint-o
+file-sound-o,file-sound-o
+file-text,file-text
+file-text-o,file-text-o
+file-video-o,file-video-o
+file-word-o,file-word-o
+file-zip-o,file-zip-o
+files-o,files-o
+film,film
+filter,filter
+fire,fire
+fire-extinguisher,fire-extinguisher
+firefox,firefox
+first-order,first-order
+flag,flag
+flag-checkered,flag-checkered
+flag-o,flag-o
+flask,flask
+flickr,flickr
+floppy-o,floppy-o
+folder,folder
+folder-o,folder-o
+folder-open,folder-open
+folder-open-o,folder-open-o
+font,font
+font-awesome,font-awesome
+fort-awesome,fort-awesome
+forumbee,forumbee
+forward,forward
+foursquare,foursquare
+free-code-camp,free-code-camp
+frown-o,frown-o
+futbol-o,futbol-o
+gamepad,gamepad
+gavel,gavel
+gbp,gbp
+ge,ge
+gear,gear
+gears,gears
+genderless,genderless
+get-pocket,get-pocket
+gg,gg
+gg-circle,gg-circle
+gift,gift
+git,git
+git-square,git-square
+github,github
+github-alt,github-alt
+github-square,github-square
+gitlab,gitlab
+gittip,gittip
+glass,glass
+glide,glide
+glide-g,glide-g
+globe,globe
+google,google
+google-plus,google-plus
+google-plus-circle,google-plus-circle
+google-plus-official,google-plus-official
+google-plus-square,google-plus-square
+google-wallet,google-wallet
+graduation-cap,graduation-cap
+gratipay,gratipay
+grav,grav
+group,group
+h-square,h-square
+hacker-news,hacker-news
+hand-grab-o,hand-grab-o
+hand-lizard-o,hand-lizard-o
+hand-o-down,hand-o-down
+hand-o-left,hand-o-left
+hand-o-right,hand-o-right
+hand-o-up,hand-o-up
+hand-paper-o,hand-paper-o
+hand-peace-o,hand-peace-o
+hand-pointer-o,hand-pointer-o
+hand-rock-o,hand-rock-o
+hand-scissors-o,hand-scissors-o
+hand-spock-o,hand-spock-o
+hand-stop-o,hand-stop-o
+handshake-o,handshake-o
+hard-of-hearing,hard-of-hearing
+hashtag,hashtag
+hdd-o,hdd-o
+header,header
+headphones,headphones
+heart,heart
+heart-o,heart-o
+heartbeat,heartbeat
+history,history
+home,home
+hospital-o,hospital-o
+hotel,hotel
+hourglass,hourglass
+hourglass-1,hourglass-1
+hourglass-2,hourglass-2
+hourglass-3,hourglass-3
+hourglass-end,hourglass-end
+hourglass-half,hourglass-half
+hourglass-o,hourglass-o
+hourglass-start,hourglass-start
+houzz,houzz
+html5,html5
+i-cursor,i-cursor
+id-badge,id-badge
+id-card,id-card
+id-card-o,id-card-o
+ils,ils
+image,image
+imdb,imdb
+inbox,inbox
+indent,indent
+industry,industry
+info,info
+info-circle,info-circle
+"info-circle lg li","info-circle lg li"
+inr,inr
+instagram,instagram
+institution,institution
+internet-explorer,internet-explorer
+intersex,intersex
+ioxhost,ioxhost
+italic,italic
+joomla,joomla
+jpy,jpy
+jsfiddle,jsfiddle
+key,key
+keyboard-o,keyboard-o
+krw,krw
+language,language
+laptop,laptop
+lastfm,lastfm
+lastfm-square,lastfm-square
+leaf,leaf
+leanpub,leanpub
+legal,legal
+lemon-o,lemon-o
+level-down,level-down
+level-up,level-up
+life-bouy,life-bouy
+life-buoy,life-buoy
+life-ring,life-ring
+life-saver,life-saver
+lightbulb-o,lightbulb-o
+line-chart,line-chart
+link,link
+linkedin,linkedin
+linkedin-square,linkedin-square
+linode,linode
+linux,linux
+list,list
+list-alt,list-alt
+list-ol,list-ol
+list-ul,list-ul
+location-arrow,location-arrow
+lock,lock
+long-arrow-down,long-arrow-down
+long-arrow-left,long-arrow-left
+long-arrow-right,long-arrow-right
+long-arrow-up,long-arrow-up
+low-vision,low-vision
+magic,magic
+magnet,magnet
+mail-forward,mail-forward
+mail-reply,mail-reply
+mail-reply-all,mail-reply-all
+male,male
+map,map
+map-marker,map-marker
+map-o,map-o
+map-pin,map-pin
+map-signs,map-signs
+mars,mars
+mars-double,mars-double
+mars-stroke,mars-stroke
+mars-stroke-h,mars-stroke-h
+mars-stroke-v,mars-stroke-v
+maxcdn,maxcdn
+meanpath,meanpath
+medium,medium
+medkit,medkit
+meetup,meetup
+meh-o,meh-o
+mercury,mercury
+microchip,microchip
+microphone,microphone
+microphone-slash,microphone-slash
+minus,minus
+minus-circle,minus-circle
+minus-square,minus-square
+minus-square-o,minus-square-o
+mixcloud,mixcloud
+mobile,mobile
+mobile-phone,mobile-phone
+modx,modx
+money,money
+moon-o,moon-o
+mortar-board,mortar-board
+motorcycle,motorcycle
+mouse-pointer,mouse-pointer
+music,music
+navicon,navicon
+neuter,neuter
+newspaper-o,newspaper-o
+object-group,object-group
+object-ungroup,object-ungroup
+odnoklassniki,odnoklassniki
+odnoklassniki-square,odnoklassniki-square
+opencart,opencart
+openid,openid
+opera,opera
+optin-monster,optin-monster
+outdent,outdent
+pagelines,pagelines
+paint-brush,paint-brush
+paper-plane,paper-plane
+paper-plane-o,paper-plane-o
+paperclip,paperclip
+paragraph,paragraph
+paste,paste
+pause,pause
+pause-circle,pause-circle
+pause-circle-o,pause-circle-o
+paw,paw
+paypal,paypal
+pencil,pencil
+pencil-square,pencil-square
+pencil-square-o,pencil-square-o
+percent,percent
+phone,phone
+phone-square,phone-square
+photo,photo
+picture-o,picture-o
+pie-chart,pie-chart
+pied-piper,pied-piper
+pied-piper-alt,pied-piper-alt
+pied-piper-pp,pied-piper-pp
+pinterest,pinterest
+pinterest-p,pinterest-p
+pinterest-square,pinterest-square
+plane,plane
+play,play
+play-circle,play-circle
+play-circle-o,play-circle-o
+plug,plug
+plus,plus
+plus-circle,plus-circle
+plus-square,plus-square
+plus-square-o,plus-square-o
+podcast,podcast
+power-off,power-off
+print,print
+product-hunt,product-hunt
+puzzle-piece,puzzle-piece
+qq,qq
+qrcode,qrcode
+question,question
+question-circle,question-circle
+question-circle-o,question-circle-o
+quora,quora
+quote-left,quote-left
+quote-right,quote-right
+ra,ra
+random,random
+ravelry,ravelry
+rebel,rebel
+recycle,recycle
+reddit,reddit
+reddit-alien,reddit-alien
+reddit-square,reddit-square
+refresh,refresh
+registered,registered
+remove,remove
+renren,renren
+reorder,reorder
+repeat,repeat
+reply,reply
+reply-all,reply-all
+resistance,resistance
+retweet,retweet
+rmb,rmb
+road,road
+rocket,rocket
+rotate-left,rotate-left
+rotate-right,rotate-right
+rouble,rouble
+rss,rss
+rss-square,rss-square
+rub,rub
+ruble,ruble
+rupee,rupee
+s15,s15
+safari,safari
+save,save
+scissors,scissors
+scribd,scribd
+search,search
+search-minus,search-minus
+search-plus,search-plus
+sellsy,sellsy
+send,send
+send-o,send-o
+server,server
+share,share
+share-alt,share-alt
+share-alt-square,share-alt-square
+share-square,share-square
+share-square-o,share-square-o
+shekel,shekel
+sheqel,sheqel
+shield,shield
+ship,ship
+shirtsinbulk,shirtsinbulk
+shopping-bag,shopping-bag
+shopping-basket,shopping-basket
+shopping-cart,shopping-cart
+shower,shower
+sign-in,sign-in
+sign-language,sign-language
+sign-out,sign-out
+signal,signal
+signing,signing
+simplybuilt,simplybuilt
+sitemap,sitemap
+skyatlas,skyatlas
+skype,skype
+slack,slack
+sliders,sliders
+slideshare,slideshare
+smile-o,smile-o
+snapchat,snapchat
+snapchat-ghost,snapchat-ghost
+snapchat-square,snapchat-square
+snowflake-o,snowflake-o
+soccer-ball-o,soccer-ball-o
+sort,sort
+sort-alpha-asc,sort-alpha-asc
+sort-alpha-desc,sort-alpha-desc
+sort-amount-asc,sort-amount-asc
+sort-amount-desc,sort-amount-desc
+sort-asc,sort-asc
+sort-desc,sort-desc
+sort-down,sort-down
+sort-numeric-asc,sort-numeric-asc
+sort-numeric-desc,sort-numeric-desc
+sort-up,sort-up
+soundcloud,soundcloud
+space-shuttle,space-shuttle
+spinner,spinner
+spoon,spoon
+spotify,spotify
+square,square
+square-o,square-o
+stack-exchange,stack-exchange
+stack-overflow,stack-overflow
+star,star
+star-half,star-half
+star-half-empty,star-half-empty
+star-half-full,star-half-full
+star-half-o,star-half-o
+star-o,star-o
+steam,steam
+steam-square,steam-square
+step-backward,step-backward
+step-forward,step-forward
+stethoscope,stethoscope
+sticky-note,sticky-note
+sticky-note-o,sticky-note-o
+stop,stop
+stop-circle,stop-circle
+stop-circle-o,stop-circle-o
+street-view,street-view
+strikethrough,strikethrough
+stumbleupon,stumbleupon
+stumbleupon-circle,stumbleupon-circle
+subscript,subscript
+subway,subway
+suitcase,suitcase
+sun-o,sun-o
+superpowers,superpowers
+superscript,superscript
+support,support
+table,table
+tablet,tablet
+tachometer,tachometer
+tag,tag
+tags,tags
+tasks,tasks
+taxi,taxi
+telegram,telegram
+television,television
+tencent-weibo,tencent-weibo
+terminal,terminal
+text-height,text-height
+text-width,text-width
+th,th
+th-large,th-large
+th-list,th-list
+themeisle,themeisle
+thermometer,thermometer
+thermometer-0,thermometer-0
+thermometer-1,thermometer-1
+thermometer-2,thermometer-2
+thermometer-3,thermometer-3
+thermometer-4,thermometer-4
+thermometer-empty,thermometer-empty
+thermometer-full,thermometer-full
+thermometer-half,thermometer-half
+thermometer-quarter,thermometer-quarter
+thermometer-three-quarters,thermometer-three-quarters
+thumb-tack,thumb-tack
+thumbs-down,thumbs-down
+thumbs-o-down,thumbs-o-down
+thumbs-o-up,thumbs-o-up
+thumbs-up,thumbs-up
+ticket,ticket
+times,times
+times-circle,times-circle
+times-circle-o,times-circle-o
+times-rectangle,times-rectangle
+times-rectangle-o,times-rectangle-o
+tint,tint
+toggle-down,toggle-down
+toggle-left,toggle-left
+toggle-off,toggle-off
+toggle-on,toggle-on
+toggle-right,toggle-right
+toggle-up,toggle-up
+trademark,trademark
+train,train
+transgender,transgender
+transgender-alt,transgender-alt
+trash,trash
+trash-o,trash-o
+tree,tree
+trello,trello
+tripadvisor,tripadvisor
+trophy,trophy
+truck,truck
+try,try
+tty,tty
+tumblr,tumblr
+tumblr-square,tumblr-square
+turkish-lira,turkish-lira
+tv,tv
+twitch,twitch
+twitter,twitter
+twitter-square,twitter-square
+umbrella,umbrella
+underline,underline
+undo,undo
+universal-access,universal-access
+university,university
+unlink,unlink
+unlock,unlock
+unlock-alt,unlock-alt
+unsorted,unsorted
+upload,upload
+usb,usb
+usd,usd
+user,user
+user-circle,user-circle
+user-circle-o,user-circle-o
+user-md,user-md
+user-o,user-o
+user-plus,user-plus
+user-secret,user-secret
+user-times,user-times
+users,users
+vcard,vcard
+vcard-o,vcard-o
+venus,venus
+venus-double,venus-double
+venus-mars,venus-mars
+viacoin,viacoin
+viadeo,viadeo
+viadeo-square,viadeo-square
+video-camera,video-camera
+vimeo,vimeo
+vimeo-square,vimeo-square
+vine,vine
+vk,vk
+volume-control-phone,volume-control-phone
+volume-down,volume-down
+volume-off,volume-off
+volume-up,volume-up
+warning,warning
+wechat,wechat
+weibo,weibo
+weixin,weixin
+whatsapp,whatsapp
+wheelchair,wheelchair
+wheelchair-alt,wheelchair-alt
+wifi,wifi
+wikipedia-w,wikipedia-w
+window-close,window-close
+window-close-o,window-close-o
+window-maximize,window-maximize
+window-minimize,window-minimize
+window-restore,window-restore
+windows,windows
+won,won
+wordpress,wordpress
+wpbeginner,wpbeginner
+wpexplorer,wpexplorer
+wpforms,wpforms
+wrench,wrench
+xing,xing
+xing-square,xing-square
+y-combinator,y-combinator
+y-combinator-square,y-combinator-square
+yahoo,yahoo
+yc,yc
+yc-square,yc-square
+yelp,yelp
+yen,yen
+yoast,yoast
+youtube,youtube
+youtube-play,youtube-play
+youtube-square,youtube-square
+"Load in a new window","Load in a new window"
+"Load in the same frame as it was clicked","Load in the same frame as it was clicked"
+"Load in the parent frameset","Load in the parent frameset"
+"Load in the full body of the window","Load in the full body of the window"
+"Category Link","Category Link"
+"-- Please Select CMS Page --","-- Please Select CMS Page --"
+"Vertical Menu","Vertical Menu"
+"Child Menu Item","Child Menu Item"
+Content,Content
+"Dynamic Content Tab","Dynamic Content Tab"
+Sub-Categories,Sub-Categories
+"Off Canvas","Off Canvas"
+"Tree Menu","Tree Menu"
+"No Repeat","No Repeat"
+"Repeat X","Repeat X"
+"Repeat Y","Repeat Y"
+Round,Round
+Space,Space
+Disabled,Disabled
+Top,Top
+"Off Canvas Left","Off Canvas Left"
+"Custom Menu","Custom Menu"
+"A menu alias with the same properties already exists in the selected store and selected customer group.","A menu alias with the same properties already exists in the selected store and selected customer group."
+Edit,Edit
+"Add Menu Item","Add Menu Item"
+"Import Store Category","Import Store Category"
+Preview,Preview
+"Expand All","Expand All"
+"Collapse All","Collapse All"
+Horizontal,Horizontal
+Vertical,Vertical
+Update,Update
+Delete,Delete
+Cancel,Cancel
+"Structure Preview","Structure Preview"
+"Search Icon","Search Icon"
+Desktop(1280px),Desktop(1280px)
+"Tablet Landscape (1024px)","Tablet Landscape (1024px)"
+"Tablet Portrait (768px)","Tablet Portrait (768px)"
+"Mobile Landscape (480x320)","Mobile Landscape (480x320)"
+"Mobile Portrait (320x480)","Mobile Portrait (320x480)"
+Load,Load
+"Only Import Subcategories","Only Import Subcategories"
+"Import Sub-categories Level","Import Sub-categories Level"
+"Import From Item Index","Import From Item Index"
+"Import To Item Index","Import To Item Index"
+Import,Import
+Margin,Margin
+Border,Border
+Padding,Padding
+"Border color","Border color"
+"Border Color","Border Color"
+"Border Style","Border Style"
+"Background color","Background color"
+Background,Background
+"Box Shadow","Box Shadow"
+inset,inset
+"Boxshadow X","Boxshadow X"
+"Boxshadow Y","Boxshadow Y"
+Blur,Blur
+"Boxshadow Blur","Boxshadow Blur"
+Spread,Spread
+"Boxshadow Spread","Boxshadow Spread"
+"Boxshadow Color","Boxshadow Color"
+"Font Size","Font Size"
+"Font Family","Font Family"
+Custom,Custom
+"Type in your custom font stack, e.g.:<br><em>Arial, ""Helvetica Neue"", Helvetica, sans-serif</em>.<br><strong>Important</strong>: Do not add trailing semicolon.","Type in your custom font stack, e.g.:<br><em>Arial, ""Helvetica Neue"", Helvetica, sans-serif</em>.<br><strong>Important</strong>: Do not add trailing semicolon."
+"Google Font","Google Font"
+"Font preview is available on <a href=""http://www.google.com/webfonts"">Google Web Fonts</a><br><strong style=""color:red;"">Important</strong>: most of the fonts from Google are not available in all weights. Make sure that you specified correct weight (field <strong>Font Weight</strong> below) for selected font. Otherwise font will not be displayed. Refer to <a href=""http://www.google.com/webfonts"">Google Web Fonts</a> to check if the selected weight is available for your font.","Font preview is available on <a href=""http://www.google.com/webfonts"">Google Web Fonts</a><br><strong style=""color:red;"">Important</strong>: most of the fonts from Google are not available in all weights. Make sure that you specified correct weight (field <strong>Font Weight</strong> below) for selected font. Otherwise font will not be displayed. Refer to <a href=""http://www.google.com/webfonts"">Google Web Fonts</a> to check if the selected weight is available for your font."
+"Character Sets","Character Sets"
+"Some of the fonts support multiple scripts (like Latin and Cyrillic for example). You need to select at least one character set.<br><strong style=""color:red;"">Important</strong>: not all fonts support extended character sets. For a complete list of available fonts and font subsets refer to <a href=""http://www.google.com/webfonts"">Google Web Fonts</a>.<br><strong style=""color:red;"">Important</strong>: using multiple character sets affects performance, so only select the character sets that you actually need.","Some of the fonts support multiple scripts (like Latin and Cyrillic for example). You need to select at least one character set.<br><strong style=""color:red;"">Important</strong>: not all fonts support extended character sets. For a complete list of available fonts and font subsets refer to <a href=""http://www.google.com/webfonts"">Google Web Fonts</a>.<br><strong style=""color:red;"">Important</strong>: using multiple character sets affects performance, so only select the character sets that you actually need."
+"Font Weight","Font Weight"
+"Specify the weight of the font. You can only use <strong>numeric font weights</strong> which are available for the CSS property <a href=""https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight""><em>font-weight</em></a>. E.g. normal weight is <em>400</em>, bold is <em>700</em>. Leave empty to use default weight.<br><strong style=""color:red;"">Important</strong>: if you selected a font from Google Fonts, note that some fonts are not available in all weights. Refer to <a href=""http://www.google.com/webfonts"">Google Web Fonts</a> to check if the selected weight is available for your font.","Specify the weight of the font. You can only use <strong>numeric font weights</strong> which are available for the CSS property <a href=""https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight""><em>font-weight</em></a>. E.g. normal weight is <em>400</em>, bold is <em>700</em>. Leave empty to use default weight.<br><strong style=""color:red;"">Important</strong>: if you selected a font from Google Fonts, note that some fonts are not available in all weights. Refer to <a href=""http://www.google.com/webfonts"">Google Web Fonts</a> to check if the selected weight is available for your font."
+"Border Radius","Border Radius"
+"Append New Item","Append New Item"
+"Prepend New Item","Prepend New Item"
+"General Settings","General Settings"
+"Menu Editor","Menu Editor"
+"Design Options","Design Options"
+"Toggle Nav","Toggle Nav"
+Sale,Sale
+New,New
+"Learn More","Learn More"
+"Add to Cart","Add to Cart"
+"In stock","In stock"
+"Out of stock","Out of stock"
+"Add to Wish List","Add to Wish List"
+"Add to Compare","Add to Compare"
+Submit,Submit
+"Item Selected","Item Selected"
+"Item Created","Item Created"
+"Item Saved","Item Saved"
+"Import Sucessfully","Import Sucessfully"
+"Menu Item","Menu Item"
+"Was Imported Sucessfully","Was Imported Sucessfully"
+"<a href=""http://venustheme.com"" target=""_BLANK"" title=""Venustheme.com - Premium Magento Template Club"">Venustheme.com</a>","<a href=""http://venustheme.com"" target=""_BLANK"" title=""Venustheme.com - Premium Magento Template Club"">Venustheme.com</a>"
+"Mega Menu","Mega Menu"
+"Enable Auto Backup Tool","Enable Auto Backup Tool"
+"Allow backup a menu version after save menu","Allow backup a menu version after save menu"
+"Number Backup Version","Number Backup Version"
+"Custom CSS","Custom CSS"
+"Allow Cache The Generated Megamenu Html Into Database.","Allow Cache The Generated Megamenu Html Into Database."
+"Ves Megamenu: Menu","Ves Megamenu: Menu"
+"Select a Menu","Select a Menu"
+Title,Title
+"Ves Megamenu: Products","Ves Megamenu: Products"
+Titlte,Titlte
+"Addtion Class","Addtion Class"
+"Product Source","Product Source"
+"Latest Products","Latest Products"
+"New products","New products"
+Special,Special
+"Most Popular","Most Popular"
+"Best Seller","Best Seller"
+"Top Rated","Top Rated"
+Random,Random
+Featured,Featured
+Categories,Categories
+"Number Item","Number Item"
+Type,Type
+"Bootstrap Carousel Settings","Bootstrap Carousel Settings"
+"Number item per page","Number item per page"
+"Number Column on Large Desktop","Number Column on Large Desktop"
+"Large devices Desktops (≥1200px)","Large devices Desktops (≥1200px)"
+"Number Column on Desktop","Number Column on Desktop"
+"Medium devices Desktops (≥992px)","Medium devices Desktops (≥992px)"
+"Number Column on Tablets","Number Column on Tablets"
+"Small devices Tablets (≥768px)","Small devices Tablets (≥768px)"
+"Number Column on Phones","Number Column on Phones"
+"Extra small devices Phones (<768px)","Extra small devices Phones (<768px)"
+"Show next/prev buttons.","Show next/prev buttons."
+"Show Dots navigations","Show Dots navigations"
+Wrap,Wrap
+"Whether the carousel should cycle continuously or have hard stops.","Whether the carousel should cycle continuously or have hard stops."
+Keyboard,Keyboard
+"Whether the carousel should react to keyboard events.","Whether the carousel should react to keyboard events."
+"OWL Carousel Settings","OWL Carousel Settings"
+"Number Columns On Page (Large display)","Number Columns On Page (Large display)"
+"Show number items when screen size 1200px and up","Show number items when screen size 1200px and up"
+"Number Columns On Page","Number Columns On Page"
+"Show number items when screen size between 1199px and 980px","Show number items when screen size between 1199px and 980px"
+"Number Columns On Page (Portrait tablets)","Number Columns On Page (Portrait tablets)"
+"Show number items when screen size between 979px and 769px","Show number items when screen size between 979px and 769px"
+"Number Columns On Page (Phones to tablets)","Number Columns On Page (Phones to tablets)"
+"Show number items when screen size between 768px and 641px","Show number items when screen size between 768px and 641px"
+"Number Columns On Page (Phones to Small tablets)","Number Columns On Page (Phones to Small tablets)"
+"Show number items when screen size between 640px and 480px","Show number items when screen size between 640px and 480px"
+"Number Columns On Page (Phones)","Number Columns On Page (Phones)"
+"Show number items when screen size bellow 480px","Show number items when screen size bellow 480px"
+"Block Width","Block Width"
+"Item Height","Item Height"
+"Unit: pixel. Empty to set auto height","Unit: pixel. Empty to set auto height"
+"Number of Item per Column","Number of Item per Column"
+"Multiple Row","Multiple Row"
+"Margin-right(px) on item.","Margin-right(px) on item."
+"Mouse Drag","Mouse Drag"
+"Pull Drag","Pull Drag"
+"Stage Padding","Stage Padding"
+"Auto Width","Auto Width"
+Autoplay,Autoplay
+"Autoplay Timeout","Autoplay Timeout"
+"Autoplay HoverPause","Autoplay HoverPause"
+"Show dots navigations","Show dots navigations"
+"Lazy Load","Lazy Load"
+"Infinity loop. Duplicate last and first items to get loop illusion.","Infinity loop. Duplicate last and first items to get loop illusion."
+Loop,Loop
+RTL,RTL
+"Owl will change direction from Right to left.","Owl will change direction from Right to left."
+"Item Settings","Item Settings"
+"Show Name","Show Name"
+"Show Short Description","Show Short Description"
+"Description Character Limit","Description Character Limit"
+"Empty to show all short description","Empty to show all short description"
+"Show More Link","Show More Link"
+"Show Price","Show Price"
+"Show Review","Show Review"
+"Show New Label","Show New Label"
+"Show Sale Label","Show Sale Label"
+"Show Image","Show Image"
+"Image Width","Image Width"
+"Image Height","Image Height"
+"Show Compare Link","Show Compare Link"
+"Show Wishlist Link","Show Wishlist Link"
+"Show Add To Cart Button","Show Add To Cart Button"
+"Delete items","Delete items"
+"Are you sure you wan't to delete selected items?","Are you sure you wan't to delete selected items?"
+Enable,Enable
+ID,ID
+"Current Version","Current Version"
+Created,Created
+Modified,Modified

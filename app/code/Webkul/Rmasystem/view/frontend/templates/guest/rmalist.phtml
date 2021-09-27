@@ -1,0 +1,144 @@
+<?php
+    $helper = $this->helper("Webkul\Rmasystem\Helper\Data");
+?>
+<fieldset class="fieldset info">
+    <legend class="legend">
+        <span><?= __('Guest Rma List') ?></span>
+        <div id="wk_rma_new_request">
+            <a href="<?= $this->getUrl("rmasystem/guest/rmanew", ['_secure' => $this->getRequest()->isSecure()]); ?>">
+                <?= __("Request New RMA"); ?>
+            </a>
+        </div>
+        
+    </legend>
+    <!--<div id="wk_rma_new_request">
+        <a href="<?= $block->getUrl("rmasystem/guest/rmanew"); ?>">
+            <?= __("Request New RMA"); ?>
+        </a>
+    </div>-->
+    <button class="action primary filter-order" type="button" data-action="grid-filter-apply" style="margin-bottom:10px;">
+        <span><?= __('Apply Filters'); ?></span>
+    </button>
+    <table class="data-table" id="rma-table">
+                <thead class="wk_rma_sorter">
+                    <tr>
+                        <th class="wk_rma_sortable">
+                            <span class="wk_rma_table_title"><?= __("Id"); ?></span>
+                            <span data-attr="rma_id" class=""></span>
+                        </th>
+                        <th class="wk_rma_sortable">
+                            <span class="wk_rma_table_title"><?= __("Order Id"); ?></span>
+                            <span data-attr="order_id" class=""></span>
+                        </th>
+                        <th class="wk_rma_sortable">
+                            <span class="wk_rma_table_title"><?= __("Status"); ?></span>
+                            <span data-attr="status" class=""></span>
+                        </th>
+                        <th class="wk_rma_sortable">
+                            <span class="wk_rma_table_title"><?= __("Date"); ?></span>
+                            <span data-attr="created_at" class=""></span>
+                        </th>
+                        <th class="a-right">
+                            <span class="wk_rma_table_title"><?= __("Action"); ?></span>
+                        </th>
+                    </tr>
+                </thead>
+                <thead class="wk_rma_filter">
+                    <tr>
+                <?php   $filter_data = $block->getFilterData(); ?>
+                        <th><input type="text" value="<?= $block->escapeHtml($filter_data["rma_id"]); ?>" id="wk_rma_filter_rma_id" class="filter_input"/></th>
+                        <th><input type="text" value="<?= $block->escapeHtml($filter_data["order_id"]); ?>" id="wk_rma_filter_order_id" class="filter_input"/></th>
+                        <th>
+                                                <select class="filter_select" id="wk_rma_filter_status">
+                                                        <option value=""><?= __("Select Status") ?></option>
+                                                        <option value="0" <?php if ($filter_data["status"] == 0 && $filter_data["status"] !== "" && $filter_data["status"] !== null) {
+                                                            echo "selected";
+                                                                          } ?>><?= __("Pending") ?></option>
+                                                        <option value="1" <?php if ($filter_data["status"] == 1) {
+                                                            echo "selected";
+                                                                          } ?>><?= __("Processing") ?></option>
+                                                        <option value="3" <?php if ($filter_data["status"] == 3) {
+                                                            echo "selected";
+                                                                          } ?>><?= __("Declined") ?></option>
+                                                            <option value="2" <?php if ($filter_data["status"] == 2) {
+                                                                echo "selected";
+                                                                              } ?>><?= __("Solved") ?></option>
+                                                        <option value="4" <?php if ($filter_data["status"] == 4) {
+                                                            echo "selected";
+                                                                          } ?>><?= __("Cancelled") ?></option>
+                                                </select>
+                        </th>
+                        <th><input type="text" value="<?= $block->escapeHtml($filter_data["date"]) ; ?>" id="wk_rma_filter_date" class="filter_input"/></th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+<?php               $collection = $block->getAllrma();
+                    $totalcount = count($collection);
+if ($totalcount > 0) {
+    foreach ($collection as $row) { ?>
+                            <tr>
+                                <td><?= $row->getId(); ?></td>
+                                <td><?= $row->getIncrementId(); ?></td>
+                                            <td>
+                                                <?= "<strong class='wk_rma_status_pending'>".$helper->getRmaStatusTitle($row->getStatus(), $row->getFinalStatus())."</strong>";?>
+                                </td>
+                                <td>
+                                    <?= date("Y-m-d", $block->getTimestamp($row->getCreatedAt()));?>
+                                </td>
+                                <td class="a-center last">
+                                    <span class="nobr">
+                                        <a href="<?= $this->getUrl('rmasystem/guest/rmaview', ['id'=>$row->getId()]); ?>"><?= __("View"); ?></a>
+                                <?php   if (!in_array($row->getStatus(), [3, 2, 4])) {   ?>
+                                        <span class="wk_separator">|</span>
+                                        <a class="link-reorder cancel" href="<?= $this->getUrl('rmasystem/guest/rmacancel/', ['id'=>$row->getId()]); ?>"><?= __("Cancel"); ?></a>
+                                <?php } ?>
+                                    </span>
+                                </td>
+                            </tr>
+    <?php }
+} elseif ($filter_data['status']!='' || $filter_data['order_id']!='' || $filter_data['rma_id']!='' || $filter_data['date']!='') { ?>
+                        <tr class="first last">
+                            <td colspan="5" class="a-center"><?= __("No result found"); ?>.</td>
+                        </tr>
+<?php } else { ?>
+                        <tr class="first last">
+                            <td colspan="5" class="a-center"><?= __("You haven't filed any RMA yet"); ?>.</td>
+                        </tr>
+<?php } ?>
+                </tbody>
+            </table>
+            <div class="field"></div>
+            <a href="<?= $block->getUrl('rmasystem/guest/logout', ['_secure' => $this->getRequest()->isSecure()]); ?>" class="wk_rma_logout_btn">
+                <button type="reset" class="button  action subscribe primary">
+                    <span><span><?= __('logout') ?></span></span>
+                </button>
+            </a>
+        </fieldset>
+    <?php if ($block->getPagerHtml()): ?>
+        <div class="order-products-toolbar toolbar bottom"><?= $block->getPagerHtml(); ?></div>
+    <?php endif ?>
+    <?php
+            $sorting_data = $block->getSortingSession();
+            $optionData = [
+            'sortingColumn'     => $sorting_data['attr'],
+            'sortingDirection'  => $sorting_data['direction'],
+            'orderTableSort'    => '#rma-table .wk_rma_sorter',
+            'orderColumnSort'   => '#rma-table .wk_rma_sortable',
+            'sortUrl'           => $block->getUrl('rmasystem/guest/sorting', ['_secure' => $this->getRequest()->isSecure()]),
+            'filterUrl'         => $block->getUrl('rmasystem/guest/filter', ['_secure' => $this->getRequest()->isSecure()]),
+            'filterColumn'      => '.filter-order',
+            'cancelButton'      => '.cancel',
+
+
+
+            ];
+            $serializedData = $this->helper('Magento\Framework\Json\Helper\Data')->jsonEncode($optionData); ?>
+    <script type="text/x-magento-init">
+    {
+        "*": {
+            "rmaList": <?php /* @noEscape */ echo $serializedData; ?>
+        }
+    }
+    </script>

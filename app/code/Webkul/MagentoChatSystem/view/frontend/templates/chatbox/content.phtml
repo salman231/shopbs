@@ -1,0 +1,44 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MagentoChatSystem
+ * @author    Webkul
+ * @copyright Copyright (c)  Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+?>
+<script>
+    window.chatboxConfig = <?= \Zend_Json::encode($block->getChatBoxConfig()); ?>;
+</script>
+<?= $block->getChildHtml('style_template'); ?>
+<div data-block="chatbox" id="chatbox-component" data-bind="scope:'chatbox-content'" class="field">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <script type="text/x-magento-init">
+    {
+        "#chatbox-component": {
+            "Magento_Ui/js/core/app":  <?= $block->getJsLayout();?>
+        }
+    }
+    </script>
+    <?= $block->getChildHtml('reply_template'); ?>
+</div>
+<script id="notification-template" type="text/x-magento-template">
+    <div class="chat-message-admin chat-message-notification">
+        <div class="msg_notification" id="<%- data.sender_id %>">
+            <div class="wk_msgLogo">
+                <img src="<%- data.adminImage %>">
+            </div>
+            <div class="wk_msgdetails">
+                <div class="wk_userName"><%- data.adminName %></div>
+                <div class="wk_userMsg"><%- data.message %></div>
+                <div class="wk_userLink">
+                    <span class="wk_msgClose">
+                        <i class="fa fa-times-circle"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

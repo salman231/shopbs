@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <preference
+        for="Magento\Customer\Api\AddressRepositoryInterface"
+        type="Bb\RemovePostcode\Model\ResourceModel\AddressRepository" />
+    <type name="Magento\Customer\Model\Address\Validator\City">
+        <plugin name="Bb_RemovePostcode::customerAddressCityValidator" type="Bb\RemovePostcode\Plugin\Customer\Address\CityValidator" />
+    </type>
+    <type name="Magento\Customer\Model\Attribute\Data\City">
+        <plugin name="Bb_RemovePostcode::customerAddressCityValidatorValue" type="Bb\RemovePostcode\Plugin\Customer\Address\CityValidatorValue" />
+    </type>
+    <type name="Magento\Customer\Model\Address\AbstractAddress">
+        <plugin name="Bb_RemovePostcode::customerAddressCityValidatorAddress" type="Bb\RemovePostcode\Plugin\Customer\Address\CityValidatorAddress" />
+    </type>
+</config>

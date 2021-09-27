@@ -1,0 +1,35 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Mpreportsystem
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+?>
+<?php
+$isPartner= $block->isSeller();
+$magentoCurrentUrl = $block->getCurrentUrl();
+$isSellerGroup = $block->isSellerGroupModuleInstalled();
+?>
+<?php if ($isPartner) { ?>
+    <?php if (($isSellerGroup && $block->isAllowedAction('mpreportsystem/report/index')) || !$isSellerGroup) { ?>
+    <li class="nav item
+        <?= $block->escapeHtml(
+            strpos($magentoCurrentUrl, 'mpreportsystem/report/index')
+        ) !== false ? "current":"";?>">
+        <?php
+        if (strpos($magentoCurrentUrl, 'mpreportsystem/report/index') !== false) { ?>
+            <strong><?= $block->escapeHtml(('Advance Report')) ?></strong>
+            <?php
+        } else { ?>
+            <a href="<?= $block->escapeHtml($block->getUrl('mpreportsystem/report/index')); ?>">
+            <?= $block->escapeHtml(__('Advance Report')) ?>
+            </a>
+            <?php
+        } ?>
+        </li>
+    <?php } ?>
+<?php } ?>

@@ -1,0 +1,20 @@
+<!--@subject Membership Subscription Reminder@-->
+<!--@vars {
+"var data.comment":"Test",
+"var data.email":"Sender Email",
+"var data.name":"Sender Name",
+"var data.expierdate":"Sender expierdate",
+"template config_path=\"design\/email\/footer_template\"":"Email Footer Template",
+"template config_path=\"design\/email\/header_template\"":"Email Header Template"
+} @-->
+
+
+
+{{template config_path="design/email/header_template"}}
+{{trans "Product Name: %name" name=$data.name}}
+{{trans "Expier Date: %expierdate" expierdate=$data.expierdate}}
+
+{{trans "Renew Url: %renewurl" renewurl=$data.renewurl}}
+{{template config_path="design/email/footer_template"}}
+
+{{template config_path="design/email/header_template"}}

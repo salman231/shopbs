@@ -1,0 +1,523 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+/** @var $block \Webkul\Marketplace\Block\Account\Editprofile */
+
+$helper = $this->helper(\Webkul\Marketplace\Helper\Data::class);
+$partner = $block->getPersistentData();
+if (empty($partner)) {
+    $partner=$helper->getSeller();
+}
+//echo "<pre>";print_r($partner);exit;
+$profile_hint_status = $helper->getProfileHintStatus();
+?>
+<form action="<?= $block->escapeUrl($block->getUrl('marketplace/account/editProfilePost', ["_secure" => $this->getRequest()->isSecure()])) ?>" enctype="multipart/form-data" method="post" data-role="form-profile-validate" data-mage-init='{"validation":{}}'>
+    <div class="wk-mp-design">
+        <fieldset class="fieldset info wk-mp-fieldset">
+            <div data-mage-init='{"formButtonAction": {}}' class="wk-mp-page-title legend" id="wk-mp-editprofile-form">
+                <span><?= /* @noEscape */ __('Edit Profile Information') ?></span>
+                <button class="button wk-mp-btn" title="<?= /* @noEscape */ __('Save Profile') ?>" type="submit" id="save-btn">
+                    <span><span><?= /* @noEscape */ __('Save Profile') ?></span></span>
+                </button>
+            </div>
+            <?= $block->getBlockHtml('seller.formkey')?>
+            <?= $block->getBlockHtml('formkey')?>
+            <!-- <legend class="legend"><span><?php // echo __('Profile Information') ?></span></legend> -->
+            <div class="field profile">
+                <label for="twitterid"><?= /* @noEscape */ __('Twitter ID') ?> </label>
+                <input type="checkbox" name="tw_active" value="1" title="<?= /* @noEscape */ __('Allow to Display Twitter Icon in Profile Page') ?>" <?php if ($partner['tw_active'] == 1) { echo "checked='checked'";} ?> style="margin: 5px;">
+                <?php
+                if ($profile_hint_status && $helper->getProfileHintTw()) {?>
+                    <img src="<?= $block->escapeUrl($this->getViewFileUrl('Webkul_Marketplace::images/quest.png')); ?>" class='questimg' title="<?= $block->escapeHtml($helper->getProfileHintTw()) ?>"/>
+                    <?php
+                } ?>
+                <div class="control">
+                    <input type="text" id="twitter_id" name="twitter_id" value="<?= $block->escapeHtml($partner['twitter_id']); ?>" title="twitterid" class="input-text" />
+                </div>
+            </div>
+            <div class="field profile">
+                <label for="facebookid"><?= /* @noEscape */ __('Facebook ID') ?> </label>
+                <input type="checkbox" name="fb_active" value="1" title="<?= /* @noEscape */ __('Allow to Display Facebook Icon in Profile Page') ?>" <?php if ($partner['fb_active'] == 1) { echo "checked='checked'";} ?> style="margin: 5px;">
+                <?php
+                if ($profile_hint_status && $helper->getProfileHintFb()) {?>
+                    <img src="<?= $block->escapeUrl($this->getViewFileUrl('Webkul_Marketplace::images/quest.png')); ?>" class='questimg' title="<?= $block->escapeHtml($helper->getProfileHintFb()) ?>"/>
+                    <?php
+                } ?>
+                <div class="control">
+                     <input type="text" id="facebook_id" name="facebook_id" value="<?= $block->escapeHtml($partner['facebook_id']); ?>" title="facebookid" class="input-text" />
+                </div>
+            </div>
+            <div class="field profile">
+                <label><?= /* @noEscape */ __('Instagram ID') ?> </label>
+                <input type="checkbox" name="instagram_active" value="1" title="<?= /* @noEscape */ __('Allow to Display Instagram Icon in Profile Page') ?>" <?php if ($partner['instagram_active'] == 1) { echo "checked='checked'";} ?> style="margin: 5px;">
+                <?php
+                if ($profile_hint_status && $helper->getProfileHintInsta()) {?>
+                    <img src="<?= $block->escapeUrl($this->getViewFileUrl('Webkul_Marketplace::images/quest.png')); ?>" class='questimg' title="<?= $block->escapeHtml($helper->getProfileHintInsta()) ?>"/>
+                    <?php
+                } ?>
+                <div class="control">
+                     <input type="text" id="instagram_id" name="instagram_id" value="<?= $block->escapeHtml($partner['instagram_id']); ?>" class="input-text" />
+                </div>
+            </div>
+            <div class="field profile">
+                <label><?= /* @noEscape */ __('Google Plus ID') ?> </label>
+                <input type="checkbox" name="gplus_active" value="1" title="<?= /* @noEscape */ __('Allow to Display Google Plus Icon in Profile Page') ?>" <?php if ($partner['gplus_active'] == 1) { echo "checked='checked'";} ?> style="margin: 5px;">
+                <?php
+                if ($profile_hint_status && $helper->getProfileHintGoogle()) {?>
+                    <img src="<?= $block->escapeUrl($this->getViewFileUrl('Webkul_Marketplace::images/quest.png')); ?>" class='questimg' title="<?= $block->escapeHtml($helper->getProfileHintGoogle()) ?>"/>
+                    <?php
+                } ?>
+                <div class="control">
+                     <input type="text" id="gplus_id" name="gplus_id" value="<?= $block->escapeHtml($partner['gplus_id']); ?>" class="input-text" />
+                </div>
+            </div>
+            <div class="field profile">
+                <label><?= /* @noEscape */ __('Youtube ID') ?> </label>
+                <input type="checkbox" name="youtube_active" value="1" title="<?= /* @noEscape */ __('Allow to Display Youtube Icon in Profile Page') ?>" <?php if ($partner['youtube_active'] == 1) { echo "checked='checked'";} ?> style="margin: 5px;">
+                <?php
+                if ($profile_hint_status && $helper->getProfileHintYoutube()) {?>
+                    <img src="<?= $block->escapeUrl($this->getViewFileUrl('Webkul_Marketplace::images/quest.png')); ?>" class='questimg' title="<?= $block->escapeHtml($helper->getProfileHintYoutube()) ?>"/>
+                    <?php
+                } ?>
+                <div class="control">
+                     <input type="text" id="youtube_id" name="youtube_id" value="<?= $block->escapeHtml($partner['youtube_id']); ?>" class="input-text" />
+                </div>
+            </div>
+            <div class="field profile">
+                <label><?= /* @noEscape */ __('Vimeo ID') ?> </label>
+                <input type="checkbox" name="vimeo_active" value="1" title="<?= /* @noEscape */ __('Allow to Display Vimeo Icon in Profile Page') ?>" <?php if ($partner['vimeo_active'] == 1) { echo "checked='checked'";} ?> style="margin: 5px;">
+                <?php
+                if ($profile_hint_status && $helper->getProfileHintVimeo()) {?>
+                    <img src="<?= $block->escapeUrl($this->getViewFileUrl('Webkul_Marketplace::images/quest.png')); ?>" class='questimg' title="<?= $block->escapeHtml($helper->getProfileHintVimeo()) ?>"/>
+                    <?php
+                } ?>
+                <div class="control">
+                     <input type="text" id="vimeo_id" name="vimeo_id" value="<?= $block->escapeHtml($partner['vimeo_id']); ?>" class="input-text" />
+                </div>
+            </div>
+            <div class="field profile">
+                <label><?= /* @noEscape */ __('Pinterest ID') ?> </label>
+                <input type="checkbox" name="pinterest_active" value="1" title="<?= /* @noEscape */ __('Allow to Display Pinterest Icon in Profile Page') ?>" <?php if ($partner['pinterest_active'] == 1) { echo "checked='checked'";} ?> style="margin: 5px;">
+                <?php
+                if ($profile_hint_status && $helper->getProfileHintPinterest()) {?>
+                    <img src="<?= $block->escapeUrl($this->getViewFileUrl('Webkul_Marketplace::images/quest.png')); ?>" class='questimg' title="<?= $block->escapeHtml($helper->getProfileHintPinterest()) ?>"/>
+                    <?php
+                } ?>
+                <div class="control">
+                     <input type="text" id="pinterest_id" name="pinterest_id" value="<?= $block->escapeHtml($partner['pinterest_id']); ?>" class="input-text" />
+                </div>
+            </div>
+            <div class="field profile">
+                <label><?= /* @noEscape */ __('Contact Number') ?> </label>
+                <?php
+                if ($profile_hint_status && $helper->getProfileHintCn()) {?>
+                    <img src="<?= $block->escapeUrl($this->getViewFileUrl('Webkul_Marketplace::images/quest.png')); ?>" class='questimg' title="<?= $block->escapeHtml($helper->getProfileHintCn()) ?>"/>
+                    <?php
+                } ?>
+                <div class="control">
+                     <input type="text" id="contact_number" name="contact_number" value="<?= $block->escapeHtml($partner['contact_number']); ?>" title="<?= /* @noEscape */ __('Enter Contact Number') ?>" class="input-text" placeholder="<?= /* @noEscape */ __('Enter Contact Number with country code ex: (123) 456-7890') ?>"/>
+                </div>
+            </div>
+            <div class="field profile">
+                <label><?= /* @noEscape */ __('Tax/VAT Number') ?> </label>
+                <?php
+                if ($profile_hint_status && $helper->getProfileHintTax()) {?>
+                    <img src="<?= $block->escapeUrl($this->getViewFileUrl('Webkul_Marketplace::images/quest.png')); ?>" class='questimg' title="<?= $block->escapeHtml($helper->getProfileHintTax()) ?>"/>
+                    <?php
+                } ?>
+                <div class="control">
+                     <input type="text" id="taxvat" name="taxvat" value="<?= $block->escapeHtml($partner['taxvat']); ?>" title="<?= /* @noEscape */ __('Enter Tax or VAT number') ?>" class="input-text"  placeholder="<?= /* @noEscape */ __('Enter Tax or VAT number') ?>" />
+                </div>
+            </div>
+            <div class="field profile">
+                <label><?= /* @noEscape */ __('Register With TAX?') ?> </label>
+                <?php
+                if ($profile_hint_status && $helper->getProfileHintTax()) {?>
+                    <img src="<?= $block->escapeUrl($this->getViewFileUrl('Webkul_Marketplace::images/quest.png')); ?>" class='questimg' title="<?= $block->escapeHtml($helper->getProfileHintTax()) ?>"/>
+                    <?php
+                } ?>
+                <div class="control">
+                     <select name="registerwithvat" id="registerwithvat" class="registerwithvat" >
+                         <option value="0" <?php if($block->escapeHtml($partner['registerwithvat'] == "0")) { echo "selected"; } ?>>No</option>
+                         <option value="1" <?php if($block->escapeHtml($partner['registerwithvat'] == "1")) { echo "selected"; } ?>>Yes</option>
+                     </select>
+                </div>
+            </div>
+            <?php
+            if ($helper->getActiveColorPicker()) {?>
+                <div class="field profile">
+                    <label for="background_width"><?= /* @noEscape */ __('Theme : Background Color') ?> </label>
+                    <?php
+                    if ($profile_hint_status && $helper->getProfileHintBc()) {?>
+                        <img src="<?= $block->escapeUrl($this->getViewFileUrl('Webkul_Marketplace::images/quest.png')); ?>" class='questimg' title="<?= $block->escapeHtml($helper->getProfileHintBc()) ?>"/>
+                        <?php
+                    } ?>
+                    <div class="control">
+                         <input type="text" id="background_width" name="background_width" value="<?= $block->escapeHtml($partner['background_width']); ?>" title="background_width" class="input-text" />
+                         <span class="color-pick" data-role="color-pick" data-mage-init='{"colorPickerFunction":{"spanBackgroundColor" : "<?= $block->escapeHtml($partner['background_width'])?>", "getActiveColorPickerStatus" : "<?= $block->escapeHtml($helper->getActiveColorPicker())?>", "backgroundWidthSelector" : "#background_width"}}'></span>
+                    </div>
+                </div>
+                <?php
+            } ?>
+            <div class="field profile">
+                <label for="shoptitle"><?= /* @noEscape */ __('Shop Title') ?></label>
+                <?php
+                if ($profile_hint_status && $helper->getProfileHintShop()) {?>
+                    <img src="<?= $block->escapeUrl($this->getViewFileUrl('Webkul_Marketplace::images/quest.png')); ?>" class='questimg' title="<?= $block->escapeHtml($helper->getProfileHintShop()) ?>"/>
+                    <?php
+                } ?>
+                <div class="control">
+                     <input type="text" id="shop_title" name="shop_title" value="<?= $block->escapeHtml($partner['shop_title']); ?>" title="<?= /* @noEscape */ __('Shop Title')?>" class="input-text" />
+                </div>
+            </div>
+            <div class="field profile">
+                <label for="banner-pic"> <?= /* @noEscape */ __('Company Banner') ?> </label>
+                <label class="control-notification">(<?= /* @noEscape */ __("Company Banner must be 1280x380 pixels(jpeg or png file format)"); ?>)</label>
+                <?php
+                if ($profile_hint_status && $helper->getProfileHintBanner()) {?>
+                    <img src="<?= $block->escapeUrl($this->getViewFileUrl('Webkul_Marketplace::images/quest.png')); ?>" class='questimg' title="<?= $block->escapeHtml($helper->getProfileHintBanner()) ?>"/>
+                    <?php
+                } ?>
+                <div class="control">
+                    <input type="file" id="banner-pic" name="banner_pic"  title="Banner Pic" class="banner" size="26" />
+                    <div class="profileimage-set">
+                          <div class="setimage">
+                            <img class="wk-banner" alt=" <?= /* @noEscape */ __('no image') ?>" src="<?= $block->escapeUrl($helper->getMediaUrl().'avatar/'.$partner['banner_pic']); ?>"/>
+                            <?php
+                            $bannerpic = $partner['banner_pic'];
+                            $logopic = $partner['logo_pic'];
+                            if ($bannerpic && !$partner['is_default_banner']) {
+                                ?>
+                            <span class="wk-profileimagedelete" title="<?= /* @noEscape */ __('Delete')?>">
+                                  <img src="<?= $block->escapeUrl($this->getViewFileUrl('Webkul_Marketplace::images/deleteIcon.png')); ?>" alt="<?= /* @noEscape */ __('Delete Image')?>" title="<?= /* @noEscape */ __('Delete Image')?>"/>
+                            </span>
+                                <?php
+                            }?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="field profile">
+                <label for="logo-pic"> <?= /* @noEscape */ __('Company Logo') ?> </label>
+                <label class="control-notification">(<?= /* @noEscape */ __("Company Logo must be 200x200 pixels(jpeg or png file format)"); ?>)</label>
+                <?php
+                if ($profile_hint_status && $helper->getProfileHintLogo()) {?>
+                    <img src="<?= $block->escapeUrl($this->getViewFileUrl('Webkul_Marketplace::images/quest.png')); ?>" class='questimg' title="<?= $block->escapeHtml($helper->getProfileHintLogo()) ?>"/>
+                    <?php
+                } ?>
+                <div class="control">
+                    <input type="file" id="logo-pic" alt="no image" name="logo_pic" title="<?= /* @noEscape */ __('Seller Logo')?>" class="banner" size="26"/>
+                    <div class="logoimage-set">
+                          <div class="setimage">
+                            <img class="prev-img" src="<?= $block->escapeUrl($helper->getMediaUrl().'avatar/'.$partner['logo_pic']); ?>"/>
+                            <?php
+                            if ($logopic && !$partner['is_default_logo']) {
+                                ?>
+                                <span class="wk-logoimagedelete" title="<?= /* @noEscape */ __('Delete')?>">
+                                      <img src="<?= $block->escapeUrl($this->getViewFileUrl('Webkul_Marketplace::images/deleteIcon.png')); ?>" alt="<?= /* @noEscape */ __('Delete Image')?>" title="<?= /* @noEscape */ __('Delete Image')?>"/>
+                                </span>
+                                <?php
+                            }?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="field profile">
+                <label for="company_locality"><?= /* @noEscape */ __('Company Locality') ?></label>
+                <?php
+                if ($profile_hint_status && $helper->getProfileHintLoc()) {?>
+                    <img src="<?= $block->escapeUrl($this->getViewFileUrl('Webkul_Marketplace::images/quest.png')); ?>" class='questimg' title="<?= $block->escapeHtml($helper->getProfileHintLoc()) ?>"/>
+                    <?php
+                } ?>
+                <div class="control">
+                     <input type="text" id="company_locality" name="company_locality" value="<?= $block->escapeHtml($partner['company_locality']); ?>" title="company_locality" class="input-text" />
+                </div>
+            </div>
+            <div class="field profile">
+                <label for="company_description"><?= /* @noEscape */ __('Company Description') ?></label>
+                <?php
+                if ($profile_hint_status && $helper->getProfileHintDesc()) {?>
+                    <img src="<?= $block->escapeUrl($this->getViewFileUrl('Webkul_Marketplace::images/quest.png')); ?>" class='questimg' title="<?= $block->escapeHtml($helper->getProfileHintDesc()) ?>"/>
+                    <?php
+                } ?>
+                <div class="control wk-border-box-sizing">
+                     <textarea type="text" id="company_description" name="company_description" title="company_description" class="input-text compdesi" ><?= /* @noEscape */ $partner['company_description']; ?> </textarea>
+                        <?php if ($helper->isWysiwygEnabled()): ?>
+                        <script>
+                            require([
+                                "jquery",
+                                "mage/translate",
+                                "mage/adminhtml/events",
+                                "mage/adminhtml/wysiwyg/tiny_mce/setup"
+                            ], function(jQuery) {
+                                wysiwygCompanyDescription = new wysiwygSetup("company_description", {
+                                    "width" : "100%",
+                                    "height" : "200px",
+                                    "plugins" : [{"name":"image"}],
+                                    "tinymce4" : {
+                                        "toolbar":"formatselect | bold italic underline | alignleft aligncenter alignright | bullist numlist | link table charmap","plugins":"advlist autolink lists link charmap media noneditable table contextmenu paste code help table",
+                                    }
+                                });
+                                wysiwygCompanyDescription.setup("exact");
+                            });
+                        </script>
+                    <?php endif; ?>
+                </div>
+            </div>
+            <?php
+            if ($helper->getSellerPolicyApproval()) {?>
+                <div class="field profile">
+                    <label><?= /* @noEscape */ __('Return Policy') ?></label>
+                    <?php
+                    if ($profile_hint_status && $helper->getProfileHintReturnPolicy()) {?>
+                        <img src="<?= $block->escapeUrl($this->getViewFileUrl('Webkul_Marketplace::images/quest.png')); ?>" class='questimg' title="<?= $block->escapeHtml($helper->getProfileHintReturnPolicy()) ?>"/>
+                        <?php
+                    } ?>
+                    <div class="control">
+                         <textarea type="text" id="return_policy" name="return_policy" title="<?= /* @noEscape */ __('Return Policy') ?>" class="input-text compdesi" ><?= /* @noEscape */ $partner['return_policy']; ?> </textarea>
+                    </div>
+                </div>
+                <div class="field profile">
+                    <label><?= /* @noEscape */ __('Shipping Policy') ?></label>
+                    <?php
+                    if ($profile_hint_status && $helper->getProfileHintShippingPolicy()) {?>
+                        <img src="<?= $block->escapeUrl($this->getViewFileUrl('Webkul_Marketplace::images/quest.png')); ?>" class='questimg' title="<?= $block->escapeHtml($helper->getProfileHintShippingPolicy()) ?>"/>
+                        <?php
+                    } ?>
+                    <div class="control">
+                         <textarea type="text" id="shipping_policy" name="shipping_policy" title="<?= /* @noEscape */ __('Shipping Policy') ?>" class="input-text compdesi" ><?= /* @noEscape */ $partner['shipping_policy']; ?> </textarea>
+                    </div>
+                </div>
+                <div class="field profile">
+                    <label><?= /* @noEscape */ __('Privacy Policy') ?></label>
+                    <div class="control">
+                         <textarea type="text" id="privacy_policy" name="privacy_policy" title="<?= /* @noEscape */ __('Privacy Policy') ?>" class="input-text compdesi" ><?= /* @noEscape */ $partner['privacy_policy']; ?> </textarea>
+                    </div>
+                </div>
+                <?php
+            } ?>
+
+            <div class="field profile">
+                <label for="country_pic"> <?= /* @noEscape */ __('Country') ?> </label>
+                <?php
+                if ($profile_hint_status && $helper->getProfileHintCountry()) {?>
+                    <img src="<?= $block->escapeUrl($this->getViewFileUrl('Webkul_Marketplace::images/quest.png')); ?>" class='questimg' title="<?= $block->escapeHtml($helper->getProfileHintCountry()) ?>"/>
+                    <?php
+                } ?>
+                <div class="control">
+                     <select name="country_pic" id="country-pic">
+                        <option value="" selected="selected" disabled="disabled"><?= /* @noEscape */ __('Select Country')?></option>
+                    <?php foreach ($block->getCountryOptionArray() as $country) {?>
+                        <option <?php
+                        if ($country['value']!='') {
+                            echo ($partner['country_pic']==$country['value']?"selected='selected'":""); ?>value="<?= $block->escapeHtml($country['value']); ?>"><?= $block->escapeHtml($country['label']);?></option>
+                            <?php
+                        }
+                    } ?>
+                    </select>
+                    <img class="country_img_prev" alt="no image" src="<?= /* @noEscape */ $this->getViewFileUrl('Webkul_Marketplace::images/country/countryflags/')."/".strtoupper($partner['country_pic']==""?"xx":$partner['country_pic']).".png"; ?>"/>
+                </div>
+            </div>
+            <div class="field profile">
+                <label for="meta_keywords"><?= /* @noEscape */ __('Meta Keywords') ?></label>
+                <label class="control-notification">(<?= /* @noEscape */ __("Enter Meta Keywords Comma(',') Separated.."); ?>)</label>
+                <?php
+                if ($profile_hint_status && $helper->getProfileHintMeta()) {?>
+                    <img src="<?= $block->escapeUrl($this->getViewFileUrl('Webkul_Marketplace::images/quest.png')); ?>" class='questimg' title="<?= $block->escapeHtml($helper->getProfileHintMeta()) ?>"/>
+                    <?php
+                } ?>
+                <div class="control">
+                    <textarea type="text" id="meta_keywords" name="meta_keyword" title="Meta Keyword" class="input-text compdesi" ><?= /* @noEscape */ $partner['meta_keyword']; ?> </textarea>
+                </div>
+            </div>
+            <div class="field profile">
+                <label for="meta_description"><?= /* @noEscape */ __('Meta Description') ?></label>
+                <?php
+                if ($profile_hint_status && $helper->getProfileHintMetaDesc()) {?>
+                    <img src="<?= $block->escapeUrl($this->getViewFileUrl('Webkul_Marketplace::images/quest.png')); ?>" class='questimg' title="<?= $block->escapeHtml($helper->getProfileHintMetaDesc()) ?>"/>
+                    <?php
+                } ?>
+                <div class="control">
+                    <textarea type="text" id="meta_description" name="meta_description" title="Meta Description" class="input-text compdesi" ><?= /* @noEscape */ $partner['meta_description']; ?> </textarea>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</form>
+<?php
+if ($helper->getUrlRewrite()) { ?>
+    <br/><br/>
+    <form action="<?= $block->escapeUrl($block->getUrl('marketplace/account/rewriteUrlPost', ["_secure" => $this->getRequest()->isSecure()])) ?>" enctype="multipart/form-data" method="post" data-role="form-urlrewrite-validate" data-mage-init='{"validation":{}}'>
+        <div class="page-title" style="width:100%;display:inline-block;">
+            <h2 style="float:left;"><?= /* @noEscape */ __('Manage Your Shop Url') ?></h2>
+            <button class="button wk-mp-btn" title="<?= /* @noEscape */ __('Set Your New Shop Url') ?>" type="submit" style="float:right;">
+                <span><span><?= /* @noEscape */ __('Save Url') ?></span></span>
+            </button>
+        </div>
+        <?= $block->getBlockHtml('seller.formkey')?>
+            <?= $block->getBlockHtml('formkey')?>
+        <div class="wk-mp-design">
+            <fieldset class="fieldset info wk-mp-fieldset">
+                <legend class="legend"><span><?= /* @noEscape */ __('Edit Your Shop Url') ?></span></legend>
+                <div class="field">
+                    <label><?= /* @noEscape */ __('Profile Page Target Url Path') ?></label>
+                    <div class="control">
+                        <input type="text" class="input-text" value="<?= /* @noEscape */ 'marketplace/seller/profile/shop/'.$partner['shop_url'] ?>" readonly/>
+                    </div>
+                </div>
+                <div class="field">
+                    <label><?= /* @noEscape */ __('Profile Page Request Url Path') ?></label>
+                    <div class="control">
+                        <input type="text" class="input-text" name="profile_request_url" id="profile_request_url" value="<?= /* @noEscape */ $helper->getRewriteUrlPath('marketplace/seller/profile/shop/'.$partner['shop_url']) ?>"/>
+                    </div>
+                </div>
+                <div class="field">
+                    <label><?= /* @noEscape */ __('Collection Page Target Url Path') ?></label>
+                    <div class="control">
+                        <input type="text" class="input-text" value="<?= /* @noEscape */ 'marketplace/seller/collection/shop/'.$partner['shop_url'] ?>" readonly/>
+                    </div>
+                </div>
+                <div class="field">
+                    <label><?= /* @noEscape */ __('Collection Page Request Url Path') ?></label>
+                    <div class="control">
+                        <input type="text" class="input-text" name="collection_request_url" id="collection_request_url" value="<?= /* @noEscape */ $helper->getRewriteUrlPath('marketplace/seller/collection/shop/'.$partner['shop_url']) ?>"/>
+                    </div>
+                </div>
+                <div class="field">
+                    <label><?= /* @noEscape */ __('Review Page Target Url Path') ?></label>
+                    <div class="control">
+                        <input type="text" class="input-text" value="<?= /* @noEscape */ 'marketplace/seller/feedback/shop/'.$partner['shop_url']; ?>" readonly/>
+                    </div>
+                </div>
+                <div class="field">
+                    <label><?= /* @noEscape */ __('Review Page Request Url Path') ?></label>
+                    <div class="control">
+                        <input type="text" class="input-text" name="review_request_url" id="review_request_url" value="<?= /* @noEscape */ $helper->getRewriteUrlPath('marketplace/seller/feedback/shop/'.$partner['shop_url']) ?>"/>
+                    </div>
+                </div>
+                <div class="field">
+                    <label><?= /* @noEscape */ __('Location Page Target Url Path') ?></label>
+                    <div class="control">
+                        <input type="text" class="input-text" value="<?= /* @noEscape */ 'marketplace/seller/location/shop/'.$partner['shop_url']; ?>" readonly/>
+                    </div>
+                </div>
+                <div class="field">
+                    <label><?= /* @noEscape */ __('Location Page Request Url Path') ?></label>
+                    <div class="control">
+                        <input type="text" class="input-text" name="location_request_url" id="location_request_url" value="<?= /* @noEscape */ $helper->getRewriteUrlPath('marketplace/seller/location/shop/'.$partner['shop_url']) ?>"/>
+                    </div>
+                </div>
+                <div class="field">
+                    <label><?= /* @noEscape */ __('Privacy Policy Page Request Url Path') ?></label>
+                    <div class="control">
+                        <input type="text" class="input-text" name="policy_request_url" id="policy_request_url" value="<?= /* @noEscape */ $helper->getRewriteUrlPath('marketplace/seller/policy/shop/'.$partner['shop_url']) ?>"/>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </form>
+    <?php
+}
+?>
+<br/><br/>
+<form action="<?= $block->escapeUrl($block->getUrl('marketplace/account/savePaymentInfo', ["_secure" => $this->getRequest()->isSecure()])) ?>" enctype="multipart/form-data" method="post" data-role="form-payment-validate" data-mage-init='{"validation":{}}'>
+    <div class="wk-mp-page-title page-title">
+        <h2><?= /* @noEscape */ __('Edit Payment Information') ?></h1>
+        <button class="button wk-mp-btn" title="<?= /* @noEscape */ __('Save Payment') ?>" type="submit">
+            <span><span><?= /* @noEscape */ __('Save Payment') ?></span></span>
+        </button>
+    </div>
+    <?= $block->getBlockHtml('seller.formkey')?>
+    <?= $block->getBlockHtml('formkey')?>
+    <div class="wk-mp-design">
+        <fieldset class="fieldset info wk-mp-fieldset">
+            <legend class="legend"><span><?= /* @noEscape */ __('Payment Information') ?></span></legend>
+            <div class="field">
+                <label><?= /* @noEscape */ __('Payment Details') ?></label>
+                <?php
+                if ($profile_hint_status && $helper->getProfileHintBank()) {?>
+                    <img src="<?= $block->escapeUrl($this->getViewFileUrl('Webkul_Marketplace::images/quest.png')); ?>" class='questimg' title="<?= $block->escapeHtml($helper->getProfileHintBank()) ?>"/>
+                    <?php
+                } ?>
+                <div class="control">
+                    <textarea class="input-text" name="payment_source" id="payment-source" title="payment source" cols="1" rows="3" ><?= /* @noEscape */ $partner['payment_source']; ?></textarea>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</form>
+<br/><br/>
+<?= $block->getChildHtml(); ?>
+<div class="field profile wk-profile-links-container">
+    <div class="wk-profile-links">
+        <a class="btn-primary" href="<?= /* @noEscape */ $helper->getRewriteUrl('marketplace/seller/profile/shop/'.$partner['shop_url']); ?>" target="_blank"><?= /* @noEscape */ __('View Profile') ?></a>
+    </div>
+    <div class="wk-profile-links">
+        <a class="btn-primary" href="<?= /* @noEscape */ $helper->getRewriteUrl('marketplace/seller/collection/shop/'.$partner['shop_url']); ?>" target="_blank"><?= /* @noEscape */ __('View Collection') ?></a>
+    </div>
+</div>
+<div class="buttons-set">
+    <p class="back-link">
+        <a href="javascript:;" onclick="javascript: window.history.back();" class="left">&laquo; <?= /* @noEscape */ __('Back') ?></a>
+    </p>
+</div>
+<?php
+$formData = [
+    'countryPicSelector' => '#country-pic',
+    'countryImgPrevSelector' => '.country_img_prev',
+    'countryLatitudeSelector' => '#country-latitude',
+    'countryLongitudeSelector' => '#country-longitude',
+    'countryImgPrev' => $this->getViewFileUrl("Webkul_Marketplace::images/country/countryflags/"),
+    'backgroundWidthSelector' => '#background_width',
+    'logoPicSelector' => '#logo-pic',
+    'bannerPicSelector' => '#banner-pic',
+    'leftButtonSelector' => '.left',
+    'buttonsSetLastSelector' => '.buttons-set:last',
+    'inputTextSelector' => '.input-text',
+    'profileimageSetSpanSelector' => '.profileimage-set span',
+    'bannerSelector' => '.wk-banner',
+    'bannerDeleteAjaxUrl' => $block->getUrl('marketplace/account/deleteSellerBanner', ['_secure' => $this->getRequest()->isSecure()]),
+    'setimageSelector' => '.setimage',
+    'profileImageDeleteSelector' => '.wk-profileimagedelete img',
+    'logoImageSetSpanSelector' => '.logoimage-set span',
+    'logoSelector' => '.wk-logo',
+    'logoDeleteAjaxUrl' => $block->getUrl('marketplace/account/deleteSellerLogo', ['_secure' => $this->getRequest()->isSecure()]),
+    'logoImageDeleteSelector' => '.wk-logoimagedelete img'
+];
+$serializedFormData = $this->helper(\Magento\Framework\Json\Helper\Data::class)->jsonEncode($formData);
+?>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "editSellerProfile": <?= /* @noEscape */ $serializedFormData; ?>
+        }
+    }
+</script> 
+<script>
+require([
+    'jquery',
+    'mage/mage'
+], function($){
+    if($('.registerwithvat').val() == "1"){
+        $('#taxvat').attr('required', 'true');
+    }else{
+        $('#taxvat').removeAttr('required');
+    }
+    $('.registerwithvat').on('change', function()
+    {
+        if(this.value == "1"){
+            $('#taxvat').attr('required', 'true');
+        }else{
+            $('#taxvat').removeAttr('required');
+        }
+    });
+});
+</script>

@@ -1,0 +1,130 @@
+<?php
+
+$paramData = $block->getRequest()->getParams();
+$agentName = '';
+$msgDate = '';
+if (isset($paramData['agent'])) {
+    $agentName = $paramData['agent'];
+}
+if (isset($paramData['msg_date'])) {
+    $msgDate = $paramData['msg_date'];
+}
+?>
+<div class="wk-mp-design">
+    <fieldset class="fieldset info wk-mp-fieldset">
+        <legend class="legend">
+            <span><?= $block->escapeHtml(__('Customer chat history')) ?></span>
+        </legend>
+        <div class="grid">
+            <div class="hor-scroll">
+                <form action="<?= $block->escapeUrl($block->getUrl('chatsystem/customer/history', ['_secure' => $block->getRequest()->isSecure()]))?>" method="get" id="form-productlist-filter"  name="formProductlistFilter" data-mage-init='{"validation":{}}'>
+                    <table cellspacing="0" class="border wk-mp-list-table">
+                        <thead>
+                            <tr id="wk-mp-tr-heading">
+                                <th><span><?= $block->escapeHtml(__('Agent Name')) ?></span></th>
+                                <th><span><?= $block->escapeHtml(__('Message Date')) ?></span></th>
+                                <th><span>&nbsp;</span></th>
+                            </tr>
+                        </thead>
+                        <tbody class="wk-mp-body">
+                            <tr>
+                                <td>
+                                    <input type="text" class="input-text validate-no-html-tags" name="agent" placeholder='<?= $block->escapeHtml(__('Search by agent name')) ?>' value="<?= $block->escapeHtml($agentName)?>"/>
+                                </td>
+                                <td>
+                                    <span class="">
+                                        <input type="text" name="msg_date" id="special-from-date" class="input-text validate-no-html-tags validate-date" value="<?= $block->escapeHtml($msgDate)?>" placeholder='<?= $block->escapeHtml(__('Search by message date')) ?>' />
+                                    </span>
+                                </td>
+                                <td>
+                                    <button class="button" title="Save" type="submit">
+                                        <span><span><span><?= $block->escapeHtml(__('Submit')) ?></span></span></span>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+                <?php if ($block->getHistoryCollection()->getSize()): ?>
+                    <table cellspacing="0" class="border wk-mp-list-table wk-mp-list-container-table">
+                        <thead>
+                            <tr class="wk-content">
+                                <th class="wk-first-td">
+                                    <span class="label name">
+                                        <?= $block->escapeHtml(__('Sender Name'))?>
+                                    </span>
+                                </th>
+                                <th>
+                                    <span class="label name">
+                                        <?= $block->escapeHtml(__('Receiver Name'))?>
+                                    </span>
+                                </th>
+                                <th>
+                                    <span class="label name">
+                                        <?= $block->escapeHtml(__('Message'))?>
+                                    </span>
+                                </th>
+                                <th>
+                                    <span class="label name">
+                                        <?= $block->escapeHtml(__('Message Date Time'))?>
+                                    </span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $customerUniqueId = $block->getCustomerUniqueId();
+                            foreach ($block->getHistoryCollection() as $history): ?>
+                                <tr class="wk-row-view">
+                                    <td>
+                                        <?php if ($history->getSenderUniqueId() == $customerUniqueId): ?>
+                                            <span><?= $block->escapeHtml(__('You')); ?></span>
+                                        <?php else: ?>
+                                            <span><?= $block->escapeHtml($history->getAgentName()); ?></span>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td>
+                                        <?php if ($history->getReceiverUniqueId() == $customerUniqueId): ?>
+                                            <span><?= $block->escapeHtml(__('You')); ?></span>
+                                        <?php else: ?>
+                                            <span><?= $block->escapeHtml($history->getAgentName()); ?></span>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td>
+                                        <?php if ($block->getMessageType($history->getMessage()) == 'image') { ?>
+                                            <span>
+                                                <a target="_blank" href="<?= $block->escapeUrl($block->getUrl('chatsystem/index/viewfile', ['image' => $history->getMessage()])); ?>">
+                                                    <img src="<?= $block->escapeUrl($block->getUrl('chatsystem/index/viewfile', ['image' => $history->getMessage()])); ?>" width="50" height="50">
+                                                </a>
+                                            </span>
+                                        <?php } elseif ($block->getMessageType($history->getMessage()) == 'file') { ?>
+                                            <a href="<?= $block->escapeUrl($block->getUrl('chatsystem/index/viewfile', ['file' => $history->getMessage()])); ?>" target="_blank">
+                                                <img src="<?= $block->escapeUrl($block->getViewFileUrl('Webkul_MagentoChatSystem::images/download.png')); ?>" width="50" height="50">
+                                            </a>
+                                        <?php } else { ?>
+                                            <?= $block->escapeHtml($history->getMessage()); ?>
+                                        <?php } ?>
+                                    </td>
+                                    <td>
+                                        <span><?= $block->escapeHtml(date('Y-m-d h:i A', strtotime($history->getDate()))); ?></span>
+                                    </td>
+                                </tr>
+
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                <?php endif; ?>
+            </div>
+        </div>
+        <?php if ($block->getPagerHtml()): ?>
+            <div class="order-products-toolbar toolbar bottom"><?= $block->getPagerHtml(); ?></div>
+        <?php endif ?>
+    </fieldset>
+</div>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Webkul_MagentoChatSystem/js/view/chat-history": {}
+        }
+    }
+</script>

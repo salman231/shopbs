@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ * 
+ * PHP version 7.0+
+ *
+ * @category  Webkul
+ * @package   Webkul_DeliveryBoy
+ * @author    Webkul <support@webkul.com>
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <carriers>
+            <expressdeliveryboy>
+                <active>1</active>
+                <title>Express 5 hour delivery</title>
+                <name>Express 5 hour delivery</name>
+                <price>0</price>
+                <handling_type>F</handling_type>
+                <handling_fee>0</handling_fee>
+                <sallowspecific>0</sallowspecific>
+                <showmethod>0</showmethod>
+                <type>0</type>
+                <specificerrmsg>This shipping method is not available. To use this shipping method, please contact us.</specificerrmsg>
+                <model>Webkul\DeliveryBoy\Model\Carrier\Shipping</model>
+            </expressdeliveryboy>
+        </carriers>
+        <deliveryboy>
+            <auth>
+                <username>mobikul</username>
+                <password>mobikul123</password>
+            </auth>
+            <email>
+                <deliveryboy_forgotpassword_validation_template>deliveryboy_email_forgotpassword_validation_template</deliveryboy_forgotpassword_validation_template>
+            </email>
+            <configuration>
+                <warehouse_address>6146 Honey Bluff Parkway&#13;Calder, Michigan, 49628-7978&#13;United States&#13;T: (555) 229-3326</warehouse_address>
+                <latitude>44.9204489</latitude>
+                <longitude>-90.7586966</longitude>
+                <delivery_range>10</delivery_range>
+                <admin_email>roni_cost@example.com</admin_email>
+                <allowed_shipping>expressdeliveryboy_expressdeliveryboy</allowed_shipping>
+            </configuration>
+        </deliveryboy>
+    </default>
+</config>

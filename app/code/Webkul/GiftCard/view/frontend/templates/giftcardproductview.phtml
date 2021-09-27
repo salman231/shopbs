@@ -1,0 +1,26 @@
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul 
+ * @package   Webkul_GiftCard
+ * @author    Webkul Software Private Limited
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<?php $productType = $block->getproductType()?>
+<script type="text/javascript">
+require(
+    [
+        'jquery'
+    ], function($){
+    $(document).ready(function(){
+        if ('<?=  /* @noEscape */ $productType; ?>' == 'giftcard') {
+            $("span:contains('Email To')").each(function(index){
+                $(this).parent().next('div').find('input').attr('data-validate',"{required:true, 'validate-email':true}");
+            });
+        }
+    });
+});
+</script>

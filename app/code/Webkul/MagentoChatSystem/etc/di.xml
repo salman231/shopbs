@@ -1,0 +1,253 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MagentoChatSystem
+ * @author    Webkul
+ * @copyright Copyright (c)  Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Webkul\MagentoChatSystem\Api\SaveMessageInterface" type="Webkul\MagentoChatSystem\Model\SaveMessage" />
+    <preference for="Webkul\MagentoChatSystem\Api\SaveCustomerInterface" type="Webkul\MagentoChatSystem\Model\SaveCustomer" />
+    <preference for="Webkul\MagentoChatSystem\Api\ChangeStatusInterface" type="Webkul\MagentoChatSystem\Model\ChangeStatus" />
+    <preference for="Webkul\MagentoChatSystem\Api\LoadHistoryInterface" type="Webkul\MagentoChatSystem\Model\LoadHistory" />
+    <preference for="Webkul\MagentoChatSystem\Api\SaveAssignedChatInterface" type="Webkul\MagentoChatSystem\Model\SaveAssignedChat" />
+
+    <preference for="Webkul\MagentoChatSystem\Api\AgentRatingRepositoryInterface" type="Webkul\MagentoChatSystem\Model\AgentRatingRepository"/>
+	<preference for="Webkul\MagentoChatSystem\Api\Data\AgentRatingInterface" type="Webkul\MagentoChatSystem\Model\AgentRating"/>
+	<preference for="Webkul\MagentoChatSystem\Api\Data\AgentRatingSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+    
+    <preference for="Webkul\MagentoChatSystem\Api\Data\CustomerDataSearchResultInterface"
+                type="Magento\Framework\Api\SearchResults" />
+
+    <preference for="Webkul\MagentoChatSystem\Api\Data\CustomerDataInterface" type="Webkul\MagentoChatSystem\Model\CustomerData" />
+    <preference for="Webkul\MagentoChatSystem\Api\CustomerDataRepositoryInterface" type="Webkul\MagentoChatSystem\Model\CustomerDataRepository" />
+
+    <preference for="Webkul\MagentoChatSystem\Api\Data\MessageSearchResultInterface"
+                type="Magento\Framework\Api\SearchResults" />
+    <preference for="Webkul\MagentoChatSystem\Api\Data\MessageInterface" type="Webkul\MagentoChatSystem\Model\Message" />
+    <preference for="Webkul\MagentoChatSystem\Api\MessageRepositoryInterface" type="Webkul\MagentoChatSystem\Model\MessageRepository" />
+
+    <preference for="Webkul\MagentoChatSystem\Api\Data\AgentDataInterface" type="Webkul\MagentoChatSystem\Model\AgentData" />
+    <preference for="Webkul\MagentoChatSystem\Api\AgentDataRepositoryInterface" type="Webkul\MagentoChatSystem\Model\Agent\AgentDataRepository" />
+
+    <preference for="Webkul\MagentoChatSystem\Api\Data\AssignedChatInterface" type="Webkul\MagentoChatSystem\Model\AssignedChat" />
+    <preference for="Webkul\MagentoChatSystem\Api\AssignedChatRepositoryInterface" type="Webkul\MagentoChatSystem\Model\Agent\AssignedChatRepository" />
+
+    <preference for="Webkul\MagentoChatSystem\Api\Data\TotalAssignedChatInterface" type="Webkul\MagentoChatSystem\Model\TotalAssignedChat" />
+    <!-- <preference for="Webkul\MagentoChatSystem\Api\TotalAssignedChatRepositoryInterface" type="Webkul\MagentoChatSystem\Model\Agent\TotalAssignedChatRepository" /> -->
+    <preference for="Webkul\MagentoChatSystem\Api\ReportRepositoryInterface" type="Webkul\MagentoChatSystem\Model\ReportRepository"/>
+	<preference for="Webkul\MagentoChatSystem\Api\Data\ReportInterface" type="Webkul\MagentoChatSystem\Model\Data\Report"/>
+	<preference for="Webkul\MagentoChatSystem\Api\Data\ReportSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+	<virtualType name="Webkul\MagentoChatSystem\Model\ResourceModel\Report\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">chatsystem_report</argument>
+			<argument name="resourceModel" xsi:type="string">Webkul\MagentoChatSystem\Model\ResourceModel\Report\Collection</argument>
+		</arguments>
+	</virtualType>
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+		<arguments>
+			<argument name="collections" xsi:type="array">
+				<item name="chatsystem_report_listing_data_source" xsi:type="string">Webkul\MagentoChatSystem\Model\ResourceModel\Report\Grid\Collection</item>
+			</argument>
+		</arguments>
+	</type>
+    
+    <type name="Magento\Framework\EntityManager\MetadataPool">
+        <arguments>
+            <argument name="metadata" xsi:type="array">
+                <item name="Webkul\MagentoChatSystem\Api\Data\CustomerDataInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">chatsystem_userdata</item>
+                    <item name="identifierField" xsi:type="string">entity_id</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\HydratorPool">
+        <arguments>
+            <argument name="hydrators" xsi:type="array">
+                <item name="Webkul\MagentoChatSystem\Api\Data\CustomerDataInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\EntityManager\MetadataPool">
+        <arguments>
+            <argument name="metadata" xsi:type="array">
+                <item name="Webkul\MagentoChatSystem\Api\Data\AgentDataInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">chatsystem_agentdata</item>
+                    <item name="identifierField" xsi:type="string">entity_id</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\HydratorPool">
+        <arguments>
+            <argument name="hydrators" xsi:type="array">
+                <item name="Webkul\MagentoChatSystem\Api\Data\AgentDataInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\EntityManager\MetadataPool">
+        <arguments>
+            <argument name="metadata" xsi:type="array">
+                <item name="Webkul\MagentoChatSystem\Api\Data\MessageInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">chatsystem_history</item>
+                    <item name="identifierField" xsi:type="string">entity_id</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\HydratorPool">
+        <arguments>
+            <argument name="hydrators" xsi:type="array">
+                <item name="Webkul\MagentoChatSystem\Api\Data\MessageInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\EntityManager\MetadataPool">
+        <arguments>
+            <argument name="metadata" xsi:type="array">
+                <item name="Webkul\MagentoChatSystem\Api\Data\AssignedChatInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">chatsystem_assigned_chat</item>
+                    <item name="identifierField" xsi:type="string">entity_id</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\HydratorPool">
+        <arguments>
+            <argument name="hydrators" xsi:type="array">
+                <item name="Webkul\MagentoChatSystem\Api\Data\AssignedChatInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\EntityManager\MetadataPool">
+        <arguments>
+            <argument name="metadata" xsi:type="array">
+                <item name="Webkul\MagentoChatSystem\Api\Data\TotalAssignedChatInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">chatsystem_total_agent_chat</item>
+                    <item name="identifierField" xsi:type="string">entity_id</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\HydratorPool">
+        <arguments>
+            <argument name="hydrators" xsi:type="array">
+                <item name="Webkul\MagentoChatSystem\Api\Data\TotalAssignedChatInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="assigned_chat_listing_data_source" xsi:type="string">Webkul\MagentoChatSystem\Model\ResourceModel\AssignedChat\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Webkul\MagentoChatSystem\Model\ResourceModel\AssignedChat\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">chatsystem_assigned_chat</argument>
+            <argument name="eventPrefix" xsi:type="string">assigned_chat_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">assigned_chat_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Webkul\MagentoChatSystem\Model\ResourceModel\AssignedChat</argument>
+        </arguments>
+    </type>
+    <virtualType name="AssignedGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Webkul\MagentoChatSystem\Model\ResourceModel\AssignedChat\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">AssignedChatFilterPool</argument>
+        </arguments>
+    </virtualType>
+
+     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="chat_history_listing_data_source" xsi:type="string">Webkul\MagentoChatSystem\Model\ResourceModel\Message\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Webkul\MagentoChatSystem\Model\ResourceModel\Message\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">chatsystem_history</argument>
+            <argument name="eventPrefix" xsi:type="string">history_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">history_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Webkul\MagentoChatSystem\Model\ResourceModel\Message</argument>
+        </arguments>
+    </type>
+    <virtualType name="AssignedGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Webkul\MagentoChatSystem\Model\ResourceModel\Message\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">AssignedChatFilterPool</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="AssignedChatFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="chat_ratings_listing_data_source" xsi:type="string">Webkul\MagentoChatSystem\Model\ResourceModel\AgentRating\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Webkul\MagentoChatSystem\Model\ResourceModel\AgentRating\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">chatsystem_agent_rating</argument>
+            <argument name="eventPrefix" xsi:type="string">chatsystem_agent_rating_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">agent_rating_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Webkul\MagentoChatSystem\Model\ResourceModel\AgentRating</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="chat_agent_listing_data_source" xsi:type="string">Webkul\MagentoChatSystem\Model\ResourceModel\AgentData\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Webkul\MagentoChatSystem\Model\ResourceModel\AgentData\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">chatsystem_agentdata</argument>
+            <argument name="eventPrefix" xsi:type="string">chatsystem_agentdata_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">chatsystem_agentdata_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Webkul\MagentoChatSystem\Model\ResourceModel\AgentData</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Backend\Controller\Adminhtml\Auth\Logout">
+        <plugin name="agent_logout" type="Webkul\MagentoChatSystem\Plugin\Backend\Auth\Logout" sortOrder="1"/>
+    </type>
+    <type name="Webkul\MagentoChatSystem\Ui\Component\MassAction\Chat\AssignOptions">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="urlPath" xsi:type="string">chatsystem/chat/massAssignChat</item>
+                <item name="paramName" xsi:type="string">entity_id</item>
+                <item name="confirm" xsi:type="array">
+                    <item name="title" xsi:type="string" translatable="true">Assign Chat</item>
+                    <item name="message" xsi:type="string" translatable="true">Are you sure to assign selected chat to agent?</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Customer\Controller\Account\LoginPost">
+        <plugin name="wk_chatsystem_loginpost" type="Webkul\MagentoChatSystem\Plugin\LoginPost" sortOrder="1"/>
+    </type>
+    <type name="Magento\Customer\Controller\Ajax\Login">
+        <plugin name="wk_chatsystem_ajaxlogin" type="Webkul\MagentoChatSystem\Plugin\AjaxLogin" sortOrder="1"/>
+    </type>
+</config>

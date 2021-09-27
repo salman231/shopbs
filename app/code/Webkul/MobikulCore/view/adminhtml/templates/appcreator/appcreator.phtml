@@ -1,0 +1,74 @@
+<?php
+$selectedLayout = $block->getSelectedLayout();
+$mobileViewLayout = $block->getMobileViewLayout();
+$result = $block->getLayoutOptions();
+?>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-pencil"></i> Home Page Layout</h3>
+    </div>
+    <div id="mainContainer" style="display: flex;">
+    <div id="leftside" style="height: 600px;padding:5px;width: 33%;">
+        <div class="list-group">
+        <?php foreach ($result['data'] as $key => $data) { ?>
+            <a id= <?= /* @noEscape */ $data['id'].'_'.$data['type'].'_'.rawurlencode($data['label'])?> 
+                data-image-url = <?= /* @noEscape */ $block->getImageUrl($data['id'], $data['type']) ?> 
+                class= "list-group-item"
+            >
+                <?= /* @noEscape */ $data['label'];?>
+                <span class="add_component">
+                    <i class="fa fa-plus" style="padding-right:5px"></i>
+                <span>
+            </a>
+        <?php  } ?>
+        </div>
+    </div>
+    <div id="centerSide">
+        <ul id="items">
+            <?php foreach ($block->getSelectedLayout() as $key => $data) { ?>
+                <li 
+                    class="slide" 
+                    id=<?=/* @noEscape */ $data['layout_id'].'_'.$data['type'].'_'.rawurlencode($data['label']) ?>
+                >
+                    <?= /* @noEscape */ rawurldecode($data['label']); // @codingStandardsIgnoreLine ?>
+                    <span class="delete_component">
+                        <i class="fa fa-trash" style="padding-right:5px"></i>
+                    </span>
+                </li>
+            <?php } ?>
+        </ul>
+    </div>
+    <div class="smartphone">
+        <div class="content">
+        <div class="iframe_html">
+        <?php foreach ($mobileViewLayout as $data) { ?>
+            <li class="slide">
+                <div>
+                    <div style="text-align: center;padding: 5px;background: #c4c4c4;font-size: small;">
+                        <span><?=/* @noEscape */ $data['label'] ?></span>
+                    </div>
+                        <img 
+                            class="mobileImage" 
+                            src= "<?=/* @noEscape */
+                                $block->getViewFileUrl('Webkul_MobikulCore::images/appcreator')
+                                .'/'.$data['imagePath'] ?>"
+                        >
+                </div>
+            </li>
+        <?php } ?>
+
+        </div>
+    </div>
+    </div>
+</div>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "appCreator": {
+             "updateUrl" : "<?=  /* @noEscape */  $block->getUrl('mobikul/appcreator/update/') ?>",
+             "baseUrl" : "<?=  /* @noEscape */  $block->getViewFileUrl('Webkul_MobikulCore::images/appcreator') ?>",
+             "maxLayout" : "<?= /* @noEscape */ $block->getMaxLayout() ?>"
+            }
+        }
+    }
+</script>

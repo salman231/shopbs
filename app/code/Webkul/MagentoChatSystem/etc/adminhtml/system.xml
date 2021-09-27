@@ -1,0 +1,190 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MagentoChatSystem
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="webkul" translate="label" sortOrder="10">
+            <label>Webkul</label>
+        </tab>
+        <section id="chatsystem" translate="label" type="text" sortOrder="305" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Chat System Configuration</label>
+            <tab>webkul</tab>
+            <resource>Webkul_MagentoChatSystem::config_chatsystem</resource>
+            <group id="chat_config" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+            	<label>Server Settings</label>
+            	<field id="host_name" translate="label comment" type="text" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="0" >
+                    <label>Host Name</label>
+                    <comment>Ex: example.com</comment>
+                </field>
+                <field id="port_number" translate="label comment" type="text" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="0" >
+                    <label>Port Number</label>
+                    <comment>Ex: 8080</comment>
+                    <validate>validate-number</validate>
+                </field>
+                <field id="start_button" translate="label" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <frontend_model>Webkul\MagentoChatSystem\Block\System\Config\Form\StartButton</frontend_model>
+                </field>
+                <field id="admin_image" translate="label comment" type="image" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Admin Chat Profile Image</label>
+                    <comment>Allowed file types: jpg, jpeg, gif, png</comment>
+                    <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+                    <base_url type="media" scope_info="1">chatsystem/admin</base_url>
+                    <upload_dir config="system/filesystem/media" scope_info="1">chatsystem/admin</upload_dir>
+                </field>
+                <field id="chat_name" translate="label comment" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Chat Name</label>
+                    <comment>Chat name will be display to all users in frontend.</comment>
+                </field>
+                <field id="assign_automatic" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Assign New Chat to Any Chatsystem Manager Automatically</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="offline_message" translate="label comment" type="select" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Allow Customer to send message offline</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Customer can send message if there are no agent is available.</comment>
+                </field>
+                <field id="max_file_size" translate="label comment" type="text" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allowed Maximum File Size for Attachment in MB</label>
+                    <validate>validate-digits</validate>
+                    <comment>Enter the integer value only: ex. 5</comment>
+                </field>
+                <field id="is_https" translate="label" type="select" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>HTTPS Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="key_file_upload" translate="label comment" type="Magento\Config\Block\System\Config\Form\Field\File" sortOrder="121" showInDefault="1" showInWebsite="1" >
+                    <label>Upload Server Private Key File</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\File</backend_model>
+                    <upload_dir config="system" scope_info="1">server_files</upload_dir>
+                    <comment>You can get this file from your host provider, file name must be as: server.key</comment>
+                    <depends>
+                        <field id="is_https">1</field>
+                    </depends>
+                </field>
+                <field id="crt_file_upload" translate="label comment" type="Magento\Config\Block\System\Config\Form\Field\File" sortOrder="122" showInDefault="1" showInWebsite="1" >
+                    <label>Upload Server Certificate File</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\File</backend_model>
+                    <upload_dir config="system" scope_info="1">server_files</upload_dir>
+                    <comment>You can get this file from your host provider, file name must be as: server.crt</comment>
+                    <depends>
+                        <field id="is_https">1</field>
+                    </depends>
+                </field>
+                <field id="ca_file_upload" translate="label comment" type="Magento\Config\Block\System\Config\Form\Field\File" sortOrder="123" showInDefault="1" showInWebsite="1" >
+                    <label>Upload Server CA Bundle File</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\File</backend_model>
+                    <upload_dir config="system" scope_info="1">server_files</upload_dir>
+                    <comment>You can get this file from your host provider, file name must be as: server.ca-bundle</comment>
+                    <depends>
+                        <field id="is_https">1</field>
+                    </depends>
+                </field>
+        	</group>
+            <group id="chat_options" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Frontend Chat Window Option</label>
+                <field id="window_position" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Chat Window Position</label>
+                    <source_model>Webkul\MagentoChatSystem\Model\Config\Positions</source_model>
+                </field>
+
+                <field id="background_type" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Chat Window Background Type</label>
+                    <source_model>Webkul\MagentoChatSystem\Model\Config\BackgroundType</source_model>
+                </field>
+                <field id="solid_color" translate="label comment" type="text" sortOrder="25" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Choose Background Color</label>
+                    <depends>
+                        <field id="background_type">color</field>
+                    </depends>
+                    <comment>select chat window background color.</comment>
+                    <frontend_model>Webkul\MagentoChatSystem\Block\System\Config\Color</frontend_model>
+                </field>
+                <field id="background_image" translate="label comment" type="image" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Chat Window Background Image</label>
+                    <depends>
+                        <field id="background_type">image</field>
+                    </depends>
+                    <comment>Allowed file types: jpg, jpeg, gif, png</comment>
+                    <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+                    <base_url type="media" scope_info="1">chatsystem/background</base_url>
+                    <upload_dir config="system/filesystem/media" scope_info="1">chatsystem/background</upload_dir>
+                </field>
+                <field id="header_color" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Chat Window Header Color</label>
+                    <comment>select chat window header color.</comment>
+                    <frontend_model>Webkul\MagentoChatSystem\Block\System\Config\Color</frontend_model>
+                </field>
+                <field id="header_text_color" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Chat Window Header Text Color</label>
+                    <comment>select chat window text color.</comment>
+                    <frontend_model>Webkul\MagentoChatSystem\Block\System\Config\Color</frontend_model>
+                </field>
+            </group>
+            <group id="admin_chat_options" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Admin Chat Window Option</label>
+                <field id="user_panel_background_color" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Chat User Panel Window Background Color</label>
+                    <comment>select chat list window background color.</comment>
+                    <frontend_model>Webkul\MagentoChatSystem\Block\System\Config\Color</frontend_model>
+                </field>
+                <field id="user_panel_color" translate="label comment" type="text" sortOrder="15" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Chat User Panel Window Text Color</label>
+                    <comment>select chat list window text color.</comment>
+                    <frontend_model>Webkul\MagentoChatSystem\Block\System\Config\Color</frontend_model>
+                </field>
+                <field id="user_list_background_color" translate="label comment" type="text" sortOrder="16" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Chat User List Background Color</label>
+                    <comment>select chat list window background color.</comment>
+                    <frontend_model>Webkul\MagentoChatSystem\Block\System\Config\Color</frontend_model>
+                </field>
+                <field id="user_list_color" translate="label comment" type="text" sortOrder="17" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Chat User List Text Color</label>
+                    <comment>select chat list window text color.</comment>
+                    <frontend_model>Webkul\MagentoChatSystem\Block\System\Config\Color</frontend_model>
+                </field>
+                <field id="background_type" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Chat Window Background Type</label>
+                    <source_model>Webkul\MagentoChatSystem\Model\Config\BackgroundType</source_model>
+                </field>
+                <field id="solid_color" translate="label comment" type="text" sortOrder="25" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Choose Background Color</label>
+                    <depends>
+                        <field id="background_type">color</field>
+                    </depends>
+                    <comment>select chat window background color.</comment>
+                    <frontend_model>Webkul\MagentoChatSystem\Block\System\Config\Color</frontend_model>
+                </field>
+                <field id="background_image" translate="label comment" type="image" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Chat Window Background Image</label>
+                    <depends>
+                        <field id="background_type">image</field>
+                    </depends>
+                    <comment>Allowed file types: jpg, jpeg, gif, png</comment>
+                    <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+                    <base_url type="media" scope_info="1">chatsystem/background</base_url>
+                    <upload_dir config="system/filesystem/media" scope_info="1">chatsystem/background</upload_dir>
+                </field>
+                <field id="header_color" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Chat Window Header Color</label>
+                    <comment>select chat window header color.</comment>
+                    <frontend_model>Webkul\MagentoChatSystem\Block\System\Config\Color</frontend_model>
+                </field>
+                <field id="header_text_color" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Chat Window Header Text Color</label>
+                    <comment>select chat window text color.</comment>
+                    <frontend_model>Webkul\MagentoChatSystem\Block\System\Config\Color</frontend_model>
+                </field>
+            </group>
+    	</section>
+	</system>
+</config>

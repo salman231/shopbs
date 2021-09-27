@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Rmasystem
+ * @author    Webkul
+ * @copyright Copyright (c) 2010-2017 Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <rmasystem>
+            <parameter>
+                <allow_for_rma>simple,configurable</allow_for_rma>
+                <file_attachment_extension>jpg,jpeg,pdf</file_attachment_extension>
+                <returnpolicy>Return Policy</returnpolicy>
+                <admin_name>admin</admin_name>
+                <admin_email>owner@example.com</admin_email>
+                <days>10</days>
+                <new_rma_message>New RMA message.</new_rma_message>
+            </parameter>
+        </rmasystem>
+    </default>
+</config>

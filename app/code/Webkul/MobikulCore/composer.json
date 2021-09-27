@@ -1,0 +1,31 @@
+{
+    "name": "webkul/module-mobikul-core",
+    "description": "Webkul Magento2 Mobikul Core Module",
+    "require": {
+        "magento/module-config": "101.*.*",
+        "magento/module-store": "101.*.*",
+        "magento/module-sales": "102.*.*",
+        "magento/module-quote": "101.*.*",
+        "magento/module-customer": "102.*.*",
+        "magento/module-backend": "101.*.*",
+        "magento/module-directory": "100.*.*",
+        "magento/module-catalog": "103.*.*",
+        "magento/module-catalog-inventory": "100.*.*",
+        "magento/module-eav": "102.*.*",
+        "magento/framework": "102.*.*",
+        "magento/module-ui": "101.*.*"
+    },
+    "type": "magento2-module",
+    "version": "3.0.8",
+    "license": [
+        "proprietary"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Webkul\\MobikulCore\\": ""
+        }
+    }
+}

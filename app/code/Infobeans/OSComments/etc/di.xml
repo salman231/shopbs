@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+* InfoBeans Sales Shipment Comment Extension
+*
+* @category   Infobeans
+* @package    Infobeans_OSComments
+* @version    2.0.0
+*
+* Release with version 2.0.0
+*
+* @author     InfoBeans Technologies Limited http://www.infobeans.com/
+* @copyright  Copyright (c) 2017 InfoBeans Technologies Limited
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/Object/etc/fieldset.xsd">
+        <type name="Magento\Checkout\Model\ShippingInformationManagement">
+            <plugin name="infobeans_oscomments_save_in_quote" type="Infobeans\OSComments\Plugin\Checkout\Model\ShippingInformationManagement" sortOrder="1"/>
+        </type>
+</config>

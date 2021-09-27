@@ -1,0 +1,20 @@
+{
+    "name": "webkul/marketplace-advanced-commission",
+    "description": "Webkul Magento2 Marketplace Advanced Commission Module",
+    "require": {
+        "webkul/module-marketplace": "3.0.*"
+    },
+    "type": "magento2-module",
+    "version": "3.0.0",
+    "license": [
+        "proprietary"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Webkul\\MpAdvancedCommission\\": ""
+        }
+    }
+}

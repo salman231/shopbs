@@ -1,0 +1,5 @@
+deny from all
+<Directory var/import/ebooks/>
+Satisfy Any
+Allow from all
+</Directory>

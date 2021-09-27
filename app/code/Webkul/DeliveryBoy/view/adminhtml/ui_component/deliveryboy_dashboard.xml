@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Webkul Software.
+ * 
+ * PHP version 7.0+
+ *
+ * @category  Webkul
+ * @package   Webkul_DeliveryBoy
+ * @author    Webkul <support@webkul.com>
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">deliveryboy_dashboard.deliveryboy_dashboard_data_source</item>
+            <item name="deps" xsi:type="string">deliveryboy_dashboard.deliveryboy_dashboard_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Deliveryboy Dashboard</item>
+        <item name="layout" xsi:type="array">
+            <item name="type" xsi:type="string">tabs</item>
+            <item name="navContainerName" xsi:type="string">left</item>
+        </item>
+        <item name="reverseMetadataMerge" xsi:type="boolean">true</item>
+    </argument>
+    <dataSource name="deliveryboy_dashboard_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Webkul\DeliveryBoy\Model\Deliveryboy\DataProvider</argument>
+            <argument name="name" xsi:type="string">deliveryboy_dashboard_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="expressdelivery/deliveryboy/save"/>
+                    <item name="validate_url" xsi:type="url" path="expressdelivery/deliveryboy/validate"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <fieldset name="deliveryboy_order_graph" sortOrder="3">
+        <settings>
+            <collapsible>false</collapsible>
+            <label translate="true">Order Graph</label>
+        </settings>
+        <container name="order_container" sortOrder="1">
+            <htmlContent name="html_content">
+                <block class="Webkul\DeliveryBoy\Block\Adminhtml\Dashboard\OrderGraph" name="deliveryboy.ordergraph">
+                    <arguments>
+                        <argument name="block_helper" xsi:type="object">Webkul\DeliveryBoy\ViewModel\BlockHelper</argument>
+                    </arguments>
+                </block>
+            </htmlContent>
+        </container>
+    </fieldset>
+    <fieldset name="deliveryboy_sales_graph" sortOrder="3">
+        <settings>
+            <collapsible>false</collapsible>
+            <label translate="true">Sales Graph</label>
+        </settings>
+        <container name="sales_container" sortOrder="1">
+            <htmlContent name="html_content">
+                <block class="Webkul\DeliveryBoy\Block\Adminhtml\Dashboard\SalesGraph" name="deliveryboy.salesgraph">
+                    <arguments>
+                        <argument name="block_helper" xsi:type="object">Webkul\DeliveryBoy\ViewModel\BlockHelper</argument>
+                    </arguments>
+                </block>
+            </htmlContent>
+        </container>
+    </fieldset>
+    <fieldset name="deliveryboy_todays_orders" sortOrder="3">
+        <settings>
+            <collapsible>false</collapsible>
+            <label translate="true">Today's Orders</label>
+        </settings>
+        <container name="orders_container" sortOrder="1">
+            <htmlContent name="html_content">
+                <block class="Webkul\DeliveryBoy\Block\Adminhtml\Edit\Account\Tab\OrderGrid" name="deliveryboy.todaysorders"/>
+            </htmlContent>
+        </container>
+    </fieldset>
+    <fieldset name="deliveryboy_location" sortOrder="3">
+        <settings>
+            <collapsible>false</collapsible>
+            <label translate="true">Deliveryboy Location</label>
+        </settings>
+        <container name="location_container" sortOrder="1">
+            <htmlContent name="html_content">
+                <block class="Webkul\DeliveryBoy\Block\Adminhtml\Edit\Account\Tab\DeliveryboyLocation" name="deliveryboy.location"/>
+            </htmlContent>
+        </container>
+    </fieldset>
+</form>

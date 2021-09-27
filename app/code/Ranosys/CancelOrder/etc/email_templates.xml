@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="cancel_order_setting_general_custom_email_template" label="Cancel Order Admin Notification Email Template" file="admin_cancel_order.html" type="html" module="Ranosys_CancelOrder" area="frontend"/>
+</config>

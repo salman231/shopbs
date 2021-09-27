@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Productkeys events xml
+ * @category  Dart
+ * @package   Dart_Productkeys
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+	<event name="sales_order_invoice_pay">
+		<observer name="email_productkeys" instance="Dart\Productkeys\Observer\EmailProductkeys" />
+	</event>
+	<event name="catalog_product_save_after">
+		<observer name="productqty_change" instance="Dart\Productkeys\Observer\Productsaveafter" />
+	</event>
+</config>

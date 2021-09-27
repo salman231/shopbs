@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Methods
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Amasty\Methods\Block\Adminhtml\Shipping\Edit" name="amasty.methods.shipping.edit"/>
+        </referenceContainer>
+        <referenceContainer name="left">
+            <block class="Amasty\Methods\Block\Adminhtml\Shipping\Edit\Tabs" name="amasty.methods.shipping.edit.tabs">
+                <block class="Amasty\Methods\Block\Adminhtml\Shipping\Edit\Tab\General" name="amasty.methods.shipping.edit.tab.general" />
+
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">amasty.methods.shipping.edit.tab.general</argument>
+                    <argument name="block" xsi:type="string">amasty.methods.shipping.edit.tab.general</argument>
+                </action>
+
+            </block>
+        </referenceContainer>
+    </body>
+</page>

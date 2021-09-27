@@ -1,0 +1,35 @@
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MagentoChatSystem
+ * @author    Webkul
+ * @copyright Copyright (c)  Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<!--@subject {{trans "Welcome to %store_name" store_name=$store.getFrontendName()}} @-->
+<!--@vars {
+"var this.getUrl($store, 'customer/account/')":"Customer Account URL",
+"var customer.email":"Customer Email",
+"var customer.name":"Customer Name"
+} @-->
+
+{{template config_path="design/email/header_template"}}
+<p class="greeting">{{trans "%name," name=$customer.name}}</p>
+<p>{{trans "Welcome to %store_name." store_name=$store.getFrontendName()}}</p>
+<p>
+    {{trans
+        'To sign in to our site, use these credentials during checkout or on the <a href="%customer_url">My Account</a> page:'
+
+        customer_url=$this.getUrl($store,'customer/account/',[_nosid:1])
+    |raw}}
+</p>
+<ul>
+    <li><strong>{{trans "Email:"}}</strong> {{var customer.email}}</li>
+    <li><strong>{{trans "Password:"}}</strong> <em>{{var password}}</em></li>
+</ul>
+
+
+{{template config_path="design/email/footer_template"}}

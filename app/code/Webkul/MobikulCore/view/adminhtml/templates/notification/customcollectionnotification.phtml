@@ -1,0 +1,538 @@
+<!-- 
+/**
+* Webkul Software.
+*
+* @category  Webkul
+* @package   Webkul_MobikulCore
+* @author    Webkul
+* @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+* @license   https://store.webkul.com/license.html
+*/ 
+-->
+<div class="admin__field-complex-content message message-warning admin__scope-old">
+    <?= $block->escapeHtml(__("Works only when custom collection is selected as notification type.")); ?>
+</div>
+<style type="text/css">
+    .admin__field-complex-content{
+        margin-bottom: 15px;
+    }
+    .admin__fieldset > .admin__scope-old > .admin__field > .admin__field-label {
+        width: calc( (100%) * 0.25 - 30px );
+        float: left;
+        margin-left: 30px;
+    }
+    .admin__fieldset > .admin__scope-old > .admin__field > .admin__field-control {
+        width: calc( (100%) * 0.75 - 30px );
+        float: left;
+        margin-left: 30px;
+    }
+    #attributeRowContainer{
+        border-left: 1px dotted;
+        margin-left: 5px;
+        min-height: 20px;
+    }
+    .attributeRow{
+        margin-left: 10px;
+        padding: 4px 2px;
+    }
+    .selectedAttributeLabel{
+        font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 1.4rem;
+        font-weight: 600;
+        line-height: 3.2rem;
+        padding: 0 10px 0px 0px;
+        white-space: nowrap;
+        width: 25%;
+        text-align: right;
+        vertical-align: top;
+    }
+    .mainAttributeLabel{
+        font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 1.4rem;
+        font-weight: 600;
+        line-height: 3.2rem;
+        padding: 0;
+        white-space: nowrap;
+    }
+    .attributeChoserContainer{
+        display: inline-block;
+        padding: 0 2px 0 98px;
+        vertical-align: top;
+        min-width: 25%;
+    }
+    .selectedAttributeValue{
+        display: inline-block;
+        padding: 0 2px;
+    }
+    .removeAttributeRule{
+        display: inline-block !important;
+        padding: 5px 0px 0px 5px;
+        vertical-align: top;
+    }
+    .categoryIdChooser{
+        padding: 0 2px;
+    }
+    .categoryIdApply{
+        padding: 0 2px;
+    }
+    .filter_block{
+        border-left: 3px solid #c5c3c3;
+        display: none;
+        margin: 10px;
+        padding: 5px 14px;
+    }
+    .productIdContainer{
+        display: inline-block;
+    }
+    .selectedIds{
+        display: inline-block;
+        margin: 0 2px;
+    }
+    .productIdChooser{
+        display: inline-block;
+        margin: 0 2px;
+    }
+    .productIdChooser:hover{
+        text-decoration: none!important;
+    }
+    .productIdApply{
+        display: inline-block;
+        margin: 0 2px;
+    }
+    .selectedAttributeValueSelectorContainer{
+        display: none;
+        min-height: 16px;
+        min-width: 215px;
+    }
+    .selectedAttributeValueSelectorContainer select{
+        width: 215px;
+        padding: 0px !important;
+    }
+    .productCategoryChooserContainer{
+        margin: 10px 0 0 40px;
+    }
+    #selectedCategoryIds{
+        width: 171px;
+    }
+    .inputField{
+        width: 215px;
+    }
+</style>
+<?php $notificationData = $block->getNotificationData();    ?>
+<div class="admin__field">
+    <label class="admin__field-label">
+        <span><?= $block->escapeHtml(__("Create Product Collection Based on")); ?></span>
+    </label>
+    <div class="admin__field-control">
+        <select class="admin__control-select"
+            name="mobikul_notification[collection_type]"
+            id="collection_type" data-form-part="mobikul_notification_form">
+            <option value=""><?= $block->escapeHtml(__("Please choose a rule to add...")); ?></option>
+            <option <?php
+            if (isset($notificationData["collection_type"]) &&
+                    $notificationData["collection_type"] == "product_attribute"
+                ) { echo "selected='selected'";}?> value="product_attribute">
+                <?= $block->escapeHtml(__("Product Attribute Assigned")); ?>
+            </option>
+            <option <?php
+            if (isset($notificationData["collection_type"]) &&
+                    $notificationData["collection_type"] == "product_ids"
+                ) { echo "selected='selected'";}?> value="product_ids">
+                <?= $block->escapeHtml(__("Products ids")); ?>
+            </option>
+            <option <?php
+            if (isset($notificationData["collection_type"]) &&
+                    $notificationData["collection_type"] == "product_new"
+                ) { echo "selected='selected'";}?> value="product_new">
+                <?= $block->escapeHtml(__("Newly Added Products with count")); ?>
+            </option>
+        </select>
+        <div class="product_attribute filter_block">
+            <label class="mainAttributeLabel">
+            <?= $block->escapeHtml(__("Add multiple filter attributes to product collection")); ?></label>
+            <div id="attributeRowContainer"></div>
+            <a id="addRule" href="javascript:void(0)">
+                <img title="<?= $block->escapeHtml(__('Add')); ?>" alt="<?= $block->escapeHtml(__('Add')); ?>"
+                    class="v-middle" 
+                    src="<?= $block->escapeUrl($block->getViewFileUrl("images/rule_component_add.gif")); ?>">
+            </a>
+        </div>
+        <div class="product_ids filter_block">
+            <label class="mainAttributeLabel">
+            <?= $block->escapeHtml(__("Select or Enter Product ids (comma separated)")); ?></label>
+            <span class="productIdContainer">
+                <input data-form-part="mobikul_notification_form" readonly=""
+                    type="text" class="input-text selectedIds"
+                    name="mobikul_notification[productIds]" id="in_category_products">
+                <a class="productIdChooser" href="javascript:void(0)" onclick="openProductGrid(this);">
+                    <img title="<?= $block->escapeHtml(__('Open Chooser')); ?>"
+                        class="v-middle" alt="<?= $block->escapeHtml(__('Open Chooser')); ?>"
+                        src="<?= $block->escapeUrl($block->getViewFileUrl("images/rule_chooser_trigger.gif")); ?>">
+                </a>
+                <a class="productIdApply" href="javascript:void(0)" onclick="selectionDoneOfProductGrid(this);">
+                    <img title="<?= $block->escapeHtml(__('Apply')); ?>" alt="<?= $block->escapeHtml(__('Apply')); ?>"
+                        class="v-middle" 
+                        src="<?= $block->escapeUrl($block->getViewFileUrl("images/rule_component_apply.gif")); ?>">
+                </a>
+            </span>
+            <div class="productCategoryChooserContainer"></div>
+        </div>
+        <div class="product_new filter_block">
+            <label class="mainAttributeLabel">
+            <?= $block->escapeHtml(__("Please enter the count of newly added products to display in collection")); ?>
+            </label>
+            <input required="" type="number" min="1" step="1" 
+                data-form-part="mobikul_notification_form" class="input-text"
+                name="mobikul_notification[newProductCount]" id="newProductCount">
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    require([
+        "jquery"
+    ], function($){
+<?php   $filterData = "[]";
+if (isset($notificationData["type"]) &&
+    $notificationData["type"] == "custom" && isset($notificationData["collection_type"]) &&
+    $notificationData["collection_type"] != ""
+) {
+    $filterData = $block->serializer()->unserialize($notificationData["filter_data"] ?? '');
+    if (is_array($filterData)) {
+        $filterData = $block->jsonHelper->jsonEncode($filterData);
+    } else { $filterData = $block->jsonHelper->jsonEncode(explode(",", $filterData));
+    }
+}                             ?>
+var selectedAttributes = [];
+var attributeData = {};
+var collectionType = "<?php if (isset($notificationData["collection_type"])) {
+    echo $block->escapeHtml($notificationData["collection_type"]);
+                      } ?>";
+if(collectionType == "product_ids" || collectionType == "product_new")
+    attributeData  = <?= $block->escapeHtml($filterData); ?>;
+else
+    attributeData  = <?= $block->escapeHtml($filterData); ?>;
+var categoryProducts = <?= $block->escapeHtml($block->getProductsJson()); ?>;
+var attributeRow =  '<div class="attributeRow">'+
+                    '<label class="selectedAttributeLabel" style="display:none;"></label>'+
+                    '<div class="attributeChoserContainer">'+
+                        '<select class="attributeChooser" onchange="attributeChooser(this);">'+
+                            '<option value=""><?= "Please choose a condition to add..."; ?></option>'+
+                            '<option value="type_id"><?= "Product Type"; ?></option>'+
+                            '<?php  $options = "";
+                            foreach ($block->getAssignedAttributes() as $attribute) {
+                                $code = explode("|", $attribute["value"]);
+                                $options .= "<option value=\'".$code[1]."\'>".$attribute["label"]."</option>";
+                            }
+                            echo $block->escapeHtml($options); ?>'+
+                        '</select>'+
+                    '</div>'+
+                    '<div class="selectedAttributeValueSelectorContainer"></div>'+
+                    '<a title="<?= $block->escapeHtml(__('Remove')); ?>" onclick="removeAttributeRule(this);"'+
+                    'class="removeAttributeRule" href="javascript:void(0)">'+
+                        '<img class="v-middle" alt="<?= $block->escapeHtml(__('Remove')); ?>"'+
+                        'src="<?= $block->escapeUrl($block->getViewFileUrl("images/rule_component_remove.gif")); ?>">'+
+                    '</a>'+
+                    '<div class="productCategoryChooserContainer"></div>'+
+                    '</div>';
+
+        setTimeout(function()   {
+            $("#collection_type").trigger("change");
+            if(Object.keys(attributeData).length > 0 && collectionType == "product_attribute") {
+                $("#collection_type").trigger("change");
+                for (var key in attributeData){
+                    $("#addRule").trigger("click");
+                    $("#attributeRowContainer").find(".attributeRow:last-child").find(".attributeChooser")
+                        .val(key).trigger("change");
+                }
+            }
+            if(collectionType == "product_ids") {
+                $("#collection_type").trigger("change");
+                $("#in_category_products").val(attributeData+"");
+            }
+            if(collectionType == "product_new") {
+                $("#collection_type").trigger("change");
+                $("#newProductCount").val(attributeData);
+            }
+        }, 100);
+
+        window.removeAttributeRule = function (thisthis){
+            var removableAttribute = $(thisthis).prev(".selectedAttributeValueSelectorContainer").attr("data-attr");
+            var index = selectedAttributes.indexOf(removableAttribute);
+            if (index > -1)
+                selectedAttributes.splice(index, 1);
+            $(thisthis).parents(".attributeRow").remove();
+        }
+
+        window.openProductGrid = function (thisthis){
+            var thisthis = $(thisthis);
+            thisthis.prev().val("");
+            var targetContainer = thisthis.parents(".product_ids").find(".productCategoryChooserContainer");
+            $.ajax({
+                url : "<?= $block->escapeUrl($block->urlHelper->getUrl("mobikul/notification/getProductGridHtml")); ?>",
+                type       : "GET",
+                showLoader : true,
+                dataType   : "html",
+                data       : {"id" : "<?= $block->escapeHtml($block->getRequest()->getParam('id')); ?>"},
+                success    : function(content){
+                    if(content){
+                        targetContainer.html(content);
+<?php                   if (($internalBlock = $block->getLayout()->createBlock(
+    \Webkul\MobikulCore\Block\Adminhtml\Notification\Edit\Tab\ProductGrid::class
+)) && ($_gridJsObject = $internalBlock->getJsObjectName())) { ?>
+                            $("#in_category_products").val(categoryProducts.join(","));
+                            function registerCategoryProduct(grid, element, checked){
+                                if(checked){
+                                    if(categoryProducts.indexOf(element.value) < 0 && element.value != "on")
+                                        categoryProducts.push(element.value);
+                                }
+                                else{
+                                    var index = categoryProducts.indexOf(element.value);
+                                    if (index > -1)
+                                        categoryProducts.splice(index, 1);
+                                }
+                                $("#in_category_products").val(categoryProducts.join(","));
+                                grid.reloadParams = {"selected_products[]":categoryProducts};
+                            }
+                            function categoryProductRowClick(grid, event){
+                                var trElement = Event.findElement(event, "tr");
+                                var isInput   = Event.element(event).tagName == "INPUT";
+                                if(trElement){
+                                    var checkbox = Element.getElementsBySelector(trElement, "input");
+                                    if(checkbox[0]){
+                                        var checked = isInput ? checkbox[0].checked : !checkbox[0].checked;
+                                    <?= $block->escapeJs($_gridJsObject); ?>.setCheckboxChecked(checkbox[0], checked);
+                                    }
+                                }
+                            }
+                            function positionChange(event){
+                                var element = Event.element(event);
+                                if(element && element.checkboxElement && element.checkboxElement.checked){
+                                    categoryProducts.set(element.checkboxElement.value, element.value);
+                                    $("#in_category_products").val(categoryProducts.join(","));
+                                }
+                            }
+                            var tabIndex = 1000;
+                            function categoryProductRowInit(grid, row){
+                                var checkbox = $(row).find(".checkbox");
+                                var position = $(row).find(".input-text");
+                                if(checkbox && position){
+                                    checkbox.positionElement = position;
+                                    position.checkboxElement = checkbox;
+                                    position.disabled = !checkbox.checked;
+                                    position.tabIndex = tabIndex++;
+                                    $(position).on("keyup", positionChange);
+                                }
+                            }
+                            setTimeout(function(){
+                                <?= $block->escapeJs($_gridJsObject); ?>.rowClickCallback = categoryProductRowClick;
+                                <?= $block->escapeJs($_gridJsObject); ?>.initRowCallback = categoryProductRowInit;
+                            <?= $block->escapeJs($_gridJsObject); ?>.checkboxCheckCallback = registerCategoryProduct;
+                            <?= $block->escapeJs($_gridJsObject); ?>.rows.each(function(row){
+                                categoryProductRowInit(<?= $block->escapeJs($_gridJsObject); ?>, row)
+                                });
+                            }, 1000);
+<?php                   }   ?>
+                    }
+                }
+            });
+        }
+
+        window.openCategoryTree = function (thisthis){
+            var thisthis = $(thisthis);
+            thisthis.prev().val("");
+            var targetContainer = thisthis.parents(".attributeRow").find(".selectedAttributeValueSelectorContainer");
+            $.ajax({
+                url: "<?= $block->escapeUrl($block->urlHelper->getUrl("mobikul/notification/getCategoryTreeHtml")); ?>",
+                type       : "GET",
+                dataType   : "html",
+                data       : {"id" : "<?= $block->escapeHtml($block->getRequest()->getParam('id')); ?>"},
+                showLoader : true,
+                success    : function(content){
+                    if(content){
+                        thisthis.parents(".attributeRow").find(".productCategoryChooserContainer").html(content);
+                    }
+                }
+            });
+        }
+
+        window.applyCategory = function (thisthis){
+            var currentElement = $(thisthis);
+            var parentElement = currentElement.parents(".attributeRow");
+            var selectedValue = parentElement.find("#product_categories").val();
+            $(thisthis).parents(".productIdContainer").find("#selectedCategoryIds").val(selectedValue);
+            parentElement.find(".productCategoryChooserContainer").html("");
+        }
+
+        window.selectionDoneOfProductGrid = function (thisthis){
+            var currentElement = $(thisthis);
+            currentElement.parents(".product_ids").find(".productCategoryChooserContainer").html("");
+        }
+
+        window.attributeChooser = function (thisthis){
+            var attributeValue = "";
+            var thisthis = $(thisthis);
+            var thisVal = thisthis.val();
+            if(selectedAttributes.indexOf(thisVal) < 0){
+                selectedAttributes.push(thisVal);
+            }
+            else{
+                alert("You can not add the already added attribute");
+                thisthis.parents(".attributeRow").find(".removeAttributeRule").trigger("click");
+                return;
+            }
+            var targetLabel     = thisthis.parents(".attributeRow").find(".selectedAttributeLabel");
+            var targetContainer = thisthis.parents(".attributeRow").find(".selectedAttributeValueSelectorContainer");
+            targetContainer.css("display","inline-block");
+            thisthis.parent().hide();
+            thisthis.parents(".attributeRow").find("label").text(thisthis.find(":selected").text());
+            $.ajax({
+                url  : "<?= $block->escapeUrl($block->urlHelper->getUrl("mobikul/notification/getAttributeHtml")); ?>",
+                type       : "GET",
+                dataType   : "json",
+                data       : {"attributeCode" : thisVal},
+                showLoader : true,
+                success    : function(content){
+                    if(content){
+                        if(content.type == "category_ids"){
+                            if(typeof attributeData === "string")
+                                attributeValue = "";
+                            else{
+                                if (thisVal in attributeData)
+                                    attributeValue = attributeData[thisVal];
+                            }
+                            var categoryHtml = '<div class="productIdContainer">'+
+                                '<input data-form-part="mobikul_notification_form"'+
+                                'name="mobikul_notification[attribute]['+thisVal+']" type="text"'+
+                                'class="assignedAttribute input-text selectedIds required-entry"'+
+                                'value="'+attributeValue+'" name="selectedCategoryIds" id="selectedCategoryIds">'+
+                                '<a class="categoryIdChooser" href="javascript:void(0)"'+
+                                'onclick="openCategoryTree(this);">'+
+                                    '<img title="<?= $block->escapeHtml(__('Open Chooser')); ?>" class="v-middle"'+
+                                    'alt="<?= $block->escapeHtml(__('Open Chooser')); ?>"'+
+                        'src="<?= $block->escapeUrl($block->getViewFileUrl("images/rule_chooser_trigger.gif")); ?>">'+
+                                '</a>'+
+                                '<a class="categoryIdApply" href="javascript:void(0)" onclick="applyCategory(this);">'+
+                                    '<img title="<?= $block->escapeHtml(__('Apply')); ?>"'+
+                                    'alt="<?= $block->escapeHtml(__('Apply')); ?>"'+
+                                    'class="v-middle"'+
+                        'src="<?= $block->escapeUrl($block->getViewFileUrl("images/rule_component_apply.gif")); ?>">'+
+                                '</a>'+
+                            '</div>';
+                            var tempLabel = targetLabel.text();
+                            targetLabel.text(tempLabel+" id(s) are").css("display","inline-block");
+                            targetContainer.attr("data-attr", thisVal).html(categoryHtml);
+                        }
+                        if(content.type == "text"){
+                            if(typeof attributeData === "string")
+                                attributeValue = "";
+                            else    {
+                                if (thisVal in attributeData)
+                                    attributeValue = attributeData[thisVal];
+                            }
+                            var inputField = "<input data-form-part='mobikul_notification_form' type='text'"+
+                            "name='mobikul_notification[attribute]["+thisVal+"]'"+
+                            "class='assignedAttribute inputField required-entry input-text'"+
+                            "value='"+attributeValue+"'/>";
+                            var tempLabel = targetLabel.text();
+                            targetLabel.text(tempLabel+" is").css("display","inline-block");
+                            targetContainer.attr("data-attr", thisVal).html(inputField);
+                        }
+                        if(content.type == "type_id"){
+                            if(typeof attributeData === "string")
+                                attributeValue = [];
+                            else    {
+                                if (thisVal in attributeData)
+                                    attributeValue = attributeData[thisVal];
+                            }
+                            var multiselect = "<select data-form-part='mobikul_notification_form'"+
+                            "class='assignedAttribute admin__control-multiselect required-entry' multiple='multiple'"+
+                            "name='mobikul_notification[attribute]["+thisVal+"][]'>";
+                            var data = content.options;
+                            for(var i in data){
+                                if(attributeValue.indexOf(i) >= 0)
+                                    multiselect += "<option selected='selected' value='"+i+"'>"+data[i]+"</option>";
+                                else
+                                    multiselect += "<option value='"+i+"'>"+data[i]+"</option>";
+                            }
+                            multiselect += "</select>";
+                            var tempLabel = targetLabel.text();
+                            targetLabel.text(tempLabel+" are").css("display","inline-block");
+                            targetContainer.attr("data-attr", thisVal).html(multiselect);
+                        }
+                        if(content.type == "attribute_set_id"){
+                            if(typeof attributeData === "string")
+                                attributeValue = [];
+                            else{
+                                if (thisVal in attributeData)
+                                    attributeValue = attributeData[thisVal];
+                            }
+                            var multiselect = "<select data-form-part='mobikul_notification_form'"+
+                            "class='assignedAttribute admin__control-multiselect required-entry' multiple='multiple'"+
+                            "name='mobikul_notification[attribute]["+thisVal+"][]'>";
+                            var data = content.options;
+                            for(var i=0; i<data.length; i++){
+                                var internalData = data[i];
+                                if(attributeValue.indexOf(internalData.attribute_set_id) >= 0)
+                                    multiselect += "<option selected='selected' value='"+
+                                    internalData.attribute_set_id+"'>"+internalData.attribute_set_name+"</option>";
+                                else
+                                    multiselect += "<option value='"+internalData.attribute_set_id+"'>"+
+                                    internalData.attribute_set_name+"</option>";
+                            }
+                            multiselect += "</select>";
+                            var tempLabel = targetLabel.text();
+                            targetLabel.text(tempLabel+" are").css("display","inline-block");
+                            targetContainer.attr("data-attr", thisVal).html(multiselect);
+                        }
+                        if(content.type == "multiselect"){
+                            if(typeof attributeData === "string")
+                                attributeValue = [];
+                            else{
+                                if (thisVal in attributeData)
+                                    attributeValue = attributeData[thisVal];
+                            }
+                            var multiselect = "<select data-form-part='mobikul_notification_form'"+
+                            "class='assignedAttribute admin__control-multiselect required-entry' multiple='multiple'"+
+                            "name='mobikul_notification[attribute]["+thisVal+"][]'>";
+                            var data = content.options;
+                            for(var i=0; i<data.length; i++){
+                                var internalData = data[i];
+                                if(attributeValue.indexOf(internalData.value) >= 0)
+                                    multiselect += "<option selected='selected' value='"+internalData.value+"'>"+
+                                    internalData.label+"</option>";
+                                else
+                                    multiselect += "<option value='"+internalData.value+"'>"+
+                                    internalData.label+"</option>";
+                            }
+                            multiselect += "</select>";
+                            var tempLabel = targetLabel.text();
+                            targetLabel.text(tempLabel+" are").css("display","inline-block");
+                            targetContainer.attr("data-attr", thisVal).html(multiselect);
+                        }
+                    }
+                }
+            });
+        }
+
+        $("#collection_type").on("change", function(){
+            selectedAttributes = [];
+            var thisthis = $(this);
+            var thisVal = thisthis.val();
+            $("#attributeRowContainer").html("");
+            $(".productCategoryChooserContainer").html("");
+            if(thisVal == "")
+                $("#required_check").val("");
+            else
+                $("#required_check").val("filled");
+            $(".filter_block").hide();
+            if(thisVal != "")
+                $("."+thisVal).show();
+        });
+
+        $("#addRule").on("click", function(){
+            $("#attributeRowContainer").append(attributeRow);
+        });
+
+    });
+</script>

@@ -1,0 +1,223 @@
+    <?php $rma = $block->getRmaDetail();
+    $id = $rma->getRmaId();
+    $order = $block->getOrder($rma->getOrderId());
+    $helper = $this->helper("Webkul\Rmasystem\Helper\Data");
+    ?>
+    <div class="page-title">
+        <h1><?= __("RMA Details"); ?>
+            <span style="float:right;">#<?= $rma->getIncrementId()."-".$id; ?></span>
+        </h1>
+    </div>
+    <div class="dashboard">
+        <div class="box-account box-info wk_rma_bigbox">
+            <div class="block block-dashboard-info">
+                <div class="block-content">
+                    <div class="box box-information">
+                        <div class="box-title">
+                            <h3><?= __("Order Id"); ?></h3>
+                        </div>
+                        <div class="box-content">
+                            <p><a href="<?= $this->getUrl('sales/order/view/').'order_id/'.$rma->getOrderId(); ?>">#<?= $rma->getIncrementId();?></a></p>
+                        </div>
+                    </div>
+
+                <div class="box box-newsletter">
+                    <div class="box">
+                                    <div class="box-title">
+                            <h3><?= __("RMA Status"); ?></h3>
+                        </div>
+                        <div class="box-content">
+                            <p style="display:inline;margin-left:10px;">
+                                                <?= "<strong class='wk_rma_status_pending'>".$helper->getRmaStatusTitle($rma->getStatus())."</strong>";?>
+                            </p>
+                        </div>
+                                    <div class="box-title">
+                            <h3><?= __("Order Status"); ?></h3>
+                        </div>
+                        <div class="box-content">
+                            <p style="display:inline;margin-left:10px;">
+                                                <?= "<strong class='wk_rma_status_pending'>".$helper->getRmaOrderStatusTitle($rma->getCustomerDeliveryStatus())."</strong>";?>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                </div>
+           <!--  </div> -->
+            <!-- <div class="block block-dashboard-info"> -->
+                <div class="block-content">
+                        <?php if (!$rma->getResolutionType()==3): ?>
+                    <div class="box box-information">
+                        <div class="box-title">
+                            <h3><?= __("Package Condition"); ?></h3>
+                        </div>
+                        <div class="box-content">
+                                        <?php if ($rma->getPackageCondition() == 0) {
+                                            echo "<p>".__("Open")."</p>";
+                                        } else {
+                                            echo "<p>".__("Packed")."</p>";
+                                        }?>
+                        </div>
+                    </div>
+                        <?php endif; ?>
+                    <div class="box box-newsletter">
+                        <div class="box">
+                            <div class="box-title">
+                                <h3><?= __("Resolution Type"); ?></h3>
+                            </div>
+                            <div class="box-content">
+                                            <?php if ($rma->getResolutionType() == 0) {
+                                                    echo "<p>".__("Refund")."</p>";
+                                            } elseif ($rma->getResolutionType() == 1) {
+                                                echo "<p>".__("Exchange")."</p>";
+                                            } else {
+                                                echo "<p>".__("Cancel Item")."</p>";
+                                            }?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <!-- </div> -->
+            <!-- <div class="block block-dashboard-info"> -->
+                <div class="block-content">
+                    <div class="box box-information">
+                        <div class="box-title">
+                            <h3><?= __("Created On"); ?></h3>
+                        </div>
+                        <div class="box-content">
+                            <p><?= date("Y-m-d g:i:s a", $block->getTimestamp($rma->getCreatedAt())); ?></p>
+                        </div>
+                    </div>
+
+                    <div class="box box-newsletter">
+                        <div class="box">
+                            <div class="box-title">
+                                <h3><?= __("Additional Information"); ?></h3>
+                            </div>
+                            <div class="box-content">
+                                <p><?= nl2br(strip_tags($rma->getAdditionalInfo())); ?></p>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+            <div class="block-content">
+                    <?php if (!$rma->getResolutionType()==3): ?>
+                    <div class="box box-information">
+                    <div class="box">
+                        <div class="box-title">
+                            <h3><?= __("Your Consignment Number"); ?></h3>
+                        </div>
+                        <div class="box-content">
+                            <?= $rma->getCustomerConsignmentNo(); ?>
+                        </div>
+                    </div>
+                </div>
+                    <?php endif; ?>
+<?php           if ($rma->getResolutionType() == 1) {                   ?>
+                <div class="box box-newsletter">
+                    <div class="box">
+                        <div class="box-title">
+                            <h3><?= __("Admin Consignment Number"); ?></h3>
+                        </div>
+                        <div class="box-content">
+                            <p><?= $rma->getAdminConsignmentNo(); ?></p>
+                        </div>
+                    </div>
+                </div>
+<?php           }                                                                                                   ?>
+            </div>
+          </div>
+            <?= $this->getChildHtml('rma.printrma.fieldvalue'); ?>
+
+            <div class="col2-set">
+                <div class="wk_rma_images_holder">
+                    <div class="box-title">
+                        <h3><?= __("Additional Image(s)"); ?></h3>
+                    </div>
+                    <div class="box-content">
+                        <div id="wk_rma_add_images_container">
+                                        <?php
+                                            $images = $block->getImages();
+                                        foreach ($images as $filename) {
+                                            $getfilename = explode("/", $filename);
+                                            $justfname = $block->getBaseUrl()."/".end($getfilename);
+                                            echo "<img class='wk_rma_add_images' alt='image' src='".$justfname."'/>";
+                                        }                                                                                       ?>
+                                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h2 class="table-caption"><?= __("Item(s) Requested for RMA"); ?></h2>
+            <div class="admin__table-wrapper table-wrapper">
+            <table id="shipping_table" class="data table">
+                    <thead>
+                            <tr>
+                                    <th scope="col" class="col name"><?= __("Product Name"); ?></th>
+                                    <th scope="col" class="col sku"><?= __("SKU"); ?></th>
+                                    <th scope="col" class="col qty"><?= __("Return Qty"); ?></th>
+                                    <th scope="col" class="col reason"><?= __("Reason"); ?></th>
+                                    <th scope="col" class="col price"><?= __("Product Price"); ?></th>
+                            </tr>
+                    </thead>
+    <?php   $orderItems = $block->getItemCollection($id);
+    foreach ($orderItems as $item) {
+        $mageItem = $block->getSalesOrderItemDetail($item->getItemId());
+        $product = $block->getProductDetail($mageItem->getProductId());
+        $image_url = $block->imageHelperObj()->init($product, 'product_page_image_small')
+                                                                    ->setImageFile($product->getFile())
+                                                                    ->getUrl();
+        $reason = $block->getReason($item->getReasonId())->getReason();
+        if (!$reason) {
+            $reason = $item->getRmaReason();
+        }
+        ?>
+            <tbody>
+                        <tr class="border">
+                            <td data-th="<?= __('Item Name') ?>" class="col name">
+                                <div class="wk-pro-divide1">
+                                    <img src="<?= $image_url?>" class="image" />
+                                </div>
+                                <div class="wk-pro-divide2">
+                                    <?= $product->getName();?>
+                                </div>
+                            </td>
+                            <td data-th="<?= __('Item SKU') ?>" class="col name"><?= $mageItem->getSku(); ?></td>
+                            <td data-th="<?= __('Returned Qty') ?>" class="col name"><?= $item->getQty(); ?></td>
+                            <td data-th="<?= __('Reason') ?>" class="col name"><?= $reason; ?></td>
+                            <td data-th="<?= __('Price') ?>" class="col name"><?= $order->formatPrice($mageItem->getPrice()); ?></td>
+                         </tr>
+             </tbody>
+    <?php   }                                                                                                           ?>
+            </table>
+            </div>
+    </div>
+    <div id="wk_rma_conversation_container">
+<?php   echo $this->getPagerHtml();
+        $collection = $this->getRmaCollection($id);
+        $customer_id = $block->getCustomerId();
+foreach ($collection as $eachconver) {                                                                      ?>
+            <div class="wk_rma_onereply">
+                <span class="wk_rma_onereply_head <?php if ($eachconver->getSender() == $customer_id) {
+                    echo "wk_rma_onereply_customer";
+                                                  }?>">
+                    <span class="wk_rma_onereply_head_left"><?= date("Y-m-d g:i:s a", $block->getTimestamp($eachconver->getCreatedAt())); ?></span>
+                    <span class="wk_rma_onereply_head_right"><?php if ($eachconver->getSender() == $customer_id) {
+                        echo __("Me");
+                                                             } else {
+                                                                 echo __("Admin");
+                                                             } ?></span>
+                </span>
+                <p class="wk_rma_onereply_cntnt"><?= nl2br(strip_tags($eachconver->getMessage())); ?></p>
+            </div>
+<?php   }                                                                                                           ?>
+    </div>
+<script>
+require([
+        "jquery",
+        "mage/mage",
+        'mage/calendar'
+    ], function($){
+            'use strict';
+            window.print();
+        });
+</script>

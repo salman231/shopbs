@@ -1,0 +1,31 @@
+Legend
+
++ Features
+- Bugs
+
+-------------------------------- Version 2.0.1 -------------------------------
+    + Customer can rate deliveryboy from order view page.
+
+-------------------------------- Version 2.0.0 -------------------------------
+    + Compatible with Single app.
+
+-------------------------------- Version 1.1.0 -------------------------------
+    + Performance improvement.
+
+-------------------------------- Version 1.0.2 -------------------------------
+    + Added Delivery boy rating and review feature.
+
+-------------------------------- Version 1.0.1 -------------------------------
+    + OTP will be sent to the customer via email.
+    + Admin can unassign orders to any of the deliveryboy.
+    + Deliveryboy can accept or reject an assigned order.
+    + Deliveryboy and Admin can see comment history of a specific order.
+
+-------------------------------- Version 1.0.0 -------------------------------
+    + Common Login for both deliveryboy and admin.
+    + Admin can assign order to any of the available deliveryboy.
+    + Admin can check location of their deliveryboy on map.
+    + Admin can check status of the order and deliveryboy.
+    + Deliveryboy can enable their status wheather they are available for service or not.
+    + Customer can check the current location of their order.
+    + Provide unique OTP at the time of delivery to deliveryboy, to confirm delivery.

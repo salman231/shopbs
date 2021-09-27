@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Venustheme
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Venustheme.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.venustheme.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category   Venustheme
+ * @package    Ves_Megamenu
+ * @copyright  Copyright (c) 2017 Venustheme (http://www.venustheme.com/)
+ * @license    http://www.venustheme.com/LICENSE-1.0.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	 <preference for="Ves\Megamenu\Api\Data\ItemSearchResultsInterface"
+                type="Magento\Framework\Api\SearchResults" />
+    <preference for="Ves\Megamenu\Api\Data\MenuSearchResultsInterface"
+                type="Magento\Framework\Api\SearchResults" />
+
+	<preference for="Ves\Megamenu\Api\FlushcacheManagementInterface" type="Ves\Megamenu\Model\FlushcacheMegamenu" />
+	<preference for="Ves\Megamenu\Api\GetMenuByAliasInterface" type="Ves\Megamenu\Model\GetMenuByAlias" />
+	<preference for="Ves\Megamenu\Api\MenuRepositoryInterface" type="Ves\Megamenu\Model\MenuRepository"/>
+    <preference for="Ves\Megamenu\Api\Data\MenuInterface" type="Ves\Megamenu\Model\Menu"/>
+	<preference for="Ves\Megamenu\Api\ItemRepositoryInterface" type="Ves\Megamenu\Model\ItemRepository"/>
+    <preference for="Ves\Megamenu\Api\Data\ItemInterface" type="Ves\Megamenu\Model\Item"/>
+
+	<type name="Magento\Framework\Webapi\ServiceOutputProcessor">
+        <plugin name="ves_megamenu_webapi_service_output_processor_plugin"
+                type="Ves\Megamenu\Plugin\Webapi\ServiceOutputProcessorPlugin" sortOrder="1"/>
+    </type>
+
+	<type name="Magento\Framework\Console\CommandList">
+		<arguments>
+			<argument name="commands" xsi:type="array">
+				<item name="Cleancache" xsi:type="object">Ves\Megamenu\Console\Command\Cleancache</item>
+			</argument>
+		</arguments>
+	</type>
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+		<arguments>
+			<argument name="collections" xsi:type="array">
+				<item name="megamenu_menu_listing_data_source" xsi:type="string">Ves\Megamenu\Model\ResourceModel\Menu\Grid\Collection</item>
+			</argument>
+		</arguments>
+	</type>
+	<type name="Ves\Megamenu\Model\ResourceModel\Menu\Grid\Collection">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">ves_megamenu_menu</argument>
+			<argument name="eventPrefix" xsi:type="string">megamenu_menu_grid_collection</argument>
+			<argument name="eventObject" xsi:type="string">menu_grid_collection</argument>
+			<argument name="resourceModel" xsi:type="string">Ves\Megamenu\Model\ResourceModel\Menu</argument>
+		</arguments>
+	</type>
+	<virtualType name="MenuGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+		<arguments>
+			<argument name="appliers" xsi:type="array">
+				<item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+				<item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+			</argument>
+		</arguments>
+	</virtualType>
+	<virtualType name="MenuGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+		<arguments>
+			<argument name="collection" xsi:type="object" shared="false">Ves\Megamenu\Model\ResourceModel\Menu\Collection</argument>
+			<argument name="filterPool" xsi:type="object" shared="false">MenuGirdFilterPool</argument>
+		</arguments>
+	</virtualType>
+	<virtualType name="Ves\Megamenu\Model\Api\SearchCriteria\CollectionProcessor\MenuFilterProcessor" type="Magento\Framework\Api\SearchCriteria\CollectionProcessor\FilterProcessor">
+        <arguments>
+            <argument name="customFilters" xsi:type="array">
+                <item name="store_id" xsi:type="object">Ves\Megamenu\Model\Api\SearchCriteria\CollectionProcessor\FilterProcessor\MenuStoreFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+	<virtualType name="Ves\Megamenu\Model\Api\SearchCriteria\MenuCollectionProcessor" type="Magento\Framework\Api\SearchCriteria\CollectionProcessor">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="filters" xsi:type="object">Ves\Megamenu\Model\Api\SearchCriteria\CollectionProcessor\MenuFilterProcessor</item>
+                <item name="sorting" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor\SortingProcessor</item>
+                <item name="pagination" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor\PaginationProcessor</item>
+            </argument>
+        </arguments>
+    </virtualType>
+</config>

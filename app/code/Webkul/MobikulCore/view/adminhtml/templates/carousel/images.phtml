@@ -1,0 +1,86 @@
+<div id="messages">
+    <div class="messages">
+        <div class="message message-notice notice">
+            <div data-ui-id="messages-message-notice">
+                <?= /* @noEscape*/ __("Applicable only when \"Carousel Type\" is selected as \"Image Type\""); ?>
+            </div>
+        </div>
+    </div>
+</div>
+<input data-form-part="mobikul_carousel_form" type="hidden" name="mobikul_carousel[image_ids]" id="image_ids"/>
+<script type="text/javascript">
+    require([
+            "jquery"
+        ], function($)  {
+            <?php
+            if (($internalBlock = $block->getLayout()->createBlock(
+                \Webkul\MobikulCore\Block\Adminhtml\Edit\Carousel\Tab\Carouselimages::class
+            )) &&
+                    ($_gridJsObject = $internalBlock->getJsObjectName())
+                ):
+                ?>
+            var image_ids = [];
+            var selectedImages = '<?= /* @noEscape*/ $block->getCarouselImagesJson(); ?>';
+            if (selectedImages)
+                image_ids = selectedImages.split(",");
+            $("#image_ids").val(image_ids);
+
+            $(".checkbox").on("click", function()  {
+                var thisVal = $(this).val();
+                if ($(this).is(":checked"))  {
+                    image_ids.push(thisVal);
+                } else  {
+                    var index = image_ids.indexOf(thisVal);
+                    if (index > -1)
+                        image_ids.splice(index, 1);
+                }
+                $("#image_ids").val(image_ids.join());
+            });
+
+            function selectedImageRowClick(grid, event)  {
+                if (!$(event.target).hasClass("checkbox"))  {
+                    var trElement = $(event.target).parents("tr");
+                    var checkbox = trElement.find("input:checkbox");
+                    var thisVal = checkbox.val();
+                    if (checkbox.is(":checked"))  {
+                        checkbox.prop("checked", false);
+                        var index = image_ids.indexOf(thisVal);
+                        if (index > -1)
+                            image_ids.splice(index, 1);
+                    } else  {
+                        checkbox.prop("checked", true);
+                        image_ids.push(thisVal);
+                    }
+                    if ($("#image_ids").val() != "")
+                        $("#image_ids").val(image_ids.join());
+                    else
+                        $("#image_ids").val(image_ids);
+                }
+            }
+
+            function selectedImageRowInit(grid, row)  {
+                var checkbox = $(row).find("input:checkbox");
+                var childElements = row.childElements();
+                var childLength = childElements.length;
+                var checkbox = $(row).find("input:checkbox");
+                if($("#image_ids").val() != "")  {
+                    var imageids = $("#image_ids").val().split(",");
+                    var checked = false;
+                    if(imageids.indexOf(checkbox.val()) >= 0)  {
+                        checked = true;
+                        checkbox.prop("checked", true);
+                    }
+                }
+            }
+
+            setTimeout(function()  {
+                <?= /* @noEscape*/ $_gridJsObject ?>.initRowCallback  = selectedImageRowInit;
+                <?= /* @noEscape*/ $_gridJsObject ?>.rowClickCallback = selectedImageRowClick;
+                <?= /* @noEscape*/ $_gridJsObject ?>.rows.each(function(row){
+                    selectedImageRowInit(<?= /* @noEscape*/ $_gridJsObject ?>, row)
+                });
+            }, 300);
+        <?php   endif;   ?>
+    });
+</script>
+<?= $block->getChildHtml("mobikul.carousel.images"); ?>

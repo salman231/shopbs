@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Dart_Productkeys acl xml
+ *
+ * @package  Dart_Productkeys
+ *
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Dart_Productkeys::dart" title="Dart" sortOrder="40">
+                    <resource id="Dart_Productkeys::productkeys_title" title="Product Keys" translate="title" sortOrder="10">
+                        <resource id="Dart_Productkeys::add_row" title="Product Keys List" translate="title" sortOrder="10" />
+                        <resource id="Dart_Productkeys::productkeys_config" title="Configuration" sortOrder="10" />
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

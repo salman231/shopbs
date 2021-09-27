@@ -1,0 +1,59 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * PHP version 7.0+
+ *
+ * @category  Webkul
+ * @package   Webkul_DeliveryBoy
+ * @author    Webkul <support@webkul.com>
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+
+$blockHelper = $block->getBlockHelper();
+?>
+<div class="dashboard-diagram">
+    <div class="dashboard-diagram-switcher">
+        <label for="order_<?= $block->getHtmlId() ?>_period"
+               class="label"><?= /* @noEscape */ __('Select Range:') ?></label>
+        <select name="period" id="order_<?= $block->getHtmlId() ?>_period"
+                onchange="changeDiagramsPeriod(this);" class="admin__control-select">
+                <?php $periods = $block->getDashboardDataHelper()
+                    ->getDatePeriods(); ?>
+            <?php foreach ($periods as $value => $label): ?>
+                <?php if (in_array($value, ['custom'])) {
+                    continue;
+                } ?>
+                <option value="<?= /* @noEscape */ $value ?>"
+                    <?php if ($block->getRequest()->getParam('period') == $value): ?> selected="selected"<?php endif; ?>
+                    ><?= /* @noEscape */ $label ?></option>
+            <?php endforeach; ?>
+        </select>
+    </div>
+    <?php if ($block->getCount()): ?>
+    <div class="dashboard-diagram-image">
+        <img src="<?= /* @noEscape */ $block->getChartUrl(false) ?>"
+             class="dashboard-diagram-chart" alt="Chart" title="Chart" />
+    </div>
+    <?php else: ?>
+    <div class="dashboard-diagram-nodata">
+        <span><?= /* @noEscape */ __('No Data Found') ?></span>
+    </div>
+    <?php endif; ?>
+</div>
+<script>
+require([
+    'Magento_Ui/js/modal/alert',
+    'prototype'
+], function(alert){
+    window.changeDiagramsPeriod = function(periodObj) {
+        var loc = location.href;
+        loc = loc.replace('#','');
+        loc = loc+'period/'+periodObj.value+'/';
+        location.href = loc;
+    }
+});
+</script>
+

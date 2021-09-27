@@ -1,0 +1,40 @@
+<!--@subject Order Cancelled By Customer  @-->
+<!--@vars {
+"var this.getUrl($store, 'admin')":"Warehouse Account URL",
+} @-->
+ 
+{{template config_path="design/email/header_template"}} 
+ 
+<table>
+    <tr class="email-intro">
+        <td>
+            <p class="greeting">{{trans "Dear Admin,"}}</p>
+            <p>
+                {{trans 'This is to inform you that %customer_name has requested to cancel his order.' customer_name=$order.getCustomerName()}}
+            </p>
+            <p>{{trans "Please review accordingly. Details are as below."}}</p>
+        </td>
+    </tr>
+    <tr class="email-information">
+        <td>
+            <table class="email-items">
+                <thead>
+                    <tr>
+                        <th class="item-info">{{trans "Order Id"}}</th>
+                        <th class="item-info">{{trans "Customer Name"}}</th>
+                        <th class="item-info">{{trans "Customer Email"}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th class="item-info">{{trans "#%increment_id" increment_id=$order.increment_id |raw}}</th>
+                        <th class="item-info">{{trans "%customer_name" customer_name=$order.getCustomerName()}}</th>
+                        <th class="item-info">{{trans "%customer_email" customer_email=$order.getCustomerEmail()}}</th>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+</table>
+ 
+{{template config_path="design/email/footer_template"}} <!--footer of template-->

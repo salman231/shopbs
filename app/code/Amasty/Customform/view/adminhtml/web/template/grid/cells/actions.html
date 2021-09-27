@@ -1,0 +1,7 @@
+<div repeat="foreach: $col.getVisibleActions($row()._rowIndex), item: '$action'" style="width: 100px">
+<a
+        class="action-menu-item"
+        click="$col.getActionHandler($action())"
+        text="$action().label"
+        attr="target: $col.getTarget($action()), href: $action().href"/>
+</div>

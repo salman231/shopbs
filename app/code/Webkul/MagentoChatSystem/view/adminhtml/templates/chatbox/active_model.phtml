@@ -1,0 +1,29 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MagentoChatSystem
+ * @author    Webkul
+ * @copyright Copyright (c)  Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+?>
+<script>
+    window.enableChatUsersConfig = <?= \Zend_Json::encode($block->getEnableUsersConfig()); ?>;
+</script>
+<div id="chatbox-active-users" class="chat-active-model" data-bind="scope:'active-users'" data-role="chat-active-model">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <script type="text/x-magento-init">
+    {
+        "#chatbox-active-users": {
+            "Magento_Ui/js/core/app":  <?= $block->getJsLayout();?>
+        }
+    }
+    </script>
+</div>
+<script>
+    require(['jquery', 'mage/apply/main'], function ($, main) {
+        main.apply();
+    })
+</script>

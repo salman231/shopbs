@@ -1,0 +1,153 @@
+<?php
+
+/**
+
+ * Mageplaza
+
+ *
+
+ * NOTICE OF LICENSE
+
+ *
+
+ * This source file is subject to the Mageplaza.com license that is
+
+ * available through the world-wide-web at this URL:
+
+ * https://www.mageplaza.com/LICENSE.txt
+
+ *
+
+ * DISCLAIMER
+
+ *
+
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+
+ * version in the future.
+
+ *
+
+ * @category    Mageplaza
+
+ * @package     Mageplaza_BannerSlider
+
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+
+ * @license     https://www.mageplaza.com/LICENSE.txt
+
+ */
+
+
+
+$banners       = $block->getBannerCollection();
+$slidername = '';
+if($block->getSliderId() == 1){
+    $slidername = 'desktop-slider';
+}else if ($block->getSliderId() == 2) {
+    $slidername = 'mobile-slider';
+}
+$sliderId      = $block->getSliderId() . '-' . uniqid();
+
+$sliderOptions = $block->getBannerOptions();
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+
+$storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+
+$baseurl = $storeManager->getStore()->getBaseUrl();
+
+if (count($banners)): ?>
+
+    <div class="carousel-container <?php echo $slidername;?>">
+
+        <div id="banner-slider-carousel">
+
+            <?php $iterator = 1; ?>
+
+            <div id="bannerslider-list-items-<?php echo $sliderId; ?>"
+
+                 class="owl-carousel owl-theme">
+
+                <?php foreach ($banners as $banner): ?>
+
+                    <?php
+
+                    $bnType  = $banner->getType();
+
+                    $bnTitle = $banner->getTitle();
+
+                    $bnUrl   = $banner->getUrlBanner();
+
+                    $bnImg   = $banner->getImageUrl();
+
+                    ?>
+
+                    <?php echo ($iterator++ == 1) ? '<div class="banner-item banner-slider">' : '</div><div class="banner-item banner-slider">' ?>
+
+                    <?php if ($bnType == \Mageplaza\BannerSlider\Model\Config\Source\Type::CONTENT): ?>
+
+                        <div class="item-content">
+
+                            <?php echo $block->getPageFilter($banner->getContent()); ?>
+
+                        </div>
+
+                    <?php else: #image type?>
+
+                        <div class="item-image">
+
+                            <?php if (!empty($bnUrl)): ?>
+
+                                <a class="owl-image"
+
+                                   href="<?php echo $bnUrl ?>" <?php echo ($banner->getNewtab() == 1) ? 'target="_blank"' : '' ?>>
+
+                                    <?php if (!empty($bnTitle)): ?>
+
+                                        <div class="banner-title"><?php echo $bnTitle ?></div>
+
+                                    <?php endif; ?>
+
+                                    <img class="owl-image img-responsive" src="<?php echo $bnImg ?>" title="<?php echo $bnTitle ?>">
+
+                                </a>
+
+                            <?php else: ?>
+
+                                <img class="owl-image img-responsive" src="<?php echo $bnImg ?>"
+
+                                     title="<?php echo $bnTitle ?>">
+
+                            <?php endif; ?>
+
+                        </div>
+
+                    <?php endif; ?>
+
+                    <?php echo ($iterator == count($banners) + 1) ? '</div>' : '' ?>
+
+                <?php endforeach; ?>
+
+            </div>
+
+        </div>
+
+        <?php echo $block->getPagerHtml() ?>
+
+    </div>
+
+
+
+    <script>
+
+        require(['jquery', 'mageplaza/core/owl.carousel'], function ($) {
+            $(document).ready(function(){
+                $('#bannerslider-list-items-<?= /* @noEscape */ $sliderId ?>').owlCarousel(<?= /* @noEscape */ $sliderOptions ?>);
+            });
+        });
+
+    </script>
+
+<?php endif; ?>
+

@@ -1,0 +1,73 @@
+Price,Price
+Id,Id
+Customer,Customer
+"Date Of Registration","Date Of Registration"
+"Last Purchase Date","Last Purchase Date"
+"Total Orders","Total Orders"
+"Total Spendings","Total Spendings"
+#,#
+Date,Date
+"Total Items Sold","Total Items Sold"
+Revenues,Revenues
+Totals,Totals
+"invalid request","invalid request"
+"see error log for details","see error log for details"
+"Service unavailable: %1","Service unavailable: %1"
+"Marketplace Advance Report System","Marketplace Advance Report System"
+"Marketplace Seller Report Dashboard","Marketplace Seller Report Dashboard"
+January,January
+February,February
+March,March
+April,April
+May,May
+June,June
+July,July
+August,August
+September,September
+October,October
+November,November
+December,December
+"Sales and Orders","Sales and Orders"
+"Select Seller","Select Seller"
+"Choose categories (%1)","Choose categories (%1)"
+"Choose Order Status (%1)","Choose Order Status (%1)"
+"Generate Reports","Generate Reports"
+"Sales and orders","Sales and orders"
+Day,Day
+Week,Week
+Month,Month
+Year,Year
+"Start On Date","Start On Date"
+"End On Date","End On Date"
+"Filter Result","Filter Result"
+"Top On Charts","Top On Charts"
+"Sales By GeoLocation","Sales By GeoLocation"
+"Top Selling Products","Top Selling Products"
+"Best Customers","Best Customers"
+"Advance Report","Advance Report"
+"There is some error during executing this process, please try again later.","There is some error during executing this process, please try again later."
+"No Data Found","No Data Found"
+"Start date must be prior than end date.","Start date must be prior than end date."
+"Choose categories ( ","Choose categories ( "
+"Choose Order Status ( ","Choose Order Status ( "
+Webkul,Webkul
+"Report System Settings","Report System Settings"
+"Best Customer Count","Best Customer Count"
+"e.g. 5","e.g. 5"
+"Top Product count","Top Product count"
+"Marketplace Advance Report","Marketplace Advance Report"
+"Marketplace Advance Report System Manager","Marketplace Advance Report System Manager"
+"Marketplace Report System","Marketplace Report System"
+"Complete","Complete"
+"Suspected Fraud","Suspected Fraud"
+"Canceled","Canceled"
+"On Hold","On Hold"
+"Payment Review","Payment Review"
+"PayPal Canceled Reversal","Paypal Canceled Reversal"
+"PayPal Reversed","Paypal Reversed"
+"Pending","Pending"
+"Pending Payment","Pending Payment"
+"Pending PayPal","Pending Paypal"
+"Processing","Processing",
+"sales","sales"
+"Time","Time"

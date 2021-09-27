@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * @category   Webkul
+ * @package    Webkul_MpAdvancedCommission
+ * @author     Webkul Software Private Limited
+ * @copyright  Copyright (c)  Webkul Software Private Limited (https://webkul.com)
+ * @license    https://store.webkul.com/license.html
+ */  -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+    	<referenceContainer name="left">
+            <block class="Webkul\MpAdvancedCommission\Block\Adminhtml\CommissionRules\Edit\Tabs" name="mpadvancedcommission_edit_tabs">
+                <block class="Webkul\MpAdvancedCommission\Block\Adminhtml\CommissionRules\Edit\Tab\Info" as="commissionRules_info"/>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="content">
+            <block class="Webkul\MpAdvancedCommission\Block\Adminhtml\CommissionRules\Edit" name="mpadvancedcommission_edit_content"/>
+            <block class="Webkul\MpAdvancedCommission\Block\Adminhtml\CommissionRules\Edit" name="mpadvancedcommission_validation_check" template="Webkul_MpAdvancedCommission::price-rule-validatior.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

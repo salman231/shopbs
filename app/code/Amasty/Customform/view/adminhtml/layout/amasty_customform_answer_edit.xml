@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Customform
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Amasty_Customform::css/google-map.css"/>
+        <css src="Amasty_Customform::css/form-answer.css"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Amasty\Customform\Block\Adminhtml\Data\Edit\Answer" name="amasty_customform_edit_answer"
+                   template="Amasty_Customform::edit/answer.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

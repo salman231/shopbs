@@ -1,0 +1,147 @@
+(Parent),(Parent)
+"Add Rule","Add Rule"
+"Save and Continue Edit","Save and Continue Edit"
+"Add A/B Testing","Add A/B Testing"
+Parent,Parent
+"The popup can be shown on the bottom left of the page depend on priority of rules. Only first product will be shown.","The popup can be shown on the bottom left of the page depend on priority of rules. Only first product will be shown."
+"The popup can be shown on the bottom right of the page depend on priority of rules. Only first product will be shown.","The popup can be shown on the bottom right of the page depend on priority of rules. Only first product will be shown."
+"Edit Rule '%1'","Edit Rule '%1'"
+"New Rule","New Rule"
+"Rule Information","Rule Information"
+"Apply the rule only to products matching the following conditions (leave blank for all products).","Apply the rule only to products matching the following conditions (leave blank for all products)."
+"Apply To","Apply To"
+Actions,Actions
+"Block Configuration","Block Configuration"
+"Block name","Block name"
+"Enter the block's name. It's only visible in the frontend.","Enter the block's name. It's only visible in the frontend."
+"Product layout","Product layout"
+Grid,Grid
+Slider,Slider
+"Select how products are displayed.","Select how products are displayed."
+"Display Mode","Display Mode"
+Ajax,Ajax
+Block,Block
+"<b>Ajax display:</b> Better for performance.<br><b>Block display:</b> Better for SEO","<b>Ajax display:</b> Better for performance.<br><b>Block display:</b> Better for SEO"
+"Limit number of products","Limit number of products"
+"Display ""Out-of-stock"" products","Display ""Out-of-stock"" products"
+Yes,Yes
+No,No
+"Product order","Product order"
+"Display additional information","Display additional information"
+"Select information or button(s) to display with products.","Select information or button(s) to display with products."
+"Add Products","Add Products"
+"Select to add Related, Up-Sell, Cross-Sell Products to the related product list","Select to add Related, Up-Sell, Cross-Sell Products to the related product list"
+"Do not Display Product in","Do not Display Product in"
+"Select to do not Displayed Product in Cart or Wishlist","Select to do not Displayed Product in Cart or Wishlist"
+"Apply the rule only if the following conditions are met (leave blank for all products).","Apply the rule only if the following conditions are met (leave blank for all products)."
+Conditions,Conditions
+"Rule Name","Rule Name"
+"Enter the rule's name here, it's only visible in the backend.","Enter the rule's name here, it's only visible in the backend."
+"Where to display","Where to display"
+"Select the position to display block.","Select the position to display block."
+Status,Status
+Active,Active
+Inactive,Inactive
+"Select Active to enable the rule.","Select Active to enable the rule."
+"Store Views","Store Views"
+"Customer Groups","Customer Groups"
+"Select customer group(s) to display the block to","Select customer group(s) to display the block to"
+From,From
+To,To
+Priority,Priority
+"Enter a number to set priority for the rule. A lower number represents a higher priority.","Enter a number to set priority for the rule. A lower number represents a higher priority."
+ID,ID
+Variant,Variant
+Impression,Impression
+Click,Click
+CTR,CTR
+Enabled,Enabled
+Disabled,Disabled
+"There are no items.","There are no items."
+"A/B Testing","A/B Testing"
+"Related Block Rule","Related Block Rule"
+"Products to Meet Conditions","Products to Meet Conditions"
+"Products to Show","Products to Show"
+Promotions,Promotions
+"We found updated rules that are not applied. Please click ""Apply Rules"" to update your catalog.","We found updated rules that are not applied. Please click ""Apply Rules"" to update your catalog."
+"An error occurred","An error occurred"
+"Manage Rules","Manage Rules"
+"You deleted the rule.","You deleted the rule."
+"We can't delete this rule right now. Please review the log and try again.","We can't delete this rule right now. Please review the log and try again."
+"We can't find a rule to delete.","We can't find a rule to delete."
+"Something went wrong.","Something went wrong."
+"This rule no longer exists.","This rule no longer exists."
+"Can not Add A/B Testing.","Can not Add A/B Testing."
+"New Related Block Rule","New Related Block Rule"
+"Edit Rule","Edit Rule"
+"Automatic Related Block Rules","Automatic Related Block Rules"
+"The wrong rule is specified.","The wrong rule is specified."
+"You saved the rule.","You saved the rule."
+"Something went wrong while saving the rule data. Please review the error log.","Something went wrong while saving the rule data. Please review the error log."
+"The module is disabled","The module is disabled"
+"-- Please Select --","-- Please Select --"
+"Related Products","Related Products"
+"Up-Sell Products","Up-Sell Products"
+"Cross-Sell Products","Cross-Sell Products"
+Price,Price
+"Add to cart button","Add to cart button"
+"Add to Wishlist","Add to Wishlist"
+"Add to Compare","Add to Compare"
+"Review information","Review information"
+Bestsellers,Bestsellers
+"Lowest Price","Lowest Price"
+"Highest Price","Highest Price"
+Newest,Newest
+Random,Random
+"Ajax Display","Ajax Display"
+"Block Display","Block Display"
+"Replace Related Products ","Replace Related Products "
+"Replace Upsell Products","Replace Upsell Products"
+"Before native Related Products","Before native Related Products"
+"After native Related Products","After native Related Products"
+"Before Upsell Products","Before Upsell Products"
+"After Upsell Products","After Upsell Products"
+"Replace Cross-sell Products","Replace Cross-sell Products"
+"Before Cross-sell Products","Before Cross-sell Products"
+"After Cross-sell Products","After Cross-sell Products"
+"Sidebar Top","Sidebar Top"
+"Sidebar Bottom","Sidebar Bottom"
+"Above Content","Above Content"
+"Below Content","Below Content"
+"Floating Left Bar","Floating Left Bar"
+"Floating Right Bar","Floating Right Bar"
+Manually,Manually
+Cart,Cart
+Wishlist,Wishlist
+"Product Page","Product Page"
+"Category Page","Category Page"
+"Shopping Cart Page","Shopping Cart Page"
+"One Page Checkout","One Page Checkout"
+"Mageplaza AutoRelated indexing failed. See details in exception log.","Mageplaza AutoRelated indexing failed. See details in exception log."
+"Manually Setup Auto Related Products","Manually Setup Auto Related Products"
+Category,Category
+"PREVIEW PRODUCTS","PREVIEW PRODUCTS"
+Statistic,Statistic
+Total,Total
+Click(s),Click(s)
+Impression(s),Impression(s)
+Child,Child
+"Recommended for you","Recommended for you"
+"Add to Cart","Add to Cart"
+"In stock","In stock"
+"Out of stock","Out of stock"
+"Add to Wish List","Add to Wish List"
+"HIDE PRODUCTS","HIDE PRODUCTS"
+"Mageplaza AutoRelated","Mageplaza AutoRelated"
+"Mageplaza Automatic Related Product","Mageplaza Automatic Related Product"
+"Automatic Related Products","Automatic Related Products"
+"General Configuration","General Configuration"
+"Enable Automatic Related Products","Enable Automatic Related Products"
+"Select Yes to enable this module","Select Yes to enable this module"
+"Mageplaza AutoRelated Indexer","Mageplaza AutoRelated Indexer"
+"Indexed Mageplaza AutoRelated association","Indexed Mageplaza AutoRelated association"
+"Select Rule","Select Rule"
+Name,Name
+Type,Type
+Start,Start
+End,End

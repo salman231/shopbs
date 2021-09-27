@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MagentoChatSystem
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Webkul_MagentoChatSystem::chatsystem" title="Chat System" sortOrder="10" >
+                    <resource id="Webkul_MagentoChatSystem::menu" title="Chat System Menu" sortOrder="10">
+                        <resource id="Webkul_MagentoChatSystem::assigned" title="Assigned Chat" sortOrder="5">
+                            <resource id="Webkul_MagentoChatSystem::assigned_view" sortOrder="10" title="View Assigned Chat"/>
+                            <resource id="Webkul_MagentoChatSystem::assigned_update" sortOrder="20" title="Update Assigned Chat"/>
+                        </resource>
+                        <resource id="Webkul_MagentoChatSystem::agents" title="Agent List" sortOrder="10" />
+                        <resource id="Webkul_MagentoChatSystem::feedback" sortOrder="20" title="Agent Rating">
+                            <resource id="Webkul_MagentoChatSystem::AgentRating_save" sortOrder="10" title="Save AgentRating"/>
+                            <resource id="Webkul_MagentoChatSystem::AgentRating_delete" sortOrder="20" title="Delete AgentRating"/>
+                            <resource id="Webkul_MagentoChatSystem::AgentRating_update" sortOrder="30" title="Update AgentRating"/>
+                            <resource id="Webkul_MagentoChatSystem::AgentRating_view" sortOrder="40" title="View AgentRating"/>
+                        </resource>
+                        <resource id="Webkul_MagentoChatSystem::Report" sortOrder="10" title="Chat Reports">
+                            <resource id="Webkul_MagentoChatSystem::Report_delete" sortOrder="20" title="Delete Report"/>
+                            <resource id="Webkul_MagentoChatSystem::Report_update" sortOrder="30" title="Update Report"/>
+                            <resource id="Webkul_MagentoChatSystem::Report_view" sortOrder="40" title="View Report"/>
+                            <resource id="Webkul_MagentoChatSystem::Report_save" sortOrder="50" title="Save Report"/>
+                        </resource>
+                    </resource>
+                </resource>
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="Webkul_MagentoChatSystem::config_chatsystem" title="Chat System Configuration" />
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

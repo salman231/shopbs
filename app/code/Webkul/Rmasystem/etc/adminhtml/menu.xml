@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Rmasystem
+ * @author    Webkul
+ * @copyright Copyright (c) 2010-2017 Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Webkul_Rmasystem::rmasystem" title="RMA System" module="Webkul_Rmasystem" sortOrder="20" resource="Webkul_Rmasystem::rmasystem" />
+        <add id="Webkul_Rmasystem::menu" title="Menu" module="Webkul_Rmasystem" sortOrder="10" parent="Webkul_Rmasystem::rmasystem" dependsOnModule="Webkul_Rmasystem" resource="Webkul_Rmasystem::rmasystem"/>
+        <add id="Webkul_Rmasystem::allrma" title="Manage All Rma" module="Webkul_Rmasystem" sortOrder="1" parent="Webkul_Rmasystem::menu" action="rmasystem/allrma" resource="Webkul_Rmasystem::allrma"/>
+        <add id="Webkul_Rmasystem::reason" title="Manage Reasons" module="Webkul_Rmasystem" sortOrder="1" parent="Webkul_Rmasystem::menu" action="rmasystem/reason" resource="Webkul_Rmasystem::reason"/>
+        <add id="Webkul_Rmasystem::shippinglabel" title="Manage Shipping Label" module="Webkul_Rmasystem" sortOrder="1" parent="Webkul_Rmasystem::menu" action="rmasystem/shippinglabel" resource="Webkul_Rmasystem::shippinglabel"/>
+        <add id="Webkul_Rmasystem::customfield" title="Manage RMA Custom Fields" module="Webkul_Rmasystem" sortOrder="1" parent="Webkul_Rmasystem::menu" action="rmasystem/customfield" resource="Webkul_Rmasystem::customfield"/>
+    </menu>
+</config>

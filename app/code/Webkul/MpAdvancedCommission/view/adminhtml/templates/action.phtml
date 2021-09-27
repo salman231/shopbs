@@ -1,0 +1,259 @@
+<!-- 
+/**
+ * @category   Webkul
+ * @package    Webkul_MpAdvancedCommission
+ * @author     Webkul Software Private Limited
+ * @copyright  Copyright (c)  Webkul Software Private Limited (https://webkul.com)
+ * @license    https://store.webkul.com/license.html
+ */  -->
+ <?php
+
+ $commissionType = $block->getCommissionType();
+ $numberValidationMsg = __("Please enter numeric and positive number only & special characters are not allowed");
+ $commissionTypeValidationMsg = __("Category commission can\'t be greater than 100 in percentage case.");
+    ?>
+<link rel="stylesheet" type="text/css"
+ href="<?= $block->escapeHtml($block->getViewFileUrl('Webkul_MpAdvancedCommission::css/style.css')) ?>"
+/>
+
+<div data-bind="visible: active">
+    <div class="admin__scope-old"
+    data-bind="html: content, attr: {class: element.cssclass ? element.cssclass : 'admin__scope-old'}">
+        <div class="fieldset-wrapper category-commission-information">
+            <div class="fieldset-wrapper-title">
+                <strong class="title">
+                    <span data-bind="text: label"><?= $block->escapeHtml(__('Category Commission'))?></span>
+                </strong>
+            </div>
+            <div data-bind="visible: opened" class="admin__fieldset-wrapper-content">
+            <input type="hidden" id = "wk-num-validation" value= "<?= $block->escapeHtml($numberValidationMsg) ?>">
+            <input type="hidden" id = "wk-commission-type-validation"
+             value= "<?= $block->escapeHtml($commissionTypeValidationMsg) ?>">
+            <input type="hidden" id = "wk-commission-type" value= "<?= $block->escapeHtml($commissionType) ?>">
+                <fieldset class="admin__fieldset">
+                    <div class="hor-scroll" style="padding-bottom: 10px;height: 160px;">
+                        <div class='labl fnt'>
+                            <?= $block->escapeHtml(__('Categories'))?>
+                        </div> <span class=' fnt'><?= $block->escapeHtml(__('Commission'))?></span>    <br></br>
+                                <?php
+                                $customer = $block->getCustomer();
+                                $categoryCommissionData = json_decode($customer->getCategoryCommission(), true);
+                                ?>
+                            <input type="hidden"
+                             id ="customer-category-commission"
+                             name="customer[category_commission]"
+                             value='<?= $block->escapeHtml($customer->getCategoryCommission())?>'
+                             data-form-part="<?= $block->escapeHtml($block->getData('target_form'))?>"
+                            />
+                            <?php
+                            $count = 0;
+                            $category_helper = $this->helper(\Magento\Catalog\Helper\Category::class);
+                            $category_model = $block->getCategory();
+                            $_categories = $category_helper->getStoreCategories();
+                            foreach ($_categories as $_category) {
+                                $count++;
+                                $categoryData = $category_model->load($_category['entity_id']);
+                                $categoryCommission = '';
+                                if (isset($categoryCommissionData[$_category->getId()])) {
+                                    $categoryCommission = $categoryCommissionData[$_category->getId()];
+                                }
+                                if (count($category_model->getAllChildren($categoryData))-1 > 0) { ?>
+                                    <div class="wk-cat-container" style="margin-left:0px;">
+                                        <span class="wk-plus">
+                                        </span><span class="wk-foldersign"></span>
+                                        <span class="wk-elements wk-cat-name">
+                                         <?= $block->escapeHtml($_category->getName()) ?>
+                                        </span>
+                                        <input class="wk-elements wk-category-commission" type="text" name="category[]"
+                                         id='<?= $block->escapeHtml($_category->getId()); ?>'
+                                         value='<?= $block->escapeHtml($categoryCommission); ?>'/>
+                                    </div>
+                                    <?php
+                                } else { ?>
+                                     <div class="wk-cat-container">
+                                        </span><span class="wk-foldersign"></span>
+                                        <span class="wk-elements wk-cat-name">
+                                         <?= $block->escapeHtml($_category->getName()) ?>
+                                        </span>
+                                        <input class="wk-elements wk-category-commission"
+                                         type="text" name="category[]"
+                                         id='<?= $block->escapeHtml($_category->getId()); ?>'
+                                         value='<?= $block->escapeHtml($categoryCommission); ?>'/>
+                                    </div>
+                                    <?php
+                                }
+                            } ?>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    require([
+        "jquery",
+        'mage/translate',
+        'Magento_Ui/js/modal/alert'
+    ], function($, $t, alert) {
+        var customCategoryCommission = [];
+        customCategoryCommission = $.parseJSON($('#customer-category-commission').val());
+        $("body").on('keyup','.wk-elements',function(){
+            var categoryCommissionArr = {};
+            var merge = {};
+            var i=0;
+            var commissionType = $('#wk-commission-type').val();
+            var numErrorMsg = $('#wk-num-validation').val();
+            var commissionTypeErrorMsg = $('#wk-commission-type-validation').val();
+            $('.wk-category-commission').each(function() {
+                if($(this).val()=='' || ($.isNumeric($(this).val()) && $(this).val()>=0) ){
+                    $(this).css('border-color','none');
+                } else { 
+                    $(this).css('border-color','red'); 
+                    $(this).val(''); 
+                    i++; 
+                }
+                if (commissionType === 'percent') {
+                    if (parseInt($(this).val()) > 100) {
+                        $(this).css('border-color','red'); 
+                        $(this).val(''); 
+                        alert({
+                            content: commissionTypeErrorMsg
+                        });
+                        return false;
+                    }
+                }
+                categoryCommissionArr[$(this).attr('id')] = $(this).val();
+            });
+            if (i>0) {
+                alert({
+                    content: numErrorMsg
+                });
+                return false; 
+            }    
+            if (customCategoryCommission != null) {       
+                for(var i in customCategoryCommission) {
+                    merge[i] = customCategoryCommission[i];
+                }
+                for(var i in categoryCommissionArr) {
+                    if(categoryCommissionArr[i] != customCategoryCommission[i]) {
+                        merge[i] = categoryCommissionArr[i];
+                    }
+                }
+            } else {
+                merge = categoryCommissionArr;
+            }
+            jQuery("#customer-category-commission").val(JSON.stringify(merge));
+        });
+
+        $("body").delegate('.wk-plus ,.wk-plusend,.wk-minus, .wk-minusend ',"click",function(){
+            var thisthis=$(this);   
+            if (thisthis.hasClass("wk-plus") || thisthis.hasClass("wk-plusend")) {
+                if (thisthis.hasClass("wk-plus")) {
+                    thisthis.removeClass('wk-plus').addClass('wk-plus_click');
+                }
+                if (thisthis.hasClass("wk-plusend")) {
+                    thisthis.removeClass('wk-plusend').addClass('wk-plusend_click');
+                }
+                thisthis.prepend("<span class='wk-node-loader'></span>");
+                callCategoryTreeAjaxFunction(thisthis);         
+            }
+            if (thisthis.hasClass("wk-minus") || thisthis.hasClass("wk-minusend")) {
+                callRemoveCategoryNodeFunction(thisthis);
+            }       
+        });
+
+        function callCategoryTreeAjaxFunction(thisthis) {
+            var i, len, name, id, commission;
+            $.ajax({
+                url: "<?= $block->escapeHtml(
+                    $block->getUrl(
+                        'mpadvancedcommission/category/sellercategorytree/',
+                        ['_secure' => $block->getRequest()->isSecure()]
+                    )
+                )?>",
+                type: "POST",
+                data: {
+                    parentCategoryId:thisthis.siblings("input").attr('id'),
+                    customerId:"<?= $block->escapeHtml($block->getCustomerId()); ?>"
+                },
+                dataType: 'html',
+                success:function($data){
+                    var newdata=JSON.parse($data);
+                    //var newdata=  $.parseJSON(content);
+                    len = newdata.length;
+                    var pxl= parseInt(thisthis.parent(".wk-cat-container").css("margin-left").replace("px",""))+20;
+                    thisthis.find(".wk-node-loader").remove();
+                    if (thisthis.attr("class") == "wk-plus") {
+                        thisthis.attr("class","wk-minus");
+                    }
+                    if (thisthis.attr("class") == "wk-plusend") {
+                        thisthis.attr("class","wk-minusend");
+                    }
+                    if (thisthis.attr("class") == "wk-plus_click") {
+                        thisthis.attr("class","wk-minus");
+                    }
+                    if (thisthis.attr("class") == "wk-plusend_click") {
+                        thisthis.attr("class","wk-minusend");
+                    }
+                    for (i=0;i<len; i++) {     
+                        id=newdata[i].id;
+                        commission=newdata[i].commission;
+                        name=newdata[i].name;
+                        if (newdata[i].counting === 0) {
+                            thisthis.parent(".wk-cat-container").after(
+                                '<div class="wk-removable wk-cat-container"'+
+                                'style="display:none;margin-left:'+pxl+'px;">'+
+                                '<span  class="wk-no"></span><span class="wk-foldersign"></span>'+
+                                '<span class="wk-elements wk-cat-name">'+ name +'</span>'+
+                                '<input class="wk-elements wk-category-commission" type="text" name="category[]"'+
+                                ' id='+ id +' value='+ commission +'>'+
+                                '</div>'
+                            );
+                        } else {
+                            thisthis.parent(".wk-cat-container").after(
+                                '<div class="wk-removable wk-cat-container"'+
+                                'style="display:none;margin-left:'+pxl+'px;">'+
+                                '<span  class="wk-plusend"></span>'+
+                                '<span class="wk-foldersign"></span>'+
+                                '<span class="wk-elements wk-cat-name">'+ name +'</span>'+
+                                '<input class="wk-elements wk-category-commission" type="text" name="category[]"'+
+                                ' id='+ id +' value='+ commission +'>'+
+                                '</div>'
+                            );   
+                        }
+                    }
+                    thisthis.parent(".wk-cat-container").nextAll().slideDown(300);
+                },
+                error: function (response) {
+                    alert({
+                        content: self.options.ajaxErrorMessage
+                    });
+                }
+            });
+        }
+
+        function callRemoveCategoryNodeFunction(thisthis) {
+            if (thisthis.attr("class") == "wk-minus") {
+                thisthis.attr("class","wk-plus");
+            }
+            if (thisthis.attr("class") == "wk-minusend") {
+                thisthis.attr("class","wk-plusend");
+            }
+            var thiscategory = thisthis.parent(".wk-cat-container");
+            var marg= parseInt(thiscategory.css("margin-left").replace("px",""));
+            while (thiscategory.next().hasClass("wk-removable")) {                      
+                if (parseInt(thiscategory.next().css("margin-left").replace("px",""))>marg) {
+                    thiscategory.next().slideUp("slow",function() {
+                        $(this).remove();
+                    });
+                }
+                thiscategory = thiscategory.next(); 
+                if (typeof thiscategory.next().css("margin-left")!= "undefined") {
+                    if (marg == thiscategory.next().css("margin-left").replace("px","")) {
+                        break;
+                    }
+                }
+            }
+        }
+    });
+</script>

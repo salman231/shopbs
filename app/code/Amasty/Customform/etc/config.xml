@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Customform
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <amasty_customform>
+            <general>
+                <enabled>0</enabled>
+            </general>
+            <response>
+                <sender>general</sender>
+                <template>amasty_customform_response_template</template>
+            </response>
+            <gdpr>
+                <enabled>0</enabled>
+                <text><![CDATA[I have read & accept the <a target="_blank" href="/privacy-policy">Privacy Policy</a>]]></text>
+            </gdpr>
+            <advanced>
+                <date_format>mm/dd/yy</date_format>
+            </advanced>
+        </amasty_customform>
+    </default>
+</config>

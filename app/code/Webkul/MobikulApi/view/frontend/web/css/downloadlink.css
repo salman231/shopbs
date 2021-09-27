@@ -1,0 +1,89 @@
+.mk-downloadlink-container{
+    padding: 5px;
+    height: 30px;
+}
+.mk-lightTheme{
+    background-color: #ffffff;
+    color: #000000;
+}
+.mk-darkTheme{
+    background-color: #000000;
+    color: #ffffff;
+}
+.mk-downloadlink-label-container{
+    float: left;
+    width: 70%;
+}
+.mk-downloadlink-label{
+    text-align: right;
+    display: block;
+    padding-right: 10px;
+    line-height: 30px;
+}
+.mk-downloadlink-button-container{
+    float: left;
+    width: 27%;
+}
+.mk-downloadlink-playstore-button{
+    display: inline-block;
+    width: 90px;
+    margin-right: 5px;
+}
+.mk-downloadlink-appstore-button{
+    display: inline-block;
+    width: 90px;
+}
+.mk-downloadlink-close-button{
+    cursor: pointer;
+    float: right;
+    width: 18px;
+    margin: 6px 5px 0px 0px;
+}
+.mk-downloadlink-image-button{
+    border: 1px solid #fff;
+    display: block;
+    border-radius: 5px;
+}
+.mk-downloadlink-hidden{
+    display: none;
+}
+@media only screen and (max-width: 800px) {
+    .mk-downloadlink-button-container {
+        width: 35%;
+    }
+    .mk-downloadlink-label-container {
+        width: 60%;
+    }
+}
+@media only screen and (max-width: 549px) {
+    .mk-downloadlink-button-container {
+        width: 45%;
+    }
+    .mk-downloadlink-label-container {
+        width: 38%;
+    }
+}
+@media only screen and (max-width: 500px) {
+    .mk-downloadlink-button-container {
+        width: 48%;
+    }
+    .mk-downloadlink-label-container {
+        width: 45%;
+    }
+}
+@media only screen and (max-width: 406px) {
+    .mk-downloadlink-container {
+        height: 64px;
+    }
+    .mk-downloadlink-button-container {
+        width: 47%;
+    }
+    .mk-downloadlink-close-button {
+        margin: 23px 5px 0px 0px;
+    }
+}
+@media only screen and (max-width: 297px) {
+    .mk-downloadlink-button-container {
+        width: 40%;
+    }
+}

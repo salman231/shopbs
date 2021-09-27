@@ -1,0 +1,116 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MagentoChatSystem
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+?>
+<script id="chat_window_template" type="text/x-magento-template">
+     <div id="live-chat-<%- data.customerId %>" class="chat-window">
+        <header class="clearfix" data-bind="click: _openChatWindow">
+            <a  id="close-chat" href="" class="chat-close" data-bind="click: closeChatWindow, clickBubble:false">&times;</a>
+            <span id="minim-chat" href="" class="minim-button">&minus;</span>
+            <span id="maxi-chat" href="" class="maxi-button">&plus;</span>
+            <span class='user-status <%- data.class %>'></span>
+            <h4><%= data.customerName %></h4>
+            <div class="chatbox-avatar">
+                <img src="<%- data.image %>" alt="<%- data.customerName %>" />
+            </div>
+        </header>
+        <div class="chat" data-block="chat-reply-block">
+            <div id="chat-history-<%- data.customerId %>" class="chat-history">
+            </div>
+            <div class="bottom-controls">
+                <div class="file-uploader">
+                    <!-- ko if: showFileLoader() == true -->
+                    <div class="chat-loading-mask" data-role="chat-loader">
+                        <div class="chat-loader">
+                            <img alt="Loading..." data-bind="attr: {'src': window.chatboxConfig.loaderImage}">
+                            <span class="upload-info" data-bind="text: uploadPercentage"></span>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <form data-role="reply"
+                    method="post"
+                    data-bind="submit:reply"
+                    id="form-reply-<%- data.customerId %>" class ="chat-form">
+                    <textarea class="form-control type_message validate-no-html-tags" name="reply" value="" placeholder="<?= $block->escapeHtml(__('Type your message...')) ?>" data-bind="event:{keypress: replyByEnter}"></textarea>
+                    <input type="hidden" name="customerId" value="<%- data.customerId %>">
+                    <div class="dropup" data-bind="click:openEmojiBox" outerClick="hideEmojiBox">
+                        <i class="fa fa-paperclip send-attachment" data-bind="click: addAttachment, clickBubble:false"></i>
+                        <span class="emoticons_div" title="Emojis" data-toggle="dropdown" role="button" aria-expanded="false"></span>
+                        <div class="dropdown-menu dropdown-menu-right" role="menu">
+                            <div class="smiley_pad">
+                                :smiley: :sweat_smile: :smile: :wink: :blush: :angry:
+                            </div>
+                            <div class="smiley_pad">
+                                :laughing: :joy: :heart_eyes: :kissing: :sleepy: :sleeping:
+                            </div>
+                            <div class="smiley_pad">
+                                :smirk: :rage: :cry: :neutral_face: :disappointed: :coffee:
+                            </div>
+                            <div class="smiley_pad">
+                                :astonished: :stuck_out_tongue_winking_eye: :sob: :flushed: :yum: :sunglasses:
+                            </div>
+                            <div class="smiley_pad">
+                                :mask: :smiling_imp: :confused: :scream: :stuck_out_tongue: :fearful:
+                            </div>
+                            <div class="smiley_pad">
+                                :punch: :ok_hand: :clap: :thumbsup: :thumbsdown:
+                            </div>
+                        </div>
+                    </div>
+                    <div class="added-attachment" style="display: none" id="attachment-file">
+                        <div class="wk-attachment">
+                            <input type="file" name="attachments" class="msg-attachment" data-bind="event:{ change: selectFile.bind()}">
+                        </div>
+                    </div>
+                </form>
+                <span class="file-error status-error" data-bind="visible: fileUploadError(), text: fileUploadErrorText()"></span>
+            </div>
+            
+        </div>
+    </div>
+</script>
+<script id="reply_client_template" type="text/x-magento-template">
+    <div class="chat-message-client message_container">
+        <img src="<%- data.adminImage %>" alt="" width="32" height="32">
+        <div class="chat-message-client-content triangle-right left clearfix">
+            <span class="chat-time"><%- data.time %></span>
+            <h5><%- data.adminName %></h5>
+            <% if(data.type == 'image') { %>
+                <p><a target="_blank" href="<?= $block->escapeUrl($block->getUrl('chatsystem/index/viewfile').'image/') ?><%- data.message %>"><img src="<?= $block->escapeUrl($block->getUrl('chatsystem/index/viewfile').'image/')?><%- data.message %>" style="width:80%;" class="message-image"></a></p>
+            <% } if(data.type == 'file'){ %>
+                <p><a href="<?= $block->escapeUrl($block->getUrl('chatsystem/index/viewfile').'file/') ?><%- data.message %>" ><span><?= $block->escapeHtml(__('Download File')); ?></span></a></p>
+            <% } if(data.type != 'file' && data.type != 'image') { %>
+                 <p><%= data.message %></p>
+            <% } %>
+            <span class="chat-date"><%- data.date %></span>
+        </div>
+    </div>
+    <% if (data.statusError == 1) { %>
+    <p class="status-error"><?= $block->escapeHtml(__('Customer is not available for chat.')) ?></p>
+    <% } %>
+</script>
+<script id="reply_admin_template" type="text/x-magento-template">
+    <div class="chat-message-admin message_container">
+        <img src="<%- data.image %>" alt="" width="32" height="32">
+        <div class="chat-message-admin-content triangle-right right clearfix">
+            <span class="chat-time"><%- data.time %></span>
+            <h5><%- data.customerName %></h5>
+            <% if(data.type == 'image') { %>
+                <p><a target="_blank" href="<?= $block->escapeUrl($block->getUrl('chatsystem/index/viewfile').'image/') ?><%- data.message %>"><img src="<?= $block->escapeUrl($block->getUrl('chatsystem/index/viewfile').'image/') ?><%- data.message %>" style="width:80%;" class="message-image"></a></p>
+            <% } if(data.type == 'file'){ %>
+                <p><a href="<?= $block->escapeUrl($block->getUrl('chatsystem/index/viewfile').'file/') ?><%- data.message %>" ><span><?= $block->escapeHtml(__('Download File')); ?></span></a></p>
+            <% } if(data.type != 'file' && data.type != 'image') { %>
+                 <p><%= data.message %></p>
+            <% } %>
+            <span class="chat-date"><%- data.date %></span>
+        </div>
+    </div>
+</script>

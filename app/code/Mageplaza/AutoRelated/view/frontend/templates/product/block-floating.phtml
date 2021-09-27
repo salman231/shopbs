@@ -1,0 +1,79 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_AutoRelated
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+/** @var \Mageplaza\AutoRelated\Block\Product\Block $block */
+
+/** @var \Magento\Catalog\Model\Product $product */
+$product = $block->getProductCollection()->getFirstItem();
+if ($product->getId()) : ?>
+    <div class="mageplaza-autorelated-block arp-popup-block" id="<?= /** @noEscape */ $block->getLocationBlock() ?>" rule-id="<?= /** @noEscape */ $block->getRuleId() ?>" data-mage-init='{"arpDefaultBlockFloating": <?= /** @noEscape */ $block->getJsData() ?>}'>
+        <div class="close-popup">
+            <div class="fa btn-close-popup" ></div>
+            <div class="fa btn-remove-popup" ></div>
+        </div>
+        <div class="popup-content">
+            <div class="image-popup">
+                <?= /** @noEscape */ $block->getImage($product, 'product_small_image')->toHtml(); ?>
+            </div>
+            <div class="popup-right">
+                <div class="arp-popup-label"><?= /** @noEscape */ $block->getTitleBlock() ?: __('Recommended for you') ?></div>
+                <a class="product-item-link"
+                   title="<?= /** @noEscape */ $block->escapeHtml($product->getName()) ?>"
+                   href="<?= /** @noEscape */ $block->getProductUrl($product) ?>">
+                    <?= /** @noEscape */ $block->escapeHtml($product->getName()) ?>
+                </a>
+                <?= /** @noEscape */ $block->getProductPrice($product); ?>
+                <div class="product actions product-item-actions">
+                    <div class="actions-primary">
+                        <?php if ($product->isSaleable()) : ?>
+                            <?php if ($product->getTypeInstance()->hasRequiredOptions($product)) : ?>
+                                <button class="action tocart primary mageplaza-autorelated-button"
+                                        data-mage-init='{"redirectUrl": {"url": "<?= /** @noEscape */ $block->getAddToCartUrl($product) ?>"}}'
+                                        type="button" title="<?= /** @noEscape */ __('Add to Cart') ?>">
+                                    <span><?= /** @noEscape */ __('Add to Cart') ?></span>
+                                </button>
+                            <?php else : ?>
+                                <?php
+                                /** @var \Magento\Framework\Data\Helper\PostHelper $postDataHelper */
+                                $postDataHelper = $this->helper(\Magento\Framework\Data\Helper\PostHelper::class);
+                                $postData       = $postDataHelper->getPostData($block->getAddToCartUrl($product), ['product' => $product->getEntityId()])
+                                ?>
+                                <button class="action tocart primary mageplaza-autorelated-button"
+                                        data-post='<?= /** @noEscape */ $postData; ?>'
+                                        type="button" title="<?= /** @noEscape */ __('Add to Cart') ?>">
+                                    <span><?= /** @noEscape */ __('Add to Cart') ?></span>
+                                </button>
+                            <?php endif; ?>
+                        <?php else : ?>
+                            <?php if ($product->getIsSalable()) : ?>
+                                <div class="stock available">
+                                    <span><?= /** @noEscape */ __('In stock') ?></span></div>
+                            <?php else : ?>
+                                <div class="stock unavailable">
+                                    <span><?= /** @noEscape */ __('Out of stock') ?></span></div>
+                            <?php endif; ?>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>

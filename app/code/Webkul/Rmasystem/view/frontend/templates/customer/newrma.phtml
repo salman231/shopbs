@@ -1,0 +1,243 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Rmasystem
+ * @author    Webkul
+ * @copyright Copyright (c) 2010-2017 Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var $block \Webkul\Rmasystem\Block\Newrma */
+?>
+
+  <script>
+      window.rmaDataConfig = <?php /* @escapeNotVerified */ echo \Zend_Json::encode($block->getRmaConfigData()); ?>;
+  </script>
+<div class="block">
+	<div class="block-content">
+    <form class="form"
+        method="post"
+        action="<?php echo $this->getUrl('rmasystem/newrma/saverma/', ['_secure' => $this->getRequest()->isSecure()]); ?>"
+        enctype="multipart/form-data" id="save_rma_form" data-mage-init='{"validation":{}}'>
+        <div id="new-rma-component" data-bind="scope:'new-rma-component'" class="field">
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <script type="text/x-magento-init">
+            {
+                "#new-rma-component": {
+                    "Magento_Ui/js/core/app":  <?php /* @escapeNotVerified */ echo $block->getJsLayout();?>
+                }
+            }
+            </script>
+            <div class="clear"></div>
+                      <input type="hidden" value="<?php echo $block->getFormKey() ?>" name="form_key"/>
+                      <fieldset class="fieldset login" data-hasrequired="<?php /* @escapeNotVerified */ echo __('* Required Fields') ?>">
+                        <!-- ko if: empty() == 1  -->
+                        <div class="field wk-noitem no-display" data-bind="css: {'no-display': !empty()}">
+                            <tr>
+                                <td><?php echo __('No item applicable for RMA generation.') ?></td>
+                            </tr>
+                        </div>
+                        <!-- /ko -->
+                        <!-- ko if: itemDetails().length > 0  -->
+                        <div class="field">
+                        </div>
+                          <div class="field required account">
+                              <label class="label"><span><?php echo __("Items Ordered"); ?>:</span></label>
+                              <div class="control table-wrapper rma-order-items">
+                                  <table name="items" class="data table ko-grid" id="wk_rma_order_details">
+                                      <thead>
+                                          <tr>
+                                              <th scope="col" class="col rma-select"><input data-bind="checked: checkAll" type="checkbox" class="wk-option-input" id="all_select"/></th>
+                                              <th scope="col" class="col name" title="Product Name"><?php echo __("Name"); ?></th>
+                                              <th scope="col" class="col sku" title="Product SKU"><?php echo __("SKU"); ?></th>
+                                              
+                                              <th scope="col" class="col qty" title="Product Quantity Ordered"><?php echo __("Qty"); ?></th>
+                                              <th scope="col" class="col price" title="Product Price"><?php echo __("Price"); ?></th>
+                                              <th scope="col" class="col rt-qty" title="Product Quantity Returning"><?php echo __("Return Qty"); ?></th>
+                                              <th scope="col" class="col reason" title="Reason"><?php echo __("Reason"); ?></th>
+
+                                          </tr>
+                                      </thead>
+                                      <tbody data-bind="template: { name: 'orderdetails-template', foreach: itemDetails }">
+                                      </tbody>
+                                  </table>
+                              </div>
+                          </div>
+                          <!-- /ko -->
+                          
+                        <script type="text/html" id="orderdetails-template">
+                          <tr>
+
+                            <!-- ko if: error === false -->
+                            <!-- ko if: disabled === false -->
+                                <td data-th="Select Item" class="col rma-select" class='wk_rma_check'>
+                                  <input data-bind="value: itemid, checked: isSlected, attr: {'data-value': product_id, 'name': 'item_checked['+itemid+']'}" type='checkbox' class='wk_rma_pro_check wk-option-input'/>
+                                </td>
+                              <!-- /ko -->
+                              <!-- ko if: disabled === true -->
+                                <td data-th="Select Item" class="col rma-select" class='wk_rma_check'></td>
+                              <!-- /ko -->
+                              <td data-th="Item Name" class="col name">
+                                <div class="wk-pro-divide1">
+                                  <img data-bind="attr: {'src': image}" style="float:left;margin-right:10px;" class="image" />
+                                </div>
+                                <div class="wk-pro-divide1">
+                                  <a target='_blank' data-bind="attr: {'href':url}, text: name"></a>
+                                </div>
+                              </td>
+                              <td data-th="Item SKU" class="col sku" data-bind="text: sku"></td>
+
+                              <td data-th="Item Qty" class="col qty" data-bind="text: qty"></td>
+                              <td data-th="Item Price" class="col price" data-bind="html: price" class='item_price'></td>
+                              <!-- ko if: disabled === false -->
+                                    <td data-th="Returning Qty" class="col rt-qty" class='a-right'><input type='number' data-bind="attr: {'name': 'return_item['+itemid+']', 'max':qty, 'min': 1, 'id': 'qty_'+itemid}" class='return_item'/></td>
+                                    <td data-th="Reason" class="col reason">
+                                        <select class='select item_reason' data-bind="attr: {'name': 'item_reason['+itemid+']', 'id': 'reason_'+itemid}">
+                                            <option value=''><?php echo __('Select Reason') ?></option>
+                                            <?php $reason_coll = $block->getRegionCollection();
+                                                foreach($reason_coll as $reason): ?>
+                                                    <option value="<?php echo $reason->getId()?>"><?php echo $reason->getReason(); ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </td>
+                              <!-- /ko -->
+                              <!-- ko if: disabled === true -->
+                                  <td class="return-filled" colspan="2"><?php echo __('Return Request Already Sent.'); ?></td>
+                              <!-- /ko -->
+                            <!-- /ko -->
+                            <!-- ko if: error === true -->
+                              <td colspan='7'><?php echo __('No order selected') ?></td>
+                            <!-- /ko -->
+
+                          </tr>
+                        </script>
+                        <div class="field image-field">
+                        </div>
+                        <div class="field image-field">
+                            <label class="label"><span><?php echo __("Related Images"); ?>:</span></label>
+                            <button type="button" for="related_images" id="wk_rma_label_image" class="rma-image-button" data-bind="click: addImageBlock">
+                                <span id="wk_rma_upload_icon"></span>
+                                <span id="wk_rma_upload_text"><?php echo __("Add Images"); ?></span>
+                            </button>
+                            <input type="hidden" name="total_images" data-bind="value: totalImages"/>
+                            <div class="control" id="image_block">
+                            </div>
+                            <script type="text/html" id="rmaImageTemplate">
+                            <div class="wk-showcase-block">
+                                <div title="Delete Showcase" class="wk-delete-item" data-bind="click: deleteImage">x</div>
+                                <div class="wk-default-block"><?php echo __("Add Image") ?></div>
+                                <input type="file" name="related_images[]" accept="image/*" class="wk-showcase-img wk-no-display" data-bind="event:{change: fileSelect}">
+                            </div>
+                            </script>
+                        </div>
+
+                        <div class="field required clear-section wk-delivery">
+                            <label class="label"><span><?php echo __("Product Delivery Status"); ?>:</span></label>
+                            <div class="control">
+                            <div class="control">
+                                <select class="required-entry select"
+                                        id="customer_delivery_status"
+                                        data-validate="{required:true}"
+                                        name="customer_delivery_status"
+                                        data-bind="options: deliveryStatus,
+                                            optionsText: 'label',
+                                            optionsValue: 'value',
+                                            value: selectedDelivery,
+                                            optionsCaption: 'Select Delivery Status'"
+                                        >
+                                </select>
+                            </div>
+                            </div>
+                        </div>
+                            <!-- ko if: selectedDelivery() == 1 -->
+                              <div class="field required clear-section">
+                                  <label class="label"><span><?php echo __("Package Condition"); ?>:</span></label>
+                                  <div class="control">
+                                      <select class="required-entry select" data-validate="{required:true}" title="<?php echo __('Select Package Condition'); ?>" name="package_condition">
+                                          <option value=""><?php echo __("Select Package Condition"); ?></option>
+                                          <option value="0"><?php echo __("Open"); ?></option>
+                                          <option value="1"><?php echo __("Packed"); ?></option>
+                                      </select>
+                                  </div>
+                              </div>
+                              <div class="field required">
+                                <label class="label"><span><?php echo __("Enter Consignment Number"); ?>:</span></label>
+                                    <div class="control">
+                                        <input id="wk_rma_consignment_no" type="text" name="customer_consignment_no" data-validate="{required:true}" />
+                                    </div>
+                                </div>
+                            <!-- /ko -->
+                          <div class="field required clear-section">
+                              <label class="label"><span><?php echo __("Resolution Type"); ?>:</span></label>
+                              <div class="control">
+                                <select class="required-entry select"
+                                        id="resolution_type"
+                                        data-validate="{required:true}"
+                                        name="resolution_type"
+                                        data-bind="options: resolutionType,
+                                         optionsText: 'label',
+                                         optionsValue: 'value',
+                                         optionsCaption: 'Select Resolution Type'"
+                                        >
+                                </select>
+                              </div>
+                          </div>
+                          <div class="field required">
+                              <label class="label"><span><?php echo __("Additional Information"); ?>:</span></label>
+                              <div class="control">
+                                  <textarea name="additional_info" id="wk_rma_additional_info" data-validate="{required:true}"></textarea>
+                              </div>
+                          </div>
+                          <?php echo $this->getChildHtml('rma.newrma.customfield') ?>
+                          <div class="field">
+                              <label class="label"><span><?php echo __("Return Policy"); ?>:</span></label>
+                              <div class="control">
+                                  <div id="wk_rma_agreement_cntnt"><?php echo $block->getPolicy(); ?></div>
+                              </div>
+                          </div>
+                          <div class="field required">
+                              <input name="agree" id="wk_i_agree" type="checkbox" class="wk_rma_checkall" data-validate="{required:true}"/>
+                              <label class="label"><span><?php echo __("I Agree"); ?>:</span></label>
+                         </div>
+                    <div class="buttons-set actions-toolbar">
+                        <div class="primary">
+                            <button id="wk_rma_button_submit" class="action save primary" title="<?php echo __('Submit Request'); ?>" type="submit" data-bind="event: {click: saveRma}">
+                                <span><?php echo __("Submit Request"); ?></span>
+                            </button>
+                        </div>
+                    </div>
+                  <a href="<?php echo $block->getUrl('rmasystem/index', ['_secure' => $this->getRequest()->isSecure()])?>">&laquo;<?php echo __("back"); ?></a>
+              </fieldset>
+              </div>
+          </form>
+      </div>
+    </div>
+    <script type="text/javascript">
+    require([
+        'jquery',
+        'mage/mage'
+    ], function($){
+
+        var dataForm = $('#save_rma_form');
+        dataForm.mage('validation', {});
+            
+        $('body').on('click','#wk_rma_button_submit', function() {
+            if (dataForm.valid()!=false) {
+                $(this).attr('disabled','disabled');
+            }
+        });
+    });
+</script>
+<script>
+    require([
+        'mage/url',
+        'Magento_Ui/js/block-loader'
+    ], function(url, blockLoader) {
+        blockLoader("<?= /* @escapeNotVerified */ $block->getViewFileUrl('images/loader-1.gif') ?>");
+        return url.setBaseUrl('<?= /* @escapeNotVerified */ $block->getBaseUrl() ?>');
+    })
+</script>

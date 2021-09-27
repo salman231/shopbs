@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ *
+ *
+ * @category  Webkul
+ * @package   Webkul_MobikulCore
+ * @author    Webkul <support@webkul.com>
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+-->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <columns name="customer_columns" class="Magento\Customer\Ui\Component\Listing\Columns">
+        <column name="customer_token" class="Webkul\MobikulCore\Ui\Component\Listing\Columns\CustomerToken" sortOrder="269">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Mobile App Token</label>
+            </settings>
+        </column>
+    </columns>
+</listing>

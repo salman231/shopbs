@@ -1,0 +1,127 @@
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_DailyDeal
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+li.deal-product-item.product-item {
+    width: 67% !important;
+    padding-left: 3% !important;
+}
+
+.mpdailydeal-float-block {
+    z-index: 99999;
+    width: 20%;
+    position: fixed;
+    bottom: 5px;
+    right: 10px;
+    border-radius: 5px;
+    background-color: #fafafa;
+}
+
+.mpdailydeal-float-block a.product.photo.deal-product-item-photo {
+    width: 135px;
+    display: inline-block;
+}
+
+.mpdailydeal-float-block .product.details.deal-product-item-details {
+    max-width: unset;
+    position: unset;
+}
+
+.mpdailydeal-float-block li.deal-product-item.product-item {
+    width: 90% !important;
+    padding-left: 3% !important;
+}
+
+@media only screen and (min-width: 1600px) {
+    .mpdailydeal-float-block {
+        width: 10%;
+    }
+}
+
+@media only screen and (max-width: 1599px) {
+    .mpdailydeal-float-block {
+        width: 20%;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .catalog-category-view .columns .sidebar-main {
+        width: 100%;
+    }
+
+    .mpdailydeal-float-block {
+        width: 50%;
+    }
+}
+
+.deal-product-item-info .special-price {
+    font-weight: bold;
+}
+
+span.old-price {
+    margin: 0 !important;
+}
+
+li.deal-product-item.product-item {
+    font-size: 1.4rem;
+}
+
+.float-block-content .owl-stage-outer {
+    min-height: 120px;
+}
+
+.float-block-content {
+    border: 1px solid #c2c2c2;
+}
+
+.deal-product-item-info {
+    padding: 10px 0 0 20px;
+}
+
+li.mpdailydeal-product-item.product-item {
+    width: 90% !important;
+}
+
+@media (max-width: 550px) {
+    a.product.photo.deal-product-item-photo {
+        width: 90% !important;
+    }
+
+    .widget-remaining-qty-item.float-remain {
+        display: none;
+    }
+
+    .widget-sold-qty-item.float-sold {
+        display: none;
+    }
+}
+
+ol.mpdailydeal-product-items.product-items.widget-viewed-grid {
+    margin-left: 0;
+}
+
+.products-grid .product-item-actions {
+    margin: 5px 0 10px;
+}
+
+@media only screen and (max-width: 767px) {
+    .catalog-category-view .columns .sidebar-main {
+        width: 100%;
+    }
+}

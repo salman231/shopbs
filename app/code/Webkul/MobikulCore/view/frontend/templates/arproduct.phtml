@@ -1,0 +1,22 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ *
+ *
+ * @category  Webkul
+ * @package   Webkul_MobikulCore
+ * @author    Webkul <support@webkul.com>
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */?>
+<?php if ($block->isAr()): ?>
+    <?php $productArUrl = $block->getArProductData(); ?>
+        <a href="<?= $block->escapeUrl($productArUrl); ?>" rel="ar">
+            <img 
+                class="ar-img" 
+                src="<?= $block->escapeUrl($block->getViewFileUrl('Webkul_MobikulCore::images/transparent.png')); ?>" 
+            />
+        </a>
+<?php endif; ?>

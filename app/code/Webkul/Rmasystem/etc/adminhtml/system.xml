@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Rmasystem
+ * @author    Webkul
+ * @copyright Copyright (c) 2010-2017 Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="webkul" translate="label" sortOrder="10">
+            <label>Webkul</label>
+        </tab>
+        <section id="rmasystem" translate="label" type="text" sortOrder="305" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>RMA System</label>
+            <tab>webkul</tab>
+            <resource>Webkul_Rmasystem::config_rmasystem</resource>
+            <group id="parameter" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>RMA System Configuration</label>
+                <field id="allow_for_rma" translate="label comment" sortOrder="1" type="multiselect" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allow Product Type For RMA</label>
+                    <source_model>Webkul\Rmasystem\Model\Config\Source\Producttype</source_model>
+                </field>
+                <field id="returnpolicy" translate="label comment" sortOrder="4" type="editor" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Return Policy</label>
+                    <frontend_model>Magento\Config\Block\System\Config\Form\Field</frontend_model>
+                </field>
+                <field id="admin_name" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Admin Name</label>
+                </field>
+                <field id="admin_email" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Admin Email</label>
+                    <validate>validate-email</validate>
+                    <backend_model>Magento\Config\Model\Config\Backend\Email\Address</backend_model>
+                </field>
+                <field id="days" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enter Days</label>
+                    <validate>validate-digits</validate>
+                </field>
+                <field id="allow_order" translate="label comment" sortOrder="40" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Select Allowed Order Status</label>
+                    <source_model>Webkul\Rmasystem\Model\Config\Source\Orderstatus</source_model>
+                </field>
+                
+                <field id="active_after_cancel" translate="label" type="select" sortOrder="45" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Allow New RMA Request For Cancelled Requests</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="active_after_decline" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Allow New RMA Request For Declined Requests</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="new_rma_message" translate="label comment" sortOrder="55" type="editor" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>New RMA Message to Customer</label>
+                    <frontend_model>Magento\Config\Block\System\Config\Form\Field</frontend_model>
+                </field>
+                <field id="file_attachment_extension" translate="label" type="text" sortOrder="56" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Allowed file extension</label>
+                    <comment>For example: jpg,jpeg,pdf</comment>
+                </field>
+                <field id="payment_allow_for_rma" translate="label comment" sortOrder="60" type="multiselect" showInDefault="1" showInWebsite="1">
+                    <label>Allowed Payment Method For RMA</label>
+                    <source_model>Webkul\Rmasystem\Model\Config\Source\Paymentmethod</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

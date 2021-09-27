@@ -1,0 +1,22 @@
+.wk_rma_bigbox .block:not(.widget) .block-content .box:nth-child(1){
+    float: left;
+    clear: left;
+}
+.wk_rma_bigbox .box-title{
+    display: inline-block;
+    margin: 0 0 10px;
+}
+.wk_rma_bigbox .box-information .box-content{
+    font-size: 1.6rem;
+    line-height: 24px;
+}
+.wk_rma_bigbox .block:not(.widget) .block-content .box:nth-child(2){
+    float: right;
+
+}
+.wk_rma_bigbox .block:not(.widget) .block-content .box{
+    width: 48%;
+}
+.wk_image{
+    clear: left;
+}

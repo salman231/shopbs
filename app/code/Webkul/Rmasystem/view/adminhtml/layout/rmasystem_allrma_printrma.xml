@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<head>
+       <css src="Webkul_Rmasystem::css/rs_front.css"/>
+       <css src="Webkul_Rmasystem::css/print.css"/>
+       
+	</head>
+    <update handle="styles"/>
+    <body>
+         <referenceContainer name="content">
+			<block class="Webkul\Rmasystem\Block\Adminhtml\Allrma\Edit" name="rma.allrma.print" template="Webkul_Rmasystem::allrma/print.phtml" cacheable="false">
+                <block class="Webkul\Rmasystem\Block\Adminhtml\Allrma\Edit" name="rma.allrma.customfield" template="Webkul_Rmasystem::fieldvalue.phtml" cacheable="false"/>
+			</block>
+        </referenceContainer>
+    </body>
+</page>

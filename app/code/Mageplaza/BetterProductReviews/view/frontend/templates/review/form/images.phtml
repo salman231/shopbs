@@ -1,0 +1,60 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_BetterProductReviews
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+/** @var $block \Magento\Backend\Block\Template */
+
+$helper = $this->helper(\Mageplaza\BetterProductReviews\Helper\Data::class);
+
+$newFile = $block->getFileData();
+?>
+<div id="mp_new_file">
+    <div class="mp-image item mp-new-image" data-role="mp_file_new_<?php echo $newFile['file_id'] ?>">
+        <input type="hidden" name="images[<?php echo $newFile['file_id'] ?>][position]"
+               value="<?php echo $newFile['position'] ?>" class="position"/>
+        <input type="hidden" name="images[<?php echo $newFile['file_id'] ?>][file]"
+               value="<?php echo $newFile['file'] ?>" class="file-image">
+        <input type="hidden" name="images[<?php echo $newFile['file_id'] ?>][label]"
+               value="">
+        <input type="hidden" name="images[<?php echo $newFile['file_id'] ?>][removed]"
+               value="">
+        <div class="review-image-wrapper">
+            <img class="review-image" data-role="image-element"
+                 src="<?php echo $newFile['url'] ?>"
+                 alt="<?php echo $newFile['label'] ?>">
+            <div class="actions">
+                <i class="fas fa-trash-alt action-remove-<?php echo $newFile['file_id'] ?>"></i>
+            </div>
+        </div>
+        <script>
+            require(['jquery'], function ($) {
+                var removeSelection = '.action-remove-' + '<?php echo $newFile['file_id'] ?>';
+                $(removeSelection).each(function () {
+                    $(this).on('click', function () {
+                        var fileContainer = $(this).parent().parent().parent();
+                        fileContainer.remove();
+                        window.mpbetterproductreviews_uploadedImages--;
+                        $('.review-field-images .mp-betterproductreviews-message').html('');
+                    });
+                });
+            });
+        </script>
+    </div>
+</div>

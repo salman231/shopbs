@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Dart_Productkeys menu xml
+ *
+ * @package  Dart_Productkeys
+ *
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+	<menu>
+		<update id="Dart_Productkeys::dart" title="Dart" module="Dart_Productkeys" sortOrder="30"
+			resource="Dart_Productkeys::dart" />
+		<update id="Dart_Productkeys::productkeys_title" title="Product Keys" module="Dart_Productkeys" sortOrder="1"
+			parent="Dart_Productkeys::dart" resource="Dart_Productkeys::productkeys_title" />
+		<add id="Dart_Productkeys::add_row" title="Product Keys List" module="Dart_Productkeys" sortOrder="1"
+			parent="Dart_Productkeys::productkeys_title" action="productkeys/productkeys" resource="Dart_Productkeys::add_row" />
+		
+		<add id="Dart_Productkeys::productkeys_config" title="Configuration" module="Dart_Productkeys" sortOrder="2"
+			parent="Dart_Productkeys::productkeys_title" action="adminhtml/system_config/edit/section/productkeys" resource="Dart_Productkeys::productkeys_config" />
+	</menu>
+</config>

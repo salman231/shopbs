@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Webkul Software
+ *
+ * @category Webkul
+ * @package Webkul_MagentoChatSystem
+ * @author Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license https://store.webkul.com/license.html
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">agent_view_form.agent_view_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Agent Information</item>
+        <item name="reverseMetadataMerge" xsi:type="boolean">true</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="back" class="Webkul\MagentoChatSystem\Block\Adminhtml\Edit\BackButton"/>
+        </buttons>
+        <layout>
+            <navContainerName>left</navContainerName>
+            <type>tabs</type>
+        </layout>
+        <deps>
+            <dep>agent_view_form.agent_view_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="agent_view_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="customer/index/save"/>
+        </settings>
+        <dataProvider class="Webkul\MagentoChatSystem\Model\Agent\DataProvider" name="agent_view_form_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>entity_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <htmlContent name="agent_rating_tab_view_content">
+        <block class="Webkul\MagentoChatSystem\Block\Adminhtml\Edit\Tab\View" name="agent_edit_tab_view" template="Webkul_MagentoChatSystem::tab/view.phtml">
+            <arguments>
+                <argument name="sort_order" xsi:type="number">10</argument>
+                <argument name="tab_label" xsi:type="string" translate="true">Agent Information</argument>
+            </arguments>
+            <block class="Webkul\MagentoChatSystem\Block\Adminhtml\Edit\Tab\View\PersonalInfo" name="agent_personal_info" template="Webkul_MagentoChatSystem::tab/view/personal_info.phtml"/>
+        </block>
+    </htmlContent>
+    <htmlContent name="agent_assigned_chat">
+        <block class="Webkul\MagentoChatSystem\Block\Adminhtml\Edit\Tab\AssignedTab" name="agent_assigned_chat_tab">
+            <arguments>
+                <argument name="sort_order" xsi:type="number">30</argument>
+                <argument name="tab_label" xsi:type="string" translate="true">Assigned Chats</argument>
+            </arguments>
+        </block>
+    </htmlContent>
+    <htmlContent name="agent_feedback_tab">
+        <block class="Webkul\MagentoChatSystem\Block\Adminhtml\Edit\Tab\FeedbackTab" name="agent_feedback_tab">
+            <arguments>
+                <argument name="sort_order" xsi:type="number">40</argument>
+                <argument name="tab_label" xsi:type="string" translate="true">Agent Feedbacks</argument>
+            </arguments>
+        </block>
+    </htmlContent>
+</form>

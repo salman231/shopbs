@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ * 
+ *
+ *
+ * @category  Webkul
+ * @package   Webkul_MobikulCore
+ * @author    Webkul <support@webkul.com>
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <link src="Webkul_MobikulCore::js/bootstrap/bannerimage-post-action.js"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <uiComponent name="mobikul_bannerimage_form"/>
+            <block class="Magento\Backend\Block\Template" name="mobikul.form.validation" template="Webkul_MobikulCore::validation.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

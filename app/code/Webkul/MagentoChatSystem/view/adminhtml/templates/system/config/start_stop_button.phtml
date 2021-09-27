@@ -1,0 +1,51 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MagentoChatSystem
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+?>
+<?php if ($block->getConfigData('host_name') !== null &&
+         $block->getConfigData('port_number') !== null
+    ) {
+        $host = $block->getConfigData('host_name').':'.$block->getConfigData('port_number');
+    ?>
+<div class="pp-buttons-container">
+    <?php  if (!$block->isServerRunning()): ?>
+    <button id="start_server" onclick="return false;">
+        <span><span><span><?= $block->escapeHtml($block->getStartButtonLabel()); ?></span></span></span>
+    </button>
+    <?php else: ?>
+    <button id="stop_server" onclick="return false;">
+        <span><span><span><?= $block->escapeHtml($block->getStopButtonLabel()); ?></span></span></span>
+    </button>
+    <?php endif; ?>
+</div>
+    <?php  if ($block->isServerRunning()): ?>
+<div class="server-message note" style="background:#6d9c7a;padding-left:10px;color:#fff;">
+    <span class="comment"><?= $block->escapeHtml(__('Chat Server is Running on ')) ?><strong><?= $block->escapeHtml($host) ?></strong></span>
+</div>
+    <?php endif; ?>
+    <?php
+    $data = json_encode(
+        [
+            "startUrl"      => $block->getAjaxStartUrl(),
+            "stopUrl"       => $block->getAjaxStopUrl(),
+            "startButton"   => '#start_server',
+            "stopButton"    => '#stop_server',
+            'configForm'    => '#config-edit-form'
+        ]
+    );
+    ?>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Webkul_MagentoChatSystem/js/action/start-stop-server": <?= /* @noEscape */ $data ?>
+        }
+    }
+</script>
+<?php } ?>

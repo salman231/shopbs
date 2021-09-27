@@ -1,0 +1,340 @@
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Mpreportsystem
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+.wk-select-box {
+    width: 23%;
+    height: 40px;
+    border: 1px solid #ccc;
+    display: inline-block;
+    margin: 10px;
+    border-radius: 5px;
+    float: left;
+}
+.wk-select-box label{
+    font-size: 14px;
+    margin: 10px 5px;
+    float: left;
+}
+.wk-select-box .wk-select-arrow-up{
+    margin: 15px 10px;
+    float: right;
+
+}
+.wk-select-box .wk-select-arrow-down{
+    margin: 15px 10px;
+    float: right;
+
+}
+.wk-select-arrow-up {
+    background-image: url('../images/sprite.png');
+    background-repeat: no-repeat;
+    background-position: -314px -122px;
+    width: 12px;
+    height: 10px;
+    float: right;
+    margin: 15px 10px;
+}
+.wk-select-arrow-down {
+    background-image: url('../images/sprite.png');
+    background-repeat: no-repeat;
+    background-position: -289px -122px;
+    width: 12px;
+    height: 10px;
+    float: right;
+    margin: 15px 10px;
+}
+.wkreport_header .wk-report-select-box-head button{
+    margin: 10px;
+    height: 40px;
+    width: 22%;
+}
+.wk-date-filter-div button {
+    width: auto;
+    margin: 10px;
+    display: inline-block;
+    height: 32px;
+}
+.wk-filter-data-div {
+    width: auto;
+    border: 1px solid;
+    border-radius: 20px;
+    display: inline-block;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+.wk-filter-cross{
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+    color: white;
+    border-radius: 18px;
+    text-align: center;
+    font-size: 12px;
+    cursor: pointer;
+}
+.wk-date-subdiv {
+    width: 160px;
+    height: 3.2rem;
+    border: 1px solid #ccc;
+    display: inline-block;
+    margin: 10px;
+    float: left;
+}
+.wk-date-subdiv label:first-child {
+    margin: 5px 10px;
+    float: left;
+}
+.wk-filter-date{
+    background-image: url('../images/sprite_advance.png');
+    background-repeat: no-repeat;
+    background-position: -17px 0px;
+    width: 15px;
+    height: 17px;
+    display: inline-block;
+    float: right;
+    margin: 7px 10px;
+}
+.wk-bg-blue-color{
+    background-color: #006bb4;
+}
+.wk-bg-green-color{
+    background-color: #4da261;
+}
+.wk-border-blue{
+    border: 1px solid #006bb4;
+}
+.wk-border-green span{
+    color: #4da261;
+}
+.wk-border-blue span{
+    color: #006bb4;
+}
+.wk-border-green{
+    border: 1px solid #4da261;
+}
+.wk-date-subdiv .wk-select-arrow-up{
+    margin: 10px;
+}
+.wk-filter-button {
+    width: 25%;
+    height: 100%;
+    background-color: #eeeeee;
+    border-right: 1px solid #ccc;
+    box-shadow: inset 0 1px 0 0 #ffffff, inset 0 -1px 0 0 rgba(204, 204, 204, 0.3);
+    opacity: 0.6;
+    display: inline-block;
+    float: left;
+    text-align: center;
+    padding-top: 5px;
+    cursor: pointer;
+}
+.wk-selected-filter-button {
+    width: 25%;
+    height: 100%;
+    background-color: white;
+    border-right: 1px solid #ccc;
+    box-shadow: inset 0 1px 0 0 #eeeeee, inset 0 -1px 0 0 #eeeeee;
+    opacity: 0.6;
+    display: inline-block;
+    float: left;
+    text-align: center;
+    padding-top: 5px;
+    cursor: pointer;
+}
+.wk-filter-buttons{
+    border: 1px solid #ccc;
+    width: 200px;
+    height: 30px;
+    display: inline-block;
+    margin: 10px;
+    float: right;
+}
+.wk-selected-filter-div {
+    background-color: white;
+    box-shadow: inset 0 0 7px #ccc;
+}
+.wk-report-select-box-head {
+    display: inline-block;
+    width: 100%;
+    position: relative;
+}
+.wk-search-result-dropdown{
+    background-color: white;
+    width: 23%;
+    position: absolute;
+    z-index: 500;
+    border: 1px solid #ccc;
+    max-height: 150px;
+    overflow-y: auto;
+}
+.wk_categories-options{
+    top: 50px;
+    left: 291px;
+}
+.wk_orders-options{
+    top: 50px;
+    left:574px;
+}
+.wk-search-result-dropdown li{
+    list-style: none;
+    background-color: white;
+    color: black;
+    padding: 2px;
+    margin: 1px;
+}
+.wk-search-result-dropdown ul{
+    padding: 0px;
+}
+input[type=search].wk-category-search{
+    width: 94%;
+    margin: 3%;
+}
+.wk-highlight-li{
+    background-color: #ccc!important;
+}
+.wk_date_filter_text {
+    width: 97%;
+    height: 100%!important;
+    border: none!important;
+    margin-left: 3%;
+}
+.wkreport_heading{
+    font-weight: 600;
+    line-height: 1.1;
+    font-size: 1.8rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+.wk_graph_border{
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+.wk_selling_graph, .wk_location_graph, .wk_sales_graph{
+    padding: 10px;
+    clear: both;
+    margin-bottom: 20px;
+}
+.wk_selling_graph div, .wk_location_graph div, .wk_sales_graph>div{
+    text-align: center;
+    clear: both;
+}
+.wk-mpreport-best-customer th, .wk-mpreport-best-customer tr, .wk-mpreport-sales-table th, .wk-mpreport-sales-table tr{
+    border-bottom: 1px solid #ccc;
+    padding: 1rem;
+}
+.wk-category-results-option:hover, .wk-orderStatus-results-option:hover, .wk-seller-results-option:hover, .wk-seller-results-option option:hover{
+    background-color: #006bb4;
+    color: white;
+}
+.wk_sales_graph_outer{
+    margin-bottom: 50px;
+}
+.wk-mp-fieldset.fieldset {
+    background: #fff;
+    border: 0;
+    margin: 0;
+    padding: 5px 0 38px;
+    position: relative;
+}
+.wk-mp-fieldset .legend {
+    position: static;
+    float: left;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0;
+    border-bottom: 1px solid #cac3b4;
+    margin: 0 0 18px;
+}
+.wk-mp-fieldset .legend span{
+    color: #303030;
+    font-size: 1.7rem;
+    font-weight: 600;
+    padding: 7px 0 10px;
+    display: inline-block;
+}
+select.wk-select-box{
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    background: transparent;
+    border: none;
+}
+.wk-report-select-box-head select{
+    width: 100%;
+}
+#salesgrid .admin__data-grid-wrap {
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
+
+/*  */
+.wk-display-ib {
+    display: inline-block;
+}
+.wk-col-1 {
+    width: 100%;
+}
+.wk-col-2 {
+    width: 50%;
+}
+.wk-col-3 {
+    width: 33.33%;
+}
+.wk-col-4 {
+    width: 25%;
+}
+.wk-float-left {
+    float: left;
+}
+.wk-float-right {
+    float: right;
+}
+
+.wk-seller-wrapper, .wk-seller-wrapper *,
+.wk-categories-wrapper, .wk-categories-wrapper *,
+.wk-order-status-wrapper, .wk-order-status-wrapper *,
+.wk-filter-button-wrapper, .wk-filter-button-wrapper *
+{
+    box-sizing: border-box !important;
+}
+
+.wk-seller-wrapper, .wk-categories-wrapper, .wk-order-status-wrapper, .wk-filter-button-wrapper {
+    padding: 10px;
+}
+.wk-categories {
+    position: relative;
+}
+.wk-order-status {
+    position: relative;
+}
+.wk-select-box {
+    width: 100%;
+    margin: 0;
+}
+.wk-search-result-dropdown {
+    width: 100%;
+    left: 0 !important;
+    top: 40px;
+    border: none;
+}
+.wk-filter-button-wrapper .action.primary {
+    margin: 0;
+    width: 100%;
+}
+.wk-select-box label.wk-order-label {
+    width:calc(100% - 42px);
+}
+.wk-select-box label.wk-categories-label {
+    width:calc(100% - 42px);
+}
+.wk-toolbar.order-products-toolbar.toolbar.bottom {
+    padding: 10px;
+    margin: 0;
+}

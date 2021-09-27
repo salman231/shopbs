@@ -1,0 +1,81 @@
+<style type="text/css">
+
+    <?php if ($block->getConfigData('user_panel_background_color')): ?>
+        #chatbox-active-users{
+            background: <?= $block->escapeHtml($block->getConfigData('user_panel_background_color')) ?>!important;
+        }
+        .pannel-control{
+            background: <?= $block->escapeHtml($block->getConfigData('user_panel_background_color')) ?>!important;
+        }
+        .active-users-model{
+            background: <?= $block->escapeHtml($block->getConfigData('user_panel_background_color')) ?>!important;
+        }
+    <?php else: ?>
+        .pannel-control{
+            background: rgba(0,0,0,0.6);
+        }
+    <?php endif; ?>
+
+    <?php if ($block->getConfigData('user_panel_color')): ?>
+        #chatbox-active-users .status-control h4{
+            color: <?= $block->escapeHtml($block->getConfigData('user_panel_color')) ?>!important;
+        }
+        .pannel-control{
+            color: <?= $block->escapeHtml($block->getConfigData('user_panel_color')) ?>!important;
+        }
+    <?php else: ?>
+        .pannel-control{
+            color: #fff!important;
+        }
+
+    <?php endif; ?>
+
+    <?php if ($block->getConfigData('user_list_background_color')): ?>
+        .user-list .user{
+            background: <?= $block->escapeHtml($block->getConfigData('user_list_background_color')) ?>!important;
+        }
+    <?php else: ?>
+
+    <?php endif; ?>
+
+    <?php if ($block->getConfigData('user_list_color')): ?>
+        .user-list .user{
+            color: <?= $block->escapeHtml($block->getConfigData('user_list_color')) ?>!important;
+        }
+
+    <?php else: ?>
+
+    <?php endif; ?>
+
+    <?php if ($block->getConfigData('background_type') == 'color'): ?>
+    .chat .chat-history{
+        background: <?= $block->escapeHtml($block->getConfigData('solid_color')) ?>!important;
+    }
+    <?php elseif ($block->getConfigData('background_type') == 'image'): ?>
+    .chat .chat-history{
+        background: url(<?= $block->escapeHtml($block->getBackgroundImage()) ?>)!important;
+        background-size: cover;
+        background-repeat: no-repeat;
+
+    }
+    <?php else: ?>
+    .chat .chat-history{
+        background: #fff;
+    }
+    <?php endif; ?>
+
+    <?php if ($block->getConfigData('header_color')): ?>
+    .chat-window header{
+        background: <?= $block->escapeHtml($block->getConfigData('header_color')) ?>!important;
+    }
+    <?php else: ?>
+    <?php endif; ?>
+
+    <?php if ($block->getConfigData('header_text_color')): ?>
+    .chat-window header{
+        color: <?= $block->escapeHtml($block->getConfigData('header_text_color')) ?>!important;
+    }
+    <?php else: ?>
+    <?php endif; ?>
+    
+</style>

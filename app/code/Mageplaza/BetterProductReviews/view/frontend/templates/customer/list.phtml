@@ -1,0 +1,94 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_BetterProductReviews
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+?>
+<?php /** @var \Mageplaza\BetterProductReviews\Block\Customer\ListProduct $block */ ?>
+<?php if ($block->isReviewRemindEnable()): ?>
+    <div id="mp-review-products">
+        <div class="mp-review-product-title">
+            <strong><?php echo __('Review your purchased products') ?></strong>
+        </div>
+        <div class="mp-review-product-content">
+            <?php if ($block->getPurchasedProductIds() && !empty($block->getPurchasedProductIds())
+                      && array_diff($block->getPurchasedProductIds(), $block->getReviewedProductIds())): ?>
+                <ul class="owl-carousel owl-theme">
+                        <?php foreach ($block->getPurchasedProductIds() as $productId): ?>
+                            <?php if (!in_array($productId, $block->getReviewedProductIds(), true)): ?>
+                            <li class="mp-review-product">
+                                <div class="mp-review-product-wrapper">
+                                    <div class="mp-review-product-img-wrapper">
+                                        <img class="mp-review-product-img"
+                                             src="<?php echo $block->getProductImgUrl($productId) ?>"
+                                             alt="<?php echo $block->getProductName($productId) ?>"/>
+                                    </div>
+                                    <div class="mp-review-product-name">
+                                        <span><?php echo $block->getProductName($productId) ?></span>
+                                    </div>
+                                    <?php if ($block->getWriteReviewRestrictionCustomerGroup($productId)): ?>
+                                    <div class="mp-review-product-link">
+                                        <a href="<?php echo $block->getReviewsUrl($productId) . '#review-form' ?>"
+                                           class="action primary">
+                                            <span><?php echo __('Write a review') ?></span>
+                                        </a>
+                                    </div>
+                                    <?php endif; ?>
+                                </div>
+                            </li>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </ul>
+            <?php else: ?>
+                <div class="message info empty"><span><?= __('You have no product review reminder.') ?></span></div>
+            <?php endif; ?>
+        </div>
+    </div>
+    <script type="text/javascript">
+        require(['jquery', 'mp_productReviewSlider'], function ($) {
+            $('.owl-carousel').owlCarousel({
+                items: 5,
+                autoplay: false,
+                singleItem: true,
+                autoHeight: true,
+                margin: 0,
+                dots: false,
+                nav: true,
+                responsiveClass: true,
+                navText: ["<i class='fa fa-chevron-left'></i>", "<i class='fa fa-chevron-right'></i>"],
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    450: {
+                        items: 2
+                    },
+                    550: {
+                        items: 3
+                    },
+                    1000: {
+                        items: 4
+                    },
+                    1250: {
+                        items: 5
+                    }
+                }
+            });
+        });
+    </script>
+<?php endif; ?>

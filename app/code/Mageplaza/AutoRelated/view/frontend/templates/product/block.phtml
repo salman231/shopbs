@@ -1,0 +1,136 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_AutoRelated
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+use Magento\Framework\App\Action\Action;
+
+/** @var \Mageplaza\AutoRelated\Block\Product\Block $block */
+
+if ($products = $block->getProductCollection()) : ?>
+    <div class="mageplaza-autorelated-block block widget block-products-list"
+         id="arp-block-<?= /** @noEscape */ $block->getRuleId() ?>" rule-id="<?= /** @noEscape */ $block->getRuleId() ?>"
+         data-mage-init='{"arpDefaultBlock": <?= /** @noEscape */ $block->getJsData() ?>}'>
+        <?php if ($title = $block->getTitleBlock()) : ?>
+            <div class="mageplaza-autorelated-title block-title title">
+                <h2 class="block-mageplaza-autorelated-heading"><?= /** @noEscape */ __($title); ?></h2>
+            </div>
+        <?php endif; ?>
+        <div class="block-content mp-arp-slider-content" aria-labelledby="block-mageplaza-autorelated-heading">
+            <div class="<?= /** @noEscape */ $block->isSliderType() ? 'mageplaza-autorelated-slider' : 'grid products-grid' ?> products-mageplaza-autorelated">
+                <ol class="product-items widget-viewed-grid <?= /** @noEscape */ $block->isSliderType() ? 'owl-carousel owl-theme' : '' ?>">
+                    <?php $iterator = 1; ?>
+                    <?php foreach ($products as $product) : ?>
+                        <?php if ($iterator++ == 1) :
+                            ?><li class="product-item"><?php
+                        else :
+                            ?></li><li class="product-item"><?php
+                        endif; ?>
+                        <div class="slider-product-item-info" style="width: 80%;">
+                            <a href="<?= /** @noEscape */ $block->getProductUrl($product) ?>"
+                               class="product photo slider-product-item-photo">
+                                <?= /** @noEscape */ $block->getImage($product, 'recently_viewed_products_grid_content_widget')->toHtml(); ?>
+                            </a>
+                            <div class="product details slider-product-item-details">
+                                <strong class="product name product-item-name">
+                                    <a class="product-item-link"
+                                       title="<?= /** @noEscape */ $block->escapeHtml($product->getName()) ?>"
+                                       href="<?= /** @noEscape */ $block->getProductUrl($product) ?>">
+                                        <?= /** @noEscape */ $block->escapeHtml($product->getName()) ?>
+                                    </a>
+                                </strong>
+
+                                <?php if ($block->canShow(\Mageplaza\AutoRelated\Model\Config\Source\Additional::SHOW_REVIEW)) : ?>
+                                    <?= /** @noEscape */ $block->getReviewsSummaryHtml($product, \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW, true) ?>
+                                <?php endif; ?>
+
+                                <?php if ($block->canShow(\Mageplaza\AutoRelated\Model\Config\Source\Additional::SHOW_PRICE)) : ?>
+                                    <?= /** @noEscape */ $block->getProductPrice($product); ?>
+                                <?php endif; ?>
+
+                                <?= $block->getProductDetailsHtml($product) ?>
+
+                                <?php
+                                $showCart          = $block->canShow(\Mageplaza\AutoRelated\Model\Config\Source\Additional::SHOW_CART);
+                                $showAddtoWishlist = $block->canShow(\Mageplaza\AutoRelated\Model\Config\Source\Additional::SHOW_WISHLIST);
+                                $showAddtoCompare  = $block->canShow(\Mageplaza\AutoRelated\Model\Config\Source\Additional::SHOW_COMPARE);
+
+                                if ($showCart || $showAddtoWishlist || $showAddtoCompare) : ?>
+                                    <div class="product actions slider-product-item-actions product-item-actions">
+                                        <?php if ($showCart) : ?>
+                                            <div class="actions-primary">
+                                                <?php if ($product->isSaleable()) :?>
+                                                    <?php $postParams = $block->getAddToCartPostParams($product); ?>
+                                                    <form data-role="tocart-form"
+                                                          data-product-sku="<?= $block->escapeHtmlAttr($product->getSku()) ?>"
+                                                          action="<?= $block->escapeUrl($postParams['action']) ?>"
+                                                          method="post">
+                                                        <input type="hidden"
+                                                               name="product"
+                                                               value="<?= /* @noEscape */ $postParams['data']['product'] ?>">
+                                                        <input type="hidden" name="<?= /* @noEscape */ Action::PARAM_NAME_URL_ENCODED ?>"
+                                                               value="<?= /* @noEscape */ $postParams['data'][Action::PARAM_NAME_URL_ENCODED] ?>">
+                                                        <?= $block->getBlockHtml('formkey') ?>
+                                                        <button type="submit"
+                                                                title="<?= $block->escapeHtmlAttr(__('Add to Cart')) ?>"
+                                                                class="action tocart primary">
+                                                            <span><?= $block->escapeHtml(__('Add to Cart')) ?></span>
+                                                        </button>
+                                                    </form>
+                                                <?php else :?>
+                                                    <?php if ($product->isAvailable()) :?>
+                                                        <div class="stock available"><span><?= $block->escapeHtml(__('In stock')) ?></span></div>
+                                                    <?php else :?>
+                                                        <div class="stock unavailable"><span><?= $block->escapeHtml(__('Out of stock')) ?></span></div>
+                                                    <?php endif; ?>
+                                                <?php endif; ?>
+                                            </div>
+                                        <?php endif; ?>
+                                        <?php if ($showAddtoWishlist || $showAddtoCompare) : ?>
+                                            <div class="secondary-addto-links actions-secondary"
+                                                 data-role="add-to-links">
+                                                <?php if ($this->helper('Magento\Wishlist\Helper\Data')->isAllow() && $showAddtoWishlist) : ?>
+                                                    <a href="#"
+                                                       data-post='<?= /** @noEscape */ $block->getAddToWishlistParams($product) ?>'
+                                                       class="action towishlist" data-action="add-to-wishlist"
+                                                       title="<?= /** @noEscape */ __('Add to Wish List') ?>">
+                                                        <span><?= /** @noEscape */ __('Add to Wish List') ?></span>
+                                                    </a>
+                                                <?php endif; ?>
+                                                <?php if ($block->getAddToCompareUrl() && $showAddtoCompare) : ?>
+                                                    <?php $compareHelper = $this->helper('Magento\Catalog\Helper\Product\Compare') ?>
+                                                    <a href="#" class="action tocompare"
+                                                       data-post='<?= /** @noEscape */ $compareHelper->getPostDataParams($product) ?>'
+                                                       data-role="add-to-links"
+                                                       title="<?= /** @noEscape */ __('Add to Compare'); ?>">
+                                                        <span><?= /** @noEscape */ __('Add to Compare') ?></span>
+                                                    </a>
+                                                <?php endif; ?>
+                                            </div>
+                                        <?php endif; ?>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                        <?= /** @noEscape */ ($iterator == count($products) + 1) ? '</li>' : '' ?>
+                    <?php endforeach; ?>
+                </ol>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>

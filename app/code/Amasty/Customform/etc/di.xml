@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Customform
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="amasty_customform_forms_listing_data_source"
+                      xsi:type="string">Amasty\Customform\Model\ResourceModel\Form\Grid\Collection</item>
+                <item name="amasty_customform_answer_listing_data_source"
+                      xsi:type="string">Amasty\Customform\Model\ResourceModel\Answer\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\Customform\Model\Export\MetadataProvider">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="serializer" xsi:type="object">Amasty\Base\Model\Serializer</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\Customform\Model\Answer">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="customer_repository" xsi:type="object">Magento\Customer\Api\CustomerRepositoryInterface</item>
+                <item name="helper" xsi:type="object">Amasty\Customform\Helper\Data</item>
+                <item name="form_repository" xsi:type="object">Amasty\Customform\Api\FormRepositoryInterface</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\Customform\Model\ResourceModel\Form\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">am_customform_form</argument>
+            <argument name="eventPrefix" xsi:type="string">amasty_customform_form_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">form_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Amasty\Customform\Model\ResourceModel\Form</argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\Customform\Model\ResourceModel\Answer\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">am_customform_answer</argument>
+            <argument name="eventPrefix" xsi:type="string">amasty_customform_answer_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">answer_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Amasty\Customform\Model\ResourceModel\Answer</argument>
+        </arguments>
+    </type>
+
+    <preference for="\Amasty\Customform\Api\Data\AnswerInterface" type="\Amasty\Customform\Model\Answer"/>
+    <preference for="\Amasty\Customform\Api\AnswerRepositoryInterface" type="\Amasty\Customform\Model\AnswerRepository"/>
+    <preference for="\Amasty\Customform\Api\Data\FormInterface" type="\Amasty\Customform\Model\Form"/>
+    <preference for="\Amasty\Customform\Api\FormRepositoryInterface" type="\Amasty\Customform\Model\FormRepository"/>
+</config>

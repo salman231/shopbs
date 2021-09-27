@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+/** Productkeys di xml
+ * @category  Dart
+ * @package   Dart_Productkeys
+ * 
+*/
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Dart\Productkeys\Api\Data\ProductkeysInterface" type="Dart\Productkeys\Model\Productkeys" />
+    <virtualType name="Dart\Productkeys\Model\ResourceModel\Productkeys\Productkeys\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">dart_productkeys</argument>
+            <argument name="resourceModel" xsi:type="string">Dart\Productkeys\Model\ResourceModel\Productkeys</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="productkeys_record_productkeys_list_data_source" xsi:type="string">Dart\Productkeys\Model\ResourceModel\Productkeys\Productkeys\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

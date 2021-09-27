@@ -1,0 +1,66 @@
+<!--
+/**
+ * Webkul Software.
+ * 
+ * PHP version 7.0+
+ *
+ * @category  Webkul
+ * @package   Webkul_DeliveryBoy
+ * @author    Webkul <support@webkul.com>
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+-->
+<!--@subject OTP for Order Number #{{var orderIncrementId}}  @-->
+{{template config_path="design/email/header_template"}}
+
+<table>
+    <tr class="email-intro">
+        <td>
+            <p class="greeting">{{trans "Hello "}} {{var customerName}},</p>
+        </td>
+    </tr>
+    <tr class="email-information">
+        <td>
+            {{trans "Your order "}} #{{var orderIncrementId}} {{trans " has been succesfully assigned to "}} {{var deliveryboyName}}
+        </td>
+    </tr>
+    <tr class="email-information">
+        <td>
+            <br/><b>{{trans "Order Details:"}}</b>
+        </td>
+    </tr>
+    <tr class="email-information">
+        <td>
+            {{trans "Status: "}} {{var orderStatus}}
+        </td>
+    </tr>
+    <tr class="email-information">
+        <td>
+            {{trans "Order Date: "}} {{var orderDate}}
+        </td>
+    </tr>
+    <tr class="email-information">
+        <td>
+            <br/><b>{{trans "DeliveryBoy Details:"}}</b>
+        </td>
+    </tr>
+    <tr class="email-information">
+        <td>
+            {{trans "Name: "}} {{var deliveryboyName}}
+        </td>
+    </tr>
+    <tr class="email-information">
+        <td>
+            {{trans "Contact: "}} {{var deliveryboyContact}}
+        </td>
+    </tr>
+    <tr class="email-information">
+        <td>
+            {{trans "Your order assignment confirmation OTP is "}} {{var otp}}
+        </td>
+    </tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}

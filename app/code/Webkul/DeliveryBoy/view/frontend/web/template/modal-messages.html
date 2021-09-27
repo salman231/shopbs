@@ -1,0 +1,27 @@
+<!--
+/**
+ * Webkul Software.
+ *
+ * PHP version 7.0+
+ *
+ * @category  Webkul
+ * @package   Webkul_DeliveryBoy
+ * @author    Webkul <support@webkul.com>
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+-->
+<div data-role="deliveryboy-messages" class="deliveryboy-messages"
+     data-bind="visible: isVisible(), click: removeAll">
+    <!-- ko foreach: messageContainer.getErrorMessages() -->
+    <div role="alert" class="message message-error error">
+        <div data-ui-id="deliveryboy-validationmessages-message-error" data-bind="text: $data"></div>
+    </div>
+    <!--/ko-->
+    <!-- ko foreach: messageContainer.getSuccessMessages() -->
+    <div role="alert" class="message message-success success">
+        <div data-ui-id="deliveryboy-validationmessages-message-success" data-bind="text: $data"></div>
+    </div>
+    <!--/ko-->
+</div>

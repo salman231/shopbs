@@ -1,0 +1,72 @@
+label,label
+"Gift Card Coupon","Gift Card Coupon"
+"We can't remove the item.","We can't remove the item."
+"Gift Card","Gift Card"
+"Total of %1 record(s) were successfully updated","Total of %1 record(s) were successfully updated"
+"Gift Card Discount Removed.","Gift Card Discount Removed."
+"Invalid user","Invalid user"
+"The gift code %1 is not available","The gift code %1 is not available"
+"The gift code %1 is expired","The gift code %1 is expired"
+"The gift code %1 is disable. Please contact administration.","The gift code %1 is disable. Please contact administration."
+"Gift code has been expired.","Gift code has been expired."
+"Please enter a valid amount","Please enter a valid amount"
+"Gift Card Discount Applied Successfully","Gift Card Discount Applied Successfully"
+"The gift code %1 is not valid","The gift code %1 is not valid"
+"code is required","code is required"
+"We can't save the credit memo for giftcard type product.","We can't save the credit memo for giftcard type product."
+"Extra Fee","Extra Fee"
+Expired,Expired
+Active,Active
+"Gift Card Discount","Gift Card Discount"
+"Gift Code:","Gift Code:"
+"Enter discount code","Enter discount code"
+Amount:,Amount:
+"Enter discount amount","Enter discount amount"
+"Apply Discount","Apply Discount"
+"Clear Discount","Clear Discount"
+"Returns : This product cannot be refunded.","Returns : This product cannot be refunded."
+"Hi %customer_name,","Hi %customer_name,"
+"Your Gift Card Usage Details:","Your Gift Card Usage Details:"
+"Name : %code","Name : %code"
+"Email : %code","Email : %code"
+"Gift Card Code : %code","Gift Card Code : %code"
+"Previous Amount: %symbol %price","Previous Amount: %symbol %price"
+"Reduced Amount: %symbol %price","Reduced Amount: %symbol %price"
+"Remaining Amount: %symbol %price","Remaining Amount: %symbol %price"
+"Issue Date: %issuedate","Issue Date: %issuedate"
+"Expiry Date: %expirydate","Expiry Date: %expirydate"
+"Hi Dear,","Hi Dear,"
+"A Gift Card is gifted to you by %name(%email)","A Gift Card is gifted to you by %name(%email)"
+"Description: %description","Description: %description"
+"Price: %symbol%price","Price: %symbol%price"
+"Message: %message","Message: %message"
+"Expiration: %expiration","Expiration: %expiration"
+"Gift Coupon Code","Gift Coupon Code"
+"Your coupon was successfully applied.","Your coupon was successfully applied."
+Webkul,Webkul
+"Gift Card Email Setting","Gift Card Email Setting"
+"Gift Notification Template","Gift Notification Template"
+"Gift Card Left Amount Email Setting","Gift Card Left Amount Email Setting"
+"Name of Admin in Mail","Name of Admin in Mail"
+"Admin Email","Admin Email"
+"Admin Left Amount Notification Template","Admin Left Amount Notification Template"
+"Gift Card Active Duration","Gift Card Active Duration"
+"No. of days","No. of days"
+"Change Status","Change Status"
+"Are you sure to change the active status of selected gift card(s)?","Are you sure to change the active status of selected gift card(s)?"
+20,20
+30,30
+50,50
+100,100
+200,200
+From,From
+To,To
+"Gift Code","Gift Code"
+Price,Price
+"Left Amount","Left Amount"
+"Order Time","Order Time"
+"Order Id","Order Id"
+"Expiry Time","Expiry Time"
+Status,Status
+Fee,Fee
+Gift Card Details,Gift Card Details

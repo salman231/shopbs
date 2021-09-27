@@ -1,0 +1,111 @@
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MpAdvancedCommission
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+#fade{
+    display: none;
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    z-index:390;
+    -moz-opacity: 0.7;
+    opacity:.70;
+    filter: alpha(opacity=70);
+}
+#light{
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 42%;
+    width: 500px;
+    margin-left: -150px;
+    margin-top: -100px;
+    padding: 10px;
+    border: 2px solid #FFF;
+    background: #CCC;
+    z-index:391;
+    overflow:visible;
+}
+
+.labl.fnt{
+    display:inline-block;
+}
+.fnt{font-weight:bold;width: 57%;}
+
+.wk-cat-container{
+    position: relative;
+    height: 20px;
+    margin-top: 5px;
+    border-bottom: 1px solid #fff;
+    height: 38px;
+}
+.wk-plus{
+    background: url("../../extjs/resources/images/magento/tree/elbow-plus.gif") no-repeat scroll 0 0 transparent;
+    display: block;
+    height: 18px;
+    width: 15px;
+    float:left;
+    cursor:pointer;
+    margin-top: 7px;
+}
+.wk-plusend{
+    background: url("../../extjs/resources/images/magento/tree/elbow-end-plus.gif") no-repeat scroll 0 0 transparent;
+    display: block;
+    height: 18px;
+    width: 15px;
+    float:left;
+    cursor:pointer;
+    margin-top: 7px;
+}
+.wk-minus,.wk-minusend{
+    background: url("../../extjs/resources/images/magento/tree/elbow-end-minus.gif") no-repeat scroll 0 0 transparent;
+    display: block;
+    height: 18px;
+    width: 15px;
+    float:left;
+    cursor:pointer;
+    margin-top: 7px;
+}
+.wk-no{
+    background: url("../../extjs/resources/images/magento/tree/elbow-end.gif") no-repeat scroll 0 0 transparent;
+    display: block;
+    height: 18px;
+    width: 15px;
+    float:left;
+    margin-top: 7px;
+}
+.wk-foldersign{
+    background: url("../../extjs/resources/images/magento/tree/leaf.gif") no-repeat scroll 0 0 transparent;
+    display: block;
+    float: left;
+    height: 15px;
+    margin-left: 5px;
+    margin-top: 10px;
+    width: 16px;
+}
+.wk-node-loader{
+    background: url("../../extjs/resources/images/default/grid/loading.gif") no-repeat scroll 0 0 #FFFFFF;
+    display: block;
+    height: 17px;
+    left: 15px;
+    position: absolute;
+    width: 17px;
+    margin-top: 7px;
+}
+.wk-elements{
+    float: right;
+    margin-left: 5px;
+    width: 41% !important;
+}
+.wk-cat-name{
+    float:left;
+    line-height: 33px;
+}

@@ -1,0 +1,90 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_DailyDeal
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+/**
+ * @var \Mageplaza\DailyDeal\Block\Widget\RandomDeal $block
+ */
+$items    = $block->getProductCollection($block->getLimit());
+
+if (!empty($items)): ?>
+    <div class="mpdailydeal-block">
+        <div class="mpdailydeal-title block-title title">
+            <h2 class="block-mpdailydeal-heading"><?= $block->escapeHtml($block->getBlockTitle()) ?></h2>
+        </div>
+        <div class="block-content">
+            <div class="products-grid grid">
+                <ol class="mpdailydeal-product-items product-items widget-viewed-grid">
+                    <div class="mpdailydeal-list-items owl-carousel owl-theme">
+                        <?php foreach ($items as $_item): ?>
+                            <li class="mpdailydeal-product-item product-item">
+                                <div class="deal-product-item-info">
+                                    <?php $productUrl = $block->getProductUrl($block->getParentConfigurableProduct($_item->getId())); ?>
+                                    <a href="<?= /* @noEscape */ $productUrl ?>" class="product photo slider-product-item-photo">
+                                        <?= $block->getImage($_item, 'recently_viewed_products_grid_content_widget')->toHtml() ?>
+                                    </a>
+                                    <div class="product details sidebar-deal-product-item-details">
+                                        <strong class="product name product-item-name">
+                                            <a title="<?= /* @noEscape */ $_item->getName() ?>" href="<?= /* @noEscape */ $productUrl ?>">
+                                                <?= $block->escapeHtml($_item->getName()) ?>
+                                            </a>
+                                        </strong>
+                                        <?php $final_price = number_format($block->_helperData->getDealPrice($_item->getId()), 2); ?>
+                                        <span class="price">
+                                            <span class="price-box price-final_price"><?= /* @noEscape */ $block->getProductPrice($_item) ?></span>
+                                        </span>
+                                    </div>
+                                    <?php if ($block->isWidgetShowRemainingItems()): ?>
+                                        <div class="widget-remaining-qty-item">
+                                            <span style="font-weight:bold">
+                                                <?= $block->escapeHtml($block->getQtyRemain($_item->getId())) ?>
+                                            </span>
+                                            <span><?= /* @noEscape */ __('item(s) left') ?></span>
+                                        </div>
+                                    <?php endif; ?>
+                                    <?php if ($block->isWidgetShowSoldItems()): ?>
+                                        <div class="widget-sold-qty-item">
+                                            <span style="font-weight:bold">
+                                                <?= $block->escapeHtml($block->getQtySold($_item->getId())) ?>
+                                            </span>
+                                            <span><?= /* @noEscape */ __('item(s) sold') ?></span>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                            </li>
+                        <?php endforeach ?>
+                    </div>
+                </ol>
+            </div>
+        </div>
+        <script>
+            require(['jquery', 'mageplaza/core/owl.carousel'], function ($) {
+                $('.mpdailydeal-list-items').owlCarousel({
+                    items: 1,
+                    loop: false,
+                    dots: false,
+                    lazyLoad: true,
+                    autoplay: true,
+                    autoplayTimeout: 5000
+                });
+            });
+        </script>
+    </div>
+<?php endif; ?>

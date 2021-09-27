@@ -1,0 +1,118 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_BetterProductReviews
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+/** @var \Mageplaza\BetterProductReviews\Block\Review\Summary $block */
+?>
+<?php if ($block->isReviewSummaryEnabled()): ?>
+    <div id="mp-review-summary" class="block review-summary">
+        <div class="block-title">
+            <h2><?php echo __('Customer Reviews') ?></h2>
+        </div>
+        <div class="block-content">
+            <div class="mp-review-statistic col-mp mp-3 mp-md-4 mp-sm-5 mp-xs-12">
+                <div class="summary-points">
+                    <?php
+                    if ($block->getProduct()) {
+                        $_ratingSummary = $block->getRatingSummary($block->getProduct());
+                        $_reviewCount = $block->getReviewCount($block->getProduct());
+                        ?>
+                        <?php if ($_ratingSummary) { ?>
+                            <span class="summary-points-text"><?php echo number_format((float)($_ratingSummary / 20), 1); ?></span>
+                            <div class="product-reviews-summary short">
+                                <div class="rating-summary">
+                                    <div title="<?php echo (int)$_ratingSummary; ?>%" class="rating-result">
+                                    <span style="width:<?php echo (int)$_ratingSummary; ?>%"><span><?php echo (int)$_ratingSummary; ?>
+                                            %</span></span>
+                                    </div>
+                                </div>
+                                <div class="reviews-actions">
+                                    <?php echo ((int)$_reviewCount == 1) ? __('%1 review', $_reviewCount) : __('%1 reviews', $_reviewCount); ?>
+                                </div>
+                            </div>
+                        <?php } else { ?>
+                            <div class="product-reviews-summary short">
+                                <div class="reviews-actions">
+                                    <?php echo ($_reviewCount) ? ((int)$_reviewCount == 1)
+                                        ? __('%1 review', $_reviewCount) : __('%1 reviews', $_reviewCount)
+                                        : __('Be the first to review this product'); ?>
+                                </div>
+                            </div>
+                        <?php }
+                    } ?>
+                </div>
+                <div class="recommend-product">
+                    <span><?php echo $block->getReviewsRecommendPercent() ?>%</span>
+                    <p><?php echo __('of customers recommend this product') ?></p>
+                </div>
+            </div>
+            <div class="mp-review-details col-mp mp-3 mp-md-4 mp-sm-5 mp-xs-12">
+                <?php for ($starValue = 5; $starValue >= 1; $starValue--) { ?>
+                    <div class="mp-review-details-<?php echo $starValue ?>stars">
+                        <div class="stars-title"><?php echo ($starValue != 1) ? $starValue . __(' Stars') : $starValue . __(' Star') ?></div>
+                        <div class="stars-process">
+                            <div style="width:<?php echo (int)$block->getReviewsVotingPercentByValue($starValue); ?>%"
+                                 class="stars-process-active"></div>
+                        </div>
+                        <span><?php echo $block->getReviewsVotingPercentByValue($starValue) ?> %</span>
+                    </div>
+                <?php } ?>
+            </div>
+            <?php if ($block->isWriteReviewEnabled()): ?>
+                <div class="mp-review-button col-mp mp-3 mp-md-3 mp-sm-12 mp-xs-12">
+                    <button title="<?php echo __('Write a review') ?>" class="action primary"
+                            id="mp-review-write-review-button">
+                        <span><?php echo __('Write a review') ?></span>
+                    </button>
+                </div>
+            <?php endif; ?>
+        </div>
+    </div>
+<?php else: ?>
+    <?php if ($block->isWriteReviewEnabled()): ?>
+        <div id="mp-write-review" class="mp-review-button">
+            <button title="<?php echo __('Write a review') ?>" class="action primary"
+                    id="mp-review-write-review-button">
+                <span><?php echo __('Write a review') ?></span>
+            </button>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>
+<div id="write-review-message" class="messages mp-betterproductreviews-message"></div>
+<script type="text/javascript">
+    require([
+        'jquery',
+        'mp_productReviewMessage'
+    ], function ($, mp_productReviewMessage) {
+        var writeReviewEnabled = <?php echo $block->getWriteReviewRestriction() ?>,
+            writeReviewBtn = $('#mp-review-write-review-button'),
+            writeReviewContainer = $('#mp-review-form'),
+            writeReviewNotice = "<?php echo $block->getCustomerNotice() ?>";
+
+        writeReviewBtn.on('click', function () {
+            if (writeReviewEnabled) {
+                writeReviewContainer.show();
+                $(this).prop('disabled', true);
+            } else {
+                $('#write-review-message').html(mp_productReviewMessage.getInfoMessage(writeReviewNotice));
+            }
+        });
+    });
+</script>

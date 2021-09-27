@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_DailyDeal
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+-->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/mpDailyDeal/deals" method="GET">
+        <service class="Mageplaza\DailyDeal\Api\DealRepositoryInterface" method="getAllDeals"/>
+        <resources>
+            <resource ref="Mageplaza_DailyDeal::mpdailydeal" />
+        </resources>
+    </route>
+    <route url="/V1/mpDailyDeal/product/:sku" method="GET">
+        <service class="Mageplaza\DailyDeal\Api\DealRepositoryInterface" method="getByProductSku"/>
+        <resources>
+            <resource ref="Mageplaza_DailyDeal::mpdailydeal" />
+        </resources>
+    </route>
+    <route url="/V1/mpDailyDeal/deals/:ruleId" method="DELETE">
+        <service class="Mageplaza\DailyDeal\Api\DealRepositoryInterface" method="deleteById"/>
+        <resources>
+            <resource ref="Mageplaza_DailyDeal::mpdailydeal" />
+        </resources>
+    </route>
+    <route url="/V1/mpDailyDeal/deals" method="POST">
+        <service class="Mageplaza\DailyDeal\Api\DealRepositoryInterface" method="add"/>
+        <resources>
+            <resource ref="Mageplaza_DailyDeal::mpdailydeal" />
+        </resources>
+    </route>
+</routes>

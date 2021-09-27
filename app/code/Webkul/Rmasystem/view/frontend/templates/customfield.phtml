@@ -1,0 +1,31 @@
+<!-- custom fields -->
+
+<?php
+$helper = $this->helper('Webkul\Rmasystem\Helper\Data');
+
+$customFieldsCollection = $helper->getFields();
+if (count($customFieldsCollection)) {
+    foreach ($customFieldsCollection as $field) {
+        switch ($field->getInputType()) {
+            case 'text':
+                echo $helper->getText($field);
+                break;
+            case 'textarea':
+                echo $helper->getTextarea($field);
+                break;
+            case 'select':
+                echo $helper->getSelect($field);
+                break;
+            case 'multiselect':
+                echo $helper->getMultiselect($field);
+                break;
+            case 'radio':
+                echo $helper->getRadio($field);
+                break;
+            case 'checkbox':
+                echo $helper->getCheckbox($field);
+                break;
+        }
+    }
+}
+?>

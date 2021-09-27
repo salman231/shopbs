@@ -1,0 +1,11 @@
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$customerSession = $objectManager->create('Magento\Customer\Model\Session');
+if ($customerSession->isLoggedIn()) {
+
+    echo "Welcome to Shop.bs ".$customerSession->getCustomer()->getName();  // get  Full Name
+}else{
+
+	 echo "Welcome to Shop.bs";
+}
+?>

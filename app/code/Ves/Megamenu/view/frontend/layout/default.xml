@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Venustheme
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Venustheme.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.venustheme.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category   Venustheme
+ * @package    Ves_Megamenu
+ * @copyright  Copyright (c) 2017 Venustheme (http://www.venustheme.com/)
+ * @license    http://www.venustheme.com/LICENSE-1.0.html
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<head>
+		<css src="Ves_All::lib/bootstrap/css/bootstrap-tiny.css" />
+		<css src="Ves_All::lib/owl.carousel/assets/owl.carousel.css" />
+		<css src="Ves_All::css/font-awesome.min.css" />
+		<css src="Ves_Megamenu::css/animate.min.css" />
+		<css src="Ves_Megamenu::css/bootstrap-tiny.css" />
+		<css src="Ves_Megamenu::css/carousel.css" />
+		<!-- Enable the code to fix directly style css for custom template if it dont extend from base magento 2 theme -->
+		
+		<css src="Ves_Megamenu::css/styles-m.css"/>
+        <css src="Ves_Megamenu::css/styles-l.css" media="screen and (min-width: 768px)"/>
+    
+		<!-- Enable Off canvas menu css
+    	<css src="Ves_Megamenu::css/offcanvas-menu.css" />
+    -->
+	</head>
+	<body>
+		<referenceBlock name="head.additional">
+			<block class="Magento\Framework\View\Element\Template" name="megamenu.head" template="Ves_Megamenu::html/head.phtml"/>
+		</referenceBlock>
+		<referenceBlock name="store.menu">
+			<block class="Ves\Megamenu\Block\Menu" name="catalog.topnav" template="Ves_Megamenu::topmenu.phtml">
+				<arguments>
+					<argument name="alias" xsi:type="string">top-menu</argument>
+				</arguments> 
+			</block>
+		</referenceBlock>
+		<referenceContainer name="before.body.end">
+			<block class="Magento\Framework\View\Element\Template" name="magemenu.js" before="-" template="Ves_Megamenu::js.phtml" />
+		</referenceContainer>
+	</body>
+</page>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * SearchSuggestion layout.
+ * @category Webkul
+ * @package Webkul_SearchSuggestion
+ * @author Webkul
+ * @copyright Copyright (c)   Webkul Software Private Limited (https://webkul.com)
+ * @license https://store.webkul.com/license.html
+ */ 
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance dc" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<head>
+		<css src="Webkul_SearchSuggestion::css/style.css"/>
+	</head>
+    <referenceBlock name="top.search">
+        <arguments>
+            <argument name="view_model" xsi:type="object">Webkul\SearchSuggestion\ViewModel\SearchViewModel</argument>
+        </arguments>
+        <action method="setTemplate">
+            <argument name="template" xsi:type="string">Webkul_SearchSuggestion::search.phtml</argument>
+        </action>
+    </referenceBlock>
+</page>

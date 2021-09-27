@@ -1,0 +1,92 @@
+<!-- 
+/**
+ * @category   Webkul
+ * @package    Webkul_MpAdvancedCommission
+ * @author     Webkul Software Private Limited
+ * @copyright  Copyright (c)  Webkul Software Private Limited (https://webkul.com)
+ * @license    https://store.webkul.com/license.html
+ */  -->
+<?php
+
+$numberValidationMsg = __("Please enter numeric and positive number");
+$commissionTypeValidationMsg = __("Category commission can\'t be greater than 100 in percentage case.");
+?>
+<?= $block->getButtonHtml();?>
+<link rel="stylesheet" type="text/css"
+href="<?= $block->escapeHtml($block->getViewFileUrl('Webkul_MpAdvancedCommission::css/style.css')) ?>">
+<div id="light" class="categry">
+    <form id ='catpercent'>
+        <input type="hidden" id = "wk-admin-num-validation" value= "<?= $block->escapeHtml($numberValidationMsg) ?>">
+        <input type="hidden" id = "wk-admin-commission-type-validation"
+        value= "<?= $block->escapeHtml($commissionTypeValidationMsg) ?>">
+        <div class='labl fnt'><?= $block->escapeHtml(__('Categories'))?></div> 
+        <span class='fnt'><?= $block->escapeHtml(__('Commission'))?></span>    
+        <br>
+        <?php
+            $count = 0;
+            $category_helper = $this->helper(\Magento\Catalog\Helper\Category::class);
+            $category_model = $block->getCategory();
+            $_categories = $category_helper->getStoreCategories();
+        foreach ($_categories as $_category) {
+            $count++;
+            $categoryData = $category_model->load($_category['entity_id']);
+            if (count($category_model->getAllChildren($categoryData))-1 > 0) { ?>
+                    <div class="wk-cat-container" style="margin-left:0px;">
+                        <span class="wk-plus">
+                        </span><span class="wk-foldersign"></span>
+                        <span class="wk-elements wk-cat-name"><?= $block->escapeHtml($_category->getName()) ?></span>
+                        <input class="wk-elements wk-category-commission" type="text" name="category[]"
+                        id='<?= $block->escapeHtml($_category->getId()); ?>'
+                        value='<?= $block->escapeHtml($categoryData->getCommissionForAdmin()); ?>'/>
+                    </div>
+                    <?php
+            } else { ?>
+                    <div class="wk-cat-container">
+                        </span><span class="wk-foldersign"></span>
+                        <span class="wk-elements wk-cat-name"><?= $block->escapeHtml($_category->getName()) ?></span>
+                        <input class="wk-elements wk-category-commission" type="text" name="category[]"
+                        id='<?= $block->escapeHtml($_category->getId()); ?>'
+                        value='<?= $block->escapeHtml($categoryData->getCommissionForAdmin()); ?>'/>
+                    </div> 
+                       <?php
+            }
+        }
+        ?>
+        <div class="wk-cat-container">
+            <button style="width: 94%;" aria-disabled="false" role="button"
+            id="mpadvancedcommission-options-category-commission-save-button"
+            title="<?= $block->escapeHtml(__('Save Config'))?>" type="button"
+            class="action-default scalable save primary ui-button ui-widget ui-state-default ui-corner-all
+            ui-button-text-only"
+            data-ui-id="mpadvancedcommission-options-category-commission-save-button">
+                <span class="ui-button-text">
+                    <span><?= $block->escapeHtml(__('Save Config'))?></span>
+                </span>
+            </button>
+        </div>
+    </form>
+</div>    
+<div id="fade"></div>
+
+<?php
+$formData = [
+    'checkAjaxUrl' => $block->getAjaxCheckUrl(),
+    'categoryCommissionSaveUrl' => $block->getUrl(
+        'mpadvancedcommission/category/save',
+        ['_secure' => $block->getRequest()->isSecure()]
+    ),
+    'categoryTreeAjaxUrl' => $block->getUrl(
+        'mpadvancedcommission/category/categorytree/',
+        ['_secure' => $block->getRequest()->isSecure()]
+    )
+];
+$serializedFormData = $block->jsonEncode($formData);
+?>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "categoryCommission": <?=  $serializedFormData; ?>
+        }
+    }
+</script>

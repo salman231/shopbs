@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_GiftCard
+ * @author    Webkul Software Private Limited
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */ 
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <giftcard>
+            <email>
+                <gift_notification_mail>giftcard_email_gift_notification_mail</gift_notification_mail>
+            </email>
+            <adminEmail>
+                <admin_amt_notification_mail>giftcard_adminEmail_admin_amt_notification_mail</admin_amt_notification_mail>
+            </adminEmail>
+            <activeDuration>
+                <gift_admin_active_days>5</gift_admin_active_days>
+            </activeDuration>
+        </giftcard>
+    </default>
+</config>

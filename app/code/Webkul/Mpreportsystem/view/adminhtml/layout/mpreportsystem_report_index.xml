@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Mpreportsystem
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Webkul_Mpreportsystem::css/mpreportsystem.css"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Webkul\Mpreportsystem\Block\Adminhtml\Mpreport" name="marketplace_advance_report" template="Webkul_Mpreportsystem::account/advancereport.phtml" cacheable="false"/>
+        </referenceContainer>
+        <referenceContainer name="marketplace_advance_report">
+            <block class="Webkul\Mpreportsystem\Block\Adminhtml\Mpreport\Grid" name="salesgrid" cacheable="false"/>
+        </referenceContainer>
+    </body>
+</page>

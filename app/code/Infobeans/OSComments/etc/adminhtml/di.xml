@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+ * InfoBeans Sales Shipment Comment Extension
+ *
+ * @category   Infobeans
+ * @package    Infobeans_OSComments
+ * @version    2.0.0
+ *
+ * Release with version 2.0.0
+ *
+ * @author     InfoBeans Technologies Limited http://www.infobeans.com/
+ * @copyright  Copyright (c) 2017 InfoBeans Technologies Limited
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\Sales\Model\Order\Pdf\Shipment" type="Infobeans\OSComments\Model\Order\Pdf\Shipment" />
+    <preference for="Magento\Sales\Model\AdminOrder\Create" type="Infobeans\OSComments\Model\AdminOrder\Create" />
+</config>

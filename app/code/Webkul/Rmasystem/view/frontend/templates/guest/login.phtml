@@ -1,0 +1,40 @@
+<div class="login-container">
+    <div class="block block-customer-login">
+      <div class="block-title">
+          <strong id="block-customer-login-heading" role="heading" aria-level="2"><?= /* @escapeNotVerified */ __('Guest Users') ?></strong>
+      </div>
+      <div class="block-content">
+          <form method="post" action="<?= $block->getUrl('rmasystem/guest/loginpost/')?>" id="wk_rma_guest_login" data-hasrequired="<?= /* @escapeNotVerified */ __('* Required Fields') ?>"
+                data-mage-init='{"validation":{}}'>
+              <input type="hidden" value="<?php $block->getFormKey(); ?>" name="form_key"/>
+              <fieldset class="fieldset login">
+                  <!-- <table class="form-list"> -->
+                    <!-- <tr> -->
+                      <div class="field name required">
+                           <label class="label" for="name"><span><?= /* @escapeNotVerified */ __('Order Id') ?></span></label>
+                          <div class="control">
+                            <input type="text" name="order_id" class="input-text" data-validate="{required:true}">
+                          </div>
+                      </div>
+                      <div class="field email required">
+                          <label class="label" for="email"><span><?= /* @escapeNotVerified */ __('Email') ?></span></label>
+                          <div class="control">
+                            <input type="text" name="email" class="input-text required-entry validate-email" data-validate="{required:true, 'validate-email':true}">
+                          </div>
+                      </div>
+                  <!-- </table> -->
+                  <div class="actions-toolbar">
+                      <div class="primary">
+                       <button type="submit" title="<?= /* @escapeNotVerified */ __('Submit') ?>" class="action submit primary">
+                              <span><?= /* @escapeNotVerified */ __('Login Guest') ?></span>
+                          </button>
+                   </div>
+                  </div>
+              </fieldset>
+          </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+     //new VarienForm("wk_rma_guest_login", true);
+</script>

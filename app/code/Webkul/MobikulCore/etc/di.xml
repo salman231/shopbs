@@ -1,0 +1,195 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ * 
+ *
+ *
+ * @category  Webkul
+ * @package   Webkul_MobikulCore
+ * @author    Webkul <support@webkul.com>
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Webkul\MobikulCore\Api\Data\BannerimageInterface" type="Webkul\MobikulCore\Model\Bannerimage" />
+    <preference for="Webkul\MobikulCore\Api\BannerimageRepositoryInterface" type="Webkul\MobikulCore\Model\BannerimageRepository" />
+    <preference for="Webkul\MobikulCore\Api\Data\CarouselimageInterface" type="Webkul\MobikulCore\Model\Carouselimage" />
+    <preference for="Webkul\MobikulCore\Api\CarouselimageRepositoryInterface" type="Webkul\MobikulCore\Model\CarouselimageRepository" />
+    <preference for="Webkul\MobikulCore\Api\Data\CarouselInterface" type="Webkul\MobikulCore\Model\Carousel" />
+    <preference for="Webkul\MobikulCore\Api\CarouselRepositoryInterface" type="Webkul\MobikulCore\Model\CarouselRepository" />
+    <preference for="Webkul\MobikulCore\Api\Data\NotificationInterface" type="Webkul\MobikulCore\Model\Notification" />
+    <preference for="Webkul\MobikulCore\Api\NotificationRepositoryInterface" type="Webkul\MobikulCore\Model\NotificationRepository" />
+    <preference for="Webkul\MobikulCore\Api\Data\FeaturedcategoriesInterface" type="Webkul\MobikulCore\Model\Featuredcategories" />
+    <preference for="Webkul\MobikulCore\Api\FeaturedcategoriesRepositoryInterface" type="Webkul\MobikulCore\Model\FeaturedcategoriesRepository" />
+    <preference for="Webkul\MobikulCore\Api\Data\CategoryimagesInterface" type="Webkul\MobikulCore\Model\Categoryimages" />
+    <preference for="Webkul\MobikulCore\Api\CategoryimagesRepositoryInterface" type="Webkul\MobikulCore\Model\CategoryimagesRepository" />
+    <preference for="Magento\Catalog\Model\Layer\ContextInterface" type="Magento\Catalog\Model\Layer\Context" />
+    <preference for="Magento\Catalog\Model\Layer\ItemCollectionProviderInterface" type="Magento\Catalog\Model\Layer\Category\ItemCollectionProvider" />
+    <preference for="Magento\Catalog\Model\Layer\StateKeyInterface" type="Magento\Catalog\Model\Layer\Category\StateKey" />
+    <preference for="Magento\Catalog\Model\Layer\CollectionFilterInterface" type="Magento\Catalog\Model\Layer\Category\CollectionFilter" />
+    <preference for="Magento\Paypal\Model\Express" type="Webkul\MobikulCore\Model\Express" />
+    <preference for="Magento\Catalog\Model\ResourceModel\Category\Tree" type="Webkul\MobikulCore\Model\ResourceModel\Category\Tree" />
+    <preference for="Magento\Catalog\Model\Layer" type="Webkul\MobikulCore\Model\Layer" />
+    <preference for="Magento\Catalog\Model\ResourceModel\Layer\Filter\Price" type="Webkul\MobikulCore\Model\ResourceModel\Layer\Filter\Price" />
+    <preference for="Magento\CatalogSearch\Model\ResourceModel\Fulltext\Collection" type="Webkul\MobikulCore\Model\ResourceModel\Fulltext\Collection" />
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="mobikul_bannerimage_list_data_source" xsi:type="string">Webkul\MobikulCore\Model\ResourceModel\Bannerimage\Grid\Collection</item>
+                <item name="mobikul_carouselimage_list_data_source" xsi:type="string">Webkul\MobikulCore\Model\ResourceModel\Carouselimage\Grid\Collection</item>
+                <item name="mobikul_carousel_list_data_source" xsi:type="string">Webkul\MobikulCore\Model\ResourceModel\Carousel\Grid\Collection</item>
+                <item name="mobikul_notification_list_data_source" xsi:type="string">Webkul\MobikulCore\Model\ResourceModel\Notification\Grid\Collection</item>
+                <item name="mobikul_featuredcategories_list_data_source" xsi:type="string">Webkul\MobikulCore\Model\ResourceModel\Featuredcategories\Grid\Collection</item>
+                <item name="mobikul_userimage_list_data_source" xsi:type="string">Webkul\MobikulCore\Model\ResourceModel\Userimage\Grid\Collection</item>
+                <item name="mobikul_categoryimages_list_data_source" xsi:type="string">Webkul\MobikulCore\Model\ResourceModel\Categoryimages\Grid\Collection</item>
+                <item name="mobikul_devicetoken_list_data_source" xsi:type="string">Webkul\MobikulCore\Model\ResourceModel\Devicetoken\Grid\Collection</item>
+                <item name="mobikul_salesorder_list_data_source" xsi:type="string">Webkul\MobikulCore\Model\ResourceModel\SalesOrder\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Webkul\MobikulCore\Model\ResourceModel\Bannerimage\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">mobikul_bannerimage</argument>
+            <argument name="eventPrefix" xsi:type="string">mobikul_bannerimage_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">bannerimage_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Webkul\MobikulCore\Model\ResourceModel\Bannerimage</argument>
+        </arguments>
+    </type>
+    <type name="Webkul\MobikulCore\Model\ResourceModel\Carouselimage\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">mobikul_carouselimage</argument>
+            <argument name="eventPrefix" xsi:type="string">mobikul_carouselimage_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">carouselimage_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Webkul\MobikulCore\Model\ResourceModel\Carouselimage</argument>
+        </arguments>
+    </type>
+    <type name="Webkul\MobikulCore\Model\ResourceModel\Carousel\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">mobikul_carousel</argument>
+            <argument name="eventPrefix" xsi:type="string">mobikul_carousel_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">carousel_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Webkul\MobikulCore\Model\ResourceModel\Carousel</argument>
+        </arguments>
+    </type>
+    <type name="Webkul\MobikulCore\Model\ResourceModel\Notification\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">mobikul_notification</argument>
+            <argument name="eventPrefix" xsi:type="string">mobikul_notification_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">notification_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Webkul\MobikulCore\Model\ResourceModel\Notification</argument>
+        </arguments>
+    </type>
+    <type name="Webkul\MobikulCore\Model\ResourceModel\Featuredcategories\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">mobikul_featuredcategories</argument>
+            <argument name="eventPrefix" xsi:type="string">mobikul_featuredcategories_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">featuredcategories_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Webkul\MobikulCore\Model\ResourceModel\Featuredcategories</argument>
+        </arguments>
+    </type>
+    <type name="Webkul\MobikulCore\Model\ResourceModel\Userimage\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">mobikul_userimage</argument>
+            <argument name="eventPrefix" xsi:type="string">mobikul_userimage_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">userimage_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Webkul\MobikulCore\Model\ResourceModel\Userimage</argument>
+        </arguments>
+    </type>
+    <type name="Webkul\MobikulCore\Model\ResourceModel\Categoryimages\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">mobikul_categoryimages</argument>
+            <argument name="eventPrefix" xsi:type="string">mobikul_categoryimages_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">categoryimages_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Webkul\MobikulCore\Model\ResourceModel\Categoryimages</argument>
+        </arguments>
+    </type>
+    <type name="Webkul\MobikulCore\Model\ResourceModel\Devicetoken\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">mobikul_devicetoken</argument>
+            <argument name="eventPrefix" xsi:type="string">mobikul_devicetoken_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">devicetoken_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Webkul\MobikulCore\Model\ResourceModel\Devicetoken</argument>
+        </arguments>
+    </type>
+    <type name="Webkul\MobikulCore\Model\ResourceModel\SalesOrder\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">mobikul_sales_order</argument>
+            <argument name="eventPrefix" xsi:type="string">mobikul_sales_order_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">salesorder_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Webkul\MobikulCore\Model\ResourceModel\SalesOrder</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="MobikulGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="BannerimageGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Webkul\MobikulCore\Model\ResourceModel\Bannerimage\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">MobikulGirdFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="CarouselimageGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Webkul\MobikulCore\Model\ResourceModel\Carouselimage\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">MobikulGirdFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="CarouselGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Webkul\MobikulCore\Model\ResourceModel\Carousel\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">MobikulGirdFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="NotificationGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Webkul\MobikulCore\Model\ResourceModel\Notification\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">MobikulGirdFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="FeaturedcategoriesGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Webkul\MobikulCore\Model\ResourceModel\Featuredcategories\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">MobikulGirdFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="UserimageGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Webkul\MobikulCore\Model\ResourceModel\Userimage\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">MobikulGirdFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="CategoryimagesGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Webkul\MobikulCore\Model\ResourceModel\Categoryimages\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">MobikulGirdFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="DevicetokenGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Webkul\MobikulCore\Model\ResourceModel\Devicetoken\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">MobikulGirdFilterPool</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="SalesOrderGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Webkul\MobikulCore\Model\ResourceModel\SalesOrder\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">MobikulGirdFilterPool</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Framework\Translate">
+        <plugin name="Webkul_MobikulCore::getLocale" type="Webkul\MobikulCore\Model\Plugin\Translate" sortOrder="10" />
+    </type>
+</config>

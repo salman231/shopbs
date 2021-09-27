@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ * 
+ * PHP version 7.0+
+ *
+ * @category  Webkul
+ * @package   Webkul_DeliveryBoy
+ * @author    Webkul <support@webkul.com>
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="checkout_submit_all_after">
+        <observer name="webkul_deliveryboy_order_place_observer" instance="Webkul\DeliveryBoy\Observer\SalesOrderPlaceAfterObserver"/>
+    </event>
+    <event name="deliveryboy_new_account_after">
+        <observer name="send_deliveyboy_new_account_email_observer" instance="Webkul\DeliveryBoy\Observer\SendDeliveyboyNewAccountEmailObserver"/>
+    </event>
+    <event name="inform_deliveryboy_new_review_event">
+        <observer name="inform_deliveryboy_new_review_observer" instance="Webkul\DeliveryBoy\Observer\DeliveryboyReviewApprovedBeforeObserver"/>
+    </event>
+    <event name="inform_deliveryboy_review_evaluation_event">
+        <observer name="inform_deliveryboy_review_evaluation_observer" instance="Webkul\DeliveryBoy\Observer\DeliveryboyReviewEvaluationObserver"/>
+    </event>
+</config>

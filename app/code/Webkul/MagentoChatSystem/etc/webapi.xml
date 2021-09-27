@@ -1,0 +1,111 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MagentoChatSystem
+ * @author    Webkul
+ * @copyright Copyright (c)  Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+	 <route url="/V1/message/save-message/" method="POST">
+        <service class="Webkul\MagentoChatSystem\Api\SaveMessageInterface" method="saveMeassage"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+    </route>
+    <route url="/V1/chat/change-status/" method="POST">
+        <service class="Webkul\MagentoChatSystem\Api\ChangeStatusInterface" method="changeStatus"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+    </route>
+    <route url="/V1/chat/load-history/" method="POST">
+        <service class="Webkul\MagentoChatSystem\Api\LoadHistoryInterface" method="loadHistory"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+    </route>
+    <route url="/V1/chat/assign-chat/" method="POST">
+        <service class="Webkul\MagentoChatSystem\Api\SaveAssignedChatInterface" method="assignChat"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+    </route>
+	<route url="/V1/chat/assign-check/" method="POST">
+        <service class="Webkul\MagentoChatSystem\Api\SaveAssignedChatInterface" method="assignmentCheck"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+    </route>
+    <route url="/V1/customer/info-save/" method="POST">
+        <service class="Webkul\MagentoChatSystem\Api\SaveCustomerInterface" method="save"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+	<route method="POST" url="/V1/chat/agentrating">
+		<service class="Webkul\MagentoChatSystem\Api\AgentRatingRepositoryInterface" method="save"/>
+		<resources>
+			<resource ref="self"/>
+		</resources>
+	</route>
+	<route method="GET" url="/V1/chat/agentrating/search">
+		<service class="Webkul\MagentoChatSystem\Api\AgentRatingRepositoryInterface" method="getList"/>
+		<resources>
+			<resource ref="Webkul_MagentoChatSystem::AgentRating_view"/>
+		</resources>
+	</route>
+	<route method="GET" url="/V1/chat/agentrating/:agentratingId">
+		<service class="Webkul\MagentoChatSystem\Api\AgentRatingRepositoryInterface" method="getById"/>
+		<resources>
+			<resource ref="Webkul_MagentoChatSystem::AgentRating_view"/>
+		</resources>
+	</route>
+	<route method="PUT" url="/V1/chat/agentrating/:agentratingId">
+		<service class="Webkul\MagentoChatSystem\Api\AgentRatingRepositoryInterface" method="save"/>
+		<resources>
+			<resource ref="Webkul_MagentoChatSystem::AgentRating_update"/>
+		</resources>
+	</route>
+	<route method="DELETE" url="/V1/chat/agentrating/:agentratingId">
+		<service class="Webkul\MagentoChatSystem\Api\AgentRatingRepositoryInterface" method="deleteById"/>
+		<resources>
+			<resource ref="Webkul_MagentoChatSystem::AgentRating_delete"/>
+		</resources>
+	</route>
+
+	<route method="POST" url="/V1/chat/report">
+		<service class="Webkul\MagentoChatSystem\Api\ReportRepositoryInterface" method="save"/>
+		<resources>
+			<resource ref="self"/>
+		</resources>
+	</route>
+	<route method="GET" url="/V1/chat/report/search">
+		<service class="Webkul\MagentoChatSystem\Api\ReportRepositoryInterface" method="getList"/>
+		<resources>
+			<resource ref="Webkul_MagentoChatSystem::Report_view"/>
+		</resources>
+	</route>
+	<route method="GET" url="/V1/chat/report/:reportId">
+		<service class="Webkul\MagentoChatSystem\Api\ReportRepositoryInterface" method="getById"/>
+		<resources>
+			<resource ref="Webkul_MagentoChatSystem::Report_view"/>
+		</resources>
+	</route>
+	<route method="PUT" url="/V1/chat/report/:reportId">
+		<service class="Webkul\MagentoChatSystem\Api\ReportRepositoryInterface" method="save"/>
+		<resources>
+			<resource ref="Webkul_MagentoChatSystem::Report_update"/>
+		</resources>
+	</route>
+	<route method="DELETE" url="/V1/chat/report/:reportId">
+		<service class="Webkul\MagentoChatSystem\Api\ReportRepositoryInterface" method="deleteById"/>
+		<resources>
+			<resource ref="Webkul_MagentoChatSystem::Report_delete"/>
+		</resources>
+	</route>
+</routes>

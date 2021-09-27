@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Mpreportsystem
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Webkul_Mpreportsystem::mpreports" title="Marketplace Report System" module="Webkul_Mpreportsystem" sortOrder="1" parent="Webkul_Mpreportsystem::manager" action="mpreportsystem/report/index" resource="Webkul_Mpreportsystem::mpreports"/>
+        <add id="Webkul_Mpreportsystem::manager" title="Marketplace Advance Report System Manager" module="Webkul_Mpreportsystem" sortOrder="11" resource="Webkul_Mpreportsystem::manager" parent="Webkul_Marketplace::marketplace"/>
+    </menu>
+</config>

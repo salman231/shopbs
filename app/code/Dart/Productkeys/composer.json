@@ -1,0 +1,32 @@
+{
+    "name": "dart/productkeys",
+    "description": "Dart Productkeys",
+    "type": "magento2-module",
+    "version": "1.5.0",
+    "license": [
+        "OSL-3.0",
+        "AFL-3.0"
+    ],
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "http://repo.magento.com/"
+        }
+    ],
+    "authors": [
+        {
+            "name": "Ganesh",
+            "email": "ganesh@dartinnovations.net",
+            "homepage": "https://dartinnovations.com/product-keys-delivery-plugin-for-magento-2/",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Dart\\Productkeys\\": ""
+        }
+    }
+}

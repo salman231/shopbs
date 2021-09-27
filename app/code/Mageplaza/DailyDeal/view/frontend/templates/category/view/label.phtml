@@ -1,0 +1,62 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_DailyDeal
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+/** @var \Mageplaza\DailyDeal\Block\Category\View\Label $block */
+
+$whereToShow = $block->getShowLabelConfig();
+$style       = [
+    'img'        => ''
+];
+$position    = 'price';
+
+if ($whereToShow !== \Mageplaza\DailyDeal\Model\Config\Source\DiscountLabel::DISABLE): ?>
+    <?php if ($whereToShow === \Mageplaza\DailyDeal\Model\Config\Source\DiscountLabel::ABOVE_PRODUCT_IMAGE): ?>
+        <?php
+        $style['img'] = $block->getCssLabelOnImage();
+        $position     = 'img';
+        $html         = "<div class='cat-deal mpdailydeal-percent-cat-above-image'></div>";
+        ?>
+    <?php else: ?>
+        <?php $html = "<br><span class='cat-deal mpdailydeal-percent-underprice'</span>"; ?>
+    <?php endif; ?>
+
+    <style type="text/css">
+        .cat-deal {
+            background: <?= /* @noEscape */ $block->getBackgroundColor() ?>;
+            border: <?= /* @noEscape */ $block->getBorderStyle() ?>;
+            color: <?= /* @noEscape */ $block->getTextColor() ?>;
+        }
+        .mpdailydeal-percent-cat-above-image {
+            <?= /* @noEscape */ $style['img']?>
+        }
+    </style>
+    <script type="text/x-magento-init">
+        {
+            "*":{
+                "categoryPageLabel":{
+                      "labelData": <?= /* @noEscape */ $block->getDataLabel() ?>,
+                      "position": "<?= /* @noEscape */ $position ?>",
+                      "labelHtml": "<?= /* @noEscape */ $html ?>"
+                    }
+                }
+        }
+    </script>
+<?php endif; ?>

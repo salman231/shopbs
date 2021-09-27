@@ -1,0 +1,37 @@
+{
+    "name": "ranosys040/cancelorder",
+    "description": "Cancel any order from frontend which status is pending.",
+    "require": {
+    },
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": [
+        "OSL-3.0",
+        "AFL-3.0"
+    ],
+     "keywords": [
+      "magento 2",
+      "ranosys",
+      "order",
+      "cancel",
+      "cancel order",
+      "deepak",
+      "free"
+    ],
+    "authors": [
+        {
+            "name": "Ranosys",
+            "email": "deepak.soni@ranosys.com",
+            "homepage": "http://www.ranosys.com/",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Ranosys\\CancelOrder\\": ""
+        }
+    }
+}

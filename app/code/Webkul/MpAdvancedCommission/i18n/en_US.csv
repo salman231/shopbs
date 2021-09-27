@@ -1,0 +1,63 @@
+"Save Commission Rule","Save Commission Rule"
+"Save and Continue Edit","Save and Continue Edit"
+"Edit Commission Rule for id '%1'","Edit Commission Rule for id '%1'"
+"New Commission Rule","New Commission Rule"
+"Commission Rule","Commission Rule"
+"Commission Rule Information","Commission Rule Information"
+"Commission Type","Commission Type"
+Fixed,Fixed
+Percent,Percent
+"Product Price From","Product Price From"
+"Price From","Price From"
+"Product Price To","Product Price To"
+"Price To","Price To"
+Commission,Commission
+"Commission Amount","Commission Amount"
+"Category Commission","Category Commission"
+"Set Per Category Commission","Set Per Category Commission"
+"No commission rule exists with %1 id.","No commission rule exists with %1 id."
+"Commission Rule with id %1 have been deleted.","Commission Rule with id %1 have been deleted."
+"Commission Rules","Commission Rules"
+"Manage Commission Rules","Manage Commission Rules"
+"This commission rule no longer exists.","This commission rule no longer exists."
+"Edit Commission Rules","Edit Commission Rules"
+"Add New Commission Rules","Add New Commission Rules"
+"Edit Commission Rules for id '%1'","Edit Commission Rules for id '%1'"
+"A total of %1 record(s) have been deleted.","A total of %1 record(s) have been deleted."
+"Price range already exist.","Price range already exist."
+"Commission Rule has been saved successfully.","Commission Rule has been saved successfully."
+"Commission Rule with %1 id already exist.","Commission Rule with %1 id already exist."
+"Unable to remove commission rules for id %1","Unable to remove commission rules for id %1"
+"Invalid Commission Price For Product","Invalid Commission Price For Product"
+Prices,Prices
+"Commission For Product","Commission For Product"
+"Commission Per Product","Commission Per Product"
+Edit,Edit
+Delete,Delete
+"Delete Commission Rule","Delete Commission Rule"
+"Are you sure you want to delete this commission rule?","Are you sure you want to delete this commission rule?"
+"Please enter numeric and positive number only & special characters are not allowed","Please enter numeric and positive number only & special characters are not allowed"
+"Category commission can't be greater than 100 in percentage case.","Category commission can't be greater than 100 in percentage case."
+Categories,Categories
+"Please enter numeric and positive number","Please enter numeric and positive number"
+"Save Config","Save Config"
+"There was error during fetching results.","There was error during fetching results."
+"Product Price To must be greater than Product Price From.","Product Price To must be greater than Product Price From."
+"In case of percent commission, commission value must be less than or equal to 100 and value must be less than or equal to product price from in case fixed commission.","In case of percent commission, commission value must be less than or equal to 100 and value must be less than or equal to product price from in case fixed commission."
+"Marketplace Advanced Commission","Marketplace Advanced Commission"
+"General Settings","General Settings"
+"Use Commission Rules","Use Commission Rules"
+"In case of fixed commission type, if product price is less than admin commission then marketplace global commission will be apply.","In case of fixed commission type, if product price is less than admin commission then marketplace global commission will be apply."
+"Admin Commission","Admin Commission"
+"Add New Commission Rule","Add New Commission Rule"
+"Are you sure you wan't to delete selected commission rule's?","Are you sure you wan't to delete selected commission rule's?"
+ID,ID
+Type,Type
+Created,Created
+Modified,Modified
+Action,Action
+Yes,Yes
+No,No
+Back,Back
+Reset,Reset
+"Commission should be calculated on round off price of product or not.","Commission should be calculated on round off price of product or not."

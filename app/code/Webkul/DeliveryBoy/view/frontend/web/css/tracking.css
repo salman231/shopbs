@@ -1,0 +1,36 @@
+/**
+ * Webkul Software.
+ *
+ * PHP version 7.0+
+ *
+ * @category  Webkul
+ * @package   Webkul_DeliveryBoy
+ * @author    Webkul <support@webkul.com>
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+.order-tracking.delivery-boy {
+    padding: 25px;
+    margin: -1px 0 0 0;
+    border: 1px solid #cccccc;
+}
+
+#db_order_track {
+    width: 600px;
+    height: 400px;
+}
+
+.estimated_time {
+    color: palevioletred;
+    padding: 15px;
+    font-weight: 800;
+}
+
+#estimated_time_value {
+    color: green;
+}
+
+.no_display {
+    display: none;
+}

@@ -1,0 +1,25 @@
+<?php
+    $a=0;
+?>
+<script type="text/javascript">
+    require([
+        "jquery"
+    ], function($){
+
+        $(document).ajaxSuccess(function (event, xhr, settings)  {
+            if (
+                settings.url.match(/mobikul\/bannerimage\/validate/g) || 
+                settings.url.match(/mobikul\/notification\/validate/g) || 
+                settings.url.match(/mobikul\/featuredcategories\/validate/g) || 
+                settings.url.match(/mobikul\/categoryimages\/validate/g) || 
+                settings.url.match(/mobikul\/carouselimage\/validate/g) || 
+                settings.url.match(/mobikul\/carousel\/validate/g)
+            )  {
+                if (xhr.responseJSON.error)  {
+                    $("html, body").scrollTop($("body").find("#messages").offset().top-100);
+                }
+            }
+        });
+
+    });
+</script>

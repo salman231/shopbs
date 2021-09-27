@@ -1,0 +1,110 @@
+/**
+ * SearchSuggestion style sheet.
+ * @category Webkul
+ * @package Webkul_SearchSuggestion
+ * @author Webkul
+ * @copyright Copyright (c)   Webkul Software Private Limited (https://webkul.com)
+ * @license https://store.webkul.com/license.html
+ */
+.wk_ss_list{
+  display: none;
+}
+#search_autocomplete{
+  display:block;
+  overflow: auto;
+}
+.search-autocomplete ul li{
+  padding:8px;
+}
+  .wk_ss_list ul{
+    list-style:none;
+    list-style:none;
+    margin: 0px;
+    padding: 0px;
+  }
+.wk_ss_list ul li{
+    margin-bottom: 1px !important;
+    padding: 2px 0px 2px 0px;
+}
+  .wk_ss_num{
+    float: right;
+    font-weight: bold;
+    padding-right:5px;
+  }
+  .wk_ss_img{
+    width: 60px;
+    display: inline-block;
+    vertical-align: top;
+    padding-left: 10px;
+  }
+  .wk_ss_bottom{
+    border-top: 1px solid;
+    display: block;
+    margin-top: 10px;
+  }
+  .wk_ss_heading{
+   background: #ffffff none repeat scroll 0 0;
+    display: block;
+    margin-left: 59px;
+    margin-top: -10px;
+    padding: 0 2px;
+    width: 118px;
+  }
+  .wk_ss_left{
+    padding-left: 5px;
+  }
+  .wk_ss_proname{
+    padding: 5px;
+    display: inline-block;
+    color: black;
+  }
+  .wk_ss_price{
+        color: #1E7EC8;
+        font-size: 16px;
+        font-weight: 600;
+  }
+  .wk_ss_list ul li:hover {background: #f4f4f4;}
+  #wk_ss_poppro{display: none;}
+  #wk_ss_loader{
+    height: 24px;
+    width: 24px;
+    position: absolute;
+    top: 5px;
+    left: 211px;
+    display: none;
+    background-image:url(../images/ajaxloader.gif);
+    background-size: 24px 24px;
+    background-repeat: no-repeat;
+  }
+.wk_ss_selected{
+    background: rgba(175, 169, 169, 0.25);
+}
+.wk_ss_showlist li a{
+text-decoration: none;
+color:black;
+}
+#popular:hover {background: white !important;}
+.wk_ss_rating0{
+display:none;
+}
+.wk_ss_cat{
+color: #252596;
+    font-size: 14px;
+    font-weight: 600;
+}
+@media  screen and (max-width: 767px) and (min-width:635px){
+  #wk_ss_loader {
+    top: 84px;
+    left: 92%;
+  }
+}
+@media  screen and (max-width: 635px) and (min-width:0px){
+  #wk_ss_loader {
+    top: 89px;
+    left: 89%;
+  }
+}
+body .block-search .action.search {
+  left: 640px !important;
+   top: 2px !important;
+}

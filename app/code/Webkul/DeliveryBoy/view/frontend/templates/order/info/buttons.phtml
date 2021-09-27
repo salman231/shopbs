@@ -1,0 +1,183 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * PHP version 7.0+
+ *
+ * @category  Webkul
+ * @package   Webkul_DeliveryBoy
+ * @author    Webkul <support@webkul.com>
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+if ($block->canAddReview()):
+    $deliveryboyOrderId = $block->getDeliveryboyOrderId();?>
+    <div class="deliveryboy-review-wrapper" data-block="deliveryboy-review">
+        <div id='deliveryboy-review_<?= /** @noEscape */ $deliveryboyOrderId; ?>'
+            data-role="deliveryboy-review-loader"
+            class="loading-mask" data-mage-init='{"Webkul_DeliveryBoy/js/view/review-loader": {}}'>
+            <div class="loader">
+                <img src="<?= $block->escapeUrl($block->getViewFileUrl('images/loader-1.gif')) ?>"
+                    alt="<?= $block->escapeHtmlAttr(__('Loading...')) ?>"
+                    style="position: absolute;">
+            </div>
+        </div>
+        <div class="actions deliveryboy-review-action-wrapper">
+            <button class="action add-review" data-trigger="deliveryboy-add-review">
+                <span><?= $block->escapeHtml(__('Add Review')) ?></span>
+            </button>
+        </div>
+        <div class="review-add block-deliveryboy-review"
+             style="display: none;"
+             data-mage-init='{"Webkul_DeliveryBoy/js/view/add-review": {
+                 "deliveryboyOrderId": "<?= $block->escapeHtmlAttr($deliveryboyOrderId); ?>"
+             }}'>
+            <div class="block block-deliveryboy-add-review">
+                <div data-role="modal-messages" class="modal-messages"
+                     data-bind="scope:'messages-wrapper'">
+                    <!-- ko template: getTemplate() --><!-- /ko -->
+                </div>
+                <div class="block-content">
+                    <form action="<?= $block->escapeUrl($block->getAddReviewAction()); ?>"
+                        class="deliveryboy-review-form" method="post"
+                        data-role="deliveryboy-review-form"
+                        data-mage-init='{
+                                "Webkul_DeliveryBoy/js/validate-review": {},
+                                "Webkul_DeliveryBoy/js/error-placement": {}
+                            }'>
+                        <?php $deliveryBoy = $block->getDeliveryBoy(); ?>
+                        <input
+                            type="hidden"
+                            name="deliveryBoyId"
+                            value="<?= $block->escapeHtmlAttr($deliveryBoy->getId()); ?>" />
+                        <input
+                            type="hidden"
+                            name="customerId"
+                            value="<?= $block->escapeHtmlAttr($block->getCustomerId()); ?>" />
+                        <fieldset class="fieldset deliveryboy-review-fieldset"
+                            data-hasrequired="<?= $block->escapeHtmlAttr(__('* Required Fields')) ?>">
+                            <legend class="legend deliveryboy-review-legend">
+                                <span><?= $block->escapeHtml(__("You're reviewing:")) ?></span>
+                                <strong><?= $block->escapeHtml($block->getDeliveryboy()->getName()) ?></strong>
+                            </legend><br />
+                            <fieldset class="field required deliveryboy-review-field-ratings">
+                                <legend class="label">
+                                    <span><?= $block->escapeHtml(__('Your Rating')) ?></span>
+                                </legend><br/>
+                                <div class="field choice deliveryboy-review-field-rating">
+                                    <div class="control">
+                                        <div class="nested">
+                                            <div class="control deliveryboy-review-control-ratings">
+                                                <?php $ratings = range(1, 5); ?>
+                                                <?php $iterator = 1; foreach ($ratings as $rating): ?>
+                                                    <input
+                                                        type="radio"
+                                                        class="radio"
+                                                        name="rating"
+                                                        id="<?=
+                                                            $block
+                                                                ->escapeHtmlAttr(
+                                                                    $deliveryBoy->getName() . '_' . $rating
+                                                                );
+                                                            ?>"
+                                                        value="<?= $block->escapeHtmlAttr($rating) ?>"
+                                                        data-validate="{'rating-required':true}"
+                                                        aria-labelledby="<?=
+                                                            $block
+                                                                ->escapeHtmlAttr($deliveryBoy->getName(). '_' .
+                                                                    $rating . '_rating_label');
+                                                                            ?>"
+                                                    />
+                                                    <label
+                                                        class="rating-<?=
+                                                            $block->escapeHtmlAttr($iterator);
+                                                        ?>"
+                                                        for="<?=
+                                                            $block
+                                                                ->escapeHtmlAttr($deliveryBoy->getName(). '_'. $rating);
+                                                        ?>"
+                                                        title="<?=
+                                                            $block
+                                                                ->escapeHtmlAttr(
+                                                                    __('%1 %2', $iterator, $iterator > 1
+                                                                    ? __('stars')
+                                                                    : __('star'))
+                                                                );
+                                                                ?>"
+                                                        id="<?=
+                                                            $block
+                                                                ->escapeHtmlAttr(
+                                                                    $deliveryBoy->getName() . '_' . $rating. '_label'
+                                                                );
+                                                            ?>">
+                                                        <span>
+                                                            <?= $block
+                                                                ->escapeHtml(
+                                                                    __('%1 %2', $iterator, $iterator > 1
+                                                                        ? __('stars')
+                                                                        : __('star'))
+                                                                );
+                                                            ?>
+                                                        </span>
+                                                    </label>
+                                                    <?php $iterator++; ?>
+                                                <?php endforeach; ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="field required">
+                                <label for='deliveryboy_title_field_<?= /** @noEscape */ $deliveryboyOrderId; ?>'
+                                    class="label">
+                                    <span><?= $block->escapeHtml(__('Title')) ?></span>
+                                </label>
+                                <div class="control">
+                                    <input type="text" name="title"
+                                        id='deliveryboy_title_field_<?= /** @noEscape */ $deliveryboyOrderId; ?>'
+                                        class="input-text" data-validate="{required:true}"
+                                    />
+                                </div>
+                            </div>
+                            <div class="field required">
+                                <label for="deliveryboy_comment_field_<?= /** @noEscape */ $deliveryboyOrderId; ?>"
+                                    class="label">
+                                    <span><?= $block->escapeHtml(__('Comment')) ?></span>
+                                </label>
+                                <div class="control">
+                                    <textarea name="comment"
+                                        id="deliveryboy_comment_field_<?= /** @noEscape */ $deliveryboyOrderId; ?>"
+                                        cols="5" rows="3"
+                                        data-validate="{required:true}"></textarea>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+<script type="text/x-magento-init">
+{
+    "[data-role=modal-messages]": {
+        "Magento_Ui/js/core/app": {
+            "components" : {
+                "messages-wrapper": {
+                    "component" : "uiComponent",
+                    "config": {
+                        "template": "Webkul_DeliveryBoy/messages-wrapper"
+                    },
+                    "children": {
+                        "messages": {
+                            "component": "Webkul_DeliveryBoy/js/view/modal-messages",
+                            "displayArea": "messages"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+</script>
+<?php endif; ?>

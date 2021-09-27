@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+* Webkul Software
+*
+* @category Webkul
+* @package Webkul_MagentoChatSystem
+* @author Webkul
+* @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+* @license https://store.webkul.com/license.html
+*/ 
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <chatsystem>
+            <chat_config>
+                <chat_name>Webkul Support</chat_name>
+                <assign_automatic>1</assign_automatic>
+                <offline_message>0</offline_message>
+                <show_rating_box_time>120</show_rating_box_time>
+            </chat_config>
+        </chatsystem>
+    </default>
+</config>

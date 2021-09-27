@@ -1,0 +1,45 @@
+<ul id="editor-top">
+	<?php if ($block->getMenu()->getId()) { ?>
+	<li><a href="#menueditor"><?php echo __('Menu Editor'); ?></a></li>
+	<?php } ?>
+	<li><a href="#base_fieldset"><?php echo __('General Settings'); ?></a></li>
+	<?php if ($block->getMenu()->getId()) { ?>
+	<li><a href="#menudesign"><?php echo __('Design Options'); ?></a></li>
+	<?php } ?>
+</ul>
+<script type="text/javascript">
+	require(["jquery"], function($){
+		$("#editor-top a:first").addClass("active");
+		$('.menu-design').hide();
+		$('.megamenu-editor').show();
+		$("#menueditor").show();
+		$("#editor-top a").click(function() {
+			$("#menueditor, #base_fieldset, .menu-design").hide();
+			$('#editor-top a').removeClass("active");
+			$(this).toggleClass("active");
+			var targetE = $(this).attr("href");
+			if(targetE == "#menueditor") {
+				$("#menueditor").show();
+				
+			}
+			$('#menueditor').removeClass('lof-design');
+			if ($('#nestable > .dd-list').children().length) {
+				$('.megamenu-editor').show();
+			}
+			$('.menu-top').show();
+			if ($(this).attr('href') == '#menudesign') {
+				$('.menu-design input').trigger('change');
+				$('.menu-design select').trigger('change');
+				$('.megamenu-editor, .menu-top').hide();
+				$('#menueditor, .menu-design').show();
+				$('#menueditor').addClass('lof-design');
+			} else {
+				$('#nestable > .dd-list').removeAttr('style');
+				var targetE = $(this).attr("href");
+				$(targetE).show();
+			}
+			return false;
+		});
+		$("#editor-top a:first").click();
+	});
+</script>

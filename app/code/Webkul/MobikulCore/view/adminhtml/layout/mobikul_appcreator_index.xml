@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MobikulCore
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<update handle="styles"/>
+    <head>
+         <css src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" src_type="url"/>        
+        <css src="Webkul_MobikulCore::css/appcreator/appcreator.css"/>        
+    </head>	
+	<body>
+	    <referenceContainer name="content">
+    	<block class="Webkul\MobikulCore\Block\Adminhtml\AppCreator\AppCreator" name="mobikul-app-creator" template="Webkul_MobikulCore::appcreator/appcreator.phtml"/>
+        </referenceContainer>
+	</body>
+</page>

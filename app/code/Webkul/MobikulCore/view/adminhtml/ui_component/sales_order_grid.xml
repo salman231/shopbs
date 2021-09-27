@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MobikulCore
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <listingToolbar name="listing_top">
+        <filters name="listing_filters">
+            <filterSelect name="purchase_point" provider="${ $.parentName }">
+                <settings>
+                    <options class="Webkul\MobikulCore\Model\Order\AttributeSet\Options"/>
+                    <caption translate="true">All</caption>
+                    <label translate="true">Order Place Point</label>
+                    <dataScope>purchase_point</dataScope>
+                </settings>
+            </filterSelect>
+        </filters>
+    </listingToolbar>
+    <columns name="sales_order_columns">
+        <column name="purchase_point" class="Webkul\MobikulCore\Ui\Component\Listing\Column\OrderPlaceFrom">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Ordr Place Point</item>
+                </item>
+            </argument>
+        </column>
+    </columns>
+</listing>

@@ -1,0 +1,28 @@
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+   <listingToolbar name="listing_top">
+        <massaction name="listing_massaction">
+            <action name="is_action">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">is_action</item>
+                        <item name="label" xsi:type="string" translate="true">Print Barcode Slip</item>
+                        <item name="url" xsi:type="url" path="mobikul/barcode/massprint"/>
+                    </item>
+                </argument>
+            </action>
+        </massaction>
+    </listingToolbar> 
+    <columns name="product_columns" class="Magento\Catalog\Ui\Component\Listing\Columns">
+       <column name="barcode" class="Webkul\MobikulCore\Ui\Component\Listing\Columns\BarCodeImage">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Webkul_MobikulCore/js/grid/columns/barcodeimage</item>
+                    <item name="sortable" xsi:type="boolean">false</item>
+                    <item name="filterable" xsi:type="boolean">false</item>
+                    <item name="label" xsi:type="string" translate="true">Bar Code</item>
+                    <item name="sortOrder" xsi:type="number">35</item>
+                </item>
+            </argument>
+        </column>
+    </columns>
+</listing>

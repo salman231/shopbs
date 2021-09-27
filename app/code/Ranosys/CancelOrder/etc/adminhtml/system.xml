@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+	<tab id="cancel_order" translate="label" sortOrder="10">
+	    <label>Ranosys</label>
+	</tab>
+	<section id="cancel_order_setting" translate="label" sortOrder="300" showInDefault="1" showInWebsite="1" showInStore="1">
+	    <label>Cancel Order</label>
+	    <tab>cancel_order</tab>
+	    <resource>Ranosys_CancelOrder::configuration</resource>
+	    <group id="general" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+		<label>Cancel Order Configuration</label>
+		<field id="module_enable" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+		    <label>Status Module</label>
+		    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+		    <comment>If enable, Cancel Order option will be visible on "Recent Orders, My Orders and on Order details" section.</comment>
+		</field>
+		<field id="sender_email" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+		    <label>Email Sender</label> 
+		    <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+		    <comment>Name of sender who send email.</comment>
+		    <depends>
+                        <field id="module_enable">1</field>
+                    </depends>
+		</field>
+		<field id="receiver_email" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+		    <label>Receiver Email Address</label> 
+		    <comment>Email address of admin who will get cancel order email.</comment>
+		    <depends>
+                        <field id="module_enable">1</field>
+                    </depends>
+		    <validate>required-entry validate-email</validate>
+		</field>
+		<field id="custom_email_template" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+		    <label>Choose Email Template</label>
+		    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+		    <comment>This email will be sent to receiver on cancellation of order.</comment>
+		    <depends>
+                        <field id="module_enable">1</field>
+                    </depends>
+		</field>
+		<field id="notice_txt" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+		    <label>Notice on popup</label>
+		    <depends>
+                        <field id="module_enable">1</field>
+                    </depends> 
+		</field>
+		<field id="btn_label" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+		    <label>Label for "Cancel Order" Button</label> 
+		    <depends>
+                        <field id="module_enable">1</field>
+                    </depends>
+		</field>
+	    </group>
+	</section>
+    </system>
+</config>

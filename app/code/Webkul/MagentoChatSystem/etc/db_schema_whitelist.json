@@ -1,0 +1,107 @@
+{
+    "chatsystem_userdata": {
+        "column": {
+            "entity_id": true,
+            "customer_id": true,
+            "unique_id": true,
+            "image": true,
+            "chat_status": true
+        },
+        "index": {
+            "CHATSYSTEM_USERDATA_CUSTOMER_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "CHATSYSTEM_USERDATA_CUSTOMER_ID_CUSTOMER_ENTITY_ENTITY_ID": true
+        }
+    },
+    "chatsystem_agentdata": {
+        "column": {
+            "entity_id": true,
+            "agent_id": true,
+            "agent_unique_id": true,
+            "agent_email": true,
+            "agent_name": true,
+            "image": true,
+            "chat_status": true,
+            "agent_type": true
+        },
+        "index": {
+            "CHATSYSTEM_AGENTDATA_AGENT_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "CHATSYSTEM_AGENTDATA_AGENT_ID_ADMIN_USER_USER_ID": true
+        }
+    },
+    "chatsystem_assigned_chat": {
+        "column": {
+            "entity_id": true,
+            "agent_id": true,
+            "agent_unique_id": true,
+            "customer_id": true,
+            "unique_id": true,
+            "is_admin_chatting": true,
+            "chat_status": true,
+            "assigned_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "chatsystem_total_agent_chat": {
+        "column": {
+            "entity_id": true,
+            "agent_id": true,
+            "agent_unique_id": true,
+            "total_active_chat": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "chatsystem_history": {
+        "column": {
+            "entity_id": true,
+            "sender_id": true,
+            "sender_unique_id": true,
+            "receiver_id": true,
+            "receiver_unique_id": true,
+            "message": true,
+            "date": true,
+            "sender_name": true,
+            "receiver_name": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "chatsystem_agent_rating": {
+        "column": {
+            "entity_id": true,
+            "customer_id": true,
+            "agent_id": true,
+            "agent_unique_id": true,
+            "rating": true,
+            "rating_comment": true,
+            "status": true,
+            "created_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "chatsystem_report": {
+        "column": {
+            "report_id": true,
+            "customer_id": true,
+            "customer_name": true,
+            "agent_id": true,
+            "subject": true,
+            "content": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

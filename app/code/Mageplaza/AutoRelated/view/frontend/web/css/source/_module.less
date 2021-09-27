@@ -1,0 +1,202 @@
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_AutoRelated
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+.sidebar .grid.products-grid {
+  ol.products.list {
+    padding-left: 10px;
+    li.item.product.product-item {
+      width: calc(100% - 10px);
+    }
+  }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__s) {
+  .product-item-info {
+    .products-grid.products-mageplaza-autorelated & {
+      &:hover,
+      &.active {
+        .sidebar & {
+          .product-item-photo {
+            top: 0 !important;
+            left: 0 !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+.mageplaza-autorelated-slider > ol {
+  width: 96%;
+  margin: auto;
+  margin-left: auto !important;
+}
+
+.slick-prev:before, .slick-next:before {
+  color: black;
+}
+
+#mageplaza-autorelated-block-before-cross, #mageplaza-autorelated-block-after-cross {
+  width: 74%;
+}
+
+#mageplaza-autorelated-block-before-cross .mageplaza-autorelated-block, #mageplaza-autorelated-block-after-cross .mageplaza-autorelated-block {
+  width: 100%;
+}
+
+#mageplaza-autorelated-block-before-cross, #mageplaza-autorelated-block-after-cross, #mageplaza-autorelated-block-before-cross .mageplaza-autorelated-block, #mageplaza-autorelated-block-after-cross .mageplaza-autorelated-block {
+  float: left;
+  -ms-flex-order: 1;
+  -webkit-order: 1;
+  order: 1;
+}
+
+@media (min-width: 1440px) {
+  #mageplaza-autorelated-block-before-sidebar .product-item-info .product-item-details, #mageplaza-autorelated-block-after-sidebar .product-item-info .product-item-details {
+    margin-left: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  #mageplaza-autorelated-block-before-sidebar .product-item-info .product-item-photo, #mageplaza-autorelated-block-after-sidebar .product-item-info .product-item-photo {
+    float: none;
+    position: relative;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .mageplaza-autorelated-slider > ol {
+    -ms-flex-order: -2;
+    -webkit-order: -2;
+    order: -2;
+  }
+
+  .cms-index-index.page-layout-1column .column.main, .cms-page-view.page-layout-1column .column.main, .checkout-cart-index.page-layout-1column .column.main, .catalog-product-view.page-layout-1column .column.main {
+    width: 100%;
+  }
+
+  .catalog-category-view.page-layout-2columns-left .column.main, .catalog-category-view.page-layout-2columns-left .sidebar.sidebar-main {
+    width: 80%;
+  }
+
+  #mageplaza-autorelated-block-before-sidebar ol li, #mageplaza-autorelated-block-after-sidebar ol li {
+    padding-left: 20px;
+  }
+
+  #mageplaza-autorelated-block-before-sidebar ol li .product-item-photo, #mageplaza-autorelated-block-after-sidebar ol li .product-item-photo {
+    margin: 0 10px 10px 0;
+    position: relative;
+  }
+
+  #mageplaza-autorelated-block-before-sidebar ol li .product-item-details, #mageplaza-autorelated-block-after-sidebar ol li .product-item-details {
+    margin: 0;
+  }
+
+  #mageplaza-autorelated-block-before-cross, #mageplaza-autorelated-block-after-cross {
+    width: 100%;
+  }
+}
+
+@media (min-width: 640px) {
+  .products-grid .mageplaza-autorelated-grid > ol .product-item-actions {
+    margin: 0;
+  }
+}
+.mp-arp-slider-content {
+  .owl-nav{
+    font-size: 80px;
+    button {
+      position: absolute;
+      top: 40%;
+      z-index: 9;
+      text-shadow: none;
+      background: none;
+      border: none;
+      span{
+        color: #757575;
+      }
+      span:hover{
+        color: #333333;
+      }
+    }
+    .owl-prev{
+      left: -25px;
+    }
+    .owl-next{
+      right: -25px;
+    }
+  }
+}
+
+/*Popup style*/
+.arp-popup-block {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  box-shadow: 2px 2px #888888;
+  outline: 0px;
+  width: auto;
+  position: fixed;
+  bottom: 5px;
+  z-index: 9999;
+  background: #ffffff;
+  color: #444444;
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity 0.2s ease-out;
+  .close-popup {
+    margin-right: 10px;
+    margin-left: 10px;
+    float: right;
+    .btn-close-popup, .btn-remove-popup {
+      color: #7d7d7d;
+      border: none;
+      background-color: #ffffff;
+    }
+  }
+  .popup-content {
+    clear: both;
+    .image-popup {
+      height: auto;
+      float: left;
+      margin: 0 0 0 5px;
+      max-height: 20%;
+    }
+    .popup-right {
+      margin: 0 10px 10px 10px;
+      float: right;
+      .arp-popup-label {
+        margin-top: -5px;
+        margin-bottom: 10px;
+        opacity: 0.6;
+      }
+    }
+    .product.actions.product-item-actions {
+      padding-top: 10px;
+    }
+  }
+}
+#right-popup-content {
+  right:3px;
+  box-shadow: 2px 2px #888888;
+}
+#left-popup-content {
+  left:3px;
+  box-shadow: -2px 2px #888888;
+}

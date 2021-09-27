@@ -1,0 +1,131 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_AutoRelated
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+?>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/prototype/1.7.3.0/prototype.js"></script>
+<?php $parameter = $block->getParameter(); ?>
+
+<div>
+    <div id="impression"></div>
+    <div id="clicks"></div>
+    <div id="ctr"></div>
+</div>
+
+<div class="entry-edit">
+    <?= /** @noEscape */ $block->getForm()->getHtml() ?>
+</div>
+<?= /** @noEscape */ $block->getChildHtml('grid') ?>
+
+<script>
+    google.charts.load("current", {
+        packages: ["corechart"]
+    });
+    google.charts.setOnLoadCallback(drawMageplazaABChart);
+
+    function drawMageplazaABChart() {
+        //CTR
+        var data = google.visualization.arrayToDataTable([
+            ['A/B', 'Parent', 'Child'],
+            ['Percentage', <?= /** @noEscape */ $parameter['ctr'][0] ?>, <?= /** @noEscape */ $parameter['ctr'][1] ?>]
+        ]);
+
+        var options = {
+            title: 'CTR',
+            vAxis: {
+                title: 'Percentage'
+            },
+            hAxis: {
+                title: 'Type'
+            },
+            seriesType: 'bars',
+            series: {
+                5: {
+                    type: 'line'
+                }
+            },
+            annotations: {
+                boxStyle: {
+                    color1: '#00bcd4',
+                    color2: '#039be5'
+                }
+            },
+            width: 450
+        };
+
+        var chart = new google.visualization.ComboChart(document.getElementById('ctr'));
+        chart.draw(data, options);
+
+        //clicks
+        var dataClick = google.visualization.arrayToDataTable([
+            ['clicks', "clicks"],
+            ['Parent', <?= /** @noEscape */ $parameter['clicks'][0] ?>],
+            ['Child', <?= /** @noEscape */ $parameter['clicks'][1] ?>]
+        ]);
+
+        var optionsClick = {
+            title: 'Clicks',
+            pieHole: 0.4,
+            slices: {
+                0: {
+                    color: '#00bcd4'
+                },
+                1: {
+                    color: '#039be5'
+                }
+            },
+            fontSize: 12,
+            width:400,
+            height:300,
+            pieSliceTextStyle: {color: 'black'}
+        };
+
+        var chartClick = new google.visualization.PieChart(document.getElementById('clicks'));
+        chartClick.draw(dataClick, optionsClick);
+
+        //impression
+        var dataImpression = google.visualization.arrayToDataTable([
+            ['Impression', "Impression"],
+            ['Parent', <?= /** @noEscape */ $parameter['impression'][0]; ?>],
+            ['Child', <?= /** @noEscape */ $parameter['impression'][1]; ?>]
+        ]);
+
+        var optionsImpression = {
+            title: 'Impression',
+            pieHole: 0.4,
+            slices: {
+                0: {
+                    color: '#4CAF50'
+                },
+                1: {
+                    color: '#039be5'
+                }
+            },
+            fontSize: 12,
+            width:400,
+            height:300,
+            pieSliceTextStyle: {color: 'black'}
+        };
+
+        var chartImpression = new google.visualization.PieChart(document.getElementById('impression'));
+        chartImpression.draw(dataImpression, optionsImpression);
+    }
+</script>

@@ -1,0 +1,39 @@
+Legend
+
++ Features
+- Bugs
+
+-------------------------------- Version 3.0.0 --------------------------------------
+	+ Compatiable with magento 2.3.3
+	- Bugs Fixed
+
+-------------------------------- Version 2.1.0 --------------------------------------
+	+ Compatiable with magento 2.3.*
+
+-------------------------------- Version 2.0.4 --------------------------------------
+	- Remove MFTF test functionality
+
+-------------------------------- Version 2.0.3 --------------------------------------
+	+ Add MFTF test functionality
+
+-------------------------------- Version 2.0.2 --------------------------------------
+
+	+ Compatible with Magento ver 2.2.x .
+
+-------------------------------- Version 2.0.1 --------------------------------------
+
+	+ Admin can set the no of days for expiration of gift card.
+	+ Addition of field to add message in gift card while purchasing gift card and send with email also.
+	+ Addition of column of order id in gift card grid.
+	+ Addition of column of active status of gift card in gift card grid.
+	+ Addition of column of status of gift card which can be change by admin in gift card grid.
+	- Fixed the issue of showing message after applying coupan on cart page without reloading the page.
+	- Fixed the issue of addition of two gift card but sending mail for one card many times.
+
+-------------------------------- Version 2.0.0 --------------------------------------
+
+	+ Admin can create gift card products.
+	+ Easily manageable since gift card is created as a normal product in magento.
+	+ Admin can easily configure the gift card.
+	+ Gift card user will get email notifications after each gift card usage.
+	+ Gift card user can use one gift card in multiple purchases as he can use less amount than gift card limit.

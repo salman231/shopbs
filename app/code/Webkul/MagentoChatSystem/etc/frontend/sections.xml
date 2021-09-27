@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MagentoChatSystem
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Customer:etc/sections.xsd">
+    <action name="customer/ajax/login">
+        <section name="customer"/>
+        <section name="chat-data"/>
+    </action>
+    <action name="chatsystem/customer/createpost">
+        <section name="customer"/>
+        <section name="chat-data"/>
+    </action>
+    <action name="rest/V1/chat/assign-check">
+        <section name="chat-data"/>
+    </action>
+    <action name="rest/V1/chat/assign-chat">
+        <section name="chat-data"/>
+    </action>
+    <action name="rest/V1/message/save-message">
+        <section name="chat-data"/>
+    </action>
+    <action name="rest/V1/chat/change-status">
+        <section name="chat-data"/>
+    </action>
+    <action name="chatsystem/profile/upload">
+        <section name="chat-data"/>
+    </action>
+    <action name="rest/V1/chat/load-history">
+        <section name="chat-data"/>
+    </action>
+
+</config>

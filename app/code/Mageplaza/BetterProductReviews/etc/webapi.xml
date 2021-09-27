@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_BetterProductReviews
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+-->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/mp/product/review/all" method="GET">
+        <service class="Mageplaza\BetterProductReviews\Api\ProductReviewsRepositoryInterface" method="getAllReviews"/>
+        <resources>
+            <resource ref="Mageplaza_BetterProductReviews::reviews" />
+        </resources>
+    </route>
+    <route url="/V1/mp/product/review/list" method="GET">
+        <service class="Mageplaza\BetterProductReviews\Api\ProductReviewsRepositoryInterface" method="getListReviews"/>
+        <resources>
+            <resource ref="Mageplaza_BetterProductReviews::reviews" />
+        </resources>
+    </route>
+    <route url="/V1/mp/product/review/view/:review_id" method="GET">
+        <service class="Mageplaza\BetterProductReviews\Api\ProductReviewsRepositoryInterface" method="getReviewById"/>
+        <resources>
+            <resource ref="Mageplaza_BetterProductReviews::reviews" />
+        </resources>
+    </route>
+    <route url="/V1/mp/product/review/productId/:product_id" method="GET">
+        <service class="Mageplaza\BetterProductReviews\Api\ProductReviewsRepositoryInterface" method="getReviewByProductId"/>
+        <resources>
+            <resource ref="Mageplaza_BetterProductReviews::reviews" />
+        </resources>
+    </route>
+    <route url="/V1/mp/product/review/productSku/:product_sku" method="GET">
+        <service class="Mageplaza\BetterProductReviews\Api\ProductReviewsRepositoryInterface" method="getReviewByProductSku"/>
+        <resources>
+            <resource ref="Mageplaza_BetterProductReviews::reviews" />
+        </resources>
+    </route>
+    <route url="/V1/mp/product/review/customerId/:customer_id" method="GET">
+        <service class="Mageplaza\BetterProductReviews\Api\ProductReviewsRepositoryInterface" method="getReviewByCustomerId"/>
+        <resources>
+            <resource ref="Mageplaza_BetterProductReviews::reviews" />
+        </resources>
+    </route>
+    <route url="/V1/mp/product/by/review/:review_id" method="GET">
+        <service class="Mageplaza\BetterProductReviews\Api\ProductReviewsRepositoryInterface" method="getProductByReviewId"/>
+        <resources>
+            <resource ref="Mageplaza_BetterProductReviews::reviews" />
+        </resources>
+    </route>
+    <route url="/V1/mp/product/review/add/:product_id" method="POST">
+        <service class="Mageplaza\BetterProductReviews\Api\ProductReviewsRepositoryInterface" method="addReview"/>
+        <resources>
+            <resource ref="Mageplaza_BetterProductReviews::reviews" />
+        </resources>
+    </route>
+    <route url="/V1/mp/product/review/update/:review_id" method="PUT">
+        <service class="Mageplaza\BetterProductReviews\Api\ProductReviewsRepositoryInterface" method="updateReview"/>
+        <resources>
+            <resource ref="Mageplaza_BetterProductReviews::reviews" />
+        </resources>
+    </route>
+    <route url="/V1/mp/product/review/remove/:review_id" method="DELETE">
+        <service class="Mageplaza\BetterProductReviews\Api\ProductReviewsRepositoryInterface" method="deleteReview"/>
+        <resources>
+            <resource ref="Mageplaza_BetterProductReviews::reviews" />
+        </resources>
+    </route>
+    <route url="/V1/mp/product/review/status/:statusId" method="PUT">
+        <service class="Mageplaza\BetterProductReviews\Api\ProductReviewsRepositoryInterface" method="updateMultiReview"/>
+        <resources>
+            <resource ref="Mageplaza_BetterProductReviews::reviews" />
+        </resources>
+    </route>
+</routes>

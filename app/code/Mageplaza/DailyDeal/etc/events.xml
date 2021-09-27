@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_DailyDeal
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="checkout_onepage_controller_success_action">
+        <observer name="mpdailydeal_order_success" instance="Mageplaza\DailyDeal\Observer\CheckoutOnePageSuccessAction"/>
+    </event>
+    <event name="checkout_cart_product_add_after">
+        <observer name="mpdailydeal_discount_price" instance="Mageplaza\DailyDeal\Observer\SetPriceDealInCart"/>
+    </event>
+    <event name="checkout_cart_update_items_after">
+        <observer name="mpdailydeal_checkout_cart_update_items_after" instance="Mageplaza\DailyDeal\Observer\UpdateCart"/>
+    </event>
+    <event name="sales_order_creditmemo_save_after">
+        <observer name="mpdailydeal_order_creditmemo_after" instance="Mageplaza\DailyDeal\Observer\OrderCreditMemoAfter"/>
+    </event>
+    <event name="order_cancel_after">
+        <observer name="mpdailydeal_order_cancel_after" instance="Mageplaza\DailyDeal\Observer\OrderCancelAfter"/>
+    </event>
+</config>

@@ -1,0 +1,46 @@
+<?php
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_Simpledetailconfigurable
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2017-2018 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+// @codingStandardsIgnoreFile
+/* @var $block \Magento\Catalog\Block\Product\View\Description */
+?>
+<?php
+$_helper = $this->helper('Magento\Catalog\Helper\Output');
+$moduleHelper = $this->helper('Bss\Simpledetailconfigurable\Helper\ModuleConfig');
+$_product = $block->getProduct();
+$_call = 'getSku';
+$_code = $block->getAtCode();
+$_className = 'sku';
+$_attributeLabel = 'default';
+$_attributeType = $block->getAtType();
+$_attributeAddAttribute = $block->getAddAttribute();
+if ($_attributeLabel && $_attributeLabel == 'default') {
+    $_attributeLabel = $_product->getResource()->getAttribute($_code)->getFrontendLabel();
+}
+if ($_attributeType && $_attributeType == 'text') {
+    $_attributeValue = ($_helper->productAttribute($_product, $_product->getSku(), 'sku')) ? $_product->getAttributeText($_code) : '';
+} else {
+    $_attributeValue = $_helper->productAttribute($_product, $_product->getSku(), 'sku');
+}
+?>
+
+<?php if ($_attributeValue || ($moduleHelper->isModuleEnable() && $moduleHelper->isShowDescription())): ?>
+<div class="bss-sdcp-description product attribute <?php /* @escapeNotVerified */ echo $_className?>">
+    <?php if ($_attributeLabel != 'none'): ?><strong class="type"><?php /* @escapeNotVerified */ echo $_attributeLabel?></strong><?php endif; ?>
+    <div class="value" <?php /* @escapeNotVerified */ echo $_attributeAddAttribute;?>><?php /* @escapeNotVerified */ echo $_attributeValue; ?></div>
+</div>
+<?php endif; ?>

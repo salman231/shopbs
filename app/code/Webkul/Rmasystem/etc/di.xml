@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Rmasystem
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Webkul\Rmasystem\Api\AllRmaRepositoryInterface"
+                type="Webkul\Rmasystem\Model\ResourceModel\AllRmaRepository" />
+    <preference for="Webkul\Rmasystem\Api\ConversationRepositoryInterface"
+                type="Webkul\Rmasystem\Model\ResourceModel\ConversationRepository" />
+    <preference for="Webkul\Rmasystem\Api\ReasonRepositoryInterface"
+                type="Webkul\Rmasystem\Model\ResourceModel\ReasonRepository" />
+    <preference for="Webkul\Rmasystem\Api\RmaitemRepositoryInterface"
+                type="Webkul\Rmasystem\Model\ResourceModel\RmaitemRepository" />
+    <preference for="Webkul\Rmasystem\Api\ShippingLabelRepositoryInterface"
+                type="Webkul\Rmasystem\Model\ResourceModel\ShippingLabelRepository" />
+    <preference for="Webkul\Rmasystem\Api\Data\AllrmaInterface"
+                type="Webkul\Rmasystem\Model\Allrma" />
+    <preference for="Webkul\Rmasystem\Api\Data\ReasonInterface"
+                type="Webkul\Rmasystem\Model\Reason" />
+    <preference for="Webkul\Rmasystem\Api\Data\ConversationInterface"
+                type="Webkul\Rmasystem\Model\Conversation" />
+    <preference for="Webkul\Rmasystem\Api\Data\ShippinglabelInterface"
+                type="Webkul\Rmasystem\Model\Shippinglabel" />
+    <preference for="Webkul\Rmasystem\Api\Data\RmaitemInterface"
+                type="Webkul\Rmasystem\Model\Rmaitem" />
+    <preference for="Webkul\Rmasystem\Api\Data\AllrmaSearchResultsInterface"
+                type="Magento\Framework\Api\SearchResults" />
+    <preference for="Webkul\Rmasystem\Api\Data\ConversationSearchResultsInterface"
+                type="Magento\Framework\Api\SearchResults" />
+    <preference for="Webkul\Rmasystem\Api\Data\ReasonSearchResultsInterface"
+                type="Magento\Framework\Api\SearchResults" />
+    <preference for="Webkul\Rmasystem\Api\Data\RmaitemSearchResultsInterface"
+                type="Magento\Framework\Api\SearchResults" />
+    <preference for="Webkul\Rmasystem\Api\Data\ShippinglabelSearchResultsInterface"
+                type="Magento\Framework\Api\SearchResults" />
+    <preference for="Webkul\Rmasystem\Api\OrderDetailsInterface"
+                type="Webkul\Rmasystem\Model\OrderDetails" />
+    <preference for="Webkul\Rmasystem\Api\GuestOrderDetailsInterface"
+                type="Webkul\Rmasystem\Model\GuestOrderDetails" />
+    <preference for="Webkul\Rmasystem\Api\ApplyFilterInterface"
+                type="Webkul\Rmasystem\Model\ApplyFilter" />
+
+    <virtualType name="RmasystemGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AllrmaGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Webkul\Rmasystem\Model\ResourceModel\Allrma\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">RmasystemGirdFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="ReasonGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Webkul\Rmasystem\Model\ResourceModel\Reason\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">RmasystemGirdFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="ShippinglabelGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Webkul\Rmasystem\Model\ResourceModel\Shippinglabel\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">RmasystemGirdFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="CustomfieldGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Webkul\Rmasystem\Model\ResourceModel\Customfield\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">RmasystemGirdFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Webkul\Rmasystem\Model\ResourceModel\Allrma\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">wk_rma</argument>
+            <argument name="eventPrefix" xsi:type="string">rmasystem_allrma_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">allrma_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Webkul\Rmasystem\Model\ResourceModel\Allrma</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Webkul\Rmasystem\Model\ResourceModel\Reason\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">wk_rma_reason</argument>
+            <argument name="resourceModel" xsi:type="string">Webkul\Rmasystem\Model\ResourceModel\Reason</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Webkul\Rmasystem\Model\ResourceModel\Shippinglabel\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">wk_rma_label</argument>
+            <!-- <argument name="eventPrefix" xsi:type="string">rmasystem_shippinglabel_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">shippinglabel_grid_collection</argument> -->
+            <argument name="resourceModel" xsi:type="string">Webkul\Rmasystem\Model\ResourceModel\Shippinglabel</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Webkul\Rmasystem\Model\ResourceModel\Customfield\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">wk_rma_customfield</argument>
+            <argument name="resourceModel" xsi:type="string">Webkul\Rmasystem\Model\ResourceModel\Customfield</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="RmasystemAllrmaIndexGridSyncInsert" type="Webkul\Rmasystem\Observer\GridSyncInsertObserver">
+        <arguments>
+            <argument name="entityGrid" xsi:type="object">Webkul\Rmasystem\Model\ResourceModel\Allrma\Grid</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="rmasystem_allrma_listing_data_source" xsi:type="string">Webkul\Rmasystem\Model\ResourceModel\Allrma\Grid\Collection</item>
+                <item name="rmasystem_reason_listing_data_source" xsi:type="string">Webkul\Rmasystem\Model\ResourceModel\Reason\Grid\Collection</item>
+                <item name="rmasystem_shippinglabel_listing_data_source" xsi:type="string">Webkul\Rmasystem\Model\ResourceModel\Shippinglabel\Grid\Collection</item>
+                <item name="rmasystem_customfield_listing_data_source" xsi:type="string">Webkul\Rmasystem\Model\ResourceModel\Customfield\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <preference for="Magento\Framework\Mail\Template\TransportBuilder" type="Webkul\Rmasystem\Mail\Template\TransportBuilder" />
+</config>

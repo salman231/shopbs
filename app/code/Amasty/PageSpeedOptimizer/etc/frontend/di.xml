@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_PageSpeedOptimizer
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\View\Page\Config\Renderer">
+        <plugin name="AmastyExcludeJs" type="Amasty\PageSpeedOptimizer\Plugin\RequireJsExclude" />
+    </type>
+    <type name="Magento\Framework\View\Layout">
+        <plugin name="AmastyModifyOutput" type="Amasty\PageSpeedOptimizer\Plugin\ModifyOutput" />
+    </type>
+    <type name="Magento\Framework\View\Asset\MergeStrategy\Direct">
+        <plugin name="MoveFont" type="Amasty\PageSpeedOptimizer\Plugin\MoveFont" />
+    </type>
+    <type name="Magento\Framework\View\Result\Page">
+        <plugin name="CheckPageLayoutOnNull" type="Amasty\PageSpeedOptimizer\Plugin\CheckPageLayoutOnNull" />
+    </type>
+</config>

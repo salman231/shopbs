@@ -1,0 +1,36 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_PageSpeedOptimizer
+ */
+?>
+<?php
+/** @var \Magento\Backend\Block\Template $block */
+?>
+
+<div>
+    <div class="amasty-page-speed-step"><?= $block->escapeHtml(__('Step 3')) ?></div>
+
+    <?= $block->escapeHtml(__('Use the console once again. Launch the following CLI commands one by one and click the Finish Button:')); ?>
+</div>
+
+<div class="amasty-page-speed-code">
+    <div>rm -rf pub/static/_cache/merged/*</div>
+    <div>php bin/magento setup:static-content:deploy <small>your locales</small></div>
+</div>
+
+<script>
+    require(["jquery", "prototype"], function (jquery) {
+        var button = jquery('#amoptimizer_settings_javascript_super_bundling');
+
+        button.click(function(){
+            button.prepend('<input type="hidden" name="am-bundling-step4" value="1" />');
+            button.attr('disabled', true);
+            jquery('#save').click();
+        });
+        jquery(function () {
+            jquery('#amoptimizer_settings_javascript-head').click();
+        });
+    });
+</script>

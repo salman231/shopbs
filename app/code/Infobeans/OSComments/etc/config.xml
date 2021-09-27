@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+ * InfoBeans Sales Shipment Comment Extension
+ *
+ * @category   Infobeans
+ * @package    Infobeans_OSComments
+ * @version    2.0.0
+ *
+ * Release with version 2.0.0
+ *
+ * @author     InfoBeans Technologies Limited http://www.infobeans.com/
+ * @copyright  Copyright (c) 2017 InfoBeans Technologies Limited
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <infobeans_oscomments>
+            <general>
+                <enable_module>1</enable_module>
+                <enable_admin>1</enable_admin>
+                <enable_frontend>1</enable_frontend>
+                <shipping_label>Shipping Comments</shipping_label>
+            </general>
+        </infobeans_oscomments>
+    </default>
+</config>

@@ -1,0 +1,166 @@
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<!--@subject {{trans "Header"}} @-->
+<!--@vars {
+"var logo_url":"Email Logo Image URL",
+"var logo_alt":"Email Logo Alt Text",
+"var logo_height":"Email Logo Image Height",
+"var logo_width":"Email Logo Image Width",
+"var template_styles|raw":"Template CSS"
+} @-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<style type="text/css">
+
+
+
+table { border-collapse: collapse !important; }	
+body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+
+img { 
+border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none;
+-ms-interpolation-mode: bicubic; /* Allow smoother rendering of resized image in Internet Explorer */
+}
+
+h1 { font-size: 26px; line-height: 1.2;}
+h2 {font-size: 24px; line-height: 1.2;}
+h3 {font-size: 22px; line-height: 1.1;}
+h4 {font-size: 20px; line-height: 1.1;}
+h5 {font-size: 18px; line-height: 1.1;}
+h6 {font-size: 16px; line-height: 1.1;}
+
+a[x-apple-data-detectors] {color: inherit !important;text-decoration: none !important;font-size: inherit !important;font-family: inherit !important;font-weight: inherit !important;line-height: inherit !important;}
+a {color: #044286;text-decoration: none !important; }
+a:hover { color: #000000 !important;text-decoration: none !important;}
+
+div[style*="margin: 16px 0;"] { margin: 0 !important; }
+.btn-secondary { border-radius: 10px; background: linear-gradient(to right, #9028df 0%,#f3189e 100%); }
+
+.topmenu tr td a:hover{color: #e7a933 !important;}
+
+.order-details h3{font-size:14px; font-weight: bold;line-height:16px; color: #ffffff; text-align:center; padding: 5px;margin:0px !important;text-transform:uppercase;background-color: #6aad61;border-radius: 20px 20px 0 0;}
+.order-details p{ padding:10px; margin-top: -2px;border:5px solid #6aad61; border-radius: 0 0 20px 20px;}
+.order-details dl dt{ padding:10px; margin-top: -2px;border:5px solid #6aad61; border-radius: 0 0 20px 20px;}
+
+thead {background-color: #c3c4c6 !important;}
+tfoot tr th {background-color: #c3c4c6 !important;}
+tfoot tr td {background-color: #c3c4c6 !important;}
+
+
+{{var template_styles|raw}}
+{{css file="css/email.css"}}
+		</style>
+
+
+	</head>
+<body style="width:100% !important;background:#f4ecfa; margin:0px !important; padding:0px !important;-webkit-text-size-adjust:none !important; -moz-text-size-adjust:none !important; -ms-text-size-adjust:none !important; -webkit-text-size-adjust:none; -moz-text-size-adjust:none; -ms-text-size-adjust:none;">
+{{inlinecss file="css/email-inline.css"}}
+
+		<!-- Begin wrapper table -->
+		<table class="wrapper" width="100%">
+			<tr>
+				<td class="wrapper-inner" align="center" >
+					<table class="main" align="center">
+
+
+						<tr>
+							<td class="header" width="660px" style="background-color:#ffffff;border-radius: 10px 10px 0 0; padding: 0 !important; border: 1px solid #ccc !important;">
+								<table width="100%" border="0" cellspacing="0" cellpadding="0">
+									
+									
+									<tr>
+										<td>
+											<table style="background-color:#145675;border-radius: 10px 10px 0 0;" width="100%" border="0" cellspacing="0" cellpadding="0">
+												
+												<tr width="100%">
+										<td width="100%" style=" background-color:#6aad61;font-size:14px;color:#ffffff; font-weight:bold;text-align:center; padding: 5px 0px 0px;border-radius: 10px 10px 0 0;">
+											<p>The  Best  Way  to  Shop  The Bahamas</p>
+										</td>
+									</tr>
+												
+												
+												
+												<tr>
+													<td width="100%" style="font-size:0pt; line-height:0pt; text-align:center; padding:15px 5px;">
+														<table width="100%" align="center" border="0" cellspacing="0" cellpadding="0">
+															
+															<tr width="100%">
+																<td width="16%" style="font-size:10pt; line-height:0pt; text-align:center;">
+																	<a style="text-decoration:none;font-size:14px; font-weight:bold; color:#ffffff !important; font-family:verdana, sans-serif;" href="https://shop.bs/department/men.html" target="_blank">MEN</a>
+																</td>
+																<td width="16%" style="font-size:10pt; line-height:0pt; text-align:center;">
+																	<a style="text-decoration:none;font-size:14px; font-weight:bold; color:#ffffff !important; font-family:verdana, sans-serif;" href="https://shop.bs/department/women.html" target="_blank">WOMEN</a>
+																</td>
+																<td width="16%" style="font-size:10pt; line-height:0pt; text-align:center;">
+																	<a style="text-decoration:none;font-size:14px; font-weight:bold; color:#ffffff !important; font-family:verdana, sans-serif;" href="https://shop.bs/department/boys.html" target="_blank">BOYS</a>
+																</td>
+
+																<td width="16%" style="font-size:10pt; line-height:0pt; text-align:center;">
+																	<a style="text-decoration:none;font-size:14px; font-weight:bold; color:#ffffff !important; font-family:verdana, sans-serif;" href="https://shop.bs/department/fashion-girls.html" target="_blank">GIRLS</a>
+																</td>
+
+																<td width="16%" style="font-size:10pt; line-height:0pt; text-align:center;">
+																	<a style="text-decoration:none;font-size:14px; font-weight:bold; color:#ffffff !important; font-family:verdana, sans-serif;" href="https://shop.bs/department/baby.html" target="_blank">BABY</a>
+																</td>
+																<td width="20%" style="font-size:10pt; line-height:0pt; text-align:center;">
+																	<a style="text-decoration:none;font-size:14px; font-weight:bold; color:#ffffff !important; font-family:verdana, sans-serif;" href="https://shop.bs/department/electronics.html" target="_blank">ELECTRONICS</a>
+																</td>
+															</tr>
+														</table>
+														<!-- menu end -->
+													</td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+
+									<tr>
+										<td>
+												<!-- Logo -->
+														<table width="100%" border="0" cellspacing="0" cellpadding="0">
+															<tr>
+
+																<td width="100%" style="text-align:center; padding:5px;">
+
+																	<a class="logo" href="{{store url=""}}">
+																		<img
+                                {{if logo_width}}
+                                    width="{{var logo_width}}"
+                                {{else}}
+                                    width="150"
+                                {{/if}}
+
+                                {{if logo_height}}
+                                    height="{{var logo_height}}"
+                                {{/if}}
+
+                                src="{{var logo_url}}"
+                                alt="{{var logo_alt}}"
+                                border="0"
+                            />
+																	</a>
+																</td>
+															</tr>	
+														</table><!-- Logo -->
+											
+										</td>
+									</tr>
+								</table>
+
+							</td>
+						</tr>
+
+							<tr>
+							<td style="font-family:'verdana',sans-serif;vertical-align: top;background-color: #ffffff;padding: 5px;">
+								<!-- class="main-content" Begin Content -->
+								

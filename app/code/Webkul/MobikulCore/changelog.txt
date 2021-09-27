@@ -1,0 +1,55 @@
+Legend
+
++ Features
+- Bugs
+
+-------------------------------- Version 3.0.8 -------------------------------
+
+	+ implemented new custom column on sales order grid to demonstarte order purchase place.
+
+
+-------------------------------- Version 3.0.7 -------------------------------
+
+	+ implemented app creator
+
+-------------------------------- Version 3.0.6 -------------------------------
+
+	+ implemented scan and go
+	- minor issue fix
+
+
+-------------------------------- Version 3.0.5 -------------------------------
+
+	+ admin can save storeview wise category icons
+	+ ML Kit functionality added for search
+	- fixed other bugs
+
+-------------------------------- Version 3.0.4 -------------------------------
+
+	+ token based customer authentication implemented
+	+ custom collection part added
+	+ notification added on website to download mobile application
+
+-------------------------------- Version 3.0.3 -------------------------------
+
+	+ digest authentication implemented
+	- fixed other minor bugs
+
+-------------------------------- Version 3.0.2 -------------------------------
+
+	+ deeplinking functionality added
+	+ updated according to magento 2.2.x
+	- fixed other bugs
+
+-------------------------------- Version 3.0.1 -------------------------------
+	+ push notification added 
+	- issues fixed related to checkout 
+	- profile pic upload issue fixed
+
+-------------------------------- Version 3.0.0 -------------------------------
+	+ admin can add banner images for product or category type
+	+ admin can add push notification images and content
+	+ admin can set features images for category
+	+ admin can set category banners and icons 
+	+ admin can set api user authentication details
+	+ admin can set authentication session timeout 

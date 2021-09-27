@@ -1,0 +1,87 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_BetterProductReviews
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+/** @var $block \Mageplaza\BetterProductReviews\Block\Review\Form */
+/** @var \Mageplaza\BetterProductReviews\Helper\Data $helper */
+$helper = $this->helper(\Mageplaza\BetterProductReviews\Helper\Data::class);
+?>
+<?php if ($block->isUploadImageEnabled()): ?>
+    <div class="field review-field-images">
+        <label class="label"><span><?php /* @escapeNotVerified */
+                echo __('Attach image(s)') ?></span></label>
+        <?php if ($block->getLimitUploadImage()): ?>
+            <span class="mp-image-limit-text">
+                <?php echo ($block->getLimitUploadImage() == '1') ? __('*You can add up to %1 image', $block->getLimitUploadImage()) : __('*You can add up to %1 images', $block->getLimitUploadImage()) ?>
+            </span>
+        <?php endif; ?>
+        <span class="mp-image-description-text"><?php echo __('Upload your photo (.gif,.jpg,.png).') ?></span>
+        <div class="control">
+            <div id="mp-image-place-holder" class="mp-image mp-image-placeholder">
+                <div id="mp_attachments_uploader" class="uploader">
+                    <div class="file-input-button form-buttons button">
+                        <span><?php echo __('Browse Files...') ?></span>
+                        <input id="file-upload" name="image" multiple="multiple"
+                               type="file" data-bind="event:{ change: onFileSelectedEvent }">
+                    </div>
+                </div>
+                <div id="mp-review-image-wrapper" class="review-image-wrapper">
+                    <i class="fas fa-camera"></i>
+                </div>
+                <div class="mp_image_loader">
+                    <div class="loader">
+                        <img src="<?php echo $block->getViewFileUrl('images/loader-1.gif') ?>"
+                             alt="<?php echo __('Loading...') ?>">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mp-betterproductreviews-message"></div>
+    </div>
+<?php endif; ?>
+<?php if ($block->isRecommendProductEnabled()): ?>
+    <div class="field review-field-recommend">
+        <div class="control">
+            <input type="checkbox" name="recommend" id="recommend_field" class="input-checkbox"
+                   data-bind="checked: recommend"/>
+            <label for="recommend_field" class="label"><span><?php /* @escapeNotVerified */ echo __('I recommend this product') ?></span></label>
+        </div>
+    </div>
+    <input type='hidden' id="commend_hidden_field" name='mp_bpr_recommended_product' data-bind="value: recommendHidden">
+<?php endif; ?>
+<?php if ($block->isTermConditionsEnabled()): ?>
+    <div class="field review-field-term">
+        <div class="control">
+            <label for="term_field" class="label"><span><?php /* @escapeNotVerified */ echo $block->getTermTitle() ?></span></label>
+            <input type="checkbox" name="term" id="term_field" class="input-checkbox"
+                   data-validate="{required:true}" <?php echo ($block->getTermIsChecked()) ? 'checked' : '' ?>/>
+        </div>
+    </div>
+<?php endif; ?>
+<div class="field review-field-verified">
+    <div class="control">
+        <input type="hidden" name="mp_bpr_verified_buyer" id="verified_field"
+               value="<?php echo ($helper->isPurchaser($block->getProductId())) ? '1' : '0' ?>">
+    </div>
+</div>
+<script type="text/javascript">
+    window.mpbetterproductreviews_ajaxUrl = '<?php echo $block->getAjaxUploadImageUrl() ?>';
+    window.mpbetterproductreviews_limitUpload = <?php echo $block->getJsonLimitUploadImage() ?>;
+</script>

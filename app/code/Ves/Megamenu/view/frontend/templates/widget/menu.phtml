@@ -1,0 +1,652 @@
+<?php
+/**
+ * Menu widget template
+ *
+ * @var $block \Ves\Megamenu\Block\Widget\Menu
+ */
+?>
+<?php
+if ($menu = $this->getMenu()) {
+	$html           = $classes = '';
+	$data           = $this->helper("Ves\Megamenu\Helper\Data");
+	$generator      = $this->helper("Ves\Megamenu\Helper\Generator");
+	$mobileTemplate = $menu->getMobileTemplate();
+	$mobile_menu 	= false;
+	//If active mobile menu alias will replace current desktop menu to mobile menu
+	if ($mobileTemplate == 2 && $menu->getMobileMenuAlias() && $this->getMobileDetect()->isMobile()) {
+		$mobile_menu_alias = $menu->getMobileMenuAlias();
+		$old_menu = $menu;
+		$menu = $block->getMenuProfile(0, $mobile_menu_alias);
+		if($menu) {
+			$mobile_menu = true;
+		} else {
+			$menu = $old_menu;
+		}
+	}
+
+	$html = $generator->getMenuCacheHtml($menu);
+
+	if (!$html) {
+		$menuItems  = $menu->getData('menuItems');
+		$structure  = json_decode($menu->getStructure(), true);
+		$categories = [];
+		foreach ($menuItems as $item) {
+			if (isset($item['link_type']) && $item['link_type'] == 'category_link' && isset($item['category']) && !in_array($item['category'], $categories)) {
+				$categories[] = $item['category'];
+			}
+		}
+		$data->setMenuCategories($categories);
+		if (is_array($structure)) {
+			$i = 1;
+			foreach ($structure as $k => $v) {
+				$itemData = $data->renderMenuItemData($v, [], $menuItems);
+				$html .= $data->drawItem($itemData, 0, 1, true, $i);
+				$i++;
+			}
+		}
+	}
+	$mobileTemplate = $menu->getMobileTemplate();
+	if ($mobileTemplate == 0) {
+		$classes = 'ves-offcanvas';
+	} else if ($mobileTemplate == 1) {
+		$classes = 'ves-maccordion';
+	} else if ($mobileTemplate == 2) {
+		$classes = 'ves-mcustommenu';
+	} else if ($mobileTemplate == 3) {
+		$classes = 'ves-mdrilldown';
+	}
+
+	$desktopTemplate = $menu->getDesktopTemplate();
+	if ($desktopTemplate == 'vertical-left' ||  $desktopTemplate == 'vertical-right') {
+		$classes .= ' ves-vertical';
+	}
+	$classes .= ' ves-d' . $desktopTemplate;
+
+	if ($disableItemBlocks = $menu->getData("disable_iblocks")) {
+		$classes .= ' hide-blocks';
+	}
+
+	if ($mobileTemplate == 0) {
+		$classes = 'ves-offcanvas offcanvas-left';
+	} else if ($mobileTemplate == 1) {
+		$classes = 'ves-maccordion';
+	} else if ($mobileTemplate == 2) {
+		$classes = 'ves-mcustommenu';
+	} else if ($mobileTemplate == 3) {
+		$classes = 'ves-mdrilldown';
+	}
+
+	$desktopTemplate = $menu->getDesktopTemplate();
+	if ($desktopTemplate == 'vertical-left' ||  $desktopTemplate == 'vertical-right') {
+		$classes .= ' ves-vertical';
+	}
+	$classes .= ' ves-d' . $desktopTemplate;
+
+	if ($disableItemBlocks = $menu->getData("disable_iblocks")) {
+		$classes .= ' hide-blocks';
+	}
+	
+	$checked = true;
+	$html2 = "";
+
+	try{
+		$html2          = $data->filter($html);
+	} catch (\Exception $e) {
+		$checked = false;
+	}
+	
+	if($checked) {
+		$html = $html2;
+	}
+
+	$event         = $menu->getEvent();
+	$id            = time() . uniqid();
+	$blockId       = $menu->getAlias() .'-'. time();
+	$disableBellow = (int) $menu->getDisableBellow();
+	$navId         = 'nav-'. $menu->getAlias() .'-' . $id;
+	$classes       .= ' ves-megamenu-' . $event . ' ' . $menu->getData("classes") . ' ' . $menu->getAlias();
+	$title         = $this->getData("title");
+	if ($title) $classes .= ' ' . 'has-title';
+	$sticky = $menu->getData('scrolltofixed');
+	$design = $menu->getDesign();
+	$styles = '';
+	if ($design) {
+		if (!is_array($design)) {
+			$design = unserialize($design);
+		}
+		if (isset($design['margin_top']) && $design['margin_top']) {
+			$styles .= 'margin-top:' . $design['margin_top'] . $design['margin_units'] . ';';
+		}
+		if (isset($design['margin_right']) && $design['margin_right']) {
+			$styles .= 'margin-right:' . $design['margin_right'] . $design['margin_units'] . ';';
+		}
+		if (isset($design['margin_bottom']) && $design['margin_bottom']) {
+			$styles .= 'margin-bottom:' . $design['margin_bottom'] . $design['margin_units'] . ';';
+		}
+		if (isset($design['margin_left']) && $design['margin_left']) {
+			$styles .= 'margin-left:' . $design['margin_left'] . $design['margin_units'] . ';';
+		}
+		if (isset($design['border_top_width']) && $design['border_top_width']) {
+			$styles .= 'border-top-width:' . $design['border_top_width'] . $design['border_units'] . ';';
+		}
+		if (isset($design['border_right_width']) && $design['border_right_width']) {
+			$styles .= 'border-right-width:' . $design['border_right_width'] . $design['border_units'] . ';';
+		}
+		if (isset($design['border_bottom_width']) && $design['border_bottom_width']) {
+			$styles .= 'border-bottom-width:' . $design['border_bottom_width'] . $design['border_units'] . ';';
+		}
+		if (isset($design['border_left_width']) && $design['border_left_width']) {
+			$styles .= 'border-left-width:' . $design['border_left_width'] . $design['border_units'] . ';';
+		}
+		if (isset($design['padding_top']) && $design['padding_top']) {
+			$styles .= 'padding-top:' . $design['padding_top'] . $design['padding_units'] . ';';
+		}
+		if (isset($design['padding_right']) && $design['padding_right']) {
+			$styles .= 'padding-right:' . $design['padding_right'] . $design['padding_units'] . ';';
+		}
+		if (isset($design['padding_bottom']) && $design['padding_bottom']) {
+			$styles .= 'padding-bottom:' . $design['padding_bottom'] . $design['padding_units'] . ';';
+		}
+		if (isset($design['padding_left']) && $design['padding_left']) {
+			$styles .= 'padding-left:' . $design['padding_left'] . $design['padding_units'] . ';';
+		}
+		if (isset($design['border_style']) && $design['border_style']) {
+			$styles .= 'border-style: ' . $design['border_style'] . ';';
+		}
+		if (isset($design['border_color']) && $design['border_color']) {
+			$styles .= 'border-color: ' . $design['border_color'] . ';';
+		}
+		if (isset($design['border_top_left_radius']) && $design['border_top_left_radius']) {
+			$styles .= 'border-top-left-radius: ' . $design['border_top_left_radius'] . $design['radius_units'] . ';';
+		}
+		if (isset($design['border_top_right_radius']) && $design['border_top_right_radius']) {
+			$styles .= 'border-top-right-radius: ' . $design['border_top_right_radius'] . $design['radius_units'] . ';';
+		}
+		if (isset($design['border_bottom_right_radius']) && $design['border_bottom_right_radius']) {
+			$styles .= 'border-bottom-right-radius: ' . $design['border_bottom_right_radius'] . $design['radius_units'] . ';';
+		}
+		if (isset($design['border_bottom_left_radius']) && $design['border_bottom_left_radius']) {
+			$styles .= 'border-top-left-radius: ' . $design['border_bottom_left_radius'] . $design['radius_units'] . ';';
+		}
+		if (isset($design['background']) && $design['background']) {
+			$styles .= 'background-color: ' . $design['background'] . ';';
+		}
+		if (isset($design['boxshadow_color']) && $design['boxshadow_color']) {
+			$boxshadowUnits = $design['boxshadow_units'];
+			$styles .= 'box-shadow: ' . ($design['boxshadow_inset']?'boxshadow_inset':'') . ' ' . $design['boxshadow_x'] . $boxshadowUnits . ' ' . $design['boxshadow_y'] . $boxshadowUnits . ' ' . $design['boxshadow_blur'] . $boxshadowUnits . ' ' . $design['boxshadow_spread'] . $boxshadowUnits . ' ' . $design['boxshadow_color'] . ';';
+		}
+	}
+	if ($styles) {
+		$styles = 'style="' . $styles . '"';
+	}
+	?>
+
+	<div id="<?php echo $blockId ?>" class="block ves-megamenu <?php echo $classes ?>" <?php echo $styles; ?>>
+		<?php if ($title) { ?>
+		<div class="block-title"><strong><span><?php echo __($title); ?></span></strong></div>
+		<?php } ?>
+		<?php if($mobileTemplate == 0 || $mobileTemplate == 2){ ?>
+		<div class="navbar ves-navbar">
+			<span class="ves-navtoggle ves-navtoggle<?php echo $blockId ?>">
+				<span><?php echo __('Toggle Nav'); ?></span>
+			</span>
+		</div>
+		<?php } ?>
+		<div class="header-overlay"></div>
+		<div class="navigation navitaion<?php echo $id ?>">
+			<ul id="<?php echo $navId ?>" class="<?php echo $navId ?>"  <?php if($disableBellow>0){ ?>data-disable-bellow="<?php echo $disableBellow ?>"<?php } ?> data-toggle-mobile-nav="false">
+				<?php echo $html; ?>
+			</ul>
+		</div>
+	</div>
+	<script>
+		require(['jquery'
+			<?php if($menu->getData('scrolltofixed')){ ?>,'scrolltofixed'<?php } ?>
+			<?php if ($mobileTemplate == 3 || ($desktopTemplate=='drill')) { ?>,'jquery.drilldown'<?php } ?>
+			], function($) {
+				// $('.price-box.price-final_price', $("#<?php echo $navId ?>")).each(function(){
+				// 	$(this).removeClass('price-box').addClass('price-box1');
+				// 	$(this).attr('data-role','priceBox1');
+				// })
+				$('.price-box', $("#<?php echo $navId ?>")).each(function(){
+					$(this).removeClass('price-box').addClass('price-box1');
+					$(this).attr('data-role','priceBox1');
+				})
+				jQuery(document).ready(function($) {
+					jQuery('#<?php echo $navId ?> p').each(function() {
+						var $this = $(this);
+						if ($this.html().replace(/\s|&nbsp;/g, '').length == 0)
+						$this.remove();
+					});
+
+					<?php if ($event == 'hover' && $desktopTemplate != 'accordion' && $desktopTemplate != 'drill') { ?>
+						$("#<?php echo $navId ?> .nav-item").hover(function() {
+							$(this).addClass('current');
+							var id = $(this).data("dynamic-id");
+							if (id) {
+								$(this).parents(".dynamic-items").find("li").removeClass("dynamic-active");
+								$(this).addClass("dynamic-active");
+								$("#<?php echo $navId ?> ."+id).parent().find(".dynamic-item").removeClass("dynamic-active");
+								$("#<?php echo $navId ?> ."+id).addClass("dynamic-active");
+							}
+							
+							if ($(this).data('hovericon')) {
+								$(this).children('.nav-anchor').find('.item-icon').attr('src', $(this).data('hovericon'));
+							}
+							if ($(this).data('caret') && $(this).data('hovercaret')) {
+								$(this).children('.nav-anchor').find('.ves-caret').removeClass($(this).data('caret')).addClass($(this).data('hovercaret'));
+							}
+
+							var child_anchor = $(this).children('.nav-anchor');
+							$(child_anchor).css({
+								"background-color": $(child_anchor).data("hover-bgcolor"),
+								"color": $(child_anchor).data("hover-color")
+							});
+
+							<?php if ($desktopTemplate == 'horizontal') { ?>
+								if ($(this).hasClass('level0')) {
+									var mParentTop = $('#<?php echo $blockId ?> .navigation').offset().top;
+									var mParentHeight = $(this).parent().height();
+									var mTop =  $(this).height();
+									var mHeight = $(this).height();
+									var mParent = $(this).parent();
+									if (mHeight < mParentHeight) {
+										mTop = $(this).offset().top - mParent.offset().top + mHeight;
+									}
+									$(this).children('.submenu').css({top:mTop});	
+								}
+								<?php } ?>
+
+								if ($(this).hasClass('vertical-item')) $('#<?php echo $blockId ?> .header-overlay').show();
+
+							}, function() {
+								var id = $(this).attr('id');
+								if ($(this).data('iconsrc')) {
+									$(this).children('.nav-anchor').find('.item-icon').attr('src', $(this).data('iconsrc'));
+								}
+								if ($(this).data('caret')) {
+									$(this).children('.nav-anchor').find('.ves-caret').removeClass($(this).data('hovercaret')).addClass($(this).data('caret'));
+								}
+								$(this).removeClass('current');
+								var child_anchor = $(this).children('.nav-anchor');
+								var link_bgcolor = $(child_anchor).data("bgcolor");
+								var link_color = $(child_anchor).data("color");
+								if(!link_bgcolor|| typeof(link_bgcolor) == 'undefined') {
+									link_bgcolor = 'none';
+								}
+								if(!link_color || typeof(link_color) == "undefined") {
+									link_color = 'none';
+								}
+								$(child_anchor).css({
+									"background-color": link_bgcolor,
+									"color": link_color
+								});
+								if ($(this).hasClass('vertical-item')) $('#<?php echo $blockId ?> .header-overlay').hide();
+							});
+						<?php } ?>
+
+
+							<?php if ($event == 'click') { ?>
+								if($("#<?php echo $navId ?> .nav-item").length > 0) {
+									$(document).mouseup(function(e) {
+									    var container = $("#<?php echo $navId ?> .nav-item.level0.current");
+									    var container1 = $("#<?php echo $navId ?> .nav-item.level1.current");
+									    var container2 = $("#<?php echo $navId ?> .nav-item.level2.current");
+									    var container3 = $("#<?php echo $navId ?> .nav-item.level3.current");
+									    // if the target of the click isn't the container nor a descendant of the container
+									    if (!container.is(e.target) && container.has(e.target).length === 0) 
+									    {
+									        $(container).removeClass('current');
+									        $(container).find(".nav-anchor").removeClass("actived");
+									        if ($(container).data('caret')) {
+												$(container).children('.nav-anchor').find('.ves-caret').removeClass($(container).data('hovercaret')).addClass($(container).data('caret'));
+											}
+											if($(container).find(".nav-item.current").length > 0){
+												$(container).find(".nav-item.current").removeClass("current");
+											}
+									        return;
+									    }
+									    if (!container1.is(e.target) && container1.has(e.target).length === 0) 
+									    {
+									        $(container1).removeClass('current');
+									        $(container1).find(".nav-anchor").removeClass("actived");
+									        if($(container1).find(".nav-item.current").length > 0){
+												$(container1).find(".nav-item.current").removeClass("current");
+											}
+									        return;
+									    }
+									    if (!container2.is(e.target) && container2.has(e.target).length === 0) 
+									    {
+									        $(container2).removeClass('current');
+									        $(container2).find(".nav-anchor").removeClass("actived");
+									        if($(container2).find(".nav-item.current").length > 0){
+												$(container2).find(".nav-item.current").removeClass("current");
+											}
+									        return;
+									    }
+									    if (!container3.is(e.target) && container3.has(e.target).length === 0) 
+									    {
+									        $(container3).removeClass('current');
+									        $(container3).find(".nav-anchor").removeClass("actived");
+									        if($(container3).find(".nav-item.current").length > 0){
+												$(container3).find(".nav-item.current").removeClass("current");
+											}
+									        return;
+									    }
+									});
+
+									$("#<?php echo $navId ?> .nav-item > .nav-anchor").click(function(e) {
+										if($(this).hasClass("actived")) {
+											if ($(window).width() < 768) {
+												return true;
+											}
+											var obj = $(this).parents(".nav-item").eq(0);
+											if ($(obj).children('.submenu').length > 0 && !$(obj).hasClass("subgroup")) {
+												e.preventDefault();
+												$(this).removeClass("actived");
+												if($(obj).hasClass('current')) {
+													$(obj).removeClass('current');
+												}
+												if ($(obj).data('caret')) {
+													$(obj).children('.nav-anchor').find('.ves-caret').removeClass($(obj).data('hovercaret')).addClass($(obj).data('caret'));
+												}
+
+												var container = $("#<?php echo $navId ?> .nav-item.level0.current");
+											    var container1 = $("#<?php echo $navId ?> .nav-item.level1.current");
+											    var container2 = $("#<?php echo $navId ?> .nav-item.level2.current");
+											    var container3 = $("#<?php echo $navId ?> .nav-item.level3.current");
+											    // if the target of the click isn't the container nor a descendant of the container
+
+											    if (!container.is(e.target) && container.has(e.target).length === 0) 
+											    {
+											        $(container).removeClass('current');
+											        return false;
+											    }
+											    if (!container1.is(e.target) && container1.has(e.target).length === 0) 
+											    {
+											        $(container1).removeClass('current');
+											        return false;
+											    }
+											    if (!container2.is(e.target) && container2.has(e.target).length === 0) 
+											    {
+											        $(container2).removeClass('current');
+											        return false;
+											    }
+											    if (!container3.is(e.target) && container3.has(e.target).length === 0) 
+											    {
+											        $(container3).removeClass('current');
+											        return false;
+											    }
+												return false;
+											}
+										} else {
+											var obj = $(this).parents(".nav-item").eq(0);
+											if ($(obj).children('.submenu').length > 0 && !$(obj).hasClass("subgroup")) {
+												if ($(obj).hasClass('level0')) {
+													$('#<?php echo $navId ?> > .nav-item').removeClass('current');
+												}
+												if($(obj).hasClass('current')) {
+													$(obj).removeClass('current');
+												} else {
+													$(obj).addClass('current');
+													$(this).addClass("actived");
+												}
+												
+												if ($(obj).data('hovericon')) {
+													$(obj).children('.nav-anchor').find('.item-icon').attr('src', $(obj).data('hovericon'));
+												}
+												if ($(obj).data('caret') && $(obj).data('hovercaret')) {
+													$(obj).children('.nav-anchor').find('.ves-caret').removeClass($(obj).data('caret')).addClass($(obj).data('hovercaret'));
+												}
+
+												return false;
+											}
+										}
+									});
+
+									$("#<?php echo $navId ?> .nav-item").hover(function() {
+										var id = $(this).data("dynamic-id");
+										if (id) {
+											$(this).addClass('current');
+											$(this).parents(".dynamic-items").find("li").removeClass("dynamic-active");
+											$(this).addClass("dynamic-active");
+											$("#<?php echo $navId ?> ."+id).parent().find(".dynamic-item").removeClass("dynamic-active");
+											$("#<?php echo $navId ?> ."+id).addClass("dynamic-active");
+
+											if ($(this).data('hovericon')) {
+												$(this).children('.nav-anchor').find('.item-icon').attr('src', $(this).data('hovericon'));
+											}
+											if ($(this).data('caret') && $(this).data('hovercaret')) {
+												$(this).children('.nav-anchor').find('.ves-caret').removeClass($(this).data('caret')).addClass($(this).data('hovercaret'));
+											}
+
+											var child_anchor = $(this).children('.nav-anchor');
+											$(child_anchor).css({
+												"background-color": $(child_anchor).data("hover-bgcolor"),
+												"color": $(child_anchor).data("hover-color")
+											});
+
+											<?php if ($desktopTemplate == 'horizontal') { ?>
+												if ($(this).hasClass('level0')) {
+													var mParentTop = $('#<?php echo $blockId ?> .navigation').offset().top;
+													var mParentHeight = $(this).parent().height();
+													var mTop =  $(this).height();
+													var mHeight = $(this).height();
+													var mParent = $(this).parent();
+													if (mHeight < mParentHeight) {
+														mTop = $(this).offset().top - mParent.offset().top + mHeight;
+													}
+													$(this).children('.submenu').css({top:mTop});	
+												}
+												<?php } ?>
+
+												if ($(this).hasClass('vertical-item')) $('#<?php echo $blockId ?> .header-overlay').show();
+										}
+										
+										}, function() {
+											var id = $(this).data("dynamic-id");
+											if(id) {
+												if ($(this).data('iconsrc')) {
+													$(this).children('.nav-anchor').find('.item-icon').attr('src', $(this).data('iconsrc'));
+												}
+												if ($(this).data('caret')) {
+													$(this).children('.nav-anchor').find('.ves-caret').removeClass($(this).data('hovercaret')).addClass($(this).data('caret'));
+												}
+												$(this).removeClass('current');
+												var child_anchor = $(this).children('.nav-anchor');
+												var link_bgcolor = $(child_anchor).data("bgcolor");
+												var link_color = $(child_anchor).data("color");
+												if(!link_bgcolor|| typeof(link_bgcolor) == 'undefined') {
+													link_bgcolor = 'none';
+												}
+												if(!link_color || typeof(link_color) == "undefined") {
+													link_color = 'none';
+												}
+												$(child_anchor).css({
+													"background-color": link_bgcolor,
+													"color": link_color
+												});
+												if ($(this).hasClass('vertical-item')) $('#<?php echo $blockId ?> .header-overlay').hide();
+											}
+										});
+								}
+								
+							<?php } ?>
+						
+
+							/** ACCORDION */
+							<?php if ($desktopTemplate == 'accordion') { ?>
+								$('#<?php echo $navId ?> .ves-caret').on('click', function(e) {
+									e.preventDefault();
+									var parent = $(this).parents(".nav-item").eq(0);
+									var subMenu = $(parent).children(".submenu");
+									if (!$(this).hasClass('item-active')) {
+										if ($(parent).data('caret') && $(parent).data('hovercaret')) {
+											$(this).removeClass($(parent).data('caret')).addClass($(parent).data('hovercaret'));
+										}
+										$(this).addClass('item-active');
+										subMenu.stop().slideToggle();
+										setTimeout(function(){
+											subMenu.css({'height':''});
+										}, 200);
+									} else {
+										subMenu.stop().slideToggle();
+										$(this).removeClass('item-active');
+										$(this).removeClass($(parent).data('hovercaret')).addClass($(parent).data('caret'));
+									}
+									return false;
+								});
+								<?php } ?>
+
+								/* OPENER */
+								$('#<?php echo $navId ?> .opener').on('click', function(e) {
+									e.preventDefault();
+									$("#<?php echo $navId ?> .nav-item").removeClass("item-active");
+									var parent = $(this).parents(".nav-item").eq(0);
+									$(this).toggleClass('item-active');
+									var subMenu = $(parent).find(".submenu").eq(0);
+									subMenu.stop().slideToggle();
+									subMenu.css({'height':''});
+									return false;	
+								});
+
+								/* TOGGLE */
+								$("#<?php echo $blockId ?> .ves-navtoggle<?php echo $blockId ?>").click(function() {
+									$('html').removeClass('nav-before-open nav-open');
+									$('.ves-overlay<?php echo $blockId ?>').show();
+									$("#<?php echo $blockId ?>").append('<div class="ves-overlay ves-overlay<?php echo $blockId ?>"></div>');
+									
+									$('#<?php echo $navId ?>').css("left", "0px");
+									if ($('html').hasClass('ves-navopen')) {
+										$('html').removeClass('ves-navopen');
+										setTimeout(function () {
+											$('html').removeClass('ves-nav-before-open');
+										}, 300);
+									}	 else {
+										$('html').addClass('ves-nav-before-open');
+										setTimeout(function () {
+											$('html').addClass('ves-navopen');
+										}, 42);
+									}
+								});
+
+								/* OFF-CANVAS */
+								$(".ves-overlay<?php echo $blockId ?>").click(function(){
+									$('#<?php echo $navId ?>').css("left","0px");
+									$('html').removeClass('ves-navopen');
+									setTimeout(function () {
+										$('html').removeClass('ves-nav-before-open');
+									}, 300);
+									$(this).remove();
+									return false;
+								});
+
+								/* STICKY MENY */
+								<?php if($menu->getData('scrolltofixed')){ ?>
+									$('#<?php echo $blockId ?>').scrollToFixed({
+										zIndex: 999
+									});
+								<?php } ?>
+
+								var mobileDrill, desktopDrill;
+								/* WINDOW RESIZE */
+								$(window).on("resize", function() {
+									if ($(window).width() < 768) {
+										$("#<?php echo $blockId ?>").addClass("nav-mobile").removeClass('nav-desktop');
+
+										<?php if ($desktopTemplate == 'drill') { ?>
+											$('#<?php echo $blockId ?> .drill-opener').hide();
+											$('#<?php echo $blockId ?>').css('width', '');
+											if (typeof(desktopDrill) === 'object') {
+												$('#<?php echo $blockId ?>').drilldown('reset');
+											}
+										<?php } ?>
+
+										/** DRILLDOWN MOBILE MENU */
+										<?php if ($mobileTemplate == 3) { ?>
+											$('#<?php echo $blockId ?> .drill-opener').show();
+											mobileDrill = $('#<?php echo $blockId ?>').drilldown({
+												selector: '.drill-opener',
+												cssClass: {
+													container: 'navitaion<?php echo $id ?>',
+													root: '<?php echo $navId ?>',
+													sub: 'submenu',
+													back: 'drilldown-back'
+												},
+												speed: 300
+											});
+											<?php } ?>
+											$('#<?php echo $blockId ?> .opener').removeClass('item-active');
+										} else {
+											$("#<?php echo $blockId ?> .submenu").css({'display':''});
+											$("#<?php echo $blockId ?>").removeClass("nav-mobile").addClass('nav-desktop');
+
+											<?php if ($mobileTemplate == 3) { ?>
+												$('#<?php echo $blockId ?> .drill-opener').hide();
+												$('#<?php echo $blockId ?>').css('width', '');
+												if (typeof(mobileDrill) === 'object') {
+													$('#<?php echo $blockId ?>').drilldown('reset');
+												}
+
+												$('#<?php echo $blockId ?>').find('.submenu').each(function() {
+													var subWidth = $(this).data('width');
+													if (!subWidth) {
+														subWidth = '100%';
+													}
+													$(this).css('width', subWidth);
+												});
+											<?php } ?>
+												
+											/** DRILLDOWN MOBILE MENU */
+											<?php if ($desktopTemplate=='drill') { ?>
+												$('#<?php echo $blockId ?> .drill-opener').show();
+												$('#<?php echo $blockId ?>').drilldown({
+													selector: '.drill-opener',
+													cssClass: {
+														container: 'navitaion<?php echo $id ?>',
+														root: '<?php echo $navId ?>',
+														sub: 'submenu',
+														back: 'drilldown-back'
+													},
+													speed: 300
+												});
+											<?php } ?>
+
+											
+											}
+
+					// TABLET
+					$("#<?php echo $navId ?> .nav-item").click(function() {
+						if ($(window).width() >= 768 && $(window).width() < 1024) {
+							var parent = $(this).parent();
+							if ($(parent).children('.submenu').length == 1) {
+								if ($(parent).hasClass('level0')) {
+									if ($(parent).hasClass('current')) {
+										$(parent).removeClass('current');
+										return false;
+									}
+									$("#<?php echo $navId ?> .level0").removeClass('current');
+									var mParent = $('#<?php echo $blockId ?> .navigation').offset().top;
+									var mHeight = $(parent).offset().top;
+									var mTop    = (mHeight - mParent) + $(parent).height();
+									$(parent).children('.submenu').css({top:mTop});
+								}
+								$(parent).addClass('current');
+								if ($(parent).hasClass('submenu-alignleft') || $(parent).hasClass('submenu-alignright')){
+									if (($(parent).offset().left + $(parent).children('.submenu').width()) > $(window).width()) {
+										$(parent).children('.submenu').css('max-width','100%');
+										$(parent).css('position','static');
+									}
+								}
+								return false;
+							}
+						} else {
+							$("#<?php echo $navId ?>").find('.submenu').css('max-width','');
+							$("#<?php echo $navId ?>").find('.submenu-alignleft').css('position','relative');
+						}
+					});
+				}).resize();
+			});
+});
+</script>
+<?php } ?>

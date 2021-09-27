@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ * 
+ *
+ *
+ * @category  Webkul
+ * @package   Webkul_MobikulCore
+ * @author    Webkul <support@webkul.com>
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add 
+            id="Webkul_MobikulCore::mobikul" 
+            title="Mobikul" 
+            module="Webkul_MobikulCore" 
+            sortOrder="10" 
+            resource="Webkul_MobikulCore::mobikul"/>
+
+        <add 
+            id="Webkul_MobikulCore::bannerimage" 
+            title="Manage Banner"
+            module="Webkul_MobikulCore" 
+            sortOrder="1" 
+            parent="Webkul_MobikulCore::mobikul" 
+            action="mobikul/bannerimage" 
+            resource="Webkul_MobikulCore::bannerimage"/>
+
+        <add 
+            id="Webkul_MobikulCore::notification" 
+            title="Manage Notifications" 
+            module="Webkul_MobikulCore" 
+            sortOrder="2" 
+            parent="Webkul_MobikulCore::mobikul" 
+            action="mobikul/notification" 
+            resource="Webkul_MobikulCore::notification"/>
+
+        <add 
+            id="Webkul_MobikulCore::featuredcategories" 
+            title="Manage Featured Categories" 
+            module="Webkul_MobikulCore" 
+            sortOrder="3" 
+            parent="Webkul_MobikulCore::mobikul" 
+            action="mobikul/featuredcategories" 
+            resource="Webkul_MobikulCore::featuredcategories"/>
+
+        <add 
+            id="Webkul_MobikulCore::categoryimages" 
+            title="Manage Category's Banners and Icons" 
+            module="Webkul_MobikulCore" 
+            sortOrder="4" 
+            parent="Webkul_MobikulCore::mobikul" 
+            action="mobikul/categoryimages" 
+            resource="Webkul_MobikulCore::categoryimages"/>
+
+        <add 
+            id="Webkul_MobikulCore::salesorder" 
+            title="Mobikul Order History" 
+            module="Webkul_MobikulCore" 
+            sortOrder="5" 
+            parent="Webkul_MobikulCore::mobikul" 
+            action="mobikul/salesorder" 
+            resource="Webkul_MobikulCore::salesorder"/>
+
+        <add 
+            id="Webkul_MobikulCore::carouselimage" 
+            title="Mobikul Carousel Images" 
+            module="Webkul_MobikulCore" 
+            sortOrder="6" 
+            parent="Webkul_MobikulCore::mobikul" 
+            action="mobikul/carouselimage" 
+            resource="Webkul_MobikulCore::carouselimage"/>
+
+        <add 
+            id="Webkul_MobikulCore::carousel" 
+            title="Mobikul Carousels" 
+            module="Webkul_MobikulCore" 
+            sortOrder="7" 
+            parent="Webkul_MobikulCore::mobikul" 
+            action="mobikul/carousel" 
+            resource="Webkul_MobikulCore::carousel"/>
+
+        <add 
+            id="Webkul_MobikulCore::configuration" 
+            title="Mobikul Configuration" 
+            module="Webkul_MobikulCore" 
+            parent="Webkul_MobikulCore::mobikul" 
+            sortOrder="8" 
+            action="adminhtml/system_config/edit/section/mobikul/" 
+            resource="Webkul_MobikulCore::configuration"/>
+        <add 
+            id="Webkul_MobikulCore::appcreator" 
+            title="Mobikul App Creator" 
+            module="Webkul_MobikulCore" 
+            parent="Webkul_MobikulCore::mobikul" 
+            sortOrder="9" 
+            action="mobikul/appcreator" 
+            resource="Webkul_MobikulCore::appcreator"/>
+    </menu>
+</config>

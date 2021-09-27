@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_PageSpeedOptimizer
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Amasty\PageSpeedOptimizer\Api\QueueRepositoryInterface" type="Amasty\PageSpeedOptimizer\Model\Queue\QueueRepository"/>
+    <preference for="Amasty\PageSpeedOptimizer\Api\Data\QueueInterface" type="Amasty\PageSpeedOptimizer\Model\Queue\Queue"/>
+
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="amopt_generate_queue" xsi:type="object">Amasty\PageSpeedOptimizer\Console\Command\GenerateQueueCommand</item>
+                <item name="amopt_optimize" xsi:type="object">Amasty\PageSpeedOptimizer\Console\Command\OptimizeCommand</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <preference for="Amasty\PageSpeedOptimizer\Model\Output\OutputCompositeInterface" type="Amasty\PageSpeedOptimizer\Model\Output\OutputComposite"/>
+    <type name="Amasty\PageSpeedOptimizer\Model\Output\OutputComposite">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="moveJs" xsi:type="object">Amasty\PageSpeedOptimizer\Model\Output\MoveJsProcessor</item>
+                <item name="lazyLoad" xsi:type="object">Amasty\PageSpeedOptimizer\Model\Output\LazyLoadProcessor</item>
+                <item name="moveFont" xsi:type="object">Amasty\PageSpeedOptimizer\Model\Output\MoveFontProcessor</item>
+                <item name="checkBundling" xsi:type="object">Amasty\PageSpeedOptimizer\Model\Output\CheckBundlingProcessor</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\PageSpeedOptimizer\Plugin\ModifyOutput">
+        <arguments>
+            <argument name="outputChain" xsi:type="object">Amasty\PageSpeedOptimizer\Model\Output\OutputComposite\Proxy</argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\PageSpeedOptimizer\Console\Command\GenerateQueueCommand">
+        <arguments>
+            <argument name="generateQueue" xsi:type="object">Amasty\PageSpeedOptimizer\Model\Image\GenerateQueue\Proxy</argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\PageSpeedOptimizer\Console\Command\OptimizeCommand">
+        <arguments>
+            <argument name="forceOptimization" xsi:type="object">Amasty\PageSpeedOptimizer\Model\Image\ForceOptimization\Proxy</argument>
+            <argument name="queueRepository" xsi:type="object">Amasty\PageSpeedOptimizer\Api\QueueRepositoryInterface\Proxy</argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Deploy\Package\Bundle\RequireJs">
+        <plugin name="amastyBundling" type="Amasty\PageSpeedOptimizer\Plugin\Bundling" />
+    </type>
+    <type name="Magento\Deploy\Service\Bundle">
+        <plugin name="getDeployConfig" type="Amasty\PageSpeedOptimizer\Plugin\Deploy" />
+    </type>
+    <!-- Magento <2.2 support -->
+    <type name="Magento\Framework\View\Asset\Bundle">
+        <plugin name="amastyBundling" type="Amasty\PageSpeedOptimizer\Plugin\BundlingMagento21" />
+    </type>
+    <!-- end -->
+</config>

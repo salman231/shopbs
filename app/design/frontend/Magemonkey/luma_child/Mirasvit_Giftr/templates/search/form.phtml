@@ -1,0 +1,151 @@
+<?php
+/** @var \Mirasvit\Giftr\Block\Search\Result $block * */
+
+$registryType = $this->getRegistryType();
+?>
+
+<div class="giftr-registry-type-general">
+    <div class="heading">
+        <div class="heading-bg">
+            <img src="<?php echo $registryType->getImageUrl('event_image') ?>"
+                alt="<?php  echo $registryType->getName() ?>"/>
+        </div>
+        <div class="event-icon">
+            <?php if ($registryType->hasEventIcon()): ?>
+                <img class="giftr-event-icon" src="<?php echo $registryType->getImageUrl('event_icon',50,50) ?>"
+                    alt="<?php  echo $registryType->getName() ?>"/>
+            <?php endif ?>
+        </div>
+        <div class="giftr-search-form-holder">
+            <!-- <form method="get" class="giftr-search-form" action="<?php //echo $block->getUrl('*/*/*', ['registry_type' => $registryType->getCode()]) ?>"> -->
+                <?php echo $registryType->getCode();
+                if($registryType->getCode() != ''){
+                    $type = $registryType->getCode();
+                }else{
+                    $type = 'all';
+                }
+                ?>
+                <form method="get" class="giftr-search-form dsfsffsd" action="<?php echo $this->getUrl()."giftr/search/result/registry_type/".$type; ?>">
+                <fieldset class="fieldset registry-search">
+                    <div class="field name">
+                        <label class="label" for="name">
+                            <?php echo __('You can find public gift registries by registrant\'s first and last name') ?>
+                        </label>
+                        <div class="control">
+                            <input value="<?php echo $block->getEnteredData('name') ?>"
+                                   class="input-text" id="name" type="text" name="name"
+                                   title="<?php echo __('Registrant Name') ?>"
+                                   placeholder="<?php echo __('Registrant Name') ?>" />
+                        </div>
+                    </div>
+                    <div class="field uid">
+                        <label class="label" for="registry_id">
+                            <?php echo __('Or you can access private gift registries by gift registry identifier') ?>
+                        </label>
+                        <div class="control">
+                            <input value="<?php echo $block->getEnteredData('registry_id') ?>" name="registry_id"
+                                   class="input-text" id="registry_id" type="text"
+                                   title="<?php echo __('Registry ID') ?>"
+                                   placeholder="<?php echo __('Registry ID') ?>" />
+                        </div>
+                    </div>
+                    <div class="field date">
+                        <label class="label" for="event_date">
+                            <?php echo __('Event Date') ?>
+                        </label>
+                        <div class="control">
+                            <input id="datepicker" value="<?php echo $block->getEnteredData('event_date') ?>" name="event_date"
+                                   class="input-text" id="event_date" type="text"
+                                   title="<?php echo __('Event Date') ?>"
+                                   placeholder="MM/DD/YYYY">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                    </div>
+                    <div class="field location">
+                        <label class="label" for="location">
+                            <?php echo __('Event Location') ?>
+                        </label>
+                        <div class="control">
+                            <input value="<?php echo $block->getEnteredData('location') ?>" name="location"
+                                   class="input-text" id="location" type="text"
+                                   title="<?php echo __('Location') ?>"
+                                   placeholder="<?php echo __('Location') ?>" />
+                        </div>
+                    </div>
+                    <div class="field event_type">
+                        <label class="label" for="event_type">
+                            <?php echo __('Event Type') ?>
+                        </label>
+                        <div class="control">
+                            <select class="input-text" id="event_type" type="text" title="<?php echo __('Event Type') ?>" name="event_type">
+                                <?= $block->getEventTypeOptionsHtml()?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="actions-toolbar-registry-search">
+                        <div class="registry-action-btn">
+                            <button class="action action-reset" type="reset"
+                                onclick="window.location.href = '<?php echo $block->getUrl('*/*/*', ['registry_type' => $registryType->getCode()]) ?>'">
+                                <span><span><?php echo __('Reset Search') ?></span></span>
+                            </button>
+                        </div>
+                        <div class="registry-action-btn">
+                            <button class="action action-reset" type="reset" onclick="window.location.href = '<?php echo $block->getUrl('*/*/*') ?>'">
+                                <span><span><?php echo __('Reset All') ?></span></span>
+                            </button>
+                        </div>
+                        <div class="registry-action-btn">
+                            <button class="action search" type="submit" title="<?php echo __('Search') ?>">
+                                <span><?php echo __('Search') ?></span>
+                            </button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    require([
+        "jquery",
+        "mage/calendar"
+    ], function($){
+        $('#datepicker').datepicker({
+            /*prevText: '&#x3c;zurück', prevStatus: '',
+            prevJumpText: '&#x3c;&#x3c;', prevJumpStatus: '',
+            nextText: 'Vor&#x3e;', nextStatus: '',
+            nextJumpText: '&#x3e;&#x3e;', nextJumpStatus: '',
+            monthNames: ['Januar','Februar','März','April','Mai','Juni',
+            'Juli','August','September','Oktober','November','Dezember'],
+            monthNamesShort: ['Jan','Feb','Mär','Apr','Mai','Jun',
+            'Jul','Aug','Sep','Okt','Nov','Dez'],
+            dayNames: ['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'],
+            dayNamesShort: ['So','Mo','Di','Mi','Do','Fr','Sa'],
+            dayNamesMin: ['So','Mo','Di','Mi','Do','Fr','Sa'],*/
+            showMonthAfterYear: false,
+            dateFormat:'mm/dd/yy'
+        });
+    });
+</script>
+<script type="text/javascript">
+    require(["jquery"], function($){
+        $('#event_type').on('change', function(e){
+            var dataCode = $('#event_type :selected').attr('data-code');
+            if (dataCode.length > 0) {
+                var action = $('#event_type').closest('form').attr('action');
+                action = action.split('/');
+                action.reverse();
+                $.each(action, function(index, value) {
+                    if (value.length > 0) {
+                        action[index] = dataCode;
+                        return false;
+                    }
+                });
+                action.reverse();
+                action = action.join('/');
+                $('#event_type').closest('form').attr('action', action);
+            }
+        });
+    });
+</script>
+<?php echo $block->getChildHtml('giftrSearchResult') ?>

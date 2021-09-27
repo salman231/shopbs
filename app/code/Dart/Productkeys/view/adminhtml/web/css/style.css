@@ -1,0 +1,71 @@
+/**
+ * Dart Productkeys Styles
+ *
+ * @package        Dart_Productkeys
+ *
+ */
+.admin__menu .level-1.item-productkeys-title .submenu-group-title {
+    display: block !important;
+}
+.admin__menu .level-0.item-dart > a:before {
+    content: url("../images/dart-logo.png");
+    margin-left: 8px;
+}
+#productkey_order_items {
+    float: right;
+}
+.productkeys_section th, .productkeys_section td {
+    text-align: center;
+}
+#productkeys_mask {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+#productkey_popup {
+    display: none;
+    width: 45%;
+    height: auto;
+    position: fixed;
+    top: 18%;
+    left: 32%;
+    z-index: 1000;
+    background-color: #fff;
+}
+#productkey_popup .keys_title {
+    padding: 10px;
+    font-size: 17px;
+    margin: 0;
+}
+#productkey_popup #productkey_edit tbody, #productkey_popup #productkey_edit tbody tr {
+    background: transparent !important;
+}
+#productkey_popup #productkey_edit td {
+    text-align: left;
+}
+#productkey_popup #productkey_edit .label {
+    width: 35%;
+    padding: 15px;
+}
+#productkey_popup #productkey_edit .value {
+    width: 65%;
+    padding: 10px;
+}
+#productkey_popup #productkey_edit td input {
+    width: 100%;
+    padding: 0 5px;
+}
+#productkey_popup #productkey_edit #prdkey_keys {
+    width: 100%;
+    display: block;
+    resize: vertical;
+}
+#productkey_popup .prdKeys_button {
+    float: right;
+    padding: 15px;
+}

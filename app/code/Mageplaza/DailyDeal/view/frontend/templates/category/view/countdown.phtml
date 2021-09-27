@@ -1,0 +1,86 @@
+<?php /** @noinspection ALL */
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_DailyDeal
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+/** @var \Mageplaza\DailyDeal\Block\Product\View\Countdown $block */
+
+$productId  = $this->getCatProductId();
+
+if ($block->_helperData->checkDealProduct($productId) && $block->isShowCountdown()):
+    $style = $block->getClockStyle();
+    $style5 = ($style === \Mageplaza\DailyDeal\Model\Config\Source\ClockStyle::STYLE_5) ? 'bg-style5' : '';
+    ?>
+    <span class="limit-time-label"><?= __("Limited Time Remaining!"); ?></span>
+    <div id="clockdiv-<?= $productId?>" class="<?= $style5 ?> mpclock"
+         data-mage-init='{"dataTimeCountdown": <?= $block->getTimeCountdownData($productId); ?>}'>
+        <div class="bg-outer <?= $style ?> category">
+            <span class="<?= $style ?>-txt1 category countdown-number days-<?= $productId ?>"></span>
+            <div class="<?= $style ?>-txt2 category countdown-text"><?= __("Days"); ?></div>
+        </div>
+        <div class="bg-outer <?= $style ?> category">
+            <span class="<?= $style ?>-txt1 category countdown-number hours-<?= $productId ?>"></span>
+            <div class="<?= $style ?>-txt2 category countdown-text"><?= __("Hours"); ?></div>
+        </div>
+        <div class="bg-outer <?= $style ?> category">
+            <span class="<?= $style ?>-txt1 category countdown-number minutes-<?= $productId ?>"></span>
+            <div class="<?= $style ?>-txt2 category countdown-text"><?= __("Minutes"); ?></div>
+        </div>
+        <div class="bg-outer <?= $style ?> category">
+            <span class="<?= $style ?>-txt1 category countdown-number seconds-<?= $productId ?>"></span>
+            <div class="<?= $style ?>-txt2 category countdown-text"><?= __("Seconds"); ?></div>
+        </div>
+    </div>
+    <style>
+        .bg-outer .countdown-number {
+            color: <?= $block->getNumberColorCountdown() ?>;
+        }
+
+        .bg-outer .countdown-text {
+            color: <?= $block->getTextColorCountdown() ?>;
+        }
+        <?php if ($style === 'deal_style_1'): ?>
+        #clockdiv-<?= $productId?> {
+            background: <?= $block->getOuterCountdownBg() ?>;
+            border-color: <?= $block->getOuterCountdownBg() ?>;
+        }
+        <?php endif; ?>
+
+        <?php if ($style === 'deal_style_2' || $style === 'deal_style_3' || $style === 'deal_style_4'): ?>
+        .bg-outer {
+            background: <?= $block->getOuterCountdownBg() ?>;
+            border-color: <?= $block->getOuterCountdownBg() ?>;
+        }
+        <?php endif; ?>
+
+        <?php if ($style === 'deal_style_5'): ?>
+        .bg-style5 {
+            background: <?= $block->getOuterCountdownBg() ?>;
+            border-color: <?= $block->getOuterCountdownBg() ?>;
+        }
+        <?php endif; ?>
+
+        <?php if ($style === \Mageplaza\DailyDeal\Model\Config\Source\ClockStyle::STYLE_4): ?>
+        .bg-outer .countdown-number {
+            background: <?= $block->getInnerCountdownBg() ?>;
+        }
+        <?php endif; ?>
+    </style>
+<?php endif; ?>
+

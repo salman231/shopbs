@@ -1,0 +1,95 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_AutoRelated
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+if (!$block->isHidden()) :
+    $totalImpression = (int)$block->getTotalImpression();
+    $totalClick = (int)$block->getTotalClick();
+    $childInfo = $block->getChildInfo();
+    ?>
+    <div class="entry-edit" id="statistic-general-lable">
+        <fieldset class="fieldset admin__fieldset ">
+            <legend class="admin__legend legend">
+                <span><?= /** @noEscape */ __('Statistic'); ?></span>
+            </legend>
+        </fieldset>
+    </div>
+    <div>
+        <label>
+            <h1><?= /** @noEscape */ __('Total'); ?></h1>
+        </label>
+        <br/>
+        <div class="autorelated-statistic">
+            <div class="autorelated-statistic-block autorelated-statistic-ctr">
+                <span><?= /** @noEscape */ $block->getCtr($totalImpression, $totalClick); ?></span>
+                <strong><?= /** @noEscape */ __('CTR'); ?></strong>
+            </div>
+            <div class="autorelated-statistic-block autorelated-statistic-click">
+                <span><?= /** @noEscape */ $totalClick; ?></span>
+                <strong><?= /** @noEscape */ __('Click(s)'); ?></strong>
+            </div>
+            <div class="autorelated-statistic-block autorelated-statistic-imp">
+                <span><?= /** @noEscape */ $totalImpression; ?></span>
+                <strong><?= /** @noEscape */ __('Impression(s)'); ?></strong>
+            </div>
+        </div>
+        <?php if (!empty($childInfo)) : ?>
+            <br/>
+            <label>
+                <h1><?= /** @noEscape */ __('Parent'); ?></h1>
+            </label>
+            <br/>
+            <div class="autorelated-statistic parent">
+                <div class="autorelated-statistic-block autorelated-statistic-ctr">
+                    <span><?= /** @noEscape */ $block->getCtr($block->getCurrentImpression(), $block->getCurrentClick()); ?></span>
+                    <strong><?= /** @noEscape */ __('CTR'); ?></strong>
+                </div>
+                <div class="autorelated-statistic-block autorelated-statistic-click">
+                    <span><?= /** @noEscape */ $block->getCurrentClick(); ?></span>
+                    <strong><?= /** @noEscape */ __('Click(s)'); ?></strong>
+                </div>
+                <div class="autorelated-statistic-block autorelated-statistic-imp">
+                    <span><?= /** @noEscape */ $block->getCurrentImpression(); ?></span>
+                    <strong><?= /** @noEscape */ __('Impression(s)'); ?></strong>
+                </div>
+            </div>
+            <br/>
+            <label>
+                <h1><?= /** @noEscape */ __('Child'); ?></h1>
+            </label>
+            <br/>
+            <div class="autorelated-statistic child">
+                <div class="autorelated-statistic-block autorelated-statistic-ctr">
+                    <span><?= /** @noEscape */ $block->getCtr($childInfo['impression'], $childInfo['click']); ?></span>
+                    <strong><?= /** @noEscape */ __('CTR'); ?></strong>
+                </div>
+                <div class="autorelated-statistic-block autorelated-statistic-click">
+                    <span><?= /** @noEscape */ $childInfo['click']; ?></span>
+                    <strong><?= /** @noEscape */ __('Click(s)'); ?></strong>
+                </div>
+                <div class="autorelated-statistic-block autorelated-statistic-imp">
+                    <span><?= /** @noEscape */ $childInfo['impression']; ?></span>
+                    <strong><?= /** @noEscape */ __('Impression(s)'); ?></strong>
+                </div>
+            </div>
+        <?php endif; ?>
+        <br>
+    </div>
+<?php endif; ?>

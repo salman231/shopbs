@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Store/etc/config.xsd">
+    <default>
+        <payment>
+            <chargeanywhere>
+                <active>1</active>
+                <title>Chargeanywhere</title>
+                <order_status>pending_payment</order_status>
+                <instructions>Instruction.</instructions>
+                <payment_action>authorize</payment_action>
+                <model>Magemonkey\Chargeanywhere\Model\Chargeanywhere</model>
+                <group>offline</group>
+            </chargeanywhere>
+            <!-- payment-config -->
+        </payment>
+    </default>
+</config>

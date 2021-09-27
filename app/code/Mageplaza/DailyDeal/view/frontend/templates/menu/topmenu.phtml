@@ -1,0 +1,35 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_DailyDeal
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+?>
+<?php /** @var \Mageplaza\DailyDeal\Block\Link\AllMenu $block */
+if ($block->canShowLink(\Mageplaza\DailyDeal\Model\Config\Source\ShowLinks::CATEGORY_LINK)): ?>
+    <?php $pageTitle = $block->getPageTitle(); ?>
+    <li class="level0 nav-6 last level-top ui-menu-item" role="presentation">
+        <a href="<?= /* @noEscape */ $block->getPageUrl() ?>"
+           class="level-top ui-corner-all" id="ui-id-8"
+           tabindex="-1"
+           role="menuitem"
+           title="<?= /* @noEscape */ $pageTitle ?>">
+            <span><?= /* @noEscape */ $pageTitle ?></span>
+        </a>
+    </li>
+<?php endif; ?>
+

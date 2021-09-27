@@ -1,0 +1,104 @@
+<!--@subject New RMA Request @-->
+<!--@vars
+{"store url=\"\"":"Store Url",
+"skin url=\"images/logo_email.gif\" _area='frontend'":"Email Logo Image"}
+@-->
+<!--@styles
+body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+@-->
+{{template config_path="design/email/header_template"}}
+
+        <table>
+            <tr>
+                <td align="center" valign="top" style="padding:20px 0 20px 0">
+                    <table bgcolor="#FFFFFF" cellspacing="0" cellpadding="10" border="0" width="650" style="border:1px solid #E0E0E0;">
+                        <tr>
+                            <td valign="top">
+                                <h1 style="font-size:22px;font-weight:normal;line-height:22px;margin:0 0 11px 0;">{{trans "Hello"}} {{var receiver_name}},</h1>
+                                <p>{{trans "%title" title=$title}}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table cellspacing="0" cellpadding="0" border="0" width="650">
+                                    <tbody>
+                                        <tr>
+                                            <th align="left" bgcolor="#EAEAEA" style="font-size:13px;padding:5px 9px 6px 9px;line-height:1em;">{{trans "RMA Id :"}}</th>
+                                            <th align="left" bgcolor="#EAEAEA" style="font-size:13px;padding:5px 9px 6px 9px;line-height:1em;">{{trans "Order Id :"}}</th>
+                                        </tr>
+                                        <tr>
+                                            <td valign="top" style="font-size:12px;padding:7px 9px 9px 9px;border-left:1px solid #EAEAEA;border-bottom:1px solid #EAEAEA;border-right:1px solid #EAEAEA;">
+                                               {{var rma_id}}
+                                            </td>
+                                            <td valign="top" style="font-size:12px;padding:7px 9px 9px 9px;border-left:1px solid #EAEAEA;border-bottom:1px solid #EAEAEA;border-right:1px solid #EAEAEA;">
+                                               {{var order_id}}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody>
+                                        <tr>
+                                            <th align="left" bgcolor="#EAEAEA" style="font-size:13px;padding:5px 9px 6px 9px;line-height:1em;">{{trans "Package Condition :"}}</th>
+                                            <th align="left" bgcolor="#EAEAEA" style="font-size:13px;padding:5px 9px 6px 9px;line-height:1em;">{{trans "Resolution Type :"}}</th>
+                                        </tr>
+                                        <tr>
+                                            <td valign="top" style="font-size:12px;padding:7px 9px 9px 9px;border-left:1px solid #EAEAEA;border-bottom:1px solid #EAEAEA;border-right:1px solid #EAEAEA;">
+                                               {{var package_condition}}
+                                            </td>
+                                            <td valign="top" style="font-size:12px;padding:7px 9px 9px 9px;border-left:1px solid #EAEAEA;border-bottom:1px solid #EAEAEA;border-right:1px solid #EAEAEA;">
+                                               {{var resolution_type}}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    {{var delivery_status|raw}}
+                                    <tbody>
+                                        <tr>
+                                            <th colspan="2" align="left" bgcolor="#EAEAEA" style="font-size:13px;padding:5px 9px 6px 9px;line-height:1em;">{{trans "Additional Information :"}}</th>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" valign="top" style="font-size:12px;padding:7px 9px 9px 9px;border-left:1px solid #EAEAEA;border-bottom:1px solid #EAEAEA;border-right:1px solid #EAEAEA;">
+                                               {{var additional_info | raw}}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody>
+                                        <tr>
+                                            <th colspan="2" align="left" bgcolor="#EAEAEA" style="font-size:13px;padding:5px 9px 6px 9px;line-height:1em;">{{trans "%rma_link_label" rma_link_label=$rma_link_label}}</th>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" valign="top" style="font-size:12px;padding:7px 9px 9px 9px;border-left:1px solid #EAEAEA;border-bottom:1px solid #EAEAEA;border-right:1px solid #EAEAEA;">
+                                               <a href= {{var rma_link}} target="_blank">{{var rma_link}}</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table cellspacing="0" cellpadding="0" border="0" width="650" style="border:1px solid #eaeaea">
+                                    <thead>
+                                        <tr>
+                                            <th align="left" bgcolor="#EAEAEA" style="font-size:13px;padding:3px 9px">{{trans "Product Name"}}</th>
+                                            <th align="left" bgcolor="#EAEAEA" style="font-size:13px;padding:3px 9px">Sku</th>
+                                            <th align="center" bgcolor="#EAEAEA" style="font-size:13px;padding:3px 9px">{{trans "Return Qty"}}</th>
+                                            <th align="right" bgcolor="#EAEAEA" style="font-size:13px;padding:3px 9px">{{trans "Reason"}}</th>
+                                        </tr>
+                                    </thead>
+                                    {{var items|raw}}
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td bgcolor="#EAEAEA" align="center" style="background:#EAEAEA;text-align:center;">
+                                <center>
+                                    <p style="font-size:12px;margin:0;">
+                                        <strong>{{trans "Thank you"}}</strong>
+                                    </p>
+                                </center>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+{{template config_path="design/email/footer_template"}}

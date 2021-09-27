@@ -1,0 +1,36 @@
+<div class="active-users-model" outerClick="closeChatPanel">
+	<div class="pannel-control close" data-bind="click: openChatPanel"></div>
+	<header class="clearfix customer-controls">
+		<div class="status-control">
+			<span class="support_status" data-bind="style: { 'background-color': supportStatus()}"></span>
+			<h4 data-bind="text: supportName"></h4>
+		</div>
+		<div class="controls">
+			<span class="chat_status" data-bind="click: showStatus">
+				<div class="wk_chat_status_options list-group"><span class="status_point"></span>
+					<div class="list-group-item chatStatus" id="1"><span class="online_status" data-bind="i18n: 'Online'"></span></div>
+					<div class="list-group-item chatStatus" id="2"><span class="busy_status" data-bind="i18n: 'Busy'"></span></div>
+					<div class="list-group-item chatStatus" id="0"><span class="idle_status" data-bind="i18n: 'Offline'"></span></div>
+				</div>
+			</span>
+		</div>
+	</header>
+	<div class="model-search-bar">
+		<span class="fa fa-search"></span>
+		<input type="text" data-bind="value: searchQuery, valueUpdate: 'keyup'" />
+	</div>
+	<div class="user-list" data-bind="template: { name: 'users-template', foreach: enabledCustomerList() }">
+	</div>
+	<script type="text/html" id="users-template">
+		<div class="user" data-bind="attr: {'id': 'user_'+$rawData.customerId}">
+			<div class="user-details" data-bind="click: $parent.openChatWindow, attr: {'id': 'client_'+$rawData.customerId}">
+				<span data-bind="attr: {'class': 'user-status '+$parent.customerChatStatus(chat_status)}"></span>
+				<p class="user-name" data-bind="text: customerName"></p>
+				<span class="user-email" data-bind="text: email"></span>
+			</div>
+			<!-- <div class="user-control tooltip" data-bind="click: $parent.clearChatHistory, attr: {'id': 'client_'+$rawData.customerId}">
+			<span class="tooltiptext" data-bind="i18n: 'Clear chat history'"></span>
+			</div> -->
+		</div>
+	</script>
+</div>

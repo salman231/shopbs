@@ -1,0 +1,98 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Customform
+ */
+?>
+<?php
+    /** @var $block \Amasty\Customform\Block\Widget\Form\Renderer\Creator */
+    /** @var $element \Magento\Framework\Data\Form\Element\Fieldset */
+    $element = $block->getElement();
+    $containerId = $element->getFieldsetContainerId();
+    $id = $element->getHtmlId();
+    $isCollapsable = $element->getCollapsable();
+    $titleActions = '<div class="actions">' . $element->getHeaderBar() . '</div>';
+?>
+
+<div class="fieldset-wrapper <?php echo($isCollapsable) ? 'admin__collapsible-block-wrapper ' : ''; ?>"
+        id="<?php /* @escapeNotVerified */ echo $containerId ? $containerId : $id . '-wrapper';?>"
+        data-role="<?php /* @escapeNotVerified */ echo $id ?>-wrapper">
+    <div class="fieldset-wrapper-title admin__fieldset-wrapper-title">
+        <strong <?php /* @escapeNotVerified */ echo($isCollapsable) ?
+            'class="admin__collapsible-title" data-toggle="collapse" data-target="#' . $id . '-content"' :
+            'class="title"'; ?>>
+            <span><?php /* @escapeNotVerified */ echo $element->getLegend() ?></span>
+        </strong>
+        <?php /* @escapeNotVerified */ echo $titleActions; ?>
+    </div>
+    <div class="amasty_form_text fieldset-wrapper-content
+                admin__fieldset-wrapper-content <?php echo($isCollapsable) ? ' collapse' : ''; ?>"
+        id="<?php /* @escapeNotVerified */ echo $id ?>-content"
+        data-role="<?php /* @escapeNotVerified */ echo $id ?>-content">
+        <form id="form-builder-pages" data-amcform-js="form-builder-wrap" class="form-builder-wrap">
+            <ul id="tabs" data-amcform-js="tabs-wrap" class="amcform-tabs-wrap -main">
+                <li data-amcform-role="page" class="amcform-tab">
+                    <a href="#page-1" title="<?= $block->escapeHtml('Page 1');?>"
+                       class="amcform-link" data-amcform-role="page-link">
+                        <?= $block->escapeHtml('Page 1');?>
+                    </a>
+                </li>
+                <li data-amcform-js="add-new-page" class="amcform-tab -new">
+                    <a href="#new-page" title="<?= $block->escapeHtml('Create new page');?>" class="amcform-link">
+                        <?= $block->escapeHtml('+ Add Page');?>
+                    </a>
+                    <span data-amcform-js="delete-tab"
+                          class="amcform-delete"
+                          title="<?= $block->escapeHtml('Delete this page');?>"></span>
+                </li>
+            </ul>
+            <div id="page-1" class="fb-editor" data-amcform-js="fb-editor">
+                <div class="amcform-title-edit" data-amcform-js="title-edit">
+                    <label for="page-title-1" class="amcform-label"><?= $block->escapeHtml('Page Title:');?></label>
+                    <div class="amcform-control">
+                        <input type="text" id="page-title-1" class="amcform-input"/>
+                        <p class="note"><?= $block->escapeHtml('Title is used for multi page form only. It is not displayed for 1 page form.');?></p>
+                    </div>
+                </div>
+            </div>
+            <div id="new-page" data-amcform-js="new-page">
+                <div class="amcform-title-edit" data-amcform-js="title-edit-new">
+                    <label for="page-title" class="amcform-label"><?= $block->escapeHtml('Page Title:');?></label>
+                    <div class="amcform-control">
+                        <input type="text" id="page-title" class="amcform-input"/>
+                        <p class="note"><?= $block->escapeHtml('Title is used for multi page form only. It is not displayed for 1 page form.');?></p>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <script type="text/javascript">
+            require([
+                'https://maps.googleapis.com/maps/api/js?libraries=places&key=<?= $block->getGoogleKey() ?>'
+            ], function () {
+            });
+            require([
+                'jquery',
+                'Amasty_Customform/js/form-data'
+            ], function($, initFormBuilder) {
+                $(document).ready(function($) {
+                    var fbOptions = {
+                            dataType: 'json',
+                            frmbFields:  <?php
+                                echo $block->getFrmbFieldsJson();
+                            ?>,
+                            fieldsTypes:  <?php
+                                echo $block->getTypeFieldsJson();
+                            ?>,
+                            messages:  <?php
+                                echo $block->getMessagesJson();
+                            ?>
+                        };
+
+                    initFormBuilder(fbOptions);
+                });
+            });
+        </script>
+    </div>
+</div>

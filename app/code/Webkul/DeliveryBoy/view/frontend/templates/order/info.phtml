@@ -1,0 +1,140 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * PHP version 7.0+
+ *
+ * @category  Webkul
+ * @package   Webkul_DeliveryBoy
+ * @author    Webkul <support@webkul.com>
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+/** @var $block \Magento\Sales\Block\Order\Info */
+$_order = $block->getOrder();
+$deliveryboyOrdersCollection = $block->shouldShowSection();
+$googleMapKey = $block->getGoogleMapKey();
+if (!empty($deliveryboyOrdersCollection) && $deliveryboyOrdersCollection->getSize()): ?>
+    <div class="block block-order-details-view">
+        <div class="block-title">
+            <strong><?= $block->escapeHtml(__('Delivery Boys Information')) ?></strong>
+        </div>
+        <div class="block-content">
+            <?php
+            $deliveryboyOrders = $deliveryboyOrdersCollection->getDeliveryboyOrders();
+            foreach ($deliveryboyOrders as $number => $deliveryboyOrder):
+                $deliveryboyAvatar = $deliveryboyOrder->getDeliveryboyAvatar();
+                $deliveryboyName = $deliveryboyOrder->getDeliveryboyName();
+                $deliveryboyMobile = $deliveryboyOrder->getDeliveryboyMobile();
+                $deliveryboyVehicleNumber = $deliveryboyOrder->getDeliveryboyVehicleNumber();
+                $deliveryboyOrderOtp = $deliveryboyOrder->getDeliveryboyOrderOtp();
+                $deliveryboyAvgRating = $deliveryboyOrder->getDeliveryboyAvgRating();
+                $deliveryboyOrderId = $deliveryboyOrder->getDeliveryboyOrderId(); ?>
+                    <div class="box-order-deliveryboy-info">
+                        <div class="box-content-deliveryboy-info">
+                            <div class="image-container deliveryboy-container">
+                                <img src="<?= $block->escapeUrl($deliveryboyAvatar) ?>"/>
+                            </div>
+                            <div class="data-container deliveryboy-container">
+                                <strong class="box-title">
+                                    <span><?= $block->escapeHtml(__('Details')) ?></span>
+                                </strong><br>
+                                <span><?= $block->escapeHtml($deliveryboyName) ?> </span><br>
+                                <span><?= $block->escapeHtml($deliveryboyMobile) ?> </span><br>
+                                <span><?= $block->escapeHtml($deliveryboyVehicleNumber) ?> </span><br>
+                            </div>
+
+                            <div class="additional-details">
+                                <div class="deliveryboy-container-otp otp-container">
+                                    <label>
+                                        <strong class="box-title"> <?= $block->escapeHtml(__("OTP")) ?>
+                                    </strong> : </label>
+                                    <span><?= $block->escapeHtml($deliveryboyOrderOtp) ?> </span>
+                                </div>
+                                <div class="wk-delivery-boy-rating-summary">
+                                    <span class="label">
+                                        <span><?= $block->escapeHtml($deliveryboyAvgRating . ' ') ?></span>
+                                    </span>
+                                    <div class="rating-result"
+                                        title="<?= $block->escapeHtmlAttr($deliveryboyAvgRating . ' '); ?>
+                                        <?= $block->escapeHtml(__('stars out of ')); ?>5.0">
+                                        <span style="width:<?= $block->escapeHtmlAttr($deliveryboyAvgRating * 20); ?>%">
+                                            <span>
+                                                <span itemprop="ratingValue">
+                                                    <?= $block->escapeHtml($deliveryboyAvgRating); ?>
+                                                </span><?= $block->escapeHtml(__('stars out of ')); ?>
+                                                <span itemprop="bestRating">5.0</span>
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <?=
+                                    $deliveryboyRatingBlock = $block->getLayoutFactory()
+                                        ->create()
+                                        ->createBlock(
+                                            \Webkul\DeliveryBoy\Block\Order\Info\Buttons::class,
+                                            'deliveryboy_ratings_'.$number,
+                                            [
+                                                'data' => [
+                                                    'deliveryboy_order_id' => $deliveryboyOrderId,
+                                                ]
+                                            ]
+                                        )
+                                        ->toHtml(); ?>
+                                <?=
+                                    $deliveryboyRatingBlock = $block->getLayoutFactory()
+                                        ->create()
+                                        ->createBlock(
+                                            \Webkul\DeliveryBoy\Block\Order\Info\TrackButton::class,
+                                            'deliveryboy_track_order_'.$number,
+                                            [
+                                                'data' => [
+                                                    'deliveryboy_order_id' => $deliveryboyOrderId,
+                                                ]
+                                            ]
+                                        )
+                                        ->toHtml(); ?>
+                            </div>
+                        </div>
+                    </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+    <script>
+        require.config({
+            map: {
+                '*': {
+                    'googleMapKey': 'https://maps.googleapis.com/maps/api/js' +
+                        '?key=<?= /* @noEscape */ $googleMapKey; ?>&libraries=places'
+                }
+            }
+        });
+    </script>
+    <script type="text/x-magento-init">
+    {
+        "[data-role=global-messages-wrapper]": {
+            "Magento_Ui/js/core/app": {
+                "components" : {
+                    "global-messages-wrapper": {
+                        "component" : "uiComponent",
+                        "config": {
+                            "template": "Webkul_DeliveryBoy/messages-wrapper"
+                        },
+                        "children": {
+                            "messages": {
+                                "component": "Webkul_DeliveryBoy/js/view/global-messages",
+                                "displayArea": "messages",
+                                "config": {
+                                    "template": "Webkul_DeliveryBoy/global-messages",
+                                    "selector": "[data-role=deliveryboy-global-messages]"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+</script>
+<?php endif; ?>

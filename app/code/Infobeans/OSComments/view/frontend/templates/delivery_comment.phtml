@@ -1,0 +1,35 @@
+<?php
+/**
+ * InfoBeans Sales Shipment Comment Extension
+ *
+ * @category   Infobeans
+ * @package    Infobeans_OSComments
+ * @version    2.0.0
+ *
+ * Release with version 2.0.0
+ *
+ * @author     InfoBeans Technologies Limited http://www.infobeans.com/
+ * @copyright  Copyright (c) 2017 InfoBeans Technologies Limited
+ */ 
+$osHelper = $this->helper('Infobeans\OSComments\Helper\Data');
+if ($osHelper->isModuleEnabled()) {
+    $_order = $block->getOrder();
+    $showComments = $osHelper->showBlankShippingComment();
+    if ($showComments || $_order->getDeliveryComment() != "") {
+        ?>
+        <div class="block block-order-details-view">
+            <div class="block-title">
+                <strong><?php echo __($osHelper->getShippingLabel()) ?></strong>
+            </div>
+            <div class="block-content">
+                <span><?php
+        echo __($_order->getDeliveryComment());
+        if ($showComments && $_order->getDeliveryComment() == "") {
+            echo __("N/A");
+        }
+        ?></span>
+            </div>
+        </div>
+        <?php
+    }
+}?>

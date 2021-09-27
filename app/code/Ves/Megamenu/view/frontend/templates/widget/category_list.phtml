@@ -1,0 +1,241 @@
+<?php
+/**
+ * Categories To Menu Items widget template
+ *
+ * @var $block \Ves\Megamenu\Block\Widget\Categories
+ */
+?>
+<?php
+if ($menuItems = $this->getMenuItems()) {
+	$show_name = $this->getShowName();
+	$show_image = $this->getShowImage();
+	$show_more_items = $this->getShowMoreItems();
+	$title = $this->getTitle();
+	$custom_link = $this->getCustomLink();
+	$image_width = $this->getImageWidth();
+	$image_height = $this->getImageHeight();
+	$level = $this->getLevel();
+	if(!function_exists('MegamenuDrawAnchor')) {
+		function MegamenuDrawAnchor($item, $hasChildren = false, $show_name = true, $show_image = false, $block_object = null)
+		{
+			if($show_image) {
+				$item['show_icon'] = true;
+				$item['icon'] = isset($item['image'])?$item['image']:'';
+				$item['icon'] = $block_object->getCategoryImage($item['icon']);
+				$item['icon_position'] = 'left';
+				$item['icon_classes'] = '';
+				$item['hover_icon'] = '';
+			}
+			$html = $class = $style = $attr = '';
+			// Design
+			if (isset($item['color']) && $item['color']!='') {
+				$style .= 'color: ' . $item['color'] . ';';
+			}
+			if (isset($item['bg_color']) && $item['bg_color']!='') {
+				$style .= 'background-color: ' . $item['bg_color'] . ';';
+			}
+			if (isset($item['inline_css']) && $item['inline_css']!='') {
+				$style .= $item['inline_css'];
+			}
+			if ($style!='') $style = 'style="' . $style . '"';
+
+			$class .= ' nav-anchor';
+			if ($item['is_group']) $class .= ' subitems-group';
+			$href = $item['link'];
+
+			if ($class!='') $class = 'class="' . $class . '"';
+
+			// Attributes
+			if (isset($item['hover_color']) && $item['hover_color']) {
+				$attr .= ' data-hover-color="' . $item['hover_color'] . '"';
+			}
+			if (isset($item['bg_hover_color']) && $item['bg_hover_color']) {
+				$attr .= ' data-hover-bgcolor="' . $item['bg_hover_color'] . '"';
+			}
+
+			if (isset($item['color']) && $item['color']) {
+				$attr .= ' data-color="' . $item['color'] . '"';
+			}
+
+			if (isset($item['bg_color']) && $item['bg_color']) {
+				$attr .= ' data-bgcolor="' . $item['bg_color'] . '"';
+			}
+
+			$target = $item['target']?'target="' . $item['target'] . '"':'';
+			if ($href=='') $href = '#';
+			if ($href == '#') $target = '';
+
+			if(!$show_name) {
+				$item['name'] = "";
+			}
+			if ($item['name']!='' || $item['icon']) {
+				$html .= '<a href="' . $href . '" title="' . strip_tags($item['name']) . '" ' . $target . ' ' . $attr . ' ' . $style . ' ' . $class . '>';
+			}
+
+			if ($item['show_icon'] && $item['icon_classes']!='') {
+				$html .= '<i class="' .$item['icon_classes'] . '"></i>';
+			}
+
+			// Icon Left
+			if ($item['show_icon'] && $item['icon_position']=='left' && $item['icon']!='') {
+				$html .= '<img class="item-icon icon-left" ';
+				if ($item['hover_icon']) $html .= ' data-hoverimg="' . $item['hover_icon'] . '"';
+				$html .= ' src="' . $item['icon'] . '" alt="' . strip_tags($item['name']) . '"/>';
+			}
+
+			if ($item['name']!='') {
+				$html .= '<span>' . $item['name'] . '</span>';
+			}
+
+			// Icon Right
+			if ($item['show_icon'] && $item['icon_position']=='right' && $item['icon']!='') {
+				$html .= '<img class="item-icon icon-right" ';
+				if ($item['hover_icon']) $html .= ' data-hoverimg="' . $item['hover_icon'] . '"';
+				$html .= ' src="' . $item['icon'] . '" alt="' . strip_tags($item['name']) . '"/>';
+			}
+
+			if (isset($item['caret']) && $item['caret']) {
+				$html .= '<i class="ves-caret fa ' . $item['caret'] . '"></i>';
+			}
+
+			if ($hasChildren) $html .= '<span class="opener"></span>';
+
+			if ($hasChildren) $html .= '<span class="drill-opener"></span>';
+
+			if ($item['name']!='') {
+				$html .= '</a>';
+			}
+			return $html;
+		}
+	}
+	if(!function_exists('MegamenuGenerateMenuHtml')) {
+		function MegamenuGenerateMenuHtml($item, $level = 0, $x = 0, $listTag = true, $show_name = true, $show_image = false, $block_object = null) {
+			$html = "";
+			$hasChildren = false;
+			$class = $style = $attr = "";
+			if (isset($item['children']) && count($item['children'])>0) $hasChildren = true;
+			$class .= ' nav-item level' . $level . ' nav-' . $x;
+			// Item Align Type
+			if ($item['align'] == '1') {
+				$class .= ' submenu-left';
+			} else if ($item['align'] == '2') {
+				$class .= ' submenu-right';
+			} else if ($item['align'] == '3') {
+				$class .= ' submenu-alignleft';
+			} else if ($item['align'] == '4') {
+				$class .= ' submenu-alignright';
+			}
+
+			// Group Childs Item
+			if ($item['is_group']) {
+				$class .= ' subgroup ';
+			} else {
+				$class .= ' subhover ';
+			}
+
+			// Disable Dimesion
+			if (((int)$item['disable_bellow'])>0)
+				$attr .= 'data-disable-bellow="' . $item['disable_bellow'] . '"';
+
+			if ($level==0) {
+				$class .=' dropdown level-top';
+			} else {
+				$class .=' dropdown-submenu';
+			}
+			$class .= ' ' . $item['classes'];
+			$link = $item['link'];
+
+			if ($hasChildren) {
+				$class .= ' parent';
+			}
+
+			if (!isset($item['htmlId'])) {
+				$item['htmlId'] = time() . rand();
+			}
+			if ($class!='') $class = 'class="' . $class . '"';
+			if ($listTag) {	
+				$html .= '<li id=' . $item['htmlId'] . ' ' . $class . ' ' . $style . ' ' . $attr . '>';
+			} else {
+				$html .= '<div id=' . $item['htmlId'] . ' ' . $class . ' ' . $style . ' ' . $attr . '>';
+			}
+			
+			$html .= MegamenuDrawAnchor($item, $hasChildren, $show_name, $show_image, $block_object);
+
+			if(isset($item['children']) && ($children = $item['children'])) {
+				$level++;
+				$subClass = $subStyle = $subAttr = '';
+
+				if ($item['sub_width']!='') {
+					$subStyle .= 'width:' . $item['sub_width'] . ';';
+					$subAttr .= 'data-width="' . $item['sub_width'] . '"';
+				}
+				$subClass .= ' submenu';
+				if ($item['is_group']) {
+					$subClass .= ' dropdown-mega';
+				} else {
+					$subClass .= ' dropdown-menu';
+				}
+				if ($subClass!='') $subClass = 'class="' . $subClass . '"';
+				if ($subStyle!='') $subStyle = 'style="' . $subStyle . '"';
+
+				$html .= '<div ' . $subClass . ' ' . $subAttr . ' ' . $subStyle . '>';
+					$html .= '<div class="drilldown-back"><a href="#"><span class="drill-opener"></span><span class="current-cat"></span></a></div>';
+					$html .= '<div class="submenu-inner">';
+						// MAIN CONTENT BLOCK
+						$html .= '<div class="item-content">';
+							$html .= '<div class="level' . $level . ' nav-dropdown ves-column12 category-to-menu-list">';
+								$html .= '<div class="item-content2">';
+								foreach ($children as  $z => $it) {
+									$html .= MegamenuGenerateMenuHtml($it, $level, $x+1, false, $show_name, $show_image, $block_object);
+								}
+								$html .= '</div>';
+							$html .= '</div>';
+						$html .= '</div>';
+					$html .= '</div>';
+				$html .= '</div>';
+			}
+			if ($listTag) {	
+				$html .= '</li>';
+			} else {
+				$html .= '</div>';
+			}
+
+			return $html;	
+		}
+	}
+	$html = "";
+	$next_level = (int)$level;
+	if($title) {
+		$next_level += 2;
+	}
+	foreach($menuItems as $menu_item) {
+		$html .= MegamenuGenerateMenuHtml($menu_item, $next_level, 0, false, $show_name, $show_image, $this);
+	}
+	if($title) {
+	$custom_link = $custom_link?$custom_link:'#';
+	?>
+	<div id="<?php echo time().rand(); ?>" class="nav-item level<?php echo $level; ?> nav-1 submenu-alignleft subgroup  dropdown-submenu  parent">
+		<a href="<?php echo $custom_link; ?>" title="<?php echo htmlspecialchars($title);?> " target="_self" class=" nav-anchor subitems-group nav-anchor-heading" style="background-color: inherit;"><span><?php echo $title; ?></span><span class="opener"></span><span class="drill-opener"></span></a>
+		<div class=" submenu dropdown-mega" data-width="100%" style="width:100%">
+			<div class="drilldown-back"><a href="#"><span class="drill-opener"></span><span class="current-cat"></span></a></div>
+			<div class="submenu-inner">
+				<div class="content-wrapper">
+					<div class="item-content" style="width: 100%">
+						<div class="level<?php echo ($level+1);?> nav-dropdown ves-column1 ">
+							<?php echo $html; ?>
+							<?php if($show_more_items && $this->getCustomLink()) { ?>
+							<div class="more-items">
+							<a href="<?php echo $custom_link;?>" class="mote-items-link"><?php echo __("View More"); ?></a>
+							</div>	
+							<?php } ?>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<?php
+	} else {
+		echo $html;
+	} 
+}

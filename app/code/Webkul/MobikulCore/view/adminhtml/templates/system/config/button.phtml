@@ -1,0 +1,14 @@
+<script type="text/javascript">
+    require([
+        "jquery"
+    ], function($)  {
+
+        $("#clear-cache").on("click", function ()  {
+            if (confirm('<?= /* @noEscape*/ __("Are you sure !"); ?>'))  {
+                window.location.href="<?= $block->escapeUrl($block->getClearCacheUrl()) ?>";
+            }
+        });
+
+    });
+</script>
+<?= /* @noEscape */ $block->getButtonHtml() ?>

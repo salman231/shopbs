@@ -1,0 +1,77 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Rmasystem
+ * @author    Webkul
+ * @copyright Copyright (c) 2010-2017 Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+    $data = $block->getModel();
+    $selectoption_signal = 0;
+    $selectoption='';
+    
+if ($data->getInputType() == "select" || $data->getInputType() == "multiselect" || $data->getInputType() == "radio" || $data->getInputType() == "checkbox") {
+    $selectoption_signal = 1;
+    $selectoption = $data->getSelectOption();
+}
+?>
+
+
+<script id="selectoption_template" type="text/x-magento-template">
+    <div class="admin__field field field-selectoption  required _required selectoption_type_container" data-ui-id="adminhtml-customfields-edit-0-form-fieldset-element-form-field-selectoption">
+        <label class="label admin__field-label" for="customfields_selectoption" data-ui-id="adminhtml-customfields-edit-0-form-fieldset-element-text-input-name-label"><span><?php echo __('Option') ?></span></label>
+        <div class="admin__field-control control">
+            <textarea id="customfields_selectoption" name="select_option" data-ui-id="adminhtml-customfields-edit-0-form-fieldset-element-textarea-selectoption" title="<?php echo __('Option') ?>" type="text" class=" textarea admin__control-text required-entry _required" aria-required="true"><%-data.options%></textarea>
+            <comment>e.g: value1=>label1,value2=>label2</comment>
+        </div>
+    </div>
+</script>
+
+
+<script> 
+    require([
+        "jquery",
+        "mage/template",
+        "mage/mage"
+    ], function ($, mageTemplate, alert){
+        var selectoption_signal = "<?php echo $selectoption_signal; ?>";
+        /* if templates have some data then add template automatically */
+        
+        if(selectoption_signal == "1"){
+            var progressTmpl = mageTemplate('#selectoption_template'),
+                          tmpl;
+                tmpl = progressTmpl({
+                        data: {
+                            options:"<?php echo trim($selectoption) ?>"
+                        }
+                    });
+                $('.field-input_type').after(tmpl);
+        }
+        /* END */
+        $('#customfield_input_type').on('change',function(){
+            $(this).parents("#customfield_base_fieldset").find(".selectoption_type_container").remove();
+            
+            if($(this).val() == 'select' || $(this).val() == 'multiselect' || $(this).val() == 'radio' || $(this).val() == 'checkbox'){
+                var progressTmpl = mageTemplate('#selectoption_template'),
+                          tmpl;
+                tmpl = progressTmpl({
+                        data: {
+                            options:""
+                        }
+                    });               
+                $('.field-input_type').after(tmpl);
+            }
+            
+        });
+
+        $('#customfield_inputname').on('keyup',function() {
+            $(this).val($(this).val().replace(/\s+/g, '_'));
+        });
+        $('#customfield_inputname').on('focusout',function() {
+            $(this).val($(this).val().replace(/\s+/g, '_'));
+        });
+    })
+
+</script>

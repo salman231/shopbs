@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_Simpledetailconfigurable
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2017-2018 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="Magento\Catalog\Ui\DataProvider\Product\Form\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="preselectTab" xsi:type="array">
+                    <item name="class" xsi:type="string">Bss\Simpledetailconfigurable\Ui\DataProvider\Product\Form\Modifier\BssSDCPTab</item>
+                    <item name="sortOrder" xsi:type="number">70</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\ImportExport\Controller\Adminhtml\Import\Download">
+        <plugin name="Download_Sapple_File_Plugin" type="Bss\Simpledetailconfigurable\Plugin\DownloadSampleFilePlugin" sortOrder="1" />
+    </type>
+    <type name="Magento\ImportExport\Model\Source\Import\Entity">
+        <plugin name="sdcp_preselect_entity_option_plugin" type="Bss\Simpledetailconfigurable\Plugin\EntityTypeArrayPlugin" sortOrder="1" />
+    </type>
+</config>

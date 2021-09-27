@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="\Magento\Sales\Block\Adminhtml\Order\View">
+        <plugin name="Magemonkey_Chargeanywhere::setbuttonBefore" type="Magemonkey\Chargeanywhere\Plugin\SetbuttonBefore" />
+    </type>
+     <!-- <preference for="Magento\Sales\Controller\Adminhtml\Order\Invoice\Capture" type="Magemonkey\Chargeanywhere\Controller\Adminhtml\Order\Invoice\Capture" /> -->
+</config>

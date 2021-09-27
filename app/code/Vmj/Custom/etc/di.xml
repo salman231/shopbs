@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	 <preference for="Webkul\Marketplace\Block\Adminhtml\Customer\Edit\Tabs"
+                type="Vmj\Custom\Block\Adminhtml\Customer\Edit\Tabs" />
+     <preference for="Webkul\Marketplace\Observer\AdminhtmlCustomerSaveAfterObserver"
+                type="Vmj\Custom\Observer\AdminhtmlCustomerSaveAfterObserver" />
+     <preference for="Webkul\Marketplace\Controller\Account\EditprofilePost"
+                type="Vmj\Custom\Controller\Account\EditprofilePost" />
+</config>

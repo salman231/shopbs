@@ -1,0 +1,89 @@
+<!--
+/**
+ * Webkul Software.
+ *
+ * PHP version 7.0+
+ *
+ * @category  Webkul
+ * @package   Webkul_DeliveryBoy
+ * @author    Webkul <support@webkul.com>
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+-->
+<!--@subject {{trans "Review from "}}{{var customerName}}{{trans " has been evaluated by "}}{{var ratingManagerName}}@-->
+<!--@vars {
+"var deliveryboy.name":"Deliveryboy Name",
+"var customerName":"Customer Name",
+"var review.rating":"Review Rating",
+"var review.comment":"Review Comment",
+"var review.createdAt":"Review Date",
+"var review.status":"Review Status",
+"var ratingMaxLimit":"Review Max Limit",
+"var ratingManagerName": "Rating Manager"
+} @-->
+<!--@styles
+   table.deliveryboy-review-table,
+    .deliveryboy-review-table td,
+    .deliveryboy-review-table th {
+        border-collapse: collapse;
+        border: 1px solid #333;
+    }
+    .deliveryboy-review-table td,
+    .deliveryboy-review-table th {
+        padding: 1rem;
+    }
+@-->
+{{template config_path="design/email/header_template"}}
+<p class="greeting">{{trans "Hello "}}{{var deliveryboy.name}}{{trans ","}}</p>
+<p>{{trans "Review from "}}{{var customerName}}{{trans " has been evaluated by "}}{{var ratingManagerName}}</p>
+<table class="deliveryboy-review-table">
+    <tbody>
+        <tr>
+            <th>
+                {{trans "Status"}}
+            </th>
+            <td>
+                {{var review.status}}
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>{{trans "Review Details"}}</p>
+<table class="deliveryboy-review-table">
+    <tbody>
+        <tr>
+            <th>
+                {{trans "Ratings"}}
+            </th>
+            <td>
+                {{var review.rating}}/{{var ratingMaxLimit}}
+            </td>
+        <tr>
+            <th>
+                {{trans "Comment"}}
+            </th>
+            <td colspan="2">
+                {{trans "%comment" comment=$review.comment}}
+            </td>
+        </tr>
+        <tr>
+            <th>
+                {{trans "Date"}}
+            </th>
+            <td>
+                {{var review.createdAt}}
+            </td>
+        </tr>
+        <tr>
+            <th>
+                {{trans "Status"}}
+            </th>
+            <td>
+                {{var review.status}}
+            </td>
+        </tr>
+    </tbody>
+</table>
+{{template config_path="design/email/footer_template"}}

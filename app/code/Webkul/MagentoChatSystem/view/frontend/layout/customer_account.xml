@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MagentoChatSystem
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" design_abstraction="custom">
+    <body>
+        <attribute name="class" value="account"/>
+        <referenceBlock name="customer_account_navigation">
+            <block class="Magento\Framework\View\Element\Html\Link\Current" name="customer-account-navigation-chat-history">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">Chat History</argument>
+                    <argument name="path" xsi:type="string">chatsystem/customer/history</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

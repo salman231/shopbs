@@ -1,0 +1,40 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ *
+ *
+ * @category  Webkul
+ * @package   Webkul_MobikulCore
+ * @author    Webkul <support@webkul.com>
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+$textureData = $block->getTextureImageData();
+$key = 1;
+if ($textureData): ?>
+    <script type="text/x-magento-init">
+        {
+            "*": {
+                "Webkul_MobikulCore/js/textureimage": {
+                    "arType" : "<?= /* @noEscape */ $textureData['ar_type'] ?>",
+                    "productType" : "<?= /* @noEscape */ $textureData['product_type'] ?>",
+                    "ar_model_file_android_model" : "<?= /* @noEscape */ $textureData[
+                        'ar_model_file_android_model'
+                    ] ?>",
+                    "ar_model_file_ios_model" : "<?= /* @noEscape */ $textureData['ar_model_file_ios_model'] ?>"
+                }
+            }
+        }
+    </script>
+<?php endif; ?>
+<script>
+    require([
+        "jquery",
+        "mage/mage"
+    ], function($){
+        $('[data-index=block_gallery]').find('div').trigger('click');
+        $("#wk-mobikul-textureimages").hide();
+    });
+</script>

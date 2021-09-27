@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_GiftCard
+ * @author    Webkul Software Private Limited 
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <!--Declare data source, columns list, button...-->
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">giftcard_giftuser_listing.giftcard_giftuser_listing_data_source</item>
+            <item name="deps" xsi:type="string">giftcard_giftuser_listing.giftcard_giftuser_listing_data_source</item>
+            <!--Declare the data source name which will be defined below-->
+        </item>
+        <item name="spinner" xsi:type="string">giftcard_giftuser_columns</item>
+        <!--Declare the listing of columns which will be defined below-->
+    </argument>
+    <dataSource name="giftcard_giftuser_listing_data_source">
+        <!--The data source-->
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>
+            <argument name="name" xsi:type="string">giftcard_giftuser_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">giftuserid</argument>
+            <argument name="requestFieldName" xsi:type="string">giftuserid</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="indexField" xsi:type="string">giftuserid</item>
+                    </item>
+                </item>
+            </argument>
+        </argument>
+    </dataSource>
+    <container name="listing_top">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="template" xsi:type="string">ui/grid/toolbar</item>
+            </item>
+        </argument>
+        <bookmark name="bookmarks">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/controls/bookmarks/bookmarks</item>
+                    <item name="displayArea" xsi:type="string">dataGridActions</item>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="saveUrl" xsi:type="url" path="mui/bookmark/save"/>
+                        <item name="deleteUrl" xsi:type="url" path="mui/bookmark/delete"/>
+                        <item name="namespace" xsi:type="string">giftcard_giftuser_listing</item>
+                    </item>
+                </item>
+            </argument>
+        </bookmark>
+        <component name="columns_controls">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="columnsData" xsi:type="array">
+                        <item name="provider" xsi:type="string">giftcard_giftuser_listing.giftcard_giftuser_listing.eshopsync_categories_columns</item>
+                    </item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/controls/columns</item>
+                    <item name="displayArea" xsi:type="string">dataGridActions</item>
+                </item>
+            </argument>
+        </component>
+        <exportButton name="export_button"/>        
+        <filterSearch name="fulltext">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/search/search</item>
+                    <item name="displayArea" xsi:type="string">dataGridFilters</item>
+                    <item name="provider" xsi:type="string">giftcard_giftuser_listing.giftcard_giftuser_listing_data_source</item>
+                    <item name="chipsProvider" xsi:type="string">giftcard_giftuser_listing.giftcard_giftuser_listing.listing_top.listing_filters_chips</item>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="provider" xsi:type="string">giftcard_giftuser_listing.giftcard_giftuser_listing.listing_top.bookmarks</item>
+                        <item name="namespace" xsi:type="string">current.search</item>
+                    </item>
+                </item>
+            </argument>
+        </filterSearch>
+        <filters name="listing_filters">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="columnsProvider" xsi:type="string">giftcard_giftuser_listing.giftcard_giftuser_listing.giftcard_giftuser_columns</item>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="provider" xsi:type="string">giftcard_giftuser_listing.giftcard_giftuser_listing.listing_top.bookmarks</item>
+                        <item name="namespace" xsi:type="string">current.filters</item>
+                    </item>
+                    <item name="templates" xsi:type="array">
+                        <item name="filters" xsi:type="array">
+                            <item name="select" xsi:type="array">
+                                <item name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</item>
+                                <item name="template" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                            </item>
+                        </item>
+                    </item>
+                    <item name="childDefaults" xsi:type="array">
+                        <item name="provider" xsi:type="string">giftcard_giftuser_listing.giftcard_giftuser_listing.listing_top.listing_filters</item>
+                        <item name="imports" xsi:type="array">
+                            <item name="visible" xsi:type="string">giftcard_giftuser_listing.giftcard_giftuser_listing.giftcard_giftuser_columns.${ $.index }:visible</item>
+                        </item>
+                    </item>
+                </item>
+                <item name="observers" xsi:type="array">
+                    <item name="column" xsi:type="string">column</item>
+                </item>
+            </argument>
+        </filters>
+         <massaction name="listing_massaction">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="selectProvider" xsi:type="string">giftcard_giftuser_listing.giftcard_giftuser_listing.giftcard_giftuser_columns.ids</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/tree-massactions</item>
+                    <item name="indexField" xsi:type="string">entity_id</item>
+                </item>
+            </argument>
+            <!--<action name="delete">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">delete</item>
+                        <item name="label" xsi:type="string" translate="true">Delete</item>
+                        <item name="url" xsi:type="url" path="eshopsync/categories/delete"/>
+                        <item name="confirm" xsi:type="array">
+                            <item name="title" xsi:type="string" translate="true">Delete items</item>
+                            <item name="message" xsi:type="string" translate="true">Are you sure you wan't to delete selected items?</item>
+                        </item>
+                    </item>
+                </argument>
+            </action>    -->
+            <!-- <action name="change_status">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">change_status</item>
+                        <item name="label" xsi:type="string" translate="true">Change Status</item>
+                    </item>
+                </argument>
+                <argument name="actions" xsi:type="configurableObject">
+                    <argument name="class" xsi:type="string">Webkul\GiftCard\Ui\Component\MassAction\Badge\Assignoptions</argument>
+                    <argument name="data" xsi:type="array">
+                        <item name="urlPath" xsi:type="string">giftcard/giftuser/changestatus</item>
+                        <item name="paramName" xsi:type="string">entity_id</item>
+                        <item name="confirm" xsi:type="array">
+                            <item name="title" xsi:type="string" translate="true">Change Status</item>
+                            <item name="message" xsi:type="string" translate="true">Are you sure to change the active status of selected gift card(s) ?</item>
+                        </item>
+                    </argument>
+                </argument>
+            </action> -->
+            <action name="change_status">
+                <settings>
+                    <type>change_status</type>
+                    <label translate="true">Change Status</label>
+                    <actions class="Webkul\GiftCard\Ui\Component\MassAction\Badge\Assignoptions"/>
+                </settings>
+            </action>
+        </massaction> 
+        <paging name="listing_paging">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="provider" xsi:type="string">giftcard_giftuser_listing.giftcard_giftuser_listing.listing_top.bookmarks</item>
+                        <item name="namespace" xsi:type="string">current.paging</item>
+                    </item>
+                    <item name="selectProvider" xsi:type="string">giftcard_giftuser_listing.giftcard_giftuser_listing.giftcard_giftuser_columns.ids</item>
+                    <item name="displayArea" xsi:type="string">bottom</item>
+                    <item name="options" xsi:type="array">
+                        <item name="20" xsi:type="array">
+                            <item name="value" xsi:type="number">20</item>
+                            <item name="label" xsi:type="string" translate="true">20</item>
+                        </item>
+                        <item name="30" xsi:type="array">
+                            <item name="value" xsi:type="number">30</item>
+                            <item name="label" xsi:type="string" translate="true">30</item>
+                        </item>
+                        <item name="50" xsi:type="array">
+                            <item name="value" xsi:type="number">50</item>
+                            <item name="label" xsi:type="string" translate="true">50</item>
+                        </item>
+                        <item name="100" xsi:type="array">
+                            <item name="value" xsi:type="number">100</item>
+                            <item name="label" xsi:type="string" translate="true">100</item>
+                        </item>
+                        <item name="200" xsi:type="array">
+                            <item name="value" xsi:type="number">200</item>
+                            <item name="label" xsi:type="string" translate="true">200</item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+        </paging>
+    </container>
+    <columns name="giftcard_giftuser_columns">
+        <!--The list of columns-->
+        <selectionsColumn name="ids">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="indexField" xsi:type="string">giftuserid</item>
+                </item>
+            </argument>
+        </selectionsColumn>
+        <column name="from_email">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="sorting" xsi:type="string">asc</item>
+                    <item name="label" xsi:type="string" translate="true">From</item>
+                </item>
+            </argument>
+        </column>        
+        <column name="to_email">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                     <item name="filter" xsi:type="string">text</item> 
+                    <item name="sorting" xsi:type="string">asc</item>
+                    <item name="label" xsi:type="string" translate="true">To</item>
+                </item>
+            </argument>
+        </column>
+        <column name="code">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                     <item name="sorting" xsi:type="string">asc</item> 
+                    <item name="label" xsi:type="string" translate="true">Gift Code</item>
+                </item>
+            </argument>
+        </column>
+        <column name="order_id" class="Webkul\GiftCard\Ui\Component\Listing\Columns\Order">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Webkul_GiftCard/js/grid/columns/link</item>
+                    <item name="filter" xsi:type="string">text</item>
+                     <item name="sorting" xsi:type="string">asc</item> 
+                    <item name="label" xsi:type="string" translate="true">Order Id</item>
+                </item>
+            </argument>
+        </column>
+        <column name="price" >
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Price</item>
+                </item>
+            </argument>
+        </column>
+        <column name="remaining_amt" >
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Left Amount</item>
+                </item>
+            </argument>
+        </column>
+        <column name="alloted">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                     <item name="sorting" xsi:type="string">desc</item> 
+                    <item name="label" xsi:type="string" translate="true">Order Time</item>
+                </item>
+            </argument>
+        </column>                                
+        <column name="expiry">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Expiry Time</item>
+                </item>
+            </argument>
+        </column>                                
+        <column name="is_active" class="Webkul\GiftCard\Ui\Component\Listing\Columns\IsActive">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                     <item name="sortable" xsi:type="boolean">false</item>
+                    <item name="component" xsi:type="string">Webkul_GiftCard/js/grid/columns/link</item>
+                    <item name="label" xsi:type="string" translate="true">Status</item>
+                </item>
+            </argument>
+        </column>                                
+        <column name="is_expire" class="Webkul\GiftCard\Ui\Component\Listing\Columns\IsExpire">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                     <item name="sortable" xsi:type="boolean">false</item>
+                    <item name="component" xsi:type="string">Webkul_GiftCard/js/grid/columns/link</item>
+                    <item name="label" xsi:type="string" translate="true">Expired</item>
+                </item>
+            </argument>
+        </column>                                
+    </columns>
+</listing>

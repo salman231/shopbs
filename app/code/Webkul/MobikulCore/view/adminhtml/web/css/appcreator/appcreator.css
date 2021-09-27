@@ -1,0 +1,240 @@
+a.list-group-item {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: -1px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+a.list-group-items {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: -1px;
+    /*background-color: #fff;*/
+    border: 1px solid #ddd;
+}
+a.list-group-item {
+    color: #555;
+}
+/*.ui-state-highlight { height: 1.5em; line-height: 1.2em; background-color: red;}*/
+/*.highlight {
+    border: 1px solid red;
+    font-weight: bold;
+    font-size: 45px;
+    background-color: lightblue;
+}*/
+.highlight {
+  border: 1px solid darkgray;
+  /*font-weight: bold;*/
+  /*font-size: 45px;*/
+  background-color: darkgray;
+  /*width:30%;*/
+  /*height: 1.5em; line-height: 1.2em;*/
+  padding:15px;
+}
+
+#items {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+li.slide {
+list-style: none;
+    background: #efefef;
+    padding: 10px;
+    border: 1px dashed #ccc;
+    position: relative;
+    margin-bottom: 5px;
+    cursor: move;
+}
+/* .front_preview{
+    background: url(http://139.59.46.134/mab/nov/img/mobile.png);
+    background-repeat: no-repeat;
+    background-position: top center;
+    text-align: center;
+    padding: 65px 0 80px
+} */
+.layout_gallery {
+    max-height: 476px;
+    max-width: 292px;
+    margin: 0 auto;
+}
+.iframe_html .slide {
+    list-style: none;
+    background: transparent;
+    padding: 0px;
+    border: 0px dashed #ccc;
+    position: relative;
+    margin-bottom: 0px;
+}
+/* The device with borders */
+.smartphone {
+    position: relative;
+    width: 31%;
+    height: 600px;
+    margin: 0 auto;
+    border: 16px black solid;
+    border-top-width: 60px;
+    border-bottom-width: 60px;
+    border-radius: 36px;
+}
+
+/* The horizontal line on the top of the device */
+.smartphone:before {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 5px;
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #333;
+  border-radius: 10px;
+}
+
+/* The circle on the bottom of the device */
+.smartphone:after {
+  content: '';
+  display: block;
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  left: 50%;
+  bottom: -65px;
+  transform: translate(-50%, -50%);
+  background: #333;
+  border-radius: 50%;
+}
+
+/* The screen (or content) of the device */
+.smartphone .content {
+  /* width: 360px;
+  height: 640px;
+  background: white; */
+  height: 478px;
+    overflow-y: scroll;
+}
+/*#centerSide .ui-selected {
+    background: red;
+    color: white;
+    font-weight: bold;
+}*/
+#centerSide {
+    padding: 5px;
+    /* height: 600px; */
+    width: 33%;
+    border: 1px solid #e8e8e8;
+    border-top: 2px solid #bfbfbf;
+    min-height: 400px;
+}
+
+
+
+/* Panels */
+.panel-heading {
+    padding: 10px 15px;
+    border-bottom: 1px solid transparent;
+    border-top-right-radius: 2px;
+    border-top-left-radius: 2px;
+}
+.panel {
+	border-radius: 0px;
+}
+.panel .panel-heading {
+	position: relative;
+}
+.panel-heading h3 i {
+	margin-right: 8px;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+.panel-heading i {
+	font-size: 16px;
+	font-weight: 500;
+}
+.panel-heading h3 {
+    margin-top: 0;
+    margin-bottom: 0;
+    color: inherit;
+	font-size: 16px;
+	font-weight: 500;
+	display: inline-block;
+}
+
+/* Primary Panel */
+.panel-primary {
+	border: 1px solid #c3e4f6;
+	border-top: 2px solid #5cb7e7;
+}
+
+.panel-primary .panel-heading {
+	color: #1e91cf;
+	border-color: #96d0f0;
+	background: white;
+}
+
+
+/* Default Panel */
+.panel-default {
+	border: 1px solid #e8e8e8;
+	border-top: 2px solid #bfbfbf;
+}
+
+.panel-default .panel-heading {
+	color: #595959;
+	border-color: #e8e8e8;
+	background: #fcfcfc;
+}
+.delete_component{
+    position: absolute;
+    right: 30px;
+    width: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+.add_component{
+    position: absolute;
+    right: 30px;
+    width: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.mobileImage {
+    width:100%
+}
+
+/* .successMessage{
+    position: absolute;
+    top: 0px;
+    right: 1%;
+    width: 12%;
+    background: red;
+    height: auto;
+} */
+
+.msg{
+    text-align: center;
+    z-index:9999;
+    font-family: Helvetica,Verdana,sans-serif;
+    width: 300px;
+    height: 65px;
+    padding: 5px 10px;
+    border-radius: 8px;
+    opacity: .97;
+    font-size: 14px;
+    color: #fff;
+    position: absolute;
+    right: 10px;
+    bottom: 34px;
+    line-height: 60px;
+}
+
+.success-message{
+    background: #8ee4b7;
+}
+
+.error-message{
+    background: #e74c3c;
+}

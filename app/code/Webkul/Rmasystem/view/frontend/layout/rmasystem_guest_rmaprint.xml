@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Webkul_Rmasystem::css/rs_front.css"/>
+        <css src="Webkul_Rmasystem::css/viewrma_guest.css"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Webkul\Rmasystem\Block\Guest\Viewrma" name="guestPrintRma" template="Webkul_Rmasystem::guest/printguestrma.phtml">
+                <block class="Webkul\Rmasystem\Block\Viewrma" name="rma.printrma.fieldvalue" template="Webkul_Rmasystem::printrma.phtml" cacheable="false"/>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

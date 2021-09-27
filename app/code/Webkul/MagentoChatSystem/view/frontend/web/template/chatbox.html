@@ -1,0 +1,477 @@
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MagentoChatSystem
+ * @author    Webkul
+ * @copyright Copyright (c)  Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+ -->
+<div class="chat-loading-mask" data-role="chat-loader" data-bind="visible: showLoader">
+	<div class="chat-loader">
+		<img alt="Loading..." data-bind="attr: {'src': getLoaderImage()}">
+	</div>
+	<span class="loading-state" data-bind="text: getLoadingState()"></span>
+</div>
+<header class="clearfix chatbox-header" data-bind="click: _openChatWindow, event:{load: refreshData()}">
+	<a id="minim-chat" href="" class="minim-button" data-bind="click: _openChatWindow">&minus;</a>
+	<a id="maxi-chat" href="" class="maxi-button" data-bind="click: _openChatWindow">&plus;</a>
+	<!--ko if: isActive() && isChatEnable() !== false -->
+	<i class="fa fa-info-circle user-info-button" data-bind="click: showInformation, clickBubble: false"></i>
+	<i class="fa fa-share report-button" data-bind="click: showReportModel, clickBubble: false, attr:{title:  $t('Report to Admin')}"></i>
+	<!--/ko-->
+	<div class="chatbox-avatar" data-bind="click: showRatingBoard, clickBubble: false">
+		<img data-bind="attr: {'src': getAdminImage()}">
+	</div>
+	<span class="support_status" data-bind="style: { 'background-color': getAdminStatus()}"></span>
+	<h4 data-bind="text: getSupportName()" 
+		style="max-width: 130px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+	</h4>
+	<!--ko if: isActive() && isChatEnable() !== false -->
+	<div class="star-ratings-sprite">
+		<span data-bind="style: {width: getRatingModel().getAveragePercentage()+'%'}" class="star-ratings-sprite-rating"></span>
+	</div>
+	<!--/ko-->
+</header>
+<!--ko if: isActive() && isChatEnable() !== false -->
+<header id="customer_controls" class="clearfix customer-controls" data-bind="visible: showInfoHeader" outerClick="hideUserInfo.bind($parent, $root)">
+	<span class="status_point"></span>
+	<div class="user-info">
+		<img id="user_profile" data-bind="attr: {'src': getProfileImage()}, click: _updateProfile">
+		<h4 data-bind="text: getCustomerName()"></h4>
+		<span class="customer_status" data-bind="style: { 'background-color': getCustomerStatus()}"></span>
+	</div>
+	<div class="controls">
+		<span class="chat_status" data-bind="click: showStatus">
+			<div class="wk_chat_status_options list-group">
+				<span class="status_point"></span>
+				<div class="list-group-item chatStatus" id="1" data-bind="click: _updateChatStatus.bind()">
+					<span class="online_status" data-bind="i18n: 'Online'"></span>
+				</div>
+				<div class="list-group-item chatStatus" id="2" data-bind="click: _updateChatStatus.bind()">
+					<span class="busy_status" data-bind="i18n: 'Busy'"></span>
+				</div>
+				<div class="list-group-item chatStatus" id="0" data-bind="click: _updateChatStatus.bind()">
+					<span class="idle_status" data-bind="i18n: 'Offline'"></span>
+				</div>
+			</div>
+		</span>
+		<span class="wk_chat_setting" data-bind="click: showSettingPanel">
+			<div class="wk_chat_setting_options list-group" style="display: none;">
+				<span class="status_point"></span>
+				<div class="list-group-item" id="wk_report_manager" data-bind="i18n: 'Give Feedback', click: showRatingBox, clickBubble:false"></div>
+				<div class="list-group-item chatStatus" id="0" data="10" data-bind="i18n: 'End Chat', click: _updateChatStatus" data-endchat="true" ></div>
+				<div class="list-group-item" id="wk_profile_setting" data-bind="i18n: 'Profile Setting', click: _updateProfile, clickBubble:false"></div>
+			</div>
+		</span>
+		<span class="wk_chat_sound enable" data-bind="click: _enableDisableSound.bind()">
+			<audio controls="controls" class="wk_sound_play hide" id="myAudio">
+				<source data-bind="attr: {'src': getSoundUrl()}" type="audio/ogg">
+			</audio>
+		</span>
+	</div>
+</header>
+<!--/ko-->
+<div class="chat" data-block="chat-reply-block">
+	<!--ko if: !isActive() -->
+	<div class="detailed">
+		<div class="product data items">
+			<div class="data item title login-tab" aria-labeledby="tab-label-title" data-role="collapsible" id="tab-label"
+			 data-bind="click: _loginTabWindow">
+				<a class="data switch" tabindex="-1" data-toggle="switch" href="#" id="tab-label-1-title">
+					<span data-bind="i18n: 'Log in'"></span>
+				</a>
+			</div>
+			<div class="data item content login-tab-data" id="1" data-role="content">
+				<form id="chat-login-form" data-role="login" data-bind="submit:login" method="post" data-mage-init='{"validation": {}}'>
+					<div class="fieldset" data-bind="attr: {'data-hasrequired': $t('* Required Fields')}">
+						<div class="field field-email required">
+							<label class="label" for="login-email">
+								<span data-bind="i18n: 'Email Address'"></span>
+							</label>
+							<div class="control">
+								<input type="email" class="input-text required" id="login-email" name="username" data-validate="{required:true, 'validate-email':true}"
+								 autocomplete="off" />
+							</div>
+						</div>
+						<div class="field field-password required">
+							<label for="login-password" class="label">
+								<span data-bind="i18n: 'Password'"></span>
+							</label>
+							<div class="control">
+								<input type="password" class="input-text required" id="login-password" name="password" data-validate="{required:true}"
+								 autocomplete="off" />
+							</div>
+						</div>
+						<div class="field field-password required">
+							<label for="login-password" class="label">
+								<span data-bind="i18n: 'Message'"></span>
+							</label>
+							<div class="control">
+								<textarea data-bind="attr :{placeholder: $t('Type your message...')}" class="type_message required validate-no-html-tags" name="message"
+								 value=""></textarea>
+							</div>
+						</div>
+					</div>
+					<!-- ko foreach: getRegion('chatbox-form-fields') -->
+                    <!-- ko template: getTemplate() --><!-- /ko -->
+					<!-- /ko -->
+					<div class="actions-toolbar">
+						<div class="primary">
+							<button type="submit" class="action primary action-login secondary">
+								<span data-bind="i18n: 'Sign In'"></span>
+							</button>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="data item title register-tab" aria-labeledby="tab-label-title" data-role="collapsible" id="tab-label"
+			 data-bind="click: _registerTabWindow">
+				<a class="data switch" tabindex="-1" data-toggle="switch" href="#" id="tab-label-1-title">
+					<span data-bind="i18n: 'Register'"></span>
+				</a>
+			</div>
+			<div class="data item content register-tab-data" id="1" data-role="content" style="display: none">
+				<form id="register-form" data-role="login" data-bind="submit:register" method="post" data-mage-init='{"validation": {}}'>
+					<div class="fieldset" data-bind="attr: {'data-hasrequired': $t('* Required Fields')}">
+						<div class="field field-namemessage required">
+							<label for="login-namemessage" class="label">
+								<span data-bind="i18n: 'Name'"></span>
+							</label>
+							<div class="control">
+								<input type="text" class="input-text" id="login-name" name="name" data-validate="{required:true}" autocomplete="off" />
+							</div>
+						</div>
+						<div class="field field-email required">
+							<label class="label" for="register-email">
+								<span data-bind="i18n: 'Email Address'"></span>
+							</label>
+							<div class="control">
+								<input type="email" class="input-text" id="register-email" name="username" data-validate="{required:true, 'validate-email':true}" />
+							</div>
+						</div>
+						<div class="field field-password required">
+							<label class="label">
+								<span data-bind="i18n: 'Password'"></span>
+							</label>
+							<div class="control">
+								<input type="password" class="input-text" id="signup-password" data-password-min-length="8" data-password-min-character-sets="3" name="password" data-validate="{required:true, 'validate-customer-password':true}" />
+							</div>
+						</div>
+						<div class="field field-message required">
+							<label for="type_message" class="label">
+								<span data-bind="i18n: 'Message'"></span>
+							</label>
+							<div class="control">
+								<textarea id="type_message" data-bind="attr :{placeholder: $t('Type your message...')}" class="type_message required validate-no-html-tags"
+								 name="message" value=""></textarea>
+							</div>
+						</div>
+					</div>
+					<div class="actions-toolbar">
+						<div class="primary">
+							<button type="submit" class="action primary action-login secondary">
+								<span data-bind="i18n: 'Create an Account'"></span>
+							</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- /ko -->
+	<!--ko if: chatscreen() === false && isActive() || isChatEnable() === false && isActive() -->
+	<div class="detailed">
+		<div class="product data items">
+			<span class="agent-error status-error" data-bind="visible: isAgentOff(), text: getAgentError()"></span>
+			<div class="data item content" id="1" data-role="content">
+				<form id="start-chat-form" data-bind="submit:startChat" method="post" data-mage-init='{"validation": {}}'>
+					<div class="fieldset" data-bind="attr: {'data-hasrequired': $t('* Required Fields')}">
+						<div class="field field-message required">
+							<input name="username" type="hidden" value="" />
+							<div class="control">
+								<textarea data-bind="attr: {placeholder: $t('Type your message...')}" class="start-message required validate-no-html-tags" name="message"
+								 value="" data-validate="{required:true}"></textarea>
+							</div>
+						</div>
+					</div>
+					<div class="actions-toolbar">
+						<input name="context" type="hidden" value="checkout" />
+						<div class="primary" style="width: 100%">
+							<button type="submit" class="action primary action-start-chat secondary" style="width: 100%; height: 50px;">
+								<span data-bind="i18n: 'Start Chat'"></span>
+							</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- /ko -->
+	<span class="agent-error status-error" data-bind="visible: isAgentOff(), text: getAgentError()"></span>
+	<!--ko if: chatscreen() === true -->
+	<!--ko if: isActive() && isChatEnable() !== false -->
+	<div id="chat_history" class="chat-history" data-bind="event: { scrollChat: scrolled }">
+		<!--ko if: isHistoryAvialable() -->
+		<!--ko foreach: { data: getChatHistory(), as: 'data'}-->
+		<!--ko if: data.changeDate === true -->
+		<span class='chat-date' data-bind="text: data.date"></span>
+		<!-- /ko -->
+		<!--ko if: data.sender === 'customer' -->
+		<div class="chat-message-client message_container">
+			<img data-bind="attr: {'src': $parent.getProfileImage()}" alt="" width="32" height="32">
+			<div class="chat-message-client-content triangle-right left clearfix">
+				<span class="chat-time" data-bind="text: data.time"></span>
+				<h5 data-bind="text: data.customerName"></h5>
+				<!--ko if: data.type === 'image' -->
+				<p class="image-msg">
+					<a data-bind="attr: {'href': data.message}" target="_blank">
+						<img data-bind="attr: {'src': data.message}" width="100" height="100" class="image-type">
+					</a>
+				</p>
+				<!-- /ko -->
+				<!--ko if: data.type === 'file' -->
+				<p class="file-msg">
+					<a data-bind="attr: {'href': data.message}" target="_blank">
+						<img data-bind="attr: {'src': $parent.getDownloadImage()}" width="30" height="20" class="file-type">
+						<span data-bind="i18n: 'Download File'"></span>
+					</a>
+				</p>
+				<!-- /ko -->
+				<!--ko ifnot: data.type === 'image' -->
+				<!--ko ifnot: data.type === 'file' -->
+				<p data-bind="html: data.message"></p>
+				<!-- /ko -->
+				<!-- /ko -->
+			</div>
+		</div>
+		<!-- /ko -->
+		<!--ko if: data.sender === 'admin' -->
+		<div class="chat-message-admin message_container">
+			<img data-bind="attr: {'src': $parent.getAdminImage()}" alt="" width="32" height="32">
+			<div class="chat-message-admin-content triangle-right right clearfix">
+				<span class="chat-time" data-bind="text: data.time"></span>
+				<h5 data-bind="text: data.customerName"></h5>
+				<!--ko if: data.type === 'image' -->
+				<p class="image-msg">
+					<a data-bind="attr: {'href': data.message}" target="_blank">
+						<img data-bind="attr: {'src': data.message}" width="100" height="100" class="image-type">
+					</a>
+				</p>
+				<!-- /ko -->
+				<!--ko if: data.type === 'file' -->
+				<p class="file-msg" style="text-align: left;">
+					<a data-bind="attr: {'href': data.message, target:'_blank','title': 'Download file' }">
+						<img data-bind="attr: {'src': $parent.getDownloadImage()}" width="30" height="20">
+						<span data-bind="i18n: 'Download File'"></span>
+					</a>
+				</p>
+				<!-- /ko -->
+				<!--ko ifnot: data.type === 'image' -->
+				<!--ko ifnot: data.type === 'file' -->
+				<p data-bind="html: data.message"></p>
+				<!-- /ko -->
+				<!-- /ko -->
+			</div>
+		</div>
+		<!-- /ko -->
+		<!-- /ko -->
+		<!-- /ko -->
+		<div class="file-uploader">
+			<!-- ko if: showFileLoader() == true -->
+			<div class="chat-loading-mask" data-role="chat-loader">
+				<div class="chat-loader">
+					<img alt="Loading..." data-bind="attr: {'src': window.chatboxConfig.loaderImage}">
+					<span class="upload-info" data-bind="text: uploadPercentage"></span>
+				</div>
+			</div>
+			<!-- /ko -->
+		</div>
+	</div>
+	<!-- end chat-history -->
+	<div id="bottom-controls">
+		<form id="chat-form" data-role="reply" data-bind="submit:reply" method="post">
+			<textarea class="form-control type_message validate-no-html-tags" name="message" value="" data-bind="attr :{placeholder: $t('Type your message...')}, hasFocus: _refreshPopup(), event:{keypress: replyByEnter}"></textarea>
+			<div class="dropup" data-bind="click:openEmojiBox" outerClick="hideEmojiBox">
+				<i class="fa fa-paperclip send-attachment" data-bind="click: addAttachment, clickBubble:false"></i>
+				<span class="emoticons_div" title="Emojis" data-toggle="dropdown" role="button" aria-expanded="false"></span>
+				<div class="dropdown-menu dropdown-menu-right" role="menu">
+					<div class="smiley_pad">
+						:smiley: :sweat_smile: :smile: :wink: :blush: :angry:
+					</div>
+					<div class="smiley_pad">
+						:laughing: :joy: :heart_eyes: :kissing: :sleepy: :sleeping:
+					</div>
+					<div class="smiley_pad">
+						:smirk: :rage: :cry: :neutral_face: :disappointed: :coffee:
+					</div>
+					<div class="smiley_pad">
+						:astonished: :stuck_out_tongue_winking_eye: :sob: :flushed: :yum: :sunglasses:
+					</div>
+					<div class="smiley_pad">
+						:mask: :smiling_imp: :confused: :scream: :stuck_out_tongue: :fearful:
+					</div>
+					<div class="smiley_pad">
+						:punch: :ok_hand: :clap: :thumbsup: :thumbsdown:
+					</div>
+				</div>
+			</div>
+			<div class="added-attachment" style="display: none" id="attachment-file">
+				<div class="wk-attachment">
+					<input type="file" name="attachments" class="msg-attachment" data-bind="event:{ change: selectFile.bind()}">
+				</div>
+			</div>
+		</form>
+		<span class="file-error status-error" data-bind="visible: fileUploadError(), text: fileUploadErrorText()"></span>
+	</div>
+	<!-- /ko -->
+	<!-- /ko -->
+	<div class="profile-setting-image" data-bind="visible: imageBoxShow">
+		<form id="profile-form" data-bind="submit:uploadProfileImage" method="post" enctype="multipart/form-data">
+			<div class="image_block">
+				<img id="user-profile-image" data-bind="attr: {'src': getProfileImage()}">
+			</div>
+			<input id="profile_image" type="file" name="profile_image" class="profile_image" data-bind="event:{ change: showSelectedImage}" accept="image/*">
+			<div class="actions-toolbar">
+				<div class="primary">
+					<button type="button" class="action action-login secondary" data-bind="event: {click: _cancelProfilePopup}">
+						<span data-bind="i18n: 'Cancel'"></span>
+					</button>
+					<button type="submit" class="action action-login primary">
+						<span data-bind="i18n: 'Upload'"></span>
+					</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="user-rating-dashboard" data-bind="visible: showRatingDashboard">
+		<i class="fa fa-close cancel-rating-popup" data-bind="click: showRatingBoard, clickBubble:false"></i>
+		<span class="heading" data-bind="text: getSupportName()"></span>
+		<div class="dashboard-ratings-sprite">
+			<span data-bind="style: {width: getRatingModel().getAveragePercentage()+'%'}" class="star-ratings-sprite-rating"></span>
+		</div>
+		<button type="button" class="action action-login primary">
+			<span data-bind="i18n: 'Give Feedback', click: showRatingBox, clickBubble:false"></span>
+		</button>
+		<p data-bind="text: getTranslation(getRatingModel().getAverageRating(), getRatingModel().totalRating())"></p>
+		<hr style="border:3px solid #f1f1f1">
+
+		<div class="row">
+			<div class="side">
+				<div>5 star</div>
+			</div>
+			<div class="middle">
+				<div class="bar-container">
+					<div class="bar-5" data-bind="style: {width: getRatingModel().getPercentage('5')+'%'}"></div>
+				</div>
+			</div>
+			<div class="side right">
+				<div data-bind="text: getRatingModel().getRatingTotalCount('5')"></div>
+			</div>
+			<div class="side">
+				<div>4 star</div>
+			</div>
+			<div class="middle">
+				<div class="bar-container">
+					<div class="bar-4" data-bind="style: {width: getRatingModel().getPercentage('4')+'%'}"></div>
+				</div>
+			</div>
+			<div class="side right">
+				<div data-bind="text: getRatingModel().getRatingTotalCount('4')"></div>
+			</div>
+			<div class="side">
+				<div>3 star</div>
+			</div>
+			<div class="middle">
+				<div class="bar-container">
+					<div class="bar-3" data-bind="style: {width: getRatingModel().getPercentage('3')+'%'}"></div>
+				</div>
+			</div>
+			<div class="side right">
+				<div data-bind="text: getRatingModel().getRatingTotalCount('3')"></div>
+			</div>
+			<div class="side">
+				<div>2 star</div>
+			</div>
+			<div class="middle">
+				<div class="bar-container">
+					<div class="bar-2" data-bind="style: {width: getRatingModel().getPercentage('2')+'%'}"></div>
+				</div>
+			</div>
+			<div class="side right">
+				<div data-bind="text: getRatingModel().getRatingTotalCount('2')"></div>
+			</div>
+			<div class="side">
+				<div>1 star</div>
+			</div>
+			<div class="middle">
+				<div class="bar-container">
+					<div class="bar-1" data-bind="style: {width: getRatingModel().getPercentage('1')+'%'}"></div>
+				</div>
+			</div>
+			<div class="side right">
+				<div data-bind="text: getRatingModel().getRatingTotalCount('1')"></div>
+			</div>
+		</div>
+	</div>
+	<div class="user-rating-popup" data-bind="visible: showFeedbackBox">
+		<i class="fa fa-close cancel-rating-popup" data-bind="click: closeRatingBox, clickBubble:false"></i>
+		<form data-bind="submit: submitRating" data-mage-init='{"validation": {}}'>
+			<span class="report status-success" data-bind="visible: isReportSent, text: showReportMessage"></span>
+			<div class="fieldset">
+				<legend class="legend">
+					<span data-bind="i18n: 'Give Stars'"></span>
+				</legend>
+				<div class="field chat-rating-stars">
+					<input type="radio" class="required" id="star5" name="rating" value="5" />
+					<label for="star5" title="">5 stars</label>
+					<input type="radio" id="star4" name="rating" value="4" />
+					<label for="star4" title="">4 stars</label>
+					<input type="radio" id="star3" name="rating" value="3" />
+					<label for="star3" title="">3 stars</label>
+					<input type="radio" id="star2" name="rating" value="2" />
+					<label for="star2" title="">2 stars</label>
+					<input type="radio" id="star1" name="rating" value="1" />
+					<label for="star1" title="">1 star</label>
+				</div>
+				<div class="field">
+					<textarea name="rating_comment" id="block_reason" class="block-comment" data-bind="attr :{placeholder: $t('Write comment here')}"></textarea>
+				</div>
+			</div>
+			<div class="actions-toolbar">
+				<div class="primary">
+					<button type="submit" class="button action primary">
+						<span data-bind="i18n: 'Submit Feedback'"></span>
+					</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="user-rating-popup" data-bind="visible: showReportBox">
+		<i class="fa fa-close cancel-rating-popup" data-bind="click: closeReportBox, clickBubble:false"></i>
+		<form id="report_form" data-bind="submit: submitReport" data-mage-init='{"validation": {}}'>
+			<span class="report status-success" data-bind="visible: isReportSent, text: showReportMessage"></span>
+			<div class="fieldset">
+				<legend class="legend">
+					<span data-bind="i18n: 'Report to Admin'"></span>
+				</legend>
+				<div class="field">
+					<input type="text" id="subject" name="subject" class="required" data-bind="attr: {placeholder: $t('Report Subject')}" />
+				</div>
+				<div class="field">
+					<textarea name="content" class="block-comment required" data-bind="attr :{placeholder: $t('Write content here')}"></textarea>
+				</div>
+			</div>
+			<div class="actions-toolbar">
+				<div class="primary">
+					<button type="submit" class="button action primary">
+						<span data-bind="i18n: 'Submit Report'"></span>
+					</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+<!-- end chat -->

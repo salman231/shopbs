@@ -1,0 +1,60 @@
+<?php
+/**
+ * Dart Productkeys Customer Dashboard View.
+ * @package   Dart_Productkeys
+ *
+ */
+?>
+<div class="table-wrapper key-orders-history">
+    <table class="data table table-order-items history" id="my-keys-table">
+        <thead>
+            <tr>
+                <th class="col id"><?= $block->escapeHtml(__('Order #')) ?></th>
+                <th class="col date"><?= $block->escapeHtml(__('Date')) ?></th>
+                <th class="col product_name"><?= $block->escapeHtml(__('Product Name')) ?></th>
+                <th class="col keys"></th>
+                <th class="col qty"><?= $block->escapeHtml(__('Qty')) ?></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php $cusOrders = $block->getCustomerOrders();
+            $itemCount = 0;
+            foreach ($cusOrders as $order) {
+                foreach ($order->getAllVisibleItems() as $item) {
+                    if ($item->getProductKeys()) {
+                        $itemCount++; ?>
+                        <tr>
+                            <td class="col id"><?= $block->escapeHtml($order->getIncrementId()); ?></td>
+                            <td class="col date">
+                                <?= $block->escapeHtml($block->formatDate($order->getCreatedAt())); ?>
+                            </td>
+                            <td class="col product_name"><?= $block->escapeHtml($item->getName()); ?></td>
+                            <td class="col keys">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td width="50%" style="padding: 0;">
+                                                <?= $block->escapeHtml($item->getProductKeyType()); ?>
+                                            </td>
+                                            <td style="padding: 0;">
+                                                <?= str_replace(",", "<br />", $item->getProductKeys()); ?>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td class="col qty"><?= $item->getQtyOrdered()*1; ?></td>
+                        </tr>
+                    <?php
+                        }
+                }
+            }
+            if ($itemCount == 0) { ?>
+                <tr>
+                    <td colspan="5" align="center"><?= $block->escapeHtml(__('No Products!')) ?></td>
+                </tr>
+            <?php
+                } ?>
+        </tbody>
+    </table>
+</div>

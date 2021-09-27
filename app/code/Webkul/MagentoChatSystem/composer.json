@@ -1,0 +1,21 @@
+{
+    "name": "webkul/chat-system",
+    "description": "Webkul Magento2 Chat System",
+    "require": {
+        "magento/module-customer": "102.0.*",
+        "magento/framework": "102.0.*"
+    },
+    "type": "magento2-module",
+    "version": "3.0.0",
+    "license": [
+        "proprietary"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Webkul\\MagentoChatSystem\\": ""
+        }
+    }
+}

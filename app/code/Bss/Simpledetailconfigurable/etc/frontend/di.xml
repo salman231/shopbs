@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_Simpledetailconfigurable
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2017-2018 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\App\PageCache\Identifier">
+        <plugin name="sdcp-custom-cache" type="Bss\Simpledetailconfigurable\Plugin\CacheIdentifier" sortOrder="10"/>
+    </type>
+    <type name="Magento\Checkout\CustomerData\ItemPoolInterface">
+        <arguments>
+            <argument name="itemMap" xsi:type="array">
+                <item name="configurable" xsi:type="string">Bss\Simpledetailconfigurable\CustomerData\ConfigurableItem</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\ConfigurableProduct\Block\Cart\Item\Renderer\Configurable">
+        <plugin name="sdcp-custom-cart-page" type="Bss\Simpledetailconfigurable\Plugin\ConfigurableCart" sortOrder="10"/>
+    </type>
+    <type name="Magento\ConfigurableProduct\Model\Product\Type\Configurable">
+        <plugin name="sdcp-custom-stock" type="Bss\Simpledetailconfigurable\Plugin\SkipStockFilter" sortOrder="10"/>
+    </type>
+    <type name="Magento\ConfigurableProduct\Pricing\Render\FinalPriceBox">
+        <plugin name="sdcp-preselect-price" type="Bss\Simpledetailconfigurable\Pricing\Render\FinalPriceBox" sortOrder="10"/>
+    </type>
+    <type name="Magento\Quote\Model\Quote\Item">
+        <plugin name="sdcp-custom-checkout-page" type="Bss\Simpledetailconfigurable\Plugin\QuoteItem" sortOrder="10"/>
+    </type>
+
+    <!-- # M2SDCP-61 Update layout when enabled module-->
+    <type name="Magento\Catalog\Helper\Product\View">
+        <plugin name="sdcp-add-layout-handle" type="Bss\Simpledetailconfigurable\Plugin\Layout\AddHandleProductLayout" sortOrder="10"/>
+    </type>
+    <type name="Magento\Catalog\Block\Product\View\Gallery">
+        <plugin name="sdcp-first-select-image" type="Bss\Simpledetailconfigurable\Plugin\GalleryPlugin" sortOrder="10"/>
+    </type>
+    <type name="Magento\ConfigurableProduct\Block\Product\View\Type\Configurable">
+        <plugin name="bss_add_additional_data_to_category_page" type="Bss\Simpledetailconfigurable\Plugin\Block\Product\View\Type\Configurable" sortOrder="10" />
+    </type>
+    <type name="Magento\Catalog\Block\Product\View\Options">
+        <plugin name="bss_add_option_of_child_product" type="Bss\Simpledetailconfigurable\Plugin\Block\Product\View\Options" sortOrder="10" />
+    </type>
+</config>

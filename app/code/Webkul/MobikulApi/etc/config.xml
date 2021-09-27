@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ * 
+ *
+ *
+ * @category  Webkul
+ * @package   Webkul_MobikulApi
+ * @author    Webkul <support@webkul.com>
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <mobikul>
+            <configuration>
+                <apiusername><![CDATA[mobikul]]></apiusername>
+                <apikey><![CDATA[mobikul123]]></apikey>
+                <pagesize><![CDATA[10]]></pagesize>
+                <featuredproduct><![CDATA[1]]></featuredproduct>
+                <splash_screen><![CDATA[splashscreen.png]]></splash_screen>
+            </configuration>
+            <searchsuggestion>
+                <displaytag><![CDATA[1]]></displaytag>
+                <tagcount>5</tagcount>
+                <displayproduct><![CDATA[1]]></displayproduct>
+                <productcount>5</productcount>
+            </searchsuggestion>
+            <appdownload>
+                <allowAndroid><![CDATA[0]]></allowAndroid>
+                <allowiOS><![CDATA[0]]></allowiOS>
+                <enabletoplink><![CDATA[0]]></enabletoplink>
+                <enablebottomlink><![CDATA[0]]></enablebottomlink>
+                <downloadlinktheme><![CDATA[mk-lightTheme]]></downloadlinktheme>
+            </appdownload>
+        </mobikul>
+    </default>
+</config>

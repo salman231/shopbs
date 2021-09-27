@@ -1,0 +1,581 @@
+############################################
+## overrides deployment configuration mode value
+## use command bin/magento deploy:mode:set to switch modes
+
+#   SetEnv MAGE_MODE developer
+
+############################################
+## uncomment these lines for CGI mode
+## make sure to specify the correct cgi php binary file name
+## it might be /cgi-bin/php-cgi
+
+#    Action php5-cgi /cgi-bin/php5-cgi
+#    AddHandler php5-cgi .php
+
+############################################
+## GoDaddy specific options
+
+#   Options -MultiViews
+
+## you might also need to add this line to php.ini
+##     cgi.fix_pathinfo = 1
+## if it still doesn't work, rename php.ini to php5.ini
+
+############################################
+## this line is specific for 1and1 hosting
+
+    #AddType x-mapp-php5 .php
+    #AddHandler x-mapp-php5 .php
+
+############################################
+## enable usage of methods arguments in backtrace
+
+    SetEnv MAGE_DEBUG_SHOW_ARGS 1
+
+############################################
+## default index file
+
+    DirectoryIndex index.php
+
+<IfModule mod_php5.c>
+############################################
+## adjust memory limit
+
+    php_value memory_limit 756M
+    php_value max_execution_time 18000
+
+############################################
+## disable automatic session start
+## before autoload was initialized
+
+    php_flag session.auto_start off
+
+############################################
+## enable resulting html compression
+
+    #php_flag zlib.output_compression on
+
+###########################################
+## disable user agent verification to not break multiple image upload
+
+    php_flag suhosin.session.cryptua off
+</IfModule>
+<IfModule mod_php7.c>
+############################################
+## adjust memory limit
+
+    php_value memory_limit 756M
+    php_value max_execution_time 18000
+
+############################################
+## disable automatic session start
+## before autoload was initialized
+
+    php_flag session.auto_start off
+
+############################################
+## enable resulting html compression
+
+    #php_flag zlib.output_compression on
+
+###########################################
+## disable user agent verification to not break multiple image upload
+
+    php_flag suhosin.session.cryptua off
+</IfModule>
+<IfModule mod_security.c>
+###########################################
+## disable POST processing to not break multiple image upload
+
+    SecFilterEngine Off
+    SecFilterScanPOST Off
+</IfModule>
+
+<IfModule mod_deflate.c>
+
+############################################
+## enable apache served files compression
+## http://developer.yahoo.com/performance/rules.html#gzip
+
+    # Insert filter on all content
+    ###SetOutputFilter DEFLATE
+    # Insert filter on selected content types only
+    #AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/x-javascript application/json image/svg+xml
+
+    # Netscape 4.x has some problems...
+    #BrowserMatch ^Mozilla/4 gzip-only-text/html
+
+    # Netscape 4.06-4.08 have some more problems
+    #BrowserMatch ^Mozilla/4\.0[678] no-gzip
+
+    # MSIE masquerades as Netscape, but it is fine
+    #BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+
+    # Don't compress images
+    #SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png)$ no-gzip dont-vary
+
+    # Make sure proxies don't deliver the wrong content
+    #Header append Vary User-Agent env=!dont-vary
+
+</IfModule>
+
+<IfModule mod_ssl.c>
+
+############################################
+## make HTTPS env vars available for CGI mode
+
+    SSLOptions StdEnvVars
+
+</IfModule>
+
+############################################
+## workaround for Apache 2.4.6 CentOS build when working via ProxyPassMatch with HHVM (or any other)
+## Please, set it on virtual host configuration level
+
+##    SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
+############################################
+
+<IfModule mod_rewrite.c>
+
+############################################
+## enable rewrites
+
+    Options +FollowSymLinks
+    RewriteEngine on
+
+############################################
+## you can put here your magento root folder
+## path relative to web root
+
+    #RewriteBase /magento/
+
+############################################
+## workaround for HTTP authorization
+## in CGI environment
+
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+############################################
+## TRACE and TRACK HTTP methods disabled to prevent XSS attacks
+
+    RewriteCond %{REQUEST_METHOD} ^TRAC[EK]
+    RewriteRule .* - [L,R=405]
+
+############################################
+## redirect for mobile user agents
+
+    #RewriteCond %{REQUEST_URI} !^/mobiledirectoryhere/.*$
+    #RewriteCond %{HTTP_USER_AGENT} "android|blackberry|ipad|iphone|ipod|iemobile|opera mobile|palmos|webos|googlebot-mobile" [NC]
+    #RewriteRule ^(.*)$ /mobiledirectoryhere/ [L,R=302]
+
+############################################
+## never rewrite for existing files, directories and links
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-l
+
+############################################
+## rewrite everything else to index.php
+
+    RewriteRule .* index.php [L]
+
+</IfModule>
+
+
+############################################
+## Prevent character encoding issues from server overrides
+## If you still have problems, use the second line instead
+
+    AddDefaultCharset Off
+    #AddDefaultCharset UTF-8
+    AddType 'text/html; charset=UTF-8' html
+
+<IfModule mod_expires.c>
+
+############################################
+## Add default Expires header
+## http://developer.yahoo.com/performance/rules.html#expires
+
+    ExpiresDefault "access plus 1 year"
+    ExpiresByType text/html A0
+    ExpiresByType text/plain A0
+
+</IfModule>
+
+###########################################
+## Deny access to root files to hide sensitive application information
+    RedirectMatch 403 /\.git
+
+    <Files composer.json>
+        <IfVersion < 2.4>
+            order allow,deny
+            deny from all
+        </IfVersion>
+        <IfVersion >= 2.4>
+            Require all denied
+        </IfVersion>
+    </Files>
+    <Files composer.lock>
+        <IfVersion < 2.4>
+            order allow,deny
+            deny from all
+        </IfVersion>
+        <IfVersion >= 2.4>
+            Require all denied
+        </IfVersion>
+    </Files>
+    <Files .gitignore>
+        <IfVersion < 2.4>
+            order allow,deny
+            deny from all
+        </IfVersion>
+        <IfVersion >= 2.4>
+            Require all denied
+        </IfVersion>
+    </Files>
+    <Files .htaccess>
+        <IfVersion < 2.4>
+            order allow,deny
+            deny from all
+        </IfVersion>
+        <IfVersion >= 2.4>
+            Require all denied
+        </IfVersion>
+    </Files>
+    <Files .htaccess.sample>
+        <IfVersion < 2.4>
+            order allow,deny
+            deny from all
+        </IfVersion>
+        <IfVersion >= 2.4>
+            Require all denied
+        </IfVersion>
+    </Files>
+    <Files .php_cs.dist>
+        <IfVersion < 2.4>
+            order allow,deny
+            deny from all
+        </IfVersion>
+        <IfVersion >= 2.4>
+            Require all denied
+        </IfVersion>
+    </Files>
+    <Files .travis.yml>
+        <IfVersion < 2.4>
+            order allow,deny
+            deny from all
+        </IfVersion>
+        <IfVersion >= 2.4>
+            Require all denied
+        </IfVersion>
+    </Files>
+    <Files CHANGELOG.md>
+        <IfVersion < 2.4>
+            order allow,deny
+            deny from all
+        </IfVersion>
+        <IfVersion >= 2.4>
+            Require all denied
+        </IfVersion>
+    </Files>
+    <Files COPYING.txt>
+        <IfVersion < 2.4>
+            order allow,deny
+            deny from all
+        </IfVersion>
+        <IfVersion >= 2.4>
+            Require all denied
+        </IfVersion>
+    </Files>
+    <Files Gruntfile.js>
+        <IfVersion < 2.4>
+            order allow,deny
+            deny from all
+        </IfVersion>
+        <IfVersion >= 2.4>
+            Require all denied
+        </IfVersion>
+    </Files>
+    <Files LICENSE.txt>
+        <IfVersion < 2.4>
+            order allow,deny
+            deny from all
+        </IfVersion>
+        <IfVersion >= 2.4>
+            Require all denied
+        </IfVersion>
+    </Files>
+    <Files LICENSE_AFL.txt>
+        <IfVersion < 2.4>
+            order allow,deny
+            deny from all
+        </IfVersion>
+        <IfVersion >= 2.4>
+            Require all denied
+        </IfVersion>
+    </Files>
+    <Files nginx.conf.sample>
+        <IfVersion < 2.4>
+            order allow,deny
+            deny from all
+        </IfVersion>
+        <IfVersion >= 2.4>
+            Require all denied
+        </IfVersion>
+    </Files>
+    <Files package.json>
+        <IfVersion < 2.4>
+            order allow,deny
+            deny from all
+        </IfVersion>
+        <IfVersion >= 2.4>
+            Require all denied
+        </IfVersion>
+    </Files>
+    <Files php.ini.sample>
+        <IfVersion < 2.4>
+            order allow,deny
+            deny from all
+        </IfVersion>
+        <IfVersion >= 2.4>
+            Require all denied
+        </IfVersion>
+    </Files>
+    <Files README.md>
+        <IfVersion < 2.4>
+            order allow,deny
+            deny from all
+        </IfVersion>
+        <IfVersion >= 2.4>
+            Require all denied
+        </IfVersion>
+    </Files>
+    <Files magento_umask>
+        <IfVersion < 2.4>
+            order allow,deny
+            deny from all
+        </IfVersion>
+        <IfVersion >= 2.4>
+            Require all denied
+        </IfVersion>
+    </Files>
+    <Files auth.json>
+        <IfVersion < 2.4>
+            order allow,deny
+            deny from all
+        </IfVersion>
+        <IfVersion >= 2.4>
+            Require all denied
+        </IfVersion>
+    </Files>
+    <Files .user.ini>
+        <IfVersion < 2.4>
+            order allow,deny
+            deny from all
+        </IfVersion>
+        <IfVersion >= 2.4>
+            Require all denied
+        </IfVersion>
+    </Files>
+
+# For 404s and 403s that aren't handled by the application, show plain 404 response
+ErrorDocument 404 /pub/errors/404.php
+ErrorDocument 403 /pub/errors/404.php
+
+################################
+## If running in cluster environment, uncomment this
+## http://developer.yahoo.com/performance/rules.html#etags
+
+    #FileETag none
+
+# ######################################################################
+# # INTERNET EXPLORER                                                  #
+# ######################################################################
+
+# ----------------------------------------------------------------------
+# | Document modes                                                     |
+# ----------------------------------------------------------------------
+
+# Force Internet Explorer 8/9/10 to render pages in the highest mode
+# available in the various cases when it may not.
+#
+# https://hsivonen.fi/doctype/#ie8
+#
+# (!) Starting with Internet Explorer 11, document modes are deprecated.
+# If your business still relies on older web apps and services that were
+# designed for older versions of Internet Explorer, you might want to
+# consider enabling `Enterprise Mode` throughout your company.
+#
+# https://msdn.microsoft.com/en-us/library/ie/bg182625.aspx#docmode
+# http://blogs.msdn.com/b/ie/archive/2014/04/02/stay-up-to-date-with-enterprise-mode-for-internet-explorer-11.aspx
+
+<IfModule mod_headers.c>
+
+    Header set X-UA-Compatible "IE=edge"
+   # Header always set Access-Control-Allow-Origin "*"
+    Header always set Access-Control-Allow-Headers "Content-Type,X-Requested-With,Origin,Accept,Authorization,Access-Control-Allow-Origin"
+    # `mod_headers` cannot match based on the content-type, however,
+    # the `X-UA-Compatible` response header should be send only for
+    # HTML documents and not for the other resources.
+
+    <FilesMatch "\.(appcache|atom|bbaw|bmp|crx|css|cur|eot|f4[abpv]|flv|geojson|gif|htc|ico|jpe?g|js|json(ld)?|m4[av]|manifest|map|mp4|oex|og[agv]|opus|otf|pdf|png|rdf|rss|safariextz|svgz?|swf|topojson|tt[cf]|txt|vcard|vcf|vtt|webapp|web[mp]|webmanifest|woff2?|xloc|xml|xpi)$">
+        Header unset X-UA-Compatible
+    </FilesMatch>
+
+</IfModule>
+
+# BEGIN cPanel-generated php ini directives, do not edit
+# Manual editing of this file may result in unexpected behavior.
+# To make changes to this file, use the cPanel MultiPHP INI Editor (Home >> Software >> MultiPHP INI Editor)
+# For more information, read our documentation (https://go.cpanel.net/EA4ModifyINI)
+<IfModule php7_module>
+   php_flag engine On
+   php_flag short_open_tag On
+   php_value precision 14
+   php_value output_buffering Off
+   php_flag zlib.output_compression On
+   php_flag implicit_flush Off
+   php_value serialize_precision 100
+   php_flag zend.enable_gc On
+   php_value max_execution_time 6000
+   php_value max_input_time 300
+   php_value max_input_vars 15000
+   php_value memory_limit 3096M
+   php_value error_reporting E_ALL & ~E_NOTICE
+   php_flag display_errors On
+   php_flag display_startup_errors Off
+   php_flag log_errors On
+   php_value log_errors_max_len 1024
+   php_flag ignore_repeated_errors Off
+   php_flag ignore_repeated_source Off
+   php_flag report_memleaks On
+   php_flag track_errors Off
+   php_flag html_errors On
+   php_value error_log "error_log;"
+   php_value variables_order "EGPCS"
+   php_value request_order "GP"
+   php_flag register_argc_argv On
+   php_flag auto_globals_jit On
+   php_value post_max_size 1024M
+   php_value default_mimetype "text/html"
+   php_value default_charset "UTF-8"
+   php_value include_path ".:/opt/php71/lib/php"
+   php_value upload_max_filesize 256M
+   php_value default_socket_timeout 60
+   php_flag cli_server.color On
+   php_value date.timezone "America/Chicago"
+   php_flag mail.add_x_header On
+   php_value odbc.defaultlrl 4096
+   php_value odbc.defaultbinmode 1
+   php_value ibase.timestampformat "%Y-%m-%d %H:%M:%S"
+   php_value ibase.dateformat "%Y-%m-%d"
+   php_value ibase.timeformat "%H:%M:%S"
+   php_value mysqli.default_port 3306
+   php_value pgsql.ignore_notice 0
+   php_value pgsql.log_notice 0
+   php_value bcmath.scale 0
+   php_value session.save_handler "files"
+   php_value session.save_path "/var/cpanel/php/sessions/ea-php72"
+   php_flag session.use_strict_mode Off
+   php_flag session.use_cookies On
+   php_flag session.use_only_cookies On
+   php_value session.name "PHPSESSID"
+   php_flag session.auto_start Off
+   php_value session.cookie_lifetime 0
+   php_value session.cookie_path "/"
+   php_value session.serialize_handler "php"
+   php_value session.gc_probability 0
+   php_value session.gc_divisor 100
+   php_value session.gc_maxlifetime 1440
+   php_value session.cache_limiter "nocache"
+   php_value session.cache_expire 180
+   php_flag session.use_trans_sid Off
+   php_value session.hash_function "0"
+   php_value session.hash_bits_per_character 5
+   php_value url_rewriter.tags "a=href,area=href,frame=src,input=src,form=,fieldset="
+   php_flag tidy.clean_output Off
+   php_flag soap.wsdl_cache_enabled On
+   php_value soap.wsdl_cache_dir "/tmp"
+   php_value soap.wsdl_cache_ttl 86400
+   php_value soap.wsdl_cache_limit 5
+</IfModule>
+<IfModule lsapi_module>
+   php_flag engine On
+   php_flag short_open_tag On
+   php_value precision 14
+   php_value output_buffering Off
+   php_flag zlib.output_compression On
+   php_flag implicit_flush Off
+   php_value serialize_precision 100
+   php_flag zend.enable_gc On
+   php_value max_execution_time 6000
+   php_value max_input_time 300
+   php_value max_input_vars 15000
+   php_value memory_limit 3096M
+   php_value error_reporting E_ALL & ~E_NOTICE
+   php_flag display_errors On
+   php_flag display_startup_errors Off
+   php_flag log_errors On
+   php_value log_errors_max_len 1024
+   php_flag ignore_repeated_errors Off
+   php_flag ignore_repeated_source Off
+   php_flag report_memleaks On
+   php_flag track_errors Off
+   php_flag html_errors On
+   php_value error_log "error_log;"
+   php_value variables_order "EGPCS"
+   php_value request_order "GP"
+   php_flag register_argc_argv On
+   php_flag auto_globals_jit On
+   php_value post_max_size 1024M
+   php_value default_mimetype "text/html"
+   php_value default_charset "UTF-8"
+   php_value include_path ".:/opt/php71/lib/php"
+   php_value upload_max_filesize 256M
+   php_value default_socket_timeout 60
+   php_flag cli_server.color On
+   php_value date.timezone "America/Chicago"
+   php_flag mail.add_x_header On
+   php_value odbc.defaultlrl 4096
+   php_value odbc.defaultbinmode 1
+   php_value ibase.timestampformat "%Y-%m-%d %H:%M:%S"
+   php_value ibase.dateformat "%Y-%m-%d"
+   php_value ibase.timeformat "%H:%M:%S"
+   php_value mysqli.default_port 3306
+   php_value pgsql.ignore_notice 0
+   php_value pgsql.log_notice 0
+   php_value bcmath.scale 0
+   php_value session.save_handler "files"
+   php_value session.save_path "/var/cpanel/php/sessions/ea-php72"
+   php_flag session.use_strict_mode Off
+   php_flag session.use_cookies On
+   php_flag session.use_only_cookies On
+   php_value session.name "PHPSESSID"
+   php_flag session.auto_start Off
+   php_value session.cookie_lifetime 0
+   php_value session.cookie_path "/"
+   php_value session.serialize_handler "php"
+   php_value session.gc_probability 0
+   php_value session.gc_divisor 100
+   php_value session.gc_maxlifetime 1440
+   php_value session.cache_limiter "nocache"
+   php_value session.cache_expire 180
+   php_flag session.use_trans_sid Off
+   php_value session.hash_function "0"
+   php_value session.hash_bits_per_character 5
+   php_value url_rewriter.tags "a=href,area=href,frame=src,input=src,form=,fieldset="
+   php_flag tidy.clean_output Off
+   php_flag soap.wsdl_cache_enabled On
+   php_value soap.wsdl_cache_dir "/tmp"
+   php_value soap.wsdl_cache_ttl 86400
+   php_value soap.wsdl_cache_limit 5
+</IfModule>
+# END cPanel-generated php ini directives, do not edit
+
+# php -- BEGIN cPanel-generated handler, do not edit
+# Set the “ea-php71” package as the default “PHP” programming language.
+<IfModule mime_module>
+  AddHandler application/x-httpd-ea-php71 .php .php7 .phtml
+</IfModule>
+# php -- END cPanel-generated handler, do not edit

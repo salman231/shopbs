@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Customform
+ */
+-->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Amasty_Customform::css/amcustomform.css"/>
+        <css src="Amasty_Customform::css/form-builder.css"/>
+        <css src="Amasty_Customform::css/form-render.css"/>
+        <css src="Amasty_Customform::css/google-map.css"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Amasty\Customform\Block\Adminhtml\Form\Edit" name="amasty_customform_form_edit"/>
+        </referenceContainer>
+        <referenceContainer name="left">
+            <block class="Amasty\Customform\Block\Adminhtml\Form\Edit\Tabs" name="amasty_customform_form_edit_tabs">
+                <block class="Amasty\Customform\Block\Adminhtml\Form\Edit\Tab\Main" name="amasty_customform_form_edit_tab_main"/>
+                <block class="Amasty\Customform\Block\Adminhtml\Form\Edit\Tab\Content" name="amasty_customform_form_edit_tab_content"/>
+                <block class="Amasty\Customform\Block\Adminhtml\Form\Edit\Tab\Creator" name="amasty_customform_form_edit_tab_creator"/>
+                <block class="Amasty\Customform\Block\Adminhtml\Form\Edit\Tab\Embedding" name="amasty_customform_form_edit_tab_embedding"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">main_section</argument>
+                    <argument name="block" xsi:type="string">amasty_customform_form_edit_tab_main</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">content_section</argument>
+                    <argument name="block" xsi:type="string">amasty_customform_form_edit_tab_content</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">creator_section</argument>
+                    <argument name="block" xsi:type="string">amasty_customform_form_edit_tab_creator</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">embeddings_section</argument>
+                    <argument name="block" xsi:type="string">amasty_customform_form_edit_tab_embedding</argument>
+                </action>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

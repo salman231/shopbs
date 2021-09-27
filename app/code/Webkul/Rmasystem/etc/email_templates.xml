@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Rmasystem
+ * @author    Webkul
+ * @copyright Copyright (c) 2010-2017 Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+	<template id="new_rma_email_template" label="New RMA" file="rma_new.html" type="html" module="Webkul_Rmasystem" area="frontend"/>
+	<template id="new_rma_admin_email_template" label="New RMA" file="rma_new_admin.html" type="html" module="Webkul_Rmasystem" area="frontend"/>
+	<template id="cancel_rma_email_template" label="Cancel RMA" file="rma_cancel.html" type="html" module="Webkul_Rmasystem" area="frontend"/>
+	<template id="message_email_template" label="New Message" file="new_message.html" type="html" module="Webkul_Rmasystem" area="frontend"/>
+	<template id="update_rma_email_template" label="Cancel RMA" file="rma_update.html" type="html" module="Webkul_Rmasystem" area="frontend"/>
+</config>

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="mp_advance_commission">
+        <observer name="webkul_mpadvancedcommission_observer" instance="Webkul\MpAdvancedCommission\Observer\MpAdvanceCommissionObserver" />
+    </event>
+    <event name="mp_advance_commission_rule">
+        <observer name="webkul_mpadvancedcommission_rule_observer" instance="Webkul\MpAdvancedCommission\Observer\MpAdvanceCommissionRuleObserver" />
+    </event>
+    <event name="catalog_product_save_after">
+        <observer name="webkul_mpadvancedcommission_product_save_observer" instance="Webkul\MpAdvancedCommission\Observer\MpAdvanceCommissionProductSaveObserver" />
+    </event>
+</config>

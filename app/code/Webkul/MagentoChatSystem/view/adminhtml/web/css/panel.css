@@ -1,0 +1,154 @@
+@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css);
+
+@font-face {
+    font-family: "Admin Icons";
+    src: url("../fonts/admin-icons.woff") format('woff');
+;font-display:swap;}
+
+/*active user modal*/
+.active-users-model {
+    width: 250px;
+    position: fixed;
+    right: -250px;
+    height: 100%;
+    z-index: 900;
+    background: #fff;
+    bottom: 0;
+    transition: all .4s ease-in-out;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    float: left;
+}
+
+.active-users-model h2 {
+    color: #fff;
+    padding: 5px;
+    text-align: center;
+    border-bottom: 1px solid;
+}
+
+.pannel-control {
+    width: 50px;
+    height: 50px;
+    background: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    left: -48px;
+    top: 53px;
+    border-radius: 10%;
+    cursor: pointer;
+    box-shadow: -1px 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 14px 0px rgba(0, 0, 0, 0.19);
+}
+
+
+.pannel-control::before {
+    color: #fff;
+    content: '\e600';
+    font-size: 2rem;
+    left: 1.4rem;
+    margin-top: -1.2rem;
+    position: absolute;
+    top: 50%;
+    font-family: 'Admin Icons';
+}
+
+.pannel-control::after {
+    color: #fff;
+    content: '\e600';
+    font-size: 2rem;
+    left: 2.3rem;
+    margin-top: -1.2rem;
+    position: absolute;
+    top: 50%;
+    font-family: 'Admin Icons';
+}
+
+.pannel-control.open {
+    background: #fff;
+}
+
+.pannel-control.open::before,
+.pannel-control.open::after {
+    color: #000;
+}
+
+.user-list {
+    width: 100%;
+    float: left;
+    height: 500px;
+    overflow-y: scroll;
+    padding: 10px;
+}
+
+.user-list .user {
+    width: 90%;
+    float: left;
+    padding: 10px;
+    font-weight: 600;
+    box-shadow: 0 4px 0px 0 rgba(0, 0, 0, 0.2), 0 0px 12px 0 rgba(0, 0, 0, 0.69);
+    cursor: pointer;
+    margin-bottom: 2px;
+    font-size: 1.1rem;
+    background: #fff;
+}
+
+.user-list .user .user-status {
+    border-radius: 50%;
+    content: "";
+    display: inline-block;
+    height: 8px;
+    margin: 0 8px 0 0;
+    width: 8px;
+    float: left;
+    position: relative;
+    top: 5px;
+}
+
+.user-list .user .user-status.active {
+    background: #1a8a34;
+}
+
+.user-list .user .user-status.busy {
+    background: #D10000;
+}
+
+.user-list .user .user-status.offline {
+    background: #77777a;
+}
+
+.model-search-bar {
+    width: 95%;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.model-search-bar span.fa {
+    color: #8a8a8a;
+    font-size: 16px;
+    position: absolute;
+    padding: 8px;
+}
+
+.model-search-bar input[type="text"] {
+    text-indent: 24px;
+    height: 33px;
+    width: 100%;
+}
+
+.msg-notify {
+    background: #d4cb8e !important;
+    -webkit-animation-name: notify;
+    -webkit-animation-duration: 2s;
+    animation-name: notify;
+    animation-duration: 2s;
+    animation: notify 2s infinite ease;
+    border-radius: 5px;
+}
+
+@keyframes notify {
+    0% {
+        background: #d4cb8e;
+    }
+
+    100% {
+        background: #fff;
+    }
+}

@@ -1,0 +1,10 @@
+.checkout-index-index #discount-form-gift div.actions-toolbar {
+    display : block!important;
+    width : 100%;
+} 
+.checkout-index-index #discount-form-gift div.primary {
+    float : right;
+}
+.checkout-index-index #discount-form-gift .payment-option-inner div.control {
+    margin: 5px 0;
+}

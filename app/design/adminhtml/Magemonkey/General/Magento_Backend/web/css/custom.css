@@ -1,0 +1,13 @@
+.menu-wrapper {
+	top: 0px !important;
+	height: 1600px !important;
+}
+.menu-wrapper._fixed {
+	position: absolute !important;
+}
+.file-uploader {
+	position: relative !important;
+	width: 100% !important;
+	bottom: auto !important;
+	right: auto !important;
+}

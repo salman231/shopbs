@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Customform
+ */
+-->
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget id="amasty_custom_form" class="Amasty\Customform\Block\Init" is_email_compatible="true"
+            placeholder_image="Magento_Cms::images/widget_block.png">
+        <label translate="true">Custom Form</label>
+        <description translate="true">Custom Form</description>
+        <parameters>
+            <parameter name="form_id" xsi:type="text" visible="true">
+                <label translate="true">Form ID</label>
+            </parameter>
+            <parameter name="template" xsi:type="select" visible="true">
+                <label translate="true">Template</label>
+                <options>
+                    <option name="default" value="Amasty_Customform::init.phtml" selected="true">
+                        <label translate="true">Default</label>
+                    </option>
+                </options>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>

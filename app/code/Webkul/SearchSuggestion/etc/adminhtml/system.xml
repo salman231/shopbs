@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * SearchSuggestion System configuration.
+ * @category Webkul
+ * @package Webkul_SearchSuggestion
+ * @author Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license https://store.webkul.com/license.html
+ */ 
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="webkul" translate="label" sortOrder="10">
+            <label>Webkul</label>
+        </tab>
+        <section id="searchsuggestion" translate="label" type="text" sortOrder="300" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Search Suggestion</label>
+            <tab>webkul</tab>
+            <resource>Webkul_SearchSuggestion::config_searchsuggestion</resource>
+            <group id="settings" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Search Suggestion Settings</label>
+                <field id="display_terms" translate="label comment" sortOrder="19" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Display Terms</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="display_terms_num" translate="label comment" sortOrder="19" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Display Terms Number</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="display_terms">1</field>
+                    </depends>
+                </field>
+                <field id="display_product" translate="label comment" sortOrder="21" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Display Product</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="caption">1</field>
+                    </depends>
+                </field>
+                <field id="display_categorie" translate="label comment" sortOrder="21" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Display Categories</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="caption">1</field>
+                    </depends>
+                </field>
+                <field id="show_terms" translate="label comment" sortOrder="15" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Terms</label>
+                    <validate>validate-not-negative-number</validate>
+                </field>
+                <field id="show_products" translate="label comment" sortOrder="15" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Products</label>
+                    <validate>validate-not-negative-number</validate>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

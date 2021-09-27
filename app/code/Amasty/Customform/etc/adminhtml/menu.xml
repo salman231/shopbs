@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Customform
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Amasty_Customform::customform" title="Custom Forms" module="Amasty_Customform"  sortOrder="30"
+             parent="Magento_Backend::content"
+             resource="Amasty_Customform::Customform"
+        />
+        <add id="Amasty_Customform::forms" title="Forms" module="Amasty_Customform" sortOrder="10"
+             parent="Amasty_Customform::customform"
+             action="amasty_customform/forms/index"
+             resource="Amasty_Customform::forms"
+        />
+        <add id="Amasty_Customform::data" title="Submitted Data" module="Amasty_Customform" sortOrder="20"
+             parent="Amasty_Customform::customform"
+             action="amasty_customform/answer/index"
+             resource="Amasty_Customform::data"
+        />
+    </menu>
+</config>

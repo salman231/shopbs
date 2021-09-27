@@ -1,0 +1,192 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Customform
+ */
+-->
+<form>
+    <group id="information">
+        <title>Free sample request (multi page)</title>
+        <code>free_sample_request</code>
+        <status>1</status>
+        <customer_group>0</customer_group>
+        <store_id>0</store_id>
+        <send_notification>0</send_notification>
+    </group>
+    <group id="content">
+        <submit_button>Submit</submit_button>
+        <success_message>Thanks for contacting us. Your request was saved successfully.</success_message>
+    </group>
+    <group id="fields">
+        <form_json>
+            <page>
+                <field>
+                    <type>textinput</type>
+                    <name>first_name</name>
+                    <label>First Name</label>
+                    <className>form-control</className>
+                </field>
+                <field>
+                    <type>textinput</type>
+                    <name>last_name</name>
+                    <label>Last Name</label>
+                    <className>form-control</className>
+                </field>
+                <field>
+                    <type>textinput</type>
+                    <name>email</name>
+                    <label>Email</label>
+                    <className>form-control</className>
+                    <validation>validate-email</validation>
+                </field>
+                <field>
+                    <type>textinput</type>
+                    <name>company_name</name>
+                    <label>Company Name</label>
+                    <className>form-control</className>
+                </field>
+                <field>
+                    <type>textinput</type>
+                    <name>company_website</name>
+                    <label>Company Website URL</label>
+                    <className>form-control</className>
+                    <validation>validate-url</validation>
+                </field>
+            </page>
+            <page>
+                <field>
+                    <type>textinput</type>
+                    <name>address</name>
+                    <label>Address</label>
+                    <className>form-control</className>
+                    <parentType>input</parentType>
+                    <validation></validation>
+                    <layout>one</layout>
+                </field>
+                <field>
+                    <type>textinput</type>
+                    <name>city</name>
+                    <label>City</label>
+                    <className>form-control</className>
+                    <parentType>input</parentType>
+                    <validation></validation>
+                    <layout>two</layout>
+                </field>
+                <field>
+                    <type>textinput</type>
+                    <name>state</name>
+                    <label>State / Province / Region</label>
+                    <className>form-control</className>
+                    <parentType>input</parentType>
+                    <validation></validation>
+                    <layout>two</layout>
+                </field>
+                <field>
+                    <type>textinput</type>
+                    <name>zip</name>
+                    <label>Zipcode</label>
+                    <className>form-control</className>
+                    <parentType>input</parentType>
+                    <validation></validation>
+                    <layout>two</layout>
+                </field>
+                <field>
+                    <type>dropdown</type>
+                    <name>country</name>
+                    <label>Country</label>
+                    <className>form-control</className>
+                    <parentType>input</parentType>
+                    <validation></validation>
+                    <layout>two</layout>
+                </field>
+            </page>
+            <page>
+                <field>
+                    <type>radio</type>
+                    <name>products_to_sample</name>
+                    <label>Choose Product(s) to Sample:</label>
+                    <className>amform-radio</className>
+                    <values>
+                        <option>
+                            <label>Product 1</label>
+                            <value>option-1</value>
+                        </option>
+                        <option>
+                            <label>Product 2</label>
+                            <value>option-2</value>
+                        </option>
+                        <option>
+                            <label>Product 3</label>
+                            <value>option-3</value>
+                        </option>
+                    </values>
+                    <validation></validation>
+                </field>
+                <field>
+                    <type>checkbox</type>
+                    <name>hear_about_us</name>
+                    <label>How did you hear about us?</label>
+                    <className>amform-checkbox</className>
+                    <values>
+                        <option>
+                            <label>Google</label>
+                            <value>option-1</value>
+                        </option>
+                        <option>
+                            <label>Facebook</label>
+                            <value>option-2</value>
+                        </option>
+                        <option>
+                            <label>Instagram</label>
+                            <value>option-3</value>
+                        </option>
+                        <option>
+                            <label>Direct mail</label>
+                            <value>option-4</value>
+                        </option>
+                        <option>
+                            <label>Print</label>
+                            <value>option-5</value>
+                        </option>
+                        <option>
+                            <label>Outdoor</label>
+                            <value>option-6</value>
+                        </option>
+                        <option>
+                            <label>TV</label>
+                            <value>option-7</value>
+                        </option>
+                        <option>
+                            <label>From a Friend</label>
+                            <value>option-8</value>
+                        </option>
+                        <option>
+                            <label>Other</label>
+                            <value>option-9</value>
+                        </option>
+                    </values>
+                    <validation></validation>
+                </field>
+                <field>
+                    <type>textarea</type>
+                    <name>other_hear</name>
+                    <label>Other</label>
+                    <className>form-control</className>
+                    <parentType>input</parentType>
+                    <validation></validation>
+                    <layout>one</layout>
+                    <dependency>
+                        <dependency-group>
+                            <field>hear_about_us</field>
+                            <type>checkbox</type>
+                            <value>option-9</value>
+                        </dependency-group>
+                    </dependency>
+                </field>
+            </page>
+        </form_json>
+        <form_title>["Personal Info","Shipping Address","Choose what you would like to try"]</form_title>
+    </group>
+</form>

@@ -1,0 +1,64 @@
+<?php
+/**
+ * SearchSuggestion search template.
+ * Webkul Software
+ * @category Webkul
+ * @package Webkul_SearchSuggestion
+ * @author Webkul
+ * @copyright Copyright (c)   Webkul Software Private Limited (https://webkul.com)
+ * @license https://store.webkul.com/license.html
+ */
+?>
+<?php
+/** @var $block \Magento\Framework\View\Element\Template */
+/** @var $helper \Magento\Search\Helper\Data */
+$viewModel = $block->getViewModel();
+$helper = $viewModel->helper(\Magento\Search\Helper\Data::class);
+$url=$block->getUrl();
+$data = json_encode(["url" => $url]);
+?>
+<div class="block block-search">
+    <div class="block block-title"><strong><?= $block->escapeHtml(__('Search')); ?></strong></div>
+    <div class="block block-content">
+        <form class="form minisearch" id="search_mini_form" 
+        action="<?= $block->escapeUrl($helper->getResultUrl()) ?>" method="get" autocomplete="off">
+            <div class="field search">
+                <label class="label" for="search" data-role="minisearch-label">
+                    <span><?= $block->escapeHtml(__('Search')); ?></span>
+                </label>
+                <div class="control">
+                    <input id="search" 
+                    data-mage-init='{"quickSearch":{
+                                "formSelector":"#search_mini_form",
+                                "url":"<?= $block->escapeUrl($block->getUrl(
+                                    'search/ajax/suggest',
+                                    ['_secure' => $block->getRequest()->isSecure()]
+                                )); ?>",
+                                "destinationSelector":"#search_autocomplete"}
+                           }'
+                    type="text" name="q" autocomplete="off" />
+                    <div id="search_autocomplete" class="search-autocomplete">
+                        <div class="wk_ss_list" ><ul class="wk_ss_showlist" ></ul></div>
+                    </div>
+                    <?= $block->getChildHtml() ?>
+                </div>
+            </div>
+            <div id="wk_ss_loader">   
+            </div>
+            <div class="actions">
+                <button type="submit"
+                        title="<?= $block->escapeHtml(__('Search')) ?>"
+                        class="action search">
+                    <span><?= $block->escapeHtml(__('Search')); ?></span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+<script type="text/x-magento-init">
+{
+"body": {
+"Webkul_SearchSuggestion/js/searchsuggestion": <?= /* @noEscape */ $data ?>
+}
+}
+</script>

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_Simpledetailconfigurable
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2017-2020 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+-->
+<layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/layout_generic.xsd">
+    <container name="root">
+        <block class="Magento\Review\Block\Product\View\ListView" name="product.info.product_additional_data" as="product_additional_data" template="Magento_Review::product/view/list.phtml" ifconfig="catalog/review/active"/>
+        <block class="Magento\Theme\Block\Html\Pager" name="product_review_list.toolbar" ifconfig="catalog/review/active">
+            <arguments>
+                <argument name="show_per_page" xsi:type="boolean">false</argument>
+                <argument name="show_amounts" xsi:type="boolean">false</argument>
+            </arguments>
+        </block>
+    </container>
+</layout>

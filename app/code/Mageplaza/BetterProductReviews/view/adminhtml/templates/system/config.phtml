@@ -1,0 +1,69 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_BetterProductReviews
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+?>
+<script>
+    require(['jquery'], function ($) {
+        var sortTypeElement = $('#mpbetterproductreviews_review_listing_sorting_type'),
+            helpfulElement = $('#mpbetterproductreviews_review_listing_enabled_helpful'),
+            defaultSortOptionsElement = $('#mpbetterproductreviews_review_listing_sorting_default_sorting option');
+
+        getSortTypeOptions(helpfulElement);
+        getDefaultSortOptions(sortTypeElement);
+        sortTypeElement.on('change', function () {
+            var self = this;
+            getDefaultSortOptions(self);
+        });
+        helpfulElement.on('change', function () {
+            getSortTypeOptions(this);
+        });
+
+
+        /** set default sort options depend on selected sort types */
+        function getDefaultSortOptions(sortTypeElement) {
+            var selectedType = $(sortTypeElement).val();
+            if (selectedType === null) {
+                selectedType = ['1'];
+                $('#mpbetterproductreviews_review_listing_sorting_type option[value=1]').prop('selected', true);
+            }
+            defaultSortOptionsElement.each(function () {
+                if (!selectedType.includes($(this).val())) {
+                    if ($(this).prop('selected')) {
+                        $('#mpbetterproductreviews_review_listing_sorting_default_sorting option[value=' + selectedType[0] + ']').prop('selected', true);
+                    }
+                    $(this).hide();
+                } else {
+                    $(this).show();
+                }
+            });
+        }
+
+        /** get sort type options */
+        function getSortTypeOptions(helpfulElement) {
+            if ($(helpfulElement).val() === '1') {
+                sortTypeElement.find('option[value=3]').show();
+                getDefaultSortOptions(sortTypeElement);
+            } else {
+                sortTypeElement.find('option[value=3]').removeAttr('selected').hide();
+                getDefaultSortOptions(sortTypeElement);
+            }
+        }
+    });
+</script>

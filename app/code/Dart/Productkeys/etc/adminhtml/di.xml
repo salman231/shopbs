@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/** Productkeys admin di xml
+ * @category  Dart
+ * @package   Dart_Productkeys
+ * 
+*/
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<virtualType name="Magento\Catalog\Ui\DataProvider\Product\Form\Modifier\Pool">
+		<arguments>
+			<argument name="modifiers" xsi:type="array">
+				<item name="productkey_generalconfig" xsi:type="array">
+					<item name="class" xsi:type="string">Dart\Productkeys\Ui\DataProvider\Product\Form\Modifier\GeneralConfigDependents</item>
+					<item name="sortOrder" xsi:type="number">100</item>
+				</item>
+			</argument>
+		</arguments>
+	</virtualType>
+</config>

@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category   Webkul
+ * @package    Webkul_MpAdvancedCommission
+ * @author     Webkul Software Private Limited
+ * @copyright  Copyright (c)  Webkul Software Private Limited (https://webkul.com)
+ * @license    https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="mpadvancedcommission" translate="label" type="text" sortOrder="300" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Marketplace Advanced Commission</label>
+            <!-- Assign section to tab -->
+            <tab>webkul</tab>
+            <resource>Webkul_MpAdvancedCommission::config_mpadvancedcommission</resource>
+            <!-- create group for fields in section -->
+            <group id="options" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Settings</label>
+                <field id="use_commission_rule" translate="label comment" sortOrder="1" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Use Commission Rules</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="commission_calculation" translate="label comment" sortOrder="2" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Round off price</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Commission should be calculated on round off price of product or not.</comment>
+                    <depends>
+                        <field id="use_commission_rule">1</field>
+                    </depends>
+                </field>
+                <field id="commission_type" translate="label comment" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Commission Type</label>
+                    <source_model>Webkul\MpAdvancedCommission\Model\Config\Source\CommissionType</source_model>
+                    <comment>In case of fixed commission type, if product price is less than admin commission then marketplace global commission will be apply.</comment>
+                    <depends>
+                        <field id="use_commission_rule">0</field>
+                    </depends>
+                </field>
+                <field id="category_commission" translate="label" type="button" sortOrder="3" showInDefault="1" showInWebsite="1">
+                    <frontend_model>Webkul\MpAdvancedCommission\Block\Adminhtml\System\Config\Form\Button</frontend_model>
+                    <depends>
+                        <field id="use_commission_rule">0</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
